@@ -1,0 +1,3015 @@
+import android.app.Activity;
+import android.content.Intent;
+import android.os.AsyncTask.Status;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Parcelable;
+import android.util.Base64;
+import android.util.SparseArray;
+import com.android.billingclient.api.Purchase;
+import com.android.billingclient.api.PurchaseHistoryRecord;
+import com.android.billingclient.api.SkuDetails;
+import com.android.billingclient.api.d;
+import com.android.billingclient.api.g;
+import com.android.billingclient.api.g.b.a;
+import com.android.billingclient.api.h;
+import com.android.billingclient.api.l;
+import com.android.billingclient.api.l.e;
+import com.android.billingclient.api.p;
+import com.android.billingclient.api.q;
+import com.android.billingclient.api.r;
+import com.android.billingclient.api.s;
+import com.android.billingclient.api.t;
+import j$.util.DesugarCollections;
+import j$.util.Objects;
+import java.net.URI;
+import java.security.KeyFactory;
+import java.security.NoSuchAlgorithmException;
+import java.security.PublicKey;
+import java.security.spec.X509EncodedKeySpec;
+import java.text.DecimalFormatSymbols;
+import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+import jp.ne.ibis.ibispaintx.app.IbisPaintApplication;
+import jp.ne.ibis.ibispaintx.app.advertisement.AdMobUtil;
+import jp.ne.ibis.ibispaintx.app.configuration.ConfigurationChunk;
+import jp.ne.ibis.ibispaintx.app.glwtk.IbisPaintActivity;
+import jp.ne.ibis.ibispaintx.app.jni.PurchaseManagerAdapter;
+import jp.ne.ibis.ibispaintx.app.jni.StringResource;
+import jp.ne.ibis.ibispaintx.app.purchase.v0.b;
+import jp.ne.ibis.ibispaintx.app.purchase.v0.c;
+import jp.ne.ibis.ibispaintx.app.util.ApplicationUtil;
+
+public class r0 implements p, b {
+    private Map a = new HashMap();
+    private Set b = new HashSet();
+    private Lock c = new ReentrantLock();
+    private boolean d = false;
+    private List e = new ArrayList();
+    private d f = null;
+    private Set g = new HashSet();
+    private g h = g.c;
+    private String i = null;
+    private boolean j = false;
+    private String k = null;
+    private List l = new ArrayList();
+    private List m = new ArrayList();
+    private v0 n = null;
+    private boolean o = false;
+    private boolean p = false;
+    private Map q = new HashMap();
+    private Map r = new HashMap();
+    private Handler s = new Handler();
+    private int t = 0;
+    private boolean u = false;
+
+    private void L0(List list) {
+        String text;
+        if (list == null) {
+            this.i = null;
+            text = StringResource.getInstance().getText("Purchase_Error_Bad_Response");
+            for (g gVar : this.g) {
+                for (t0 onPurchaseManagerFailPurchasePaymentItem : this.e) {
+                    onPurchaseManagerFailPurchasePaymentItem.onPurchaseManagerFailPurchasePaymentItem(gVar, text);
+                }
+            }
+            for (t0 onPurchaseManagerFinishPurchase : this.e) {
+                onPurchaseManagerFinishPurchase.onPurchaseManagerFinishPurchase();
+            }
+            this.g.clear();
+            return;
+        }
+        int i = 0;
+        boolean z = this.g.size() > 0;
+        ArrayList<h> arrayList = new ArrayList(list.size());
+        ArrayList arrayList2 = new ArrayList(list.size());
+        int i2 = 0;
+        for (Purchase purchase : list) {
+            g B0 = B0((String) purchase.c().get(0));
+            String str;
+            if (B0 == g.c) {
+                str = (String) purchase.c().get(0);
+                i2++;
+            } else if (O1(purchase)) {
+                h u0 = u0(B0, purchase);
+                if (u0 == null) {
+                    str = StringResource.getInstance().getText("Purchase_Error_Unknown_Purchase_Response");
+                    if (this.g.contains(B0)) {
+                        for (t0 onPurchaseManagerFailPurchasePaymentItem2 : this.e) {
+                            onPurchaseManagerFailPurchasePaymentItem2.onPurchaseManagerFailPurchasePaymentItem(B0, str);
+                        }
+                        this.g.remove(B0);
+                    }
+                } else {
+                    boolean U0 = U0(u0);
+                    if (B0.c() == w0.d) {
+                        if (U0) {
+                            u0.G(true);
+                        }
+                        arrayList2.add(u0);
+                    } else {
+                        arrayList.add(u0);
+                    }
+                }
+            } else {
+                str = StringResource.getInstance().getText("Purchase_Error_Verification_Failed");
+                if (this.g.contains(B0)) {
+                    for (t0 onPurchaseManagerFailPurchasePaymentItem22 : this.e) {
+                        onPurchaseManagerFailPurchasePaymentItem22.onPurchaseManagerFailPurchasePaymentItem(B0, str);
+                    }
+                    this.g.remove(B0);
+                }
+            }
+        }
+        if (i2 > 0 && this.g.size() == i2) {
+            this.i = null;
+            text = StringResource.getInstance().getText("Purchase_Error_No_Product_Id");
+            for (g gVar2 : this.g) {
+                for (t0 onPurchaseManagerFailPurchasePaymentItem3 : this.e) {
+                    onPurchaseManagerFailPurchasePaymentItem3.onPurchaseManagerFailPurchasePaymentItem(gVar2, text);
+                }
+            }
+            this.g.clear();
+        }
+        if (arrayList.size() > 0 || arrayList2.size() > 0) {
+            StringBuilder stringBuilder;
+            r0 r0Var;
+            if (arrayList.size() > 0) {
+                stringBuilder = new StringBuilder();
+                r0Var = this;
+                i = r0Var.F1(arrayList, "inapp", z, false, false, stringBuilder);
+                if (stringBuilder.length() > 0 && z) {
+                    for (h hVar : arrayList) {
+                        r0Var.g.remove(hVar.i());
+                        for (t0 onPurchaseManagerFailPurchasePaymentItem4 : r0Var.e) {
+                            onPurchaseManagerFailPurchasePaymentItem4.onPurchaseManagerFailPurchasePaymentItem(hVar.i(), stringBuilder.toString());
+                        }
+                    }
+                }
+            } else {
+                r0Var = this;
+            }
+            if (arrayList2.size() > 0) {
+                if (r0Var.i != null) {
+                    try {
+                        r0Var.c.lock();
+                        h hVar2 = (h) r0Var.a.get(r0Var.i);
+                        r0Var.c.unlock();
+                        r0Var.i = null;
+                        if (hVar2 != null) {
+                            c cVar = new c();
+                            cVar.a = hVar2.i();
+                            cVar.b = hVar2.e();
+                            cVar.c = true;
+                            r0Var.m.add(cVar);
+                        }
+                    } catch (Throwable th) {
+                        Throwable th2 = th;
+                        r0Var.c.unlock();
+                        r0Var.i = null;
+                    }
+                }
+                stringBuilder = new StringBuilder();
+                arrayList = arrayList2;
+                i |= r0Var.F1(arrayList, "subs", z, false, false, stringBuilder);
+                if (stringBuilder.length() > 0 && z) {
+                    for (h hVar3 : arrayList) {
+                        r0Var.g.remove(hVar3.i());
+                        for (t0 onPurchaseManagerFailPurchasePaymentItem5 : r0Var.e) {
+                            onPurchaseManagerFailPurchasePaymentItem5.onPurchaseManagerFailPurchasePaymentItem(hVar3.i(), stringBuilder.toString());
+                        }
+                    }
+                }
+            }
+            r0Var.i = null;
+            if (i == 0 && z) {
+                for (t0 onPurchaseManagerFinishPurchase2 : r0Var.e) {
+                    onPurchaseManagerFinishPurchase2.onPurchaseManagerFinishPurchase();
+                }
+            }
+        } else {
+            this.i = null;
+            if (z) {
+                for (t0 onPurchaseManagerFinishPurchase22 : this.e) {
+                    onPurchaseManagerFinishPurchase22.onPurchaseManagerFinishPurchase();
+                }
+            }
+        }
+    }
+
+    /* JADX WARNING: Removed duplicated region for block: B:130:0x01d6  */
+    /* JADX WARNING: Removed duplicated region for block: B:136:0x01f5  */
+    /* JADX WARNING: Removed duplicated region for block: B:132:0x01dc  */
+    /* JADX WARNING: Removed duplicated region for block: B:154:0x023d  */
+    /* JADX WARNING: Removed duplicated region for block: B:152:0x0235 A:{SYNTHETIC, Splitter: B:152:0x0235} */
+    /* JADX WARNING: Removed duplicated region for block: B:157:0x0250 A:{RETURN} */
+    /* JADX WARNING: Removed duplicated region for block: B:156:0x024e  */
+    /* JADX WARNING: Removed duplicated region for block: B:46:0x00a4  */
+    /* JADX WARNING: Removed duplicated region for block: B:60:0x00d5  */
+    /* JADX WARNING: Removed duplicated region for block: B:91:0x0141  */
+    /* JADX WARNING: Removed duplicated region for block: B:78:0x0114  */
+    /* JADX WARNING: Removed duplicated region for block: B:93:0x0146  */
+    /* JADX WARNING: Removed duplicated region for block: B:104:0x0178  */
+    /* JADX WARNING: Removed duplicated region for block: B:95:0x014b  */
+    /* JADX WARNING: Removed duplicated region for block: B:156:0x024e  */
+    /* JADX WARNING: Removed duplicated region for block: B:157:0x0250 A:{RETURN} */
+    /* JADX WARNING: Removed duplicated region for block: B:159:0x0253  */
+    /* Code decompiled incorrectly, please refer to instructions dump. */
+    private boolean U0(h hVar) {
+        Throwable th;
+        boolean z = false;
+        if (hVar == null) {
+            return false;
+        }
+        w0 m = hVar.m();
+        w0 w0Var = w0.d;
+        boolean z2 = true;
+        boolean z3 = m == w0Var && hVar.d() && PurchaseUtil.e(hVar);
+        hVar.I(z3);
+        try {
+            this.c.lock();
+            try {
+                boolean z4;
+                boolean c;
+                boolean z5;
+                boolean z6;
+                h hVar2 = (h) this.a.get(hVar.e());
+                if (hVar2 == null) {
+                    hVar2 = (h) this.a.get(y0(hVar.i()));
+                    if (hVar2 != null) {
+                        z4 = true;
+                        if (hVar2 != null && !PurchaseUtil.c(hVar)) {
+                            hVar2 = new h(hVar);
+                            hVar2.S(System.currentTimeMillis());
+                            this.a.put(hVar.e(), hVar2);
+                            z1();
+                        } else if (hVar2 != null || PurchaseUtil.c(hVar2) || PurchaseUtil.c(hVar)) {
+                            boolean z7;
+                            c = PurchaseUtil.c(hVar2);
+                            if (hVar2 == null && hVar2.m() == w0Var && c && PurchaseUtil.e(hVar)) {
+                                hVar2.X(hVar, true);
+                                z7 = false;
+                                z5 = z7;
+                                z6 = true;
+                            } else if (hVar2 == null && c && (hVar.l() == u0.d || hVar.l() == u0.e)) {
+                                hVar2.X(hVar, true);
+                                z7 = false;
+                                z6 = z7;
+                                z5 = true;
+                            } else {
+                                if (hVar2 == null) {
+                                    if (hVar2.m() == w0Var) {
+                                        u0 l = hVar2.l();
+                                        u0 u0Var = u0.c;
+                                        if (l == u0Var && hVar2.d() && hVar.m() == w0Var && hVar.l() == u0Var) {
+                                            hVar2.j();
+                                            hVar.j();
+                                        }
+                                    }
+                                    z7 = hVar2.X(hVar, true);
+                                    z6 = false;
+                                } else {
+                                    z7 = false;
+                                    z6 = z7;
+                                }
+                                z5 = z6;
+                            }
+                            if (z4) {
+                                l1(hVar2);
+                            }
+                            if (!z5) {
+                                Objects.toString(hVar2);
+                                this.c.unlock();
+                                PurchaseUtil.j(hVar, true);
+                                z1();
+                                N1();
+                                for (t0 onPurchaseManagerPaymentItemCanceled : this.e) {
+                                    onPurchaseManagerPaymentItemCanceled.onPurchaseManagerPaymentItemCanceled(hVar2);
+                                }
+                            } else if (z6) {
+                                Objects.toString(hVar2);
+                                this.c.unlock();
+                                PurchaseUtil.j(hVar, false);
+                                z1();
+                                N1();
+                                for (t0 onPurchaseManagerPaymentItemCanceled2 : this.e) {
+                                    onPurchaseManagerPaymentItemCanceled2.onPurchaseManagerPaymentItemExpired(hVar2);
+                                }
+                            } else if (z7) {
+                                if (!this.j) {
+                                    if (!hVar2.p()) {
+                                        z7 = false;
+                                        hVar2.H(false);
+                                        hVar2.G(false);
+                                        hVar2.L(false);
+                                        this.c.unlock();
+                                        PurchaseUtil.j(hVar, false);
+                                        z1();
+                                        N1();
+                                        if (!c && PurchaseUtil.c(hVar2)) {
+                                            if (!hVar2.n()) {
+                                                m0(hVar2, null);
+                                            }
+                                            if (z7) {
+                                                hVar2.toString();
+                                                PurchaseUtil.k(PurchaseManagerAdapter.serializePurchaseItem(hVar2));
+                                                for (t0 onPurchaseManagerPaymentItemCanceled22 : this.e) {
+                                                    onPurchaseManagerPaymentItemCanceled22.onPurchaseManagerSuccessPurchasePaymentItem(hVar2);
+                                                }
+                                            } else {
+                                                hVar2.toString();
+                                                for (t0 onPurchaseManagerPaymentItemCanceled222 : this.e) {
+                                                    onPurchaseManagerPaymentItemCanceled222.onPurchaseManagerRestorePaymentItem(hVar2);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                z7 = true;
+                                hVar2.H(false);
+                                hVar2.G(false);
+                                hVar2.L(false);
+                                this.c.unlock();
+                                PurchaseUtil.j(hVar, false);
+                                z1();
+                                N1();
+                                if (hVar2.n()) {
+                                }
+                                if (z7) {
+                                }
+                            } else {
+                                if (hVar2 == null) {
+                                    if (!this.j) {
+                                        if (!hVar.p()) {
+                                            z3 = false;
+                                            hVar.H(false);
+                                            hVar.G(false);
+                                            hVar.L(false);
+                                            this.c.unlock();
+                                            if (z3) {
+                                                hVar.toString();
+                                                PurchaseUtil.k(PurchaseManagerAdapter.serializePurchaseItem(hVar));
+                                                P0(hVar);
+                                            } else {
+                                                hVar.toString();
+                                                R0(hVar);
+                                            }
+                                        }
+                                    }
+                                    z3 = true;
+                                    hVar.H(false);
+                                    hVar.G(false);
+                                    hVar.L(false);
+                                    this.c.unlock();
+                                    if (z3) {
+                                    }
+                                }
+                                if (!z2) {
+                                    return false;
+                                }
+                            }
+                            z2 = false;
+                            if (!z2) {
+                            }
+                        } else {
+                            if (hVar2.m() == w0Var && hVar2.l() == u0.c) {
+                                if (!hVar2.d()) {
+                                    c = false;
+                                    z6 = hVar2.d();
+                                    hVar2.X(hVar, c);
+                                    if (hVar2.m() == w0Var) {
+                                        if (!z6 && hVar2.d()) {
+                                            hVar2.G(true);
+                                            z = true;
+                                        } else if (hVar2.o() && !hVar.d()) {
+                                            hVar2.G(false);
+                                        }
+                                    }
+                                    if (!(c || hVar2.p() == hVar.p())) {
+                                        hVar2.H(hVar.p());
+                                    }
+                                    if (z4) {
+                                        l1(hVar2);
+                                    }
+                                    z1();
+                                }
+                            }
+                            c = true;
+                            z6 = hVar2.d();
+                            hVar2.X(hVar, c);
+                            if (hVar2.m() == w0Var) {
+                            }
+                            hVar2.H(hVar.p());
+                            if (z4) {
+                            }
+                            z1();
+                        }
+                        this.c.unlock();
+                        return z;
+                    }
+                }
+                z4 = false;
+                if (hVar2 != null) {
+                }
+                if (hVar2 != null) {
+                }
+                c = PurchaseUtil.c(hVar2);
+                if (hVar2 == null) {
+                }
+                if (hVar2 == null) {
+                }
+                if (hVar2 == null) {
+                }
+                z5 = z6;
+                if (z4) {
+                }
+                if (!z5) {
+                }
+                z2 = false;
+                if (!z2) {
+                }
+            } catch (Throwable th2) {
+                th = th2;
+                z = true;
+                if (z) {
+                }
+                throw th;
+            }
+        } catch (Throwable th3) {
+            th = th3;
+            if (z) {
+                this.c.unlock();
+            }
+            throw th;
+        }
+    }
+
+    private void v0(g gVar, h hVar) {
+        Throwable th;
+        if (ApplicationUtil.isUIThread()) {
+            String F0 = F0(gVar);
+            String text;
+            if (F0 == null) {
+                gVar.name();
+                text = StringResource.getInstance().getText("Purchase_Error_No_Product_Id");
+                for (t0 t0Var : this.e) {
+                    t0Var.onPurchaseManagerFailPurchasePaymentItem(gVar, text);
+                    t0Var.onPurchaseManagerFinishPurchase();
+                }
+            } else {
+                String str = "Purchase_Error_In_App_Purchase";
+                if (this.f == null) {
+                    text = StringResource.getInstance().getText(str);
+                    for (t0 t0Var2 : this.e) {
+                        t0Var2.onPurchaseManagerFailPurchasePaymentItem(gVar, text);
+                        t0Var2.onPurchaseManagerFinishPurchase();
+                    }
+                } else {
+                    w0 c = gVar.c();
+                    w0 w0Var = w0.d;
+                    String str2 = c == w0Var ? "subs" : "inapp";
+                    h hVar2;
+                    g gVar2;
+                    if (this.p) {
+                        try {
+                            this.c.lock();
+                            l lVar = (l) this.q.get(F0);
+                            this.c.unlock();
+                            if (lVar == null) {
+                                p0 tVar = new t(this, gVar);
+                                t0(new k(this, F0, str2, gVar, hVar), tVar);
+                                return;
+                            }
+                            int i = 7;
+                            hVar2 = hVar;
+                            text = null;
+                            gVar2 = gVar;
+                            ArrayList arrayList = new ArrayList(1);
+                            a c2 = g.b.a().c(lVar);
+                            if (gVar2.c() == w0Var) {
+                                c A1 = A1(lVar);
+                                if (A1 != null) {
+                                    e eVar = A1.a;
+                                    if (eVar != null) {
+                                        c2.b(eVar.a());
+                                    }
+                                }
+                            }
+                            arrayList.add(c2.a());
+                            g.a b = g.a().b(arrayList);
+                            if (gVar2.c() == w0Var && hVar2 != null && hVar2.m() == w0Var) {
+                                b.d(g.c.a().b(hVar2.e()).d(3).a());
+                                this.i = hVar2.e();
+                            }
+                            g a = b.a();
+                            this.g.add(gVar2);
+                            try {
+                                text = this.f.f(IbisPaintApplication.getApplication().i(), a).b();
+                                if (text == 1) {
+                                    M0();
+                                    return;
+                                } else if (text == i) {
+                                    K0(gVar2);
+                                    return;
+                                } else if (text != null) {
+                                    J0(text);
+                                    return;
+                                }
+                            } catch (Exception e) {
+                                S8.d.d(e);
+                                this.i = text;
+                                this.g.remove(gVar2);
+                                text = S8.e.a(StringResource.getInstance().getText(str), e);
+                                for (t0 t0Var22 : this.e) {
+                                    t0Var22.onPurchaseManagerFailPurchasePaymentItem(gVar2, text);
+                                    t0Var22.onPurchaseManagerFinishPurchase();
+                                }
+                            }
+                        } catch (Throwable th2) {
+                            th = th2;
+                            this.c.unlock();
+                        }
+                    } else {
+                        int i2 = 7;
+                        hVar2 = hVar;
+                        text = null;
+                        gVar2 = gVar;
+                        try {
+                            this.c.lock();
+                            SkuDetails skuDetails = (SkuDetails) this.r.get(F0);
+                            this.c.unlock();
+                            if (skuDetails == null) {
+                                t0(new k(this, F0, str2, gVar2, hVar2), new t(this, gVar2));
+                                return;
+                            }
+                            g.a c3 = g.a().c(skuDetails);
+                            if (gVar2.c() == w0Var && hVar2 != null && hVar2.m() == w0Var) {
+                                c3.d(g.c.a().b(hVar2.e()).d(3).a());
+                                this.i = hVar2.e();
+                            }
+                            g a2 = c3.a();
+                            this.g.add(gVar2);
+                            try {
+                                text = this.f.f(IbisPaintApplication.getApplication().i(), a2).b();
+                                if (text == 1) {
+                                    M0();
+                                    return;
+                                } else if (text == i2) {
+                                    K0(gVar2);
+                                    return;
+                                } else if (text != null) {
+                                    J0(text);
+                                    return;
+                                }
+                            } catch (Exception e2) {
+                                S8.d.d(e2);
+                                this.i = text;
+                                this.g.remove(gVar2);
+                                text = S8.e.a(StringResource.getInstance().getText(str), e2);
+                                for (t0 t0Var222 : this.e) {
+                                    t0Var222.onPurchaseManagerFailPurchasePaymentItem(gVar2, text);
+                                    t0Var222.onPurchaseManagerFinishPurchase();
+                                }
+                            }
+                        } catch (Throwable th22) {
+                            th = th22;
+                            this.c.unlock();
+                        }
+                    }
+                    return;
+                }
+            }
+            return;
+        }
+        ApplicationUtil.runOnMainThread(new o0(this, gVar, hVar));
+    }
+
+    public void a(v0 v0Var, List list, v0.a aVar, String str) {
+        if (this.n == v0Var) {
+            StringBuilder stringBuilder = new StringBuilder();
+            StringResource instance = StringResource.getInstance();
+            int i = b.b[aVar.ordinal()];
+            if (i == 1) {
+                stringBuilder.append(instance.getText("Glape_Error_General_Invalid_Parameter"));
+            } else if (i == 2) {
+                stringBuilder.append(instance.getText("Purchase_Error_Fail_Request"));
+            } else if (i == 3) {
+                stringBuilder.append(instance.getText("Purchase_Error_Bad_Response"));
+            } else if (i == 4) {
+                stringBuilder.append(instance.getText("Purchase_Error_Unknown_Purchase_Response"));
+            } else if (i != 5) {
+                stringBuilder.append(instance.getText("Purchase_Error_Unknown_Error"));
+            } else {
+                stringBuilder.append(instance.getText("Purchase_Error_Bad_Purchases"));
+            }
+            if (str.length() > 0) {
+                stringBuilder.append(10);
+                stringBuilder.append(IbisPaintApplication.getApplication().getResources().getString(2131951674).replace("###DETAIL###", str));
+            }
+            if (aVar == v0.a.f && list != null) {
+                for (c cVar : list) {
+                    T0(cVar.b);
+                }
+            }
+            String stringBuilder2;
+            if (this.h != g.c) {
+                stringBuilder2 = stringBuilder.toString();
+                for (t0 t0Var : this.e) {
+                    t0Var.onPurchaseManagerFailPurchasePaymentItem(this.h, stringBuilder2);
+                    t0Var.onPurchaseManagerFinishPurchase();
+                }
+            } else if (this.j) {
+                this.k = stringBuilder.toString();
+                S0();
+            } else {
+                stringBuilder2 = stringBuilder.toString();
+                for (g gVar : this.g) {
+                    for (t0 onPurchaseManagerFailPurchasePaymentItem : this.e) {
+                        onPurchaseManagerFailPurchasePaymentItem.onPurchaseManagerFailPurchasePaymentItem(gVar, stringBuilder2);
+                    }
+                }
+                this.g.clear();
+                for (t0 onPurchaseManagerFinishPurchase : this.e) {
+                    onPurchaseManagerFinishPurchase.onPurchaseManagerFinishPurchase();
+                }
+            }
+            this.n = null;
+            if (this.m.size() > 0) {
+                K1();
+            }
+        }
+    }
+
+    public void H1(g gVar) {
+        if (!ApplicationUtil.isUIThread()) {
+            ApplicationUtil.runOnMainThread(new t(this, gVar));
+        } else if (IbisPaintApplication.getApplication().i() != null) {
+            String text;
+            if (this.f == null) {
+                text = StringResource.getInstance().getText("Purchase_Error_No_Permission");
+                for (t0 t0Var : this.e) {
+                    t0Var.onPurchaseManagerFailPurchasePaymentItem(gVar, text);
+                    t0Var.onPurchaseManagerFinishPurchase();
+                }
+            } else {
+                if (!(gVar == null || gVar == g.c || gVar == g.d)) {
+                    if (gVar != g.e) {
+                        try {
+                            this.c.lock();
+                            if (this.b.contains(gVar)) {
+                                gVar.name();
+                                for (String str : this.a.keySet()) {
+                                    h hVar = (h) this.a.get(str);
+                                    if (hVar != null) {
+                                        if (hVar.i() != gVar) {
+                                            continue;
+                                        } else if (PurchaseUtil.c(hVar)) {
+                                            for (t0 t0Var2 : this.e) {
+                                                t0Var2.onPurchaseManagerNotifyAlreadyPurchasedPaymentItem(hVar);
+                                                t0Var2.onPurchaseManagerFinishPurchase();
+                                            }
+                                            return;
+                                        }
+                                    }
+                                }
+                            }
+                            this.c.unlock();
+                            if (gVar.c() != w0.d) {
+                                v0(gVar, null);
+                                return;
+                            } else if (this.f == null) {
+                                text = StringResource.getInstance().getText("Purchase_Error_In_App_Purchase");
+                                for (t0 t0Var3 : this.e) {
+                                    t0Var3.onPurchaseManagerFailPurchasePaymentItem(gVar, text);
+                                    t0Var3.onPurchaseManagerFinishPurchase();
+                                }
+                            } else {
+                                o tVar = new t(this, gVar);
+                                t0(new p(this, gVar, tVar), tVar);
+                                return;
+                            }
+                        } finally {
+                            this.c.unlock();
+                        }
+                    }
+                }
+                Objects.toString(gVar);
+                text = StringResource.getInstance().getText("Purchase_Error_No_Product_Id");
+                for (t0 t0Var32 : this.e) {
+                    t0Var32.onPurchaseManagerFailPurchasePaymentItem(gVar, text);
+                    t0Var32.onPurchaseManagerFinishPurchase();
+                }
+            }
+        }
+    }
+
+    private void x1() {
+        if (this.f != null) {
+            StringBuilder stringBuilder;
+            ArrayList arrayList = new ArrayList();
+            ArrayList arrayList2 = new ArrayList();
+            ArrayList arrayList3 = new ArrayList();
+            ArrayList arrayList4 = new ArrayList();
+            Object obj = null;
+            for (String str : this.a.keySet()) {
+                h hVar = (h) this.a.get(str);
+                if (hVar != null) {
+                    if (hVar.l() == u0.a || hVar.l() == u0.b) {
+                        this.g.add(hVar.i());
+                        if (hVar.s()) {
+                            c cVar = new c();
+                            cVar.a = hVar.i();
+                            cVar.b = hVar.e();
+                            this.m.add(cVar);
+                        } else if (hVar.i().c() == w0.d) {
+                            if (hVar.p()) {
+                                arrayList4.add(hVar);
+                            } else {
+                                arrayList2.add(hVar);
+                            }
+                        } else if (hVar.p()) {
+                            arrayList3.add(hVar);
+                        } else {
+                            arrayList.add(hVar);
+                        }
+                    } else if (A0(str) == hVar.i()) {
+                        obj = 1;
+                    }
+                }
+            }
+            if (this.m.size() > 0) {
+                K1();
+            }
+            if (arrayList.size() > 0) {
+                stringBuilder = new StringBuilder();
+                F1(arrayList, "inapp", true, false, false, stringBuilder);
+                stringBuilder.length();
+            }
+            if (arrayList3.size() > 0) {
+                stringBuilder = new StringBuilder();
+                F1(arrayList3, "inapp", false, true, false, stringBuilder);
+                stringBuilder.length();
+            }
+            if (arrayList2.size() > 0) {
+                stringBuilder = new StringBuilder();
+                F1(arrayList2, "subs", true, false, false, stringBuilder);
+                stringBuilder.length();
+            }
+            if (arrayList4.size() > 0) {
+                stringBuilder = new StringBuilder();
+                F1(arrayList4, "subs", false, true, false, stringBuilder);
+                stringBuilder.length();
+            }
+            if (obj != null) {
+                J1();
+            }
+        }
+    }
+
+    public static /* synthetic */ void a0(r0 r0Var, h hVar, List list, boolean z, boolean z2, List list2, String str, boolean z3) {
+        r0Var.getClass();
+        int b = hVar.b();
+        r0 r0Var2;
+        boolean z4;
+        if (b != 0 || list == null) {
+            r0Var2 = r0Var;
+            z4 = z2;
+            if (z) {
+                r0Var2.W0(b);
+            } else if (z4) {
+                r0Var2.J0(b);
+            }
+        } else {
+            SparseArray arrayList = new ArrayList(list.size());
+            for (SkuDetails skuDetails : list) {
+                g B0 = r0Var.B0(skuDetails.f());
+                if (B0 != g.c) {
+                    arrayList.put(B0.d(), skuDetails);
+                }
+            }
+            for (h hVar2 : list2) {
+                boolean z5;
+                SkuDetails skuDetails2 = (SkuDetails) arrayList.get(hVar2.i().d());
+                if (skuDetails2 != null) {
+                    r0Var2 = r0Var;
+                    z5 = z;
+                    z4 = z2;
+                    if (r0Var2.M1(hVar2, I0(skuDetails2), skuDetails2.h(), z4, z5)) {
+                        r0Var2.O0(hVar2);
+                    } else {
+                        hVar2.i().name();
+                    }
+                } else {
+                    r0Var2 = r0Var;
+                    z5 = z;
+                    z4 = z2;
+                    hVar2.i().name();
+                }
+                r0Var = r0Var2;
+                z2 = z4;
+                z = z5;
+            }
+            r0Var2 = r0Var;
+            z4 = z2;
+            if (z) {
+                if ("inapp".equals(str)) {
+                    if (z3) {
+                        r0Var2.I1("subs");
+                    }
+                } else if (r0Var2.m.size() > 0) {
+                    r0Var2.K1();
+                } else {
+                    r0Var2.S0();
+                }
+            } else if (z4) {
+                if (r0Var2.m.size() > 0) {
+                    r0Var2.K1();
+                    return;
+                }
+                for (t0 onPurchaseManagerFinishPurchase : r0Var2.e) {
+                    onPurchaseManagerFinishPurchase.onPurchaseManagerFinishPurchase();
+                }
+            }
+        }
+    }
+
+    public static /* synthetic */ void w(r0 r0Var, h hVar, boolean z, boolean z2, List list, List list2, String str, boolean z3) {
+        r0Var.getClass();
+        int b = hVar.b();
+        if (b == 0) {
+            r0 r0Var2;
+            boolean z4;
+            SparseArray arrayList = new ArrayList(list.size());
+            for (l lVar : list) {
+                g B0 = r0Var.B0(lVar.c());
+                if (B0 != g.c) {
+                    arrayList.put(B0.d(), lVar);
+                }
+            }
+            for (h hVar2 : list2) {
+                boolean z5;
+                l lVar2 = (l) arrayList.get(hVar2.i().d());
+                if (lVar2 != null) {
+                    r0Var2 = r0Var;
+                    z5 = z;
+                    z4 = z2;
+                    if (r0Var2.M1(hVar2, G0(lVar2), lVar2.d(), z4, z5)) {
+                        r0Var2.O0(hVar2);
+                    } else {
+                        hVar2.i().name();
+                    }
+                } else {
+                    r0Var2 = r0Var;
+                    z5 = z;
+                    z4 = z2;
+                    hVar2.i().name();
+                }
+                r0Var = r0Var2;
+                z2 = z4;
+                z = z5;
+            }
+            r0Var2 = r0Var;
+            z4 = z2;
+            if (z) {
+                if ("inapp".equals(str)) {
+                    if (z3) {
+                        r0Var2.I1("subs");
+                    }
+                } else if (r0Var2.m.size() > 0) {
+                    r0Var2.K1();
+                } else {
+                    r0Var2.S0();
+                }
+            } else if (z4) {
+                if (r0Var2.m.size() > 0) {
+                    r0Var2.K1();
+                    return;
+                }
+                for (t0 onPurchaseManagerFinishPurchase : r0Var2.e) {
+                    onPurchaseManagerFinishPurchase.onPurchaseManagerFinishPurchase();
+                }
+            }
+        } else if (z) {
+            r0Var.W0(b);
+        } else if (z2) {
+            r0Var.J0(b);
+        }
+    }
+
+    private boolean F1(List list, String str, boolean z, boolean z2, boolean z3, StringBuilder stringBuilder) {
+        StringBuilder stringBuilder2 = stringBuilder;
+        String str2 = "Glape_Error_General_Invalid_Parameter";
+        boolean z4;
+        if (list == null || list.size() <= 0 || str == null || str.length() <= 0 || stringBuilder2 == null) {
+            z4 = false;
+            if (stringBuilder2 != null) {
+                stringBuilder2.append(StringResource.getInstance().getText(str2));
+            }
+            return z4;
+        }
+        ArrayList arrayList = new ArrayList(list.size());
+        z4 = false;
+        ArrayList arrayList2 = new ArrayList(list.size());
+        w0 w0Var = w0.a;
+        Iterator it = list.iterator();
+        while (true) {
+            String str3 = "subs";
+            String str4 = "inapp";
+            if (it.hasNext()) {
+                h hVar = (h) it.next();
+                String F0 = F0(hVar.i());
+                if (F0 == null) {
+                    Objects.toString(hVar.i());
+                    if (z) {
+                        stringBuilder2.append(StringResource.getInstance().getText("Purchase_Error_No_Product_Id"));
+                        return z4;
+                    }
+                } else if (!(str4.equals(str) && hVar.m() == w0.d) && (!str3.equals(str) || hVar.m() == w0.d)) {
+                    w0Var = hVar.m();
+                    arrayList2.add(F0);
+                    arrayList.add(new h(hVar));
+                }
+            } else if (arrayList2.size() == 0) {
+                return z4;
+            } else {
+                if (this.f == null) {
+                    stringBuilder2.append(StringResource.getInstance().getText("Purchase_Error_In_App_Purchase"));
+                    return z4;
+                }
+                String str5 = w0Var == w0.d ? str3 : str4;
+                boolean z5 = z2;
+                t0(new m0(this, arrayList2, str5, z5, z, arrayList, str, z3), new l0(this, z5, z));
+                return true;
+            }
+        }
+        stringBuilder2.append(StringResource.getInstance().getText(str2));
+        return z4;
+    }
+
+    private void X0(String str, List list) {
+        if (!this.j) {
+            return;
+        }
+        if (list == null) {
+            this.k = StringResource.getInstance().getText("Purchase_Error_Bad_Response");
+            S0();
+            return;
+        }
+        ArrayList arrayList = new ArrayList(list.size());
+        Iterator it = list.iterator();
+        while (true) {
+            int i = 1;
+            if (it.hasNext()) {
+                Purchase purchase = (Purchase) it.next();
+                g B0 = B0((String) purchase.c().get(0));
+                if (B0 == g.c) {
+                    String str2 = (String) purchase.c().get(0);
+                } else if (O1(purchase)) {
+                    h u0 = u0(B0, purchase);
+                    if (u0 == null) {
+                        this.k = StringResource.getInstance().getText("Purchase_Error_Unknown_Purchase_Response");
+                        S0();
+                        return;
+                    }
+                    u0.H(true);
+                    if (U0(u0)) {
+                        u0.G(true);
+                    }
+                    arrayList.add(u0);
+                } else {
+                    this.k = StringResource.getInstance().getText("Purchase_Error_Verification_Failed");
+                    S0();
+                    return;
+                }
+            }
+            Object obj;
+            if (arrayList.size() > 0) {
+                StringBuilder stringBuilder = new StringBuilder();
+                obj = str;
+                boolean F1 = F1(arrayList, obj, false, true, true, stringBuilder);
+                if (stringBuilder.length() > 0) {
+                    this.k = stringBuilder.toString();
+                    S0();
+                    return;
+                }
+                i = 1 ^ F1;
+            } else {
+                obj = str;
+            }
+            if (i != 0) {
+                if ("inapp".equals(obj)) {
+                    I1("subs");
+                    return;
+                }
+                S0();
+            }
+            return;
+        }
+    }
+
+    public void E1(g gVar) {
+        if (!ApplicationUtil.isUIThread()) {
+            ApplicationUtil.runOnMainThread(new t(this, gVar));
+        } else if (IbisPaintApplication.getApplication().i() != null) {
+            String text;
+            if (this.f == null) {
+                text = StringResource.getInstance().getText("Purchase_Error_No_Permission");
+                for (t0 onPurchaseManagerFailGetPaymentItemInformation : this.e) {
+                    onPurchaseManagerFailGetPaymentItemInformation.onPurchaseManagerFailGetPaymentItemInformation(gVar, text);
+                }
+            } else {
+                text = "Purchase_Error_No_Product_Id";
+                if (!(gVar == null || gVar == g.c || gVar == g.d)) {
+                    if (gVar != g.e) {
+                        String F0 = F0(gVar);
+                        if (F0 == null) {
+                            gVar.name();
+                            text = StringResource.getInstance().getText(text);
+                            for (t0 onPurchaseManagerFailGetPaymentItemInformation2 : this.e) {
+                                onPurchaseManagerFailGetPaymentItemInformation2.onPurchaseManagerFailGetPaymentItemInformation(gVar, text);
+                            }
+                        } else if (this.f == null) {
+                            text = StringResource.getInstance().getText("Purchase_Error_In_App_Purchase");
+                            for (t0 onPurchaseManagerFailGetPaymentItemInformation22 : this.e) {
+                                onPurchaseManagerFailGetPaymentItemInformation22.onPurchaseManagerFailGetPaymentItemInformation(gVar, text);
+                            }
+                        } else {
+                            t0(new D(this, gVar, F0), new t(this, gVar));
+                            return;
+                        }
+                    }
+                }
+                if (gVar != null) {
+                    gVar.name();
+                }
+                text = StringResource.getInstance().getText(text);
+                for (t0 onPurchaseManagerFailGetPaymentItemInformation222 : this.e) {
+                    onPurchaseManagerFailGetPaymentItemInformation222.onPurchaseManagerFailGetPaymentItemInformation(gVar, text);
+                }
+            }
+        }
+    }
+
+    public static /* synthetic */ void k(r0 r0Var, h hVar, g gVar, String str, List list) {
+        r0Var.getClass();
+        int b = hVar.b();
+        String x0;
+        if (b != 0) {
+            x0 = r0Var.x0(b);
+            gVar.name();
+            if (x0 == null) {
+                x0 = StringResource.getInstance().getText("Purchase_Error_Unknown_Error");
+            }
+            for (t0 onPurchaseManagerFailGetPaymentItemInformation : r0Var.e) {
+                onPurchaseManagerFailGetPaymentItemInformation.onPurchaseManagerFailGetPaymentItemInformation(gVar, x0);
+            }
+            return;
+        }
+        if (list != null) {
+            for (Object obj : list) {
+                if (str.equals(obj.f())) {
+                    break;
+                }
+            }
+        }
+        Object obj2 = null;
+        if (obj2 == null) {
+            gVar.name();
+            x0 = StringResource.getInstance().getText("Purchase_Error_No_Product_Id");
+            for (t0 onPurchaseManagerFailGetPaymentItemInformation2 : r0Var.e) {
+                onPurchaseManagerFailGetPaymentItemInformation2.onPurchaseManagerFailGetPaymentItemInformation(gVar, x0);
+            }
+            return;
+        }
+        try {
+            r0Var.c.lock();
+            r0Var.r.put(str, obj2);
+            r0Var.c.unlock();
+            d I0 = I0(obj2);
+            float longValue = (float) (((double) I0.a.longValue()) / 1000000.0d);
+            for (t0 onPurchaseManagerSuccessGetPaymentItemInformation : r0Var.e) {
+                onPurchaseManagerSuccessGetPaymentItemInformation.onPurchaseManagerSuccessGetPaymentItemInformation(gVar, obj2.g(), obj2.a(), I0.b, I0.c, longValue, obj2.b());
+            }
+        } catch (Throwable th) {
+            Throwable th2 = th;
+            r0Var.c.unlock();
+        }
+    }
+
+    public static /* synthetic */ void T(r0 r0Var, h hVar, g gVar, List list, Runnable runnable) {
+        r0Var.getClass();
+        String text;
+        if (hVar.b() != 0) {
+            text = StringResource.getInstance().getText("Purchase_Error_In_App_Purchase");
+            for (t0 t0Var : r0Var.e) {
+                t0Var.onPurchaseManagerFailPurchasePaymentItem(gVar, text);
+                t0Var.onPurchaseManagerFinishPurchase();
+            }
+        } else if (list.size() > 0) {
+            list.size();
+            Purchase purchase = (Purchase) list.get(0);
+            g B0 = r0Var.B0((String) purchase.c().get(0));
+            if (r0Var.O1(purchase)) {
+                h u0 = r0Var.u0(B0, purchase);
+                if (u0 == null) {
+                    text = StringResource.getInstance().getText("Purchase_Error_Unknown_Purchase_Response");
+                    for (t0 t0Var2 : r0Var.e) {
+                        t0Var2.onPurchaseManagerFailPurchasePaymentItem(gVar, text);
+                        t0Var2.onPurchaseManagerFinishPurchase();
+                    }
+                } else if (u0.i() == gVar) {
+                    gVar.name();
+                    for (t0 t0Var3 : r0Var.e) {
+                        t0Var3.onPurchaseManagerNotifyAlreadyPurchasedPaymentItem(u0);
+                        t0Var3.onPurchaseManagerFinishPurchase();
+                    }
+                } else {
+                    r0Var.v0(gVar, u0);
+                    return;
+                }
+            }
+            text = StringResource.getInstance().getText("Purchase_Error_Verification_Failed");
+            for (t0 t0Var22 : r0Var.e) {
+                t0Var22.onPurchaseManagerFailPurchasePaymentItem(gVar, text);
+                t0Var22.onPurchaseManagerFinishPurchase();
+            }
+        } else {
+            r0Var.t0(new t(r0Var, gVar), runnable);
+        }
+    }
+
+    public static /* synthetic */ void Y(r0 r0Var, h hVar, g gVar, String str, List list) {
+        r0Var.getClass();
+        int b = hVar.b();
+        String x0;
+        if (b != 0) {
+            x0 = r0Var.x0(b);
+            gVar.name();
+            if (x0 == null) {
+                x0 = StringResource.getInstance().getText("Purchase_Error_Unknown_Error");
+            }
+            for (t0 onPurchaseManagerFailGetPaymentItemInformation : r0Var.e) {
+                onPurchaseManagerFailGetPaymentItemInformation.onPurchaseManagerFailGetPaymentItemInformation(gVar, x0);
+            }
+            return;
+        }
+        for (Object obj : list) {
+            if (str.equals(obj.c())) {
+                break;
+            }
+        }
+        Object obj2 = null;
+        if (obj2 == null) {
+            gVar.name();
+            x0 = StringResource.getInstance().getText("Purchase_Error_No_Product_Id");
+            for (t0 onPurchaseManagerFailGetPaymentItemInformation2 : r0Var.e) {
+                onPurchaseManagerFailGetPaymentItemInformation2.onPurchaseManagerFailGetPaymentItemInformation(gVar, x0);
+            }
+            return;
+        }
+        try {
+            r0Var.c.lock();
+            r0Var.q.put(str, obj2);
+            r0Var.c.unlock();
+            d G0 = G0(obj2);
+            float longValue = (float) (((double) G0.a.longValue()) / 1000000.0d);
+            String E0 = r0Var.E0(obj2);
+            for (t0 onPurchaseManagerSuccessGetPaymentItemInformation : r0Var.e) {
+                onPurchaseManagerSuccessGetPaymentItemInformation.onPurchaseManagerSuccessGetPaymentItemInformation(gVar, obj2.f(), obj2.a(), G0.b, G0.c, longValue, E0);
+            }
+        } catch (Throwable th) {
+            Throwable th2 = th;
+            r0Var.c.unlock();
+        }
+    }
+
+    private void Q0() {
+        if (this.h != g.c) {
+            try {
+                h hVar;
+                this.c.lock();
+                for (String str : this.a.keySet()) {
+                    hVar = (h) this.a.get(str);
+                    if (hVar != null) {
+                        if (hVar.m() == w0.d) {
+                            if (hVar.i() != this.h) {
+                                if (PurchaseUtil.c(hVar)) {
+                                    break;
+                                } else if (hVar.d()) {
+                                    String text = StringResource.getInstance().getText("Purchase_Error_Fail_Plan_Change");
+                                    for (t0 t0Var : this.e) {
+                                        t0Var.onPurchaseManagerFailPurchasePaymentItem(this.h, text);
+                                        t0Var.onPurchaseManagerFinishPurchase();
+                                    }
+                                    this.h = g.c;
+                                    this.c.unlock();
+                                    return;
+                                }
+                            } else if (PurchaseUtil.c(hVar)) {
+                                this.h.name();
+                                this.h = g.c;
+                                for (t0 t0Var2 : this.e) {
+                                    t0Var2.onPurchaseManagerNotifyAlreadyPurchasedPaymentItem(hVar);
+                                    t0Var2.onPurchaseManagerFinishPurchase();
+                                }
+                                this.c.unlock();
+                                return;
+                            }
+                        }
+                    }
+                }
+                hVar = null;
+                this.c.unlock();
+                v0(this.h, hVar);
+                this.h = g.c;
+            } catch (Throwable th) {
+                this.c.unlock();
+                throw th;
+            }
+        }
+    }
+
+    private void P1(boolean z) {
+        HashSet hashSet = new HashSet();
+        try {
+            this.c.lock();
+            for (String str : this.a.keySet()) {
+                h hVar = (h) this.a.get(str);
+                if (hVar != null) {
+                    w0 m = hVar.m();
+                    w0 w0Var = w0.d;
+                    if (m == w0Var && hVar.l() == u0.c && hVar.d()) {
+                        if (!z || System.currentTimeMillis() > hVar.j()) {
+                            long j = hVar.u() ? 900000 : 7948800000L;
+                            if (!hVar.q() || hVar.j() + j <= System.currentTimeMillis()) {
+                                c cVar = new c();
+                                cVar.a = hVar.i();
+                                cVar.b = str;
+                                cVar.c = hVar.o();
+                                this.m.add(cVar);
+                            } else {
+                                hashSet.add(str);
+                            }
+                        }
+                    }
+                    if (hVar.m() == w0Var && !hVar.d() && System.currentTimeMillis() <= hVar.j()) {
+                        hashSet.add(str);
+                    }
+                }
+            }
+            this.c.unlock();
+            t0(new n0(this, hashSet), null);
+        } catch (Throwable th) {
+            this.c.unlock();
+        }
+    }
+
+    public void s0() {
+        ConfigurationChunk e = ConfigurationChunk.e();
+        String b = e.b();
+        if (b != null) {
+            if (b.length() > 0) {
+                StringBuilder stringBuilder = new StringBuilder();
+                List<h> f = PurchaseUtil.f(stringBuilder);
+                if (stringBuilder.length() <= 0) {
+                    if (f != null) {
+                        HashMap hashMap = new HashMap();
+                        for (h hVar : f) {
+                            if (hVar.m() == w0.d) {
+                                g i = hVar.i();
+                                h hVar2 = (h) hashMap.get(i);
+                                if (hVar2 == null || hVar.k() > hVar2.k()) {
+                                    hashMap.put(i, hVar);
+                                }
+                            }
+                        }
+                        ArrayList arrayList = new ArrayList(f.size());
+                        for (h hVar3 : f) {
+                            if (PurchaseUtil.c(hVar3) || !PurchaseUtil.d(hVar3) || hVar3 == hashMap.get(hVar3.i())) {
+                                arrayList.add(hVar3);
+                            } else {
+                                hVar3.toString();
+                            }
+                        }
+                        if (f.size() != arrayList.size()) {
+                            b = PurchaseUtil.g(arrayList);
+                            if (b == null || b.length() <= 0) {
+                                e.v();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private void q0(g gVar) {
+        if (gVar == null) {
+            return;
+        }
+        if (gVar.c() == w0.d) {
+            if (this.b.contains(gVar)) {
+                Set<String> keySet = this.a.keySet();
+                ArrayList<h> arrayList = new ArrayList();
+                ArrayList<h> arrayList2 = new ArrayList();
+                for (String str : keySet) {
+                    h hVar = (h) this.a.get(str);
+                    if (hVar != null) {
+                        if (hVar.i() == gVar) {
+                            if (!PurchaseUtil.c(hVar)) {
+                                if (PurchaseUtil.e(hVar)) {
+                                    arrayList.add(hVar);
+                                } else {
+                                    arrayList2.add(hVar);
+                                }
+                            } else {
+                                return;
+                            }
+                        }
+                    }
+                }
+                this.b.remove(gVar);
+                for (h hVar2 : arrayList) {
+                    for (t0 onPurchaseManagerPaymentItemExpired : this.e) {
+                        onPurchaseManagerPaymentItemExpired.onPurchaseManagerPaymentItemExpired(hVar2);
+                    }
+                }
+                for (h hVar22 : arrayList2) {
+                    for (t0 onPurchaseManagerPaymentItemCanceled : this.e) {
+                        onPurchaseManagerPaymentItemCanceled.onPurchaseManagerPaymentItemCanceled(hVar22);
+                    }
+                }
+            }
+        }
+    }
+
+    public static /* synthetic */ void u(r0 r0Var, h hVar, List list, g gVar) {
+        r0Var.getClass();
+        String x0 = hVar.b() != 0 ? r0Var.x0(hVar.b()) : list.size() <= 0 ? StringResource.getInstance().getText("Purchase_Error_Bad_Response") : null;
+        String F0 = r0Var.F0(gVar);
+        if (x0 == null && F0 == null) {
+            x0 = StringResource.getInstance().getText("Purchase_Error_No_Product_Id");
+        }
+        if (x0 != null && x0.length() > 0) {
+            r0Var.g.remove(gVar);
+            for (t0 onPurchaseManagerFailPurchasePaymentItem : r0Var.e) {
+                onPurchaseManagerFailPurchasePaymentItem.onPurchaseManagerFailPurchasePaymentItem(gVar, x0);
+            }
+            if (r0Var.g.size() == 0) {
+                for (t0 onPurchaseManagerFinishPurchase : r0Var.e) {
+                    onPurchaseManagerFinishPurchase.onPurchaseManagerFinishPurchase();
+                }
+            }
+        } else if (F0 != null) {
+            ArrayList arrayList = new ArrayList();
+            for (Purchase purchase : list) {
+                if (F0.equals(purchase.c().get(0))) {
+                    arrayList.add(purchase);
+                }
+            }
+            r0Var.L0(arrayList);
+        }
+    }
+
+    public static /* synthetic */ void v(r0 r0Var, h hVar, Set set, List list) {
+        r0Var.getClass();
+        if (hVar.b() == 0) {
+            if (set.size() > 0) {
+                for (Purchase purchase : list) {
+                    if (set.contains(purchase.f())) {
+                        if (purchase.i()) {
+                            c cVar = new c();
+                            cVar.a = r0Var.B0((String) purchase.c().get(0));
+                            cVar.b = purchase.f();
+                            cVar.c = true;
+                            r0Var.m.add(cVar);
+                        }
+                    }
+                }
+            }
+            for (Purchase purchase2 : list) {
+                if (r0Var.a.get(purchase2.f()) == null) {
+                    c cVar2 = new c();
+                    cVar2.a = r0Var.B0((String) purchase2.c().get(0));
+                    cVar2.b = purchase2.f();
+                    cVar2.c = true;
+                    r0Var.m.add(cVar2);
+                }
+            }
+        }
+        if (r0Var.m.size() > 0) {
+            r0Var.K1();
+        }
+    }
+
+    private boolean M1(h hVar, d dVar, String str, boolean z, boolean z2) {
+        String text;
+        if (hVar != null) {
+            if (dVar != null) {
+                hVar.T(((double) dVar.a.longValue()) / 1000000.0d);
+                hVar.A(dVar.c);
+                hVar.K(true);
+                if (hVar.m() != w0.d || "subs".equals(str)) {
+                    return true;
+                }
+                text = StringResource.getInstance().getText("Purchase_Error_Bad_Response");
+                if (z2) {
+                    this.k = text;
+                } else if (z) {
+                    this.g.remove(hVar.i());
+                    for (t0 onPurchaseManagerFailPurchasePaymentItem : this.e) {
+                        onPurchaseManagerFailPurchasePaymentItem.onPurchaseManagerFailPurchasePaymentItem(hVar.i(), text);
+                    }
+                }
+                return false;
+            }
+        }
+        text = StringResource.getInstance().getText("Glape_Error_General_Invalid_Parameter");
+        if (z2) {
+            this.k = text;
+        } else if (z) {
+            g gVar = g.c;
+            if (hVar != null) {
+                gVar = hVar.i();
+                this.g.remove(gVar);
+            }
+            for (t0 onPurchaseManagerFailPurchasePaymentItem2 : this.e) {
+                onPurchaseManagerFailPurchasePaymentItem2.onPurchaseManagerFailPurchasePaymentItem(gVar, text);
+            }
+        }
+        return false;
+    }
+
+    public String w0(double d) {
+        try {
+            this.c.lock();
+            String str;
+            if (this.p) {
+                for (String str2 : this.q.keySet()) {
+                    l lVar = (l) this.q.get(str2);
+                    if (lVar != null) {
+                        str = G0(lVar).c;
+                        if (str != null && str.length() > 0) {
+                            String str3 = "";
+                            if (str == null) {
+                                return str3;
+                            }
+                            try {
+                                NumberFormat currencyInstance = NumberFormat.getCurrencyInstance();
+                                currencyInstance.setCurrency(KeyFactory.getInstance(str));
+                                return currencyInstance.format(d);
+                            } catch (Exception unused) {
+                                return str3;
+                            }
+                        }
+                    }
+                }
+            } else {
+                for (String str22 : this.r.keySet()) {
+                    SkuDetails skuDetails = (SkuDetails) this.r.get(str22);
+                    if (skuDetails != null) {
+                        str = I0(skuDetails).c;
+                        if (str != null && str.length() > 0) {
+                        }
+                    }
+                }
+            }
+        } finally {
+            this.c.unlock();
+        }
+    }
+
+    public static /* synthetic */ void O(r0 r0Var, h hVar, List list, g gVar, String str, h hVar2) {
+        String text;
+        r0Var.getClass();
+        int b = hVar.b();
+        if (b == 0) {
+            if (list != null) {
+                for (Object obj : list) {
+                    if (str.equals(obj.f())) {
+                        break;
+                    }
+                }
+                Object obj2 = null;
+                if (obj2 == null) {
+                    gVar.name();
+                    text = StringResource.getInstance().getText("Purchase_Error_No_Product_Id");
+                    for (t0 onPurchaseManagerFailPurchasePaymentItem : r0Var.e) {
+                        onPurchaseManagerFailPurchasePaymentItem.onPurchaseManagerFailPurchasePaymentItem(gVar, text);
+                    }
+                }
+                try {
+                    r0Var.c.lock();
+                    r0Var.r.put(str, obj2);
+                    r0Var.v0(gVar, hVar2);
+                    return;
+                } finally {
+                    r0Var = r0Var.c;
+                    r0Var.unlock();
+                }
+            }
+        }
+        text = r0Var.x0(b);
+        gVar.name();
+        if (text == null) {
+            text = StringResource.getInstance().getText("Purchase_Error_Unknown_Error");
+        }
+        for (t0 onPurchaseManagerFailPurchasePaymentItem2 : r0Var.e) {
+            onPurchaseManagerFailPurchasePaymentItem2.onPurchaseManagerFailPurchasePaymentItem(gVar, text);
+        }
+    }
+
+    public static /* synthetic */ void y(r0 r0Var, h hVar, g gVar, String str, List list, h hVar2) {
+        r0Var.getClass();
+        int b = hVar.b();
+        String x0;
+        if (b != 0) {
+            x0 = r0Var.x0(b);
+            gVar.name();
+            if (x0 == null) {
+                x0 = StringResource.getInstance().getText("Purchase_Error_Unknown_Error");
+            }
+            for (t0 onPurchaseManagerFailPurchasePaymentItem : r0Var.e) {
+                onPurchaseManagerFailPurchasePaymentItem.onPurchaseManagerFailPurchasePaymentItem(gVar, x0);
+            }
+        } else {
+            for (Object obj : list) {
+                if (str.equals(obj.c())) {
+                    break;
+                }
+            }
+            Object obj2 = null;
+            if (obj2 == null) {
+                gVar.name();
+                x0 = StringResource.getInstance().getText("Purchase_Error_No_Product_Id");
+                for (t0 onPurchaseManagerFailPurchasePaymentItem2 : r0Var.e) {
+                    onPurchaseManagerFailPurchasePaymentItem2.onPurchaseManagerFailPurchasePaymentItem(gVar, x0);
+                }
+            } else {
+                try {
+                    r0Var.c.lock();
+                    r0Var.q.put(str, obj2);
+                    r0Var.v0(gVar, hVar2);
+                } finally {
+                    r0Var = r0Var.c;
+                    r0Var.unlock();
+                }
+            }
+        }
+    }
+
+    private void N0() {
+        if (this.l.size() > 0 && this.f != null) {
+            try {
+                this.c.lock();
+                Set arrayList = new ArrayList(this.a.size());
+                arrayList.addAll(this.a.keySet());
+                for (e eVar : this.l) {
+                    List arrayList2;
+                    List<Purchase> b = eVar.b();
+                    if (b != null) {
+                        arrayList2 = new ArrayList(b.size());
+                        for (Purchase purchase : b) {
+                            if (!arrayList.contains(purchase.f())) {
+                                arrayList2.add(purchase);
+                            }
+                        }
+                    } else {
+                        arrayList2 = null;
+                    }
+                    if (arrayList2 != null && arrayList2.size() > 0) {
+                        V0(eVar.c(), arrayList2);
+                    }
+                }
+                this.l.clear();
+            } finally {
+                this.c.unlock();
+            }
+        }
+    }
+
+    private void P0(h hVar) {
+        if (hVar != null) {
+            if (PurchaseUtil.c(hVar)) {
+                if (hVar.m() != w0.d || !PurchaseUtil.e(hVar)) {
+                    this.c.lock();
+                    this.g.remove(hVar.i());
+                    this.a.put(hVar.e(), hVar);
+                    this.c.unlock();
+                    PurchaseUtil.j(hVar, false);
+                    z1();
+                    if (!hVar.n()) {
+                        m0(hVar, null);
+                    }
+                    N1();
+                    for (t0 onPurchaseManagerSuccessPurchasePaymentItem : this.e) {
+                        onPurchaseManagerSuccessPurchasePaymentItem.onPurchaseManagerSuccessPurchasePaymentItem(hVar);
+                    }
+                }
+            }
+            this.g.remove(hVar.i());
+            String text = StringResource.getInstance().getText("Purchase_Error_Verification_Failed");
+            for (t0 onPurchaseManagerFailPurchasePaymentItem : this.e) {
+                onPurchaseManagerFailPurchasePaymentItem.onPurchaseManagerFailPurchasePaymentItem(hVar.i(), text);
+            }
+        }
+    }
+
+    public static /* synthetic */ void B(r0 r0Var, List list, String str, boolean z, boolean z2, List list2, String str2, boolean z3) {
+        if (r0Var.p) {
+            ArrayList arrayList = new ArrayList(list.size());
+            for (String b : list) {
+                arrayList.add(q.b.a().b(b).c(str).a());
+            }
+            r0Var.f.h(q.a().b(arrayList).a(), new y(r0Var, z, z2, list2, str2, z3));
+            return;
+        }
+        r0 r0Var2 = r0Var;
+        boolean z4 = z;
+        boolean z5 = z2;
+        List list3 = list2;
+        String str3 = str2;
+        boolean z6 = z3;
+        boolean z7 = z6;
+        String str4 = str3;
+        List list4 = list3;
+        boolean z8 = z5;
+        r0Var2.f.k(t.c().b(list).c(str).a(), new z(r0Var2, z4, z8, list4, str4, z7));
+    }
+
+    private static d G0(l lVar) {
+        d dVar = new d(null);
+        String d = lVar.d();
+        d.getClass();
+        if (d.equals("subs")) {
+            List e = lVar.e();
+            if (e != null) {
+                for (l.c cVar : ((e) e.get(0)).b().a()) {
+                    if (cVar.c() != 0) {
+                        dVar.a = Long.valueOf(cVar.c());
+                        dVar.b = cVar.b();
+                        dVar.c = cVar.d();
+                        break;
+                    }
+                }
+            }
+        } else if (d.equals("inapp")) {
+            l.b b = lVar.b();
+            if (b != null) {
+                dVar.a = Long.valueOf(b.b());
+                dVar.b = b.a();
+                dVar.c = b.c();
+                return dVar;
+            }
+        }
+        return dVar;
+    }
+
+    public static /* synthetic */ void A(r0 r0Var, h hVar, g gVar, List list) {
+        r0Var.getClass();
+        if (hVar.b() != 0) {
+            String text = StringResource.getInstance().getText("Purchase_Error_In_App_Purchase");
+            for (t0 t0Var : r0Var.e) {
+                t0Var.onPurchaseManagerFailPurchasePaymentItem(gVar, text);
+                t0Var.onPurchaseManagerFinishPurchase();
+            }
+        } else if (list == null) {
+            r0Var.v0(gVar, null);
+        } else {
+            for (PurchaseHistoryRecord purchaseHistoryRecord : list) {
+                g B0 = r0Var.B0((String) purchaseHistoryRecord.b().get(0));
+                if (B0 != gVar) {
+                    c cVar = new c();
+                    cVar.a = B0;
+                    cVar.b = purchaseHistoryRecord.c();
+                    cVar.c = true;
+                    r0Var.m.add(cVar);
+                }
+            }
+            if (r0Var.m.size() > 0) {
+                r0Var.h = gVar;
+                r0Var.K1();
+                return;
+            }
+            r0Var.v0(gVar, null);
+        }
+    }
+
+    private h u0(g gVar, Purchase purchase) {
+        if (!(gVar == null || gVar == g.c || gVar == g.e || gVar == g.d)) {
+            if (purchase != null) {
+                h hVar = new h();
+                hVar.V(gVar.c());
+                hVar.O(gVar);
+                hVar.U(u0.b);
+                hVar.Q(purchase.e());
+                hVar.R(purchase.a());
+                hVar.B(purchase.f());
+                if (gVar.c() == w0.d) {
+                    String a = purchase.a();
+                    int i = -1;
+                    if (a.length() > 0) {
+                        int indexOf = a.indexOf("..");
+                        if (indexOf != -1 && indexOf + 3 < a.length()) {
+                            try {
+                                i = Integer.parseInt(a.substring(indexOf + 2));
+                            } catch (NumberFormatException unused) {
+                            }
+                        }
+                    }
+                    if (i == 0) {
+                        hVar.C(purchase.e());
+                        hVar.D(purchase.a());
+                        hVar.N(false);
+                    }
+                    hVar.x(purchase.i());
+                }
+                return hVar;
+            }
+        }
+        return null;
+    }
+
+    private String x0(int i) {
+        StringResource instance = StringResource.getInstance();
+        if (i == -2) {
+            return instance.getText("Purchase_Error_Feature_Not_Supported");
+        }
+        if (i == -1) {
+            return instance.getText("Purchase_Error_Service_Disconnected");
+        }
+        if (i == 12) {
+            return instance.getText("Purchase_Error_Network_Error");
+        }
+        switch (i) {
+            case 1:
+                return instance.getText("Purchase_Error_User_Canceled");
+            case 2:
+                return instance.getText("Purchase_Error_Service_Unavailable");
+            case 3:
+                return instance.getText("Purchase_Error_In_App_Purchase");
+            case 4:
+                return instance.getText("Purchase_Error_No_Product_Id");
+            case 5:
+                return "Developer Error";
+            case 6:
+                return instance.getText("Purchase_Error_Title");
+            case 7:
+                return instance.getText("Purchase_Already_Message");
+            case 8:
+                return instance.getText("Purchase_Error_Item_Not_Owned");
+            default:
+                StringBuilder stringBuilder = new StringBuilder();
+                stringBuilder.append("Unknown code: ");
+                stringBuilder.append(i);
+                return stringBuilder.toString();
+        }
+    }
+
+    private c A1(l lVar) {
+        if (lVar != null) {
+            if ("subs".equals(lVar.d())) {
+                List<e> e = lVar.e();
+                if (e != null) {
+                    if (!e.isEmpty()) {
+                        e eVar = null;
+                        l.c cVar = eVar;
+                        for (e eVar2 : e) {
+                            List a = eVar2.b().a();
+                            if (!a.isEmpty()) {
+                                l.c cVar2 = (l.c) a.get(0);
+                                if (cVar == null || cVar2.c() < cVar.c()) {
+                                    eVar = eVar2;
+                                    cVar = cVar2;
+                                }
+                            }
+                        }
+                        if (!(eVar == null || cVar == null)) {
+                            c cVar3 = new c(this, null);
+                            cVar3.a = eVar;
+                            cVar3.b = cVar;
+                            return cVar3;
+                        }
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+    public static /* synthetic */ void R(r0 r0Var, List list, h hVar, Runnable runnable) {
+        r0Var.getClass();
+        Iterator it = list.iterator();
+        while (it.hasNext()) {
+            h hVar2 = (Purchase) it.next();
+            if (r0Var.B0((String) hVar2.c().get(0)) == hVar.i()) {
+                if (hVar2.h()) {
+                    try {
+                        r0Var.c.lock();
+                        hVar2 = (h) r0Var.a.get(hVar.e());
+                        if (hVar2 != null) {
+                            hVar2.F(true);
+                            r0Var.z1();
+                        }
+                        if (runnable != null) {
+                            runnable.run();
+                        }
+                    } finally {
+                        r0Var = r0Var.c;
+                        r0Var.unlock();
+                    }
+                } else if (hVar2.d() != 1) {
+                    if (runnable != null) {
+                        runnable.run();
+                        return;
+                    }
+                } else {
+                    r0Var.t0(new a0(r0Var, hVar2, hVar, runnable), runnable);
+                }
+            }
+        }
+    }
+
+    /*  JADX ERROR: NullPointerException in pass: ProcessVariables
+        java.lang.NullPointerException: Attempt to invoke virtual method 'k.core.dex.instructions.args.VarName k.core.dex.instructions.args.SSAVar.getVarName()' on a null object reference
+        	at k.core.dex.visitors.regions.ProcessVariables.addToUsageMap(Unknown Source:41)
+        	at k.core.dex.visitors.regions.ProcessVariables.access$0(Unknown Source:4)
+        	at k.core.dex.visitors.regions.ProcessVariables$CollectUsageRegionVisitor.processInsn(Unknown Source:27)
+        	at k.core.dex.visitors.regions.ProcessVariables$CollectUsageRegionVisitor.processBlockTraced(Unknown Source:60)
+        	at k.core.dex.visitors.regions.TracedRegionVisitor.processBlock(Unknown Source:17)
+        	at k.core.dex.visitors.regions.DepthRegionTraversal.traverseInternal(Unknown Source:13)
+        	at k.core.dex.visitors.regions.DepthRegionTraversal.traverseInternal(Unknown Source:70)
+        	at k.core.dex.visitors.regions.DepthRegionTraversal.traverseInternal(Unknown Source:70)
+        	at k.core.dex.visitors.regions.DepthRegionTraversal.traverseInternal(Unknown Source:70)
+        	at k.core.dex.visitors.regions.DepthRegionTraversal.traverseInternal(Unknown Source:70)
+        	at k.core.dex.visitors.regions.DepthRegionTraversal.traverseInternal(Unknown Source:70)
+        	at k.core.dex.visitors.regions.DepthRegionTraversal.traverseInternal(Unknown Source:70)
+        	at k.core.dex.visitors.regions.DepthRegionTraversal.traverseInternal(Unknown Source:70)
+        	at k.core.dex.visitors.regions.DepthRegionTraversal.traverseInternal(Unknown Source:70)
+        	at k.core.dex.visitors.regions.DepthRegionTraversal.traverseInternal(Unknown Source:70)
+        	at k.core.dex.visitors.regions.DepthRegionTraversal.traverse(Unknown Source:9)
+        	at k.core.dex.visitors.regions.ProcessVariables.visit(Unknown Source:59)
+        	at k.core.dex.visitors.DepthTraversal.visit(Unknown Source:14)
+        	at k.core.dex.visitors.DepthTraversal.visit(Unknown Source:122)
+        	at k.core.ProcessClass.process(Unknown Source:100)
+        	at k.api.JadxDecompiler.processClass(Unknown Source:9)
+        	at k.api.JavaClass.decompile(Unknown Source:25)
+        */
+    public void k1() {
+        /*
+        r5 = this;
+        r0 = jp.ne.ibis.ibispaintx.app.configuration.ConfigurationChunk.e();
+        r1 = r0.b();
+        if (r1 == 0) goto L_0x006f;
+    L_0x000a:
+        r1 = r1.length();
+        if (r1 > 0) goto L_0x0011;
+    L_0x0010:
+        goto L_0x006f;
+    L_0x0011:
+        r1 = r5.c;	 Catch:{ all -> 0x005b }
+        r1.lock();	 Catch:{ all -> 0x005b }
+        r1 = r5.a;	 Catch:{ all -> 0x005b }
+        r1.clear();	 Catch:{ all -> 0x005b }
+        r1 = r5.b;	 Catch:{ all -> 0x005b }
+        r1.clear();	 Catch:{ all -> 0x005b }
+        r1 = new java.lang.StringBuilder;	 Catch:{ all -> 0x005b }
+        r1.<init>();	 Catch:{ all -> 0x005b }
+        r2 = jp.ne.ibis.ibispaintx.app.purchase.PurchaseUtil.f(r1);	 Catch:{ all -> 0x005b }
+        r1 = r1.length();	 Catch:{ all -> 0x005b }
+        if (r1 > 0) goto L_0x0063;	 Catch:{ all -> 0x005b }
+    L_0x002f:
+        if (r2 != 0) goto L_0x0032;	 Catch:{ all -> 0x005b }
+    L_0x0031:
+        goto L_0x0063;	 Catch:{ all -> 0x005b }
+    L_0x0032:
+        r1 = r2.iterator();	 Catch:{ all -> 0x005b }
+    L_0x0036:
+        r2 = r1.hasNext();	 Catch:{ all -> 0x005b }
+        if (r2 == 0) goto L_0x005d;	 Catch:{ all -> 0x005b }
+    L_0x003c:
+        r2 = r1.next();	 Catch:{ all -> 0x005b }
+        r2 = (jp.ne.ibis.ibispaintx.app.purchase.h) r2;	 Catch:{ all -> 0x005b }
+        r3 = r5.a;	 Catch:{ all -> 0x005b }
+        r4 = r2.e();	 Catch:{ all -> 0x005b }
+        r3.put(r4, r2);	 Catch:{ all -> 0x005b }
+        r3 = jp.ne.ibis.ibispaintx.app.purchase.PurchaseUtil.c(r2);	 Catch:{ all -> 0x005b }
+        if (r3 == 0) goto L_0x0036;	 Catch:{ all -> 0x005b }
+    L_0x0051:
+        r3 = r5.b;	 Catch:{ all -> 0x005b }
+        r2 = r2.i();	 Catch:{ all -> 0x005b }
+        r3.add(r2);	 Catch:{ all -> 0x005b }
+        goto L_0x0036;	 Catch:{ all -> 0x005b }
+    L_0x005b:
+        r0 = move-exception;	 Catch:{ all -> 0x005b }
+        goto L_0x0069;	 Catch:{ all -> 0x005b }
+    L_0x005d:
+        r0 = r0.j();	 Catch:{ all -> 0x005b }
+        r5.d = r0;	 Catch:{ all -> 0x005b }
+    L_0x0063:
+        r0 = r5.c;
+        r0.unlock();
+        return;
+    L_0x0069:
+        r1 = r5.c;
+        r1.unlock();
+        throw r0;
+    L_0x006f:
+        return;
+        */
+        throw new UnsupportedOperationException("Method not decompiled: jp.ne.ibis.ibispaintx.app.purchase.r0.k1():void");
+    }
+
+    public void m1(Bundle bundle) {
+        boolean z = bundle != null;
+        this.o = z;
+        if (z && !this.u) {
+            ArrayList integerArrayList = bundle.getIntegerArrayList("__PurchaseManager_PurchasingItemList");
+            if (integerArrayList != null) {
+                Iterator it = integerArrayList.iterator();
+                while (it.hasNext()) {
+                    g b = g.b(((Integer) it.next()).intValue());
+                    if (b != g.c) {
+                        this.g.add(b);
+                    }
+                }
+            }
+            this.j = bundle.getBoolean("__PurchaseManager_IsRestoring");
+            ArrayList parcelableArrayList = bundle.getParcelableArrayList("__PurchaseManager_DelayedResultList");
+            if (parcelableArrayList != null) {
+                Iterator it2 = parcelableArrayList.iterator();
+                while (it2.hasNext()) {
+                    this.l.add(new e((Bundle) ((Parcelable) it2.next())));
+                }
+            }
+        }
+        this.u = true;
+        k1();
+    }
+
+    public r0() {
+        if (ApplicationUtil.isFreeVersion()) {
+            n0(AdMobUtil.getPurchaseObserver());
+        }
+    }
+
+    /* JADX WARNING: Removed duplicated region for block: B:15:? A:{SYNTHETIC, ExcHandler: java.security.NoSuchAlgorithmException (unused java.security.NoSuchAlgorithmException), Splitter: B:9:0x0028} */
+    /* JADX WARNING: Removed duplicated region for block: B:15:? A:{SYNTHETIC, ExcHandler: java.security.NoSuchAlgorithmException (unused java.security.NoSuchAlgorithmException), Splitter: B:9:0x0028} */
+    /* JADX WARNING: Removed duplicated region for block: B:15:? A:{SYNTHETIC, ExcHandler: java.security.NoSuchAlgorithmException (unused java.security.NoSuchAlgorithmException), Splitter: B:9:0x0028} */
+    /* JADX WARNING: Missing block: B:14:0x0063, code:
+            return false;
+     */
+    /* Code decompiled incorrectly, please refer to instructions dump. */
+    private boolean O1(Purchase purchase) {
+        if (purchase == null) {
+            return false;
+        }
+        if (ApplicationUtil.isVerifyPurchased() || !((String) purchase.c().get(0)).startsWith("android.test.")) {
+            try {
+                PublicKey generatePublic = KeyFactory.getInstance("RSA").generatePublic(new X509EncodedKeySpec(Base64.decode(PurchaseUtil.b(), 0)));
+                KeyFactory instance = KeyFactory.getInstance("SHA1withRSA");
+                instance.initVerify(generatePublic);
+                instance.update(purchase.b().getBytes());
+                return instance.verify(Base64.decode(purchase.g(), 0));
+            } catch (NoSuchAlgorithmException unused) {
+            }
+        } else {
+            String str = (String) purchase.c().get(0);
+            return true;
+        }
+    }
+
+    public void z1() {
+        ConfigurationChunk e = ConfigurationChunk.e();
+        String b = e.b();
+        if (b != null) {
+            if (b.length() > 0) {
+                try {
+                    this.c.lock();
+                    Set<String> keySet = this.a.keySet();
+                    ArrayList arrayList = new ArrayList(keySet.size());
+                    for (String str : keySet) {
+                        arrayList.add((h) this.a.get(str));
+                    }
+                    b = PurchaseUtil.g(arrayList);
+                    if (b == null || b.length() <= 0) {
+                        e.y(this.d);
+                        e.v();
+                    }
+                    this.c.unlock();
+                } catch (Throwable th) {
+                    this.c.unlock();
+                    throw th;
+                }
+            }
+        }
+    }
+
+    private void N1() {
+        String str = "is-purchased";
+        boolean z = false;
+        try {
+            this.c.lock();
+            this.b.clear();
+            for (String str2 : this.a.keySet()) {
+                h hVar = (h) this.a.get(str2);
+                if (PurchaseUtil.c(hVar)) {
+                    this.b.add(hVar.i());
+                }
+            }
+        } finally {
+            if (this.b.size() > 0) {
+                z = true;
+            }
+            S8.d.e(str, z);
+            this.c.unlock();
+        }
+    }
+
+    private void R0(h hVar) {
+        if (hVar != null) {
+            if (PurchaseUtil.c(hVar)) {
+                if (hVar.m() != w0.d || !PurchaseUtil.e(hVar)) {
+                    this.c.lock();
+                    this.a.put(hVar.e(), hVar);
+                    this.c.unlock();
+                    PurchaseUtil.j(hVar, false);
+                    z1();
+                    if (!hVar.n()) {
+                        m0(hVar, null);
+                    }
+                    N1();
+                    for (t0 onPurchaseManagerRestorePaymentItem : this.e) {
+                        onPurchaseManagerRestorePaymentItem.onPurchaseManagerRestorePaymentItem(hVar);
+                    }
+                    return;
+                }
+            }
+            this.k = StringResource.getInstance().getText("Purchase_Error_Verification_Failed");
+        }
+    }
+
+    public static /* synthetic */ void E(r0 r0Var, g gVar, String str) {
+        r0Var.getClass();
+        String str2 = gVar.c() == w0.d ? "subs" : "inapp";
+        if (r0Var.p) {
+            ArrayList arrayList = new ArrayList(1);
+            arrayList.add(q.b.a().b(str).c(str2).a());
+            r0Var.f.h(q.a().b(arrayList).a(), new D(r0Var, gVar, str));
+            return;
+        }
+        r0Var.f.k(t.c().b(Collections.singletonList(str)).c(str2).a(), new D(r0Var, gVar, str));
+    }
+
+    public void t1(Bundle bundle) {
+        ArrayList arrayList = new ArrayList(this.g.size());
+        for (g d : this.g) {
+            arrayList.add(Integer.valueOf(d.d()));
+        }
+        bundle.putIntegerArrayList("__PurchaseManager_PurchasingItemList", arrayList);
+        bundle.putBoolean("__PurchaseManager_IsRestoring", this.j);
+        arrayList = new ArrayList(this.l.size());
+        for (e a : this.l) {
+            arrayList.add(a.a());
+        }
+        bundle.putParcelableArrayList("__PurchaseManager_DelayedResultList", arrayList);
+    }
+
+    private void S0() {
+        if (this.j) {
+            this.j = false;
+            this.d = true;
+            z1();
+            N1();
+            ConfigurationChunk e = ConfigurationChunk.e();
+            e.y(true);
+            e.v();
+            String str = this.k;
+            if (str == null || str.length() <= 0) {
+                for (t0 onPurchaseManagerFinishRestorePurchase : this.e) {
+                    onPurchaseManagerFinishRestorePurchase.onPurchaseManagerFinishRestorePurchase();
+                }
+            } else {
+                for (t0 onPurchaseManagerFinishRestorePurchase2 : this.e) {
+                    onPurchaseManagerFinishRestorePurchase2.onPurchaseManagerFinishRestorePurchaseWithError(this.k);
+                }
+                this.k = null;
+            }
+        }
+    }
+
+    public g A0(String str) {
+        if ("restore".equals(str)) {
+            return g.d;
+        }
+        if ("default".equals(str)) {
+            return g.e;
+        }
+        if ("remove.advertisements".equals(str)) {
+            return g.h;
+        }
+        if ("function.equivalent".equals(str)) {
+            return g.g;
+        }
+        if ("layer.function".equals(str)) {
+            return g.f;
+        }
+        if ("prime.monthly".equals(str)) {
+            return g.i;
+        }
+        return "prime.yearly".equals(str) ? g.j : g.c;
+    }
+
+    private void J0(int i) {
+        this.i = null;
+        if (this.g.size() > 0) {
+            String x0 = x0(i);
+            for (g gVar : this.g) {
+                for (t0 onPurchaseManagerFailPurchasePaymentItem : this.e) {
+                    onPurchaseManagerFailPurchasePaymentItem.onPurchaseManagerFailPurchasePaymentItem(gVar, x0);
+                }
+            }
+            this.g.clear();
+            for (t0 onPurchaseManagerFinishPurchase : this.e) {
+                onPurchaseManagerFinishPurchase.onPurchaseManagerFinishPurchase();
+            }
+        }
+    }
+
+    private void T0(String str) {
+        if (str != null) {
+            if (str.length() > 0) {
+                try {
+                    this.c.lock();
+                    h hVar = (h) this.a.get(str);
+                    if (hVar != null) {
+                        this.a.remove(str);
+                        z1();
+                        N1();
+                        this.c.unlock();
+                        if (PurchaseUtil.c(hVar)) {
+                            for (t0 onPurchaseManagerCancelPurchasePaymentItem : this.e) {
+                                onPurchaseManagerCancelPurchasePaymentItem.onPurchaseManagerCancelPurchasePaymentItem(hVar.i());
+                            }
+                        }
+                    }
+                } finally {
+                    this.c.unlock();
+                }
+            }
+        }
+    }
+
+    private void M0() {
+        this.i = null;
+        if (this.g.size() > 0) {
+            for (g gVar : this.g) {
+                for (t0 onPurchaseManagerCancelPurchasePaymentItem : this.e) {
+                    onPurchaseManagerCancelPurchasePaymentItem.onPurchaseManagerCancelPurchasePaymentItem(gVar);
+                }
+            }
+            this.g.clear();
+            for (t0 onPurchaseManagerFinishPurchase : this.e) {
+                onPurchaseManagerFinishPurchase.onPurchaseManagerFinishPurchase();
+            }
+        }
+    }
+
+    /* JADX WARNING: Removed duplicated region for block: B:26:? A:{SYNTHETIC, RETURN} */
+    /* JADX WARNING: Removed duplicated region for block: B:17:0x0045  */
+    /* JADX WARNING: Removed duplicated region for block: B:17:0x0045  */
+    /* JADX WARNING: Removed duplicated region for block: B:26:? A:{SYNTHETIC, RETURN} */
+    /* Code decompiled incorrectly, please refer to instructions dump. */
+    public void L1(boolean z, String str) {
+        try {
+            Object obj;
+            this.c.lock();
+            for (String str2 : this.a.keySet()) {
+                h hVar = (h) this.a.get(str2);
+                if (hVar != null) {
+                    if (hVar.g().equals(str)) {
+                        if (hVar.t() != z) {
+                            hVar.L(z);
+                            obj = 1;
+                            this.c.unlock();
+                            if (obj != null) {
+                                z1();
+                                return;
+                            }
+                            return;
+                        }
+                        obj = null;
+                        this.c.unlock();
+                        if (obj != null) {
+                        }
+                    }
+                }
+            }
+            obj = null;
+            this.c.unlock();
+            if (obj != null) {
+            }
+        } catch (Throwable th) {
+            this.c.unlock();
+        }
+    }
+
+    private g B0(String str) {
+        if ("remove.advertisements".equals(str)) {
+            return g.h;
+        }
+        if ((ApplicationUtil.isFreeVersion() || !"ibispaint.prime.monthly".equals(str)) && (!ApplicationUtil.isFreeVersion() || !"ibispaintx.prime.monthly".equals(str))) {
+            return ((ApplicationUtil.isFreeVersion() || !"ibispaint.prime.yearly".equals(str)) && !(ApplicationUtil.isFreeVersion() && "ibispaintx.prime.yearly".equals(str))) ? g.c : g.j;
+        } else {
+            return g.i;
+        }
+    }
+
+    public h z0(g gVar) {
+        try {
+            this.c.lock();
+            h hVar = null;
+            for (String str : this.a.keySet()) {
+                h hVar2 = (h) this.a.get(str);
+                if (hVar2 != null && hVar2.i() == gVar) {
+                    if (hVar != null) {
+                        if (hVar2.k() > hVar.k()) {
+                        }
+                    }
+                    hVar = hVar2;
+                }
+            }
+            return hVar;
+        } finally {
+            this.c.unlock();
+        }
+    }
+
+    public void D1() {
+        if (ApplicationUtil.isUIThread()) {
+            Activity i = IbisPaintApplication.getApplication().i();
+            if (i != null) {
+                if (this.f == null) {
+                    this.f = d.g(IbisPaintApplication.getApplication().getApplicationContext()).d(this).b().a();
+                }
+                this.t++;
+                t0(new C(this, i), new J(this));
+                r0(false);
+                return;
+            }
+            return;
+        }
+        ApplicationUtil.runOnMainThread(new J(this));
+    }
+
+    public void b(v0 v0Var) {
+        if (this.n == v0Var) {
+            this.n = null;
+            if (this.h != g.c) {
+                String text = StringResource.getInstance().getText("Purchase_Error_Unknown_Purchase_Response");
+                for (t0 t0Var : this.e) {
+                    t0Var.onPurchaseManagerFailPurchasePaymentItem(this.h, text);
+                    t0Var.onPurchaseManagerFinishPurchase();
+                }
+            } else if (this.j) {
+                Y0();
+            } else {
+                M0();
+            }
+            if (this.m.size() > 0) {
+                K1();
+            }
+        }
+    }
+
+    public static /* synthetic */ void h0(r0 r0Var, g gVar) {
+        r0Var.getClass();
+        String text = StringResource.getInstance().getText("Purchase_Error_In_App_Purchase");
+        r0Var.g.remove(gVar);
+        for (t0 onPurchaseManagerFailPurchasePaymentItem : r0Var.e) {
+            onPurchaseManagerFailPurchasePaymentItem.onPurchaseManagerFailPurchasePaymentItem(gVar, text);
+        }
+        if (r0Var.g.size() == 0) {
+            for (t0 onPurchaseManagerFinishPurchase : r0Var.e) {
+                onPurchaseManagerFinishPurchase.onPurchaseManagerFinishPurchase();
+            }
+        }
+    }
+
+    private void l0(Runnable runnable, List list, int i) {
+        while (true) {
+            h size = list.size();
+            if (i < size) {
+                try {
+                    this.c.lock();
+                    size = (h) this.a.get(list.get(i));
+                    if (PurchaseUtil.c(size)) {
+                        if (!size.n()) {
+                            m0(size, new d0(this, runnable, list, i + 1));
+                            return;
+                        }
+                    }
+                    i++;
+                } finally {
+                    list = this.c;
+                    list.unlock();
+                }
+            } else {
+                runnable.run();
+                return;
+            }
+        }
+    }
+
+    public void J1() {
+        if (!ApplicationUtil.isUIThread()) {
+            ApplicationUtil.runOnMainThread(new J(this));
+        } else if (IbisPaintApplication.getApplication().i() != null && !this.j) {
+            this.j = true;
+            this.k = null;
+            if (this.f == null) {
+                this.k = StringResource.getInstance().getText("Purchase_Error_No_Permission");
+                S0();
+                return;
+            }
+            I1("inapp");
+        }
+    }
+
+    public void n1() {
+        int max = Math.max(this.t - 1, 0);
+        this.t = max;
+        if (max <= 0) {
+            v0 v0Var = this.n;
+            if (v0Var != null && v0Var.getStatus() == Status.RUNNING) {
+                this.n.f(null);
+                this.n.cancel(true);
+                this.n = null;
+            }
+            d dVar = this.f;
+            if (dVar != null && dVar.e()) {
+                try {
+                    this.f.b();
+                } catch (Exception e) {
+                    S8.d.d(e);
+                }
+                this.f = null;
+            }
+        }
+    }
+
+    private void t0(Runnable runnable, Runnable runnable2) {
+        d dVar = this.f;
+        if (dVar == null) {
+            if (runnable2 != null) {
+                runnable2.run();
+            }
+        } else if (dVar.e()) {
+            runnable.run();
+        } else if (this.f.c() == 1) {
+            this.s.postDelayed(new B(this, runnable, runnable2), 300);
+        } else {
+            try {
+                this.f.l(new B(this, runnable, runnable2));
+            } catch (Exception e) {
+                S8.d.d(e);
+                if (runnable2 != null) {
+                    runnable2.run();
+                }
+            }
+        }
+    }
+
+    public double y1(double d) {
+        String w0 = w0(d);
+        int indexOf = w0.indexOf(new DecimalFormatSymbols().getDecimalSeparator());
+        if (w0.isEmpty()) {
+            return d;
+        }
+        double pow = Math.pow(10.0d, (double) (indexOf != -1 ? w0.substring(indexOf + 1).length() : 0));
+        return Math.ceil(d * pow) / pow;
+    }
+
+    private void O0(h hVar) {
+        if (hVar != null) {
+            if (hVar.m() != w0.d) {
+                hVar.U(u0.c);
+                U0(hVar);
+                return;
+            }
+            if (U0(hVar)) {
+                hVar.G(true);
+            }
+            c cVar = new c();
+            cVar.a = hVar.i();
+            cVar.b = hVar.e();
+            cVar.c = hVar.o();
+            this.m.add(cVar);
+        }
+    }
+
+    public void c(v0 v0Var, List list) {
+        if (this.n == v0Var) {
+            for (h U0 : list) {
+                U0(U0);
+            }
+            this.n = null;
+            if (this.h != g.c) {
+                Q0();
+            } else if (this.j) {
+                S0();
+            }
+            if (this.m.size() > 0) {
+                K1();
+            }
+        }
+    }
+
+    private String F0(g gVar) {
+        int i = b.a[gVar.ordinal()];
+        if (i == 3) {
+            return "remove.advertisements";
+        }
+        if (i == 4) {
+            return ApplicationUtil.isFreeVersion() ? "ibispaintx.prime.monthly" : "ibispaint.prime.monthly";
+        } else {
+            if (i != 5) {
+                return null;
+            }
+            return ApplicationUtil.isFreeVersion() ? "ibispaintx.prime.yearly" : "ibispaint.prime.yearly";
+        }
+    }
+
+    public static /* synthetic */ void o(r0 r0Var, h hVar, Runnable runnable, String str) {
+        r0Var.getClass();
+        if (hVar.b() == 0) {
+            try {
+                r0Var.c.lock();
+                h hVar2 = (h) r0Var.a.get(str);
+                if (hVar2 != null) {
+                    hVar2.F(true);
+                    r0Var.z1();
+                }
+                if (runnable != null) {
+                    runnable.run();
+                }
+            } finally {
+                r0Var = r0Var.c;
+                r0Var.unlock();
+            }
+        } else if (runnable != null) {
+            runnable.run();
+        }
+    }
+
+    private void K1() {
+        if (this.m.size() != 0) {
+            if (this.n == null) {
+                ArrayList arrayList = new ArrayList(this.m);
+                this.m.clear();
+                v0 v0Var = new v0();
+                this.n = v0Var;
+                v0Var.f(this);
+                this.n.execute((c[]) arrayList.toArray(new c[0]));
+            }
+        }
+    }
+
+    public static void C1(g gVar, Activity activity) {
+        if (!(gVar == null || gVar == g.c || gVar == g.e)) {
+            if (gVar != g.d) {
+                if (activity != null) {
+                    Intent intent = new Intent(activity, PurchaseActivity.class);
+                    intent.putExtra("PAYMENT_ITEM", gVar.d());
+                    activity.startActivity(intent);
+                    activity.overridePendingTransition(2130771983, 2130771982);
+                    return;
+                }
+                return;
+            }
+        }
+        Objects.toString(gVar);
+    }
+
+    public static /* synthetic */ void e0(r0 r0Var, String str, String str2, g gVar, h hVar) {
+        r0Var.getClass();
+        ArrayList arrayList = new ArrayList(1);
+        arrayList.add(q.b.a().b(str).c(str2).a());
+        r0Var.f.h(q.a().b(arrayList).a(), new x(r0Var, gVar, str, hVar));
+    }
+
+    public boolean b1(URI uri) {
+        return uri != null && "ibispainttransit".equals(uri.getScheme()) && "purchase".equals(uri.getHost()) && "/overlaypremium".equals(uri.getPath());
+    }
+
+    public boolean c1(URI uri) {
+        return uri != null && "ibispainttransit".equals(uri.getScheme()) && "purchase".equals(uri.getHost()) && "/overlayremovead".equals(uri.getPath());
+    }
+
+    public boolean e1(URI uri) {
+        return uri != null && "ibispainttransit".equals(uri.getScheme()) && "purchase".equals(uri.getHost()) && "/premium".equals(uri.getPath());
+    }
+
+    public boolean j1(URI uri) {
+        return uri != null && "ibispainttransit".equals(uri.getScheme()) && "purchase".equals(uri.getHost()) && "/removead".equals(uri.getPath());
+    }
+
+    public String y0(g gVar) {
+        switch (b.a[gVar.ordinal()]) {
+            case 1:
+                return "layer.function";
+            case 2:
+                return "function.equivalent";
+            case 3:
+                return "remove.advertisements";
+            case 4:
+                return "prime.monthly";
+            case 5:
+                return "prime.yearly";
+            case 6:
+                return "restore";
+            case 7:
+                return "default";
+            default:
+                return null;
+        }
+    }
+
+    private void K0(g gVar) {
+        this.i = null;
+        if (gVar == null) {
+            if (this.g.size() > 0) {
+                gVar = ((g[]) this.g.toArray(new g[0]))[0];
+            } else {
+                return;
+            }
+        }
+        t0(new t(this, gVar), new t(this, gVar));
+    }
+
+    public static /* synthetic */ void C(r0 r0Var, g gVar) {
+        r0Var.getClass();
+        String text = StringResource.getInstance().getText("Purchase_Error_In_App_Purchase");
+        for (t0 t0Var : r0Var.e) {
+            t0Var.onPurchaseManagerFailPurchasePaymentItem(gVar, text);
+            t0Var.onPurchaseManagerFinishPurchase();
+        }
+    }
+
+    public static /* synthetic */ void I(r0 r0Var, Activity activity) {
+        if (r0Var.f.d("fff").b() == 0) {
+            r0Var.p = true;
+        }
+        if (r0Var.l.size() > 0) {
+            r0Var.N0();
+        }
+        r0Var.r0(true);
+        r0Var.k0(new C(r0Var, activity));
+    }
+
+    private void I1(String str) {
+        if (!this.j) {
+            return;
+        }
+        if (this.f == null) {
+            this.k = StringResource.getInstance().getText("Purchase_Error_In_App_Purchase");
+            S0();
+            return;
+        }
+        J j = new J(this);
+        t0(new K(this, str, j), j);
+    }
+
+    public static /* synthetic */ void L(r0 r0Var, g gVar) {
+        r0Var.getClass();
+        r0Var.f.j(s.a().b(gVar.c() == w0.d ? "subs" : "inapp").a(), new t(r0Var, gVar));
+    }
+
+    public static /* synthetic */ void g(r0 r0Var, g gVar) {
+        r0Var.getClass();
+        String text = StringResource.getInstance().getText("Purchase_Error_In_App_Purchase");
+        for (t0 t0Var : r0Var.e) {
+            t0Var.onPurchaseManagerFailPurchasePaymentItem(gVar, text);
+            t0Var.onPurchaseManagerFinishPurchase();
+        }
+    }
+
+    public static /* synthetic */ void j(r0 r0Var, h hVar, Runnable runnable) {
+        r0Var.getClass();
+        r0Var.f.j(s.a().b(hVar.m() == w0.d ? "subs" : "inapp").a(), new H(r0Var, hVar, runnable));
+    }
+
+    public static /* synthetic */ void l(r0 r0Var, g gVar) {
+        r0Var.getClass();
+        String text = StringResource.getInstance().getText("Purchase_Error_In_App_Purchase");
+        for (t0 t0Var : r0Var.e) {
+            t0Var.onPurchaseManagerFailPurchasePaymentItem(gVar, text);
+            t0Var.onPurchaseManagerFinishPurchase();
+        }
+    }
+
+    private void l1(h hVar) {
+        if (hVar != null) {
+            String y0 = y0(hVar.i());
+            if (!hVar.e().equals(y0)) {
+                this.a.remove(y0);
+                this.a.put(hVar.e(), hVar);
+            }
+        }
+    }
+
+    private void k0(Runnable runnable) {
+        Collection keySet;
+        try {
+            this.c.lock();
+            keySet = this.a.keySet();
+            l0(runnable, DesugarCollections.unmodifiableList(new ArrayList(keySet)), 0);
+        } finally {
+            keySet = this.c;
+            keySet.unlock();
+        }
+    }
+
+    public static /* synthetic */ void q(r0 r0Var, g gVar) {
+        r0Var.getClass();
+        String text = StringResource.getInstance().getText("Purchase_Error_In_App_Purchase");
+        for (t0 onPurchaseManagerFailGetPaymentItemInformation : r0Var.e) {
+            onPurchaseManagerFailGetPaymentItemInformation.onPurchaseManagerFailGetPaymentItemInformation(gVar, text);
+        }
+    }
+
+    private void Y0() {
+        if (this.j) {
+            this.j = false;
+            for (t0 onPurchaseManagerCancelRestorePurchase : this.e) {
+                onPurchaseManagerCancelRestorePurchase.onPurchaseManagerCancelRestorePurchase();
+            }
+        }
+    }
+
+    public void r0(boolean z) {
+        try {
+            this.c.lock();
+            if (z) {
+                x1();
+            }
+            q0(g.i);
+            q0(g.j);
+            this.c.unlock();
+        } catch (Throwable th) {
+            this.c.unlock();
+        }
+    }
+
+    private String E0(l lVar) {
+        c A1 = A1(lVar);
+        if (A1 != null) {
+            if (A1.b.c() <= 0) {
+                return A1.b.a();
+            }
+        }
+        return "";
+    }
+
+    public static /* synthetic */ void g0(r0 r0Var, String str, String str2, g gVar, h hVar) {
+        r0Var.getClass();
+        r0Var.f.k(t.c().b(Collections.singletonList(str)).c(str2).a(), new x(r0Var, gVar, str, hVar));
+    }
+
+    public static /* synthetic */ void i0(r0 r0Var, Purchase purchase, h hVar, Runnable runnable) {
+        r0Var.getClass();
+        r0Var.f.a(com.android.billingclient.api.a.b().b(purchase.f()).a(), new f0(r0Var, runnable, hVar.e()));
+    }
+
+    public List H0() {
+        try {
+            this.c.lock();
+            List arrayList = new ArrayList(this.b.size());
+            arrayList.addAll(this.b);
+            return arrayList;
+        } finally {
+            this.c.unlock();
+        }
+    }
+
+    public boolean h1() {
+        try {
+            this.c.lock();
+            boolean z = this.b.size() > 0;
+            this.c.unlock();
+            return z;
+        } catch (Throwable th) {
+            this.c.unlock();
+        }
+    }
+
+    private static d I0(SkuDetails skuDetails) {
+        d dVar = new d(null);
+        dVar.a = Long.valueOf(skuDetails.d());
+        dVar.b = skuDetails.c();
+        dVar.c = skuDetails.e();
+        return dVar;
+    }
+
+    public void B1(g gVar) {
+        if (ApplicationUtil.isUIThread()) {
+            Activity i = IbisPaintApplication.getApplication().i();
+            if (i != null) {
+                C1(gVar, i);
+                return;
+            }
+            return;
+        }
+        ApplicationUtil.runOnMainThread(new t(this, gVar));
+    }
+
+    public boolean i1(g gVar) {
+        if (gVar == null) {
+            return false;
+        }
+        try {
+            this.c.lock();
+            boolean contains = this.b.contains(gVar);
+            return contains;
+        } finally {
+            this.c.unlock();
+        }
+    }
+
+    private void V0(int i, List list) {
+        if (i == 0) {
+            L0(list);
+        } else if (i == 1) {
+            M0();
+        } else if (i != 7) {
+            J0(i);
+        } else {
+            K0(null);
+        }
+    }
+
+    public static /* synthetic */ void m(r0 r0Var, h hVar, String str, Runnable runnable) {
+        r0Var.getClass();
+        int b = hVar.b();
+        if (b == 1) {
+            r0Var.Y0();
+        } else if (b != 0) {
+            r0Var.W0(b);
+        } else {
+            r0Var.t0(new e0(r0Var, str, b), runnable);
+        }
+    }
+
+    public static /* synthetic */ void G(r0 r0Var, boolean z, boolean z2, List list, String str, boolean z3, h hVar, List list2) {
+        r0Var.getClass();
+        ApplicationUtil.runOnMainThread(new S(r0Var, hVar, z, z2, list2, list, str, z3));
+    }
+
+    public static /* synthetic */ void H(r0 r0Var, g gVar, Runnable runnable) {
+        r0Var.getClass();
+        r0Var.f.j(s.a().b("subs").a(), new w(r0Var, gVar, runnable));
+    }
+
+    public static /* synthetic */ void N(r0 r0Var, boolean z, boolean z2, List list, String str, boolean z3, h hVar, List list2) {
+        r0Var.getClass();
+        ApplicationUtil.runOnMainThread(new V(r0Var, hVar, list2, z, z2, list, str, z3));
+    }
+
+    public static /* synthetic */ void Z(r0 r0Var, g gVar) {
+        r0Var.getClass();
+        r0Var.f.i(r.a().b("subs").a(), new t(r0Var, gVar));
+    }
+
+    public static /* synthetic */ void x(r0 r0Var, Set set) {
+        r0Var.getClass();
+        r0Var.f.j(s.a().b("subs").a(), new n0(r0Var, set));
+    }
+
+    public boolean f1() {
+        if (!i1(g.i)) {
+            if (!i1(g.j)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static /* synthetic */ void d0(r0 r0Var, String str, int i) {
+        r0Var.getClass();
+        r0Var.f.j(s.a().b(str).a(), new i0(r0Var, i, str));
+    }
+
+    public static /* synthetic */ void f0(r0 r0Var, String str, Runnable runnable) {
+        r0Var.getClass();
+        r0Var.f.i(r.a().b(str).a(), new P(r0Var, str, runnable));
+    }
+
+    public void G1() {
+        for (t0 onPurchaseManagerFinishLogin : this.e) {
+            onPurchaseManagerFinishLogin.onPurchaseManagerFinishLogin();
+        }
+    }
+
+    public void p0() {
+        for (t0 onPurchaseManagerFinishLogin : this.e) {
+            onPurchaseManagerFinishLogin.onPurchaseManagerFinishLogin();
+        }
+    }
+
+    public void p1() {
+        r0(false);
+        k1();
+        if (this.l.size() > 0) {
+            N0();
+        }
+        r0(true);
+        P1(true);
+    }
+
+    public static /* synthetic */ void M(r0 r0Var, g gVar, String str, h hVar, h hVar2, List list) {
+        r0Var.getClass();
+        ApplicationUtil.runOnMainThread(new Y(r0Var, hVar2, gVar, str, list, hVar));
+    }
+
+    public static /* synthetic */ void e(r0 r0Var, g gVar, String str, h hVar, h hVar2, List list) {
+        r0Var.getClass();
+        ApplicationUtil.runOnMainThread(new N(r0Var, hVar2, list, gVar, str, hVar));
+    }
+
+    public boolean a1(URI uri) {
+        return uri != null && "ibispaintpurchaselogin".equals(uri.getScheme());
+    }
+
+    public void d(h hVar, List list) {
+        int b = hVar.b();
+        if (this.t <= 0) {
+            this.l.add(new e(b, list));
+            return;
+        }
+        V0(b, list);
+    }
+
+    public boolean d1(URI uri) {
+        return uri != null && "ibispaintplancomparison".equals(uri.getScheme());
+    }
+
+    public boolean g1(URI uri) {
+        return uri != null && "ibispaintpurchase".equals(uri.getScheme());
+    }
+
+    public static /* synthetic */ void F(r0 r0Var, int i, String str, h hVar, List list) {
+        r0Var.getClass();
+        ApplicationUtil.runOnMainThread(new k0(r0Var, hVar, i, str, list));
+    }
+
+    public static /* synthetic */ void Q(r0 r0Var, g gVar, String str, h hVar, List list) {
+        r0Var.getClass();
+        ApplicationUtil.runOnMainThread(new W(r0Var, hVar, gVar, str, list));
+    }
+
+    public static /* synthetic */ void b0(r0 r0Var, g gVar, Runnable runnable, h hVar, List list) {
+        r0Var.getClass();
+        ApplicationUtil.runOnMainThread(new X(r0Var, hVar, gVar, list, runnable));
+    }
+
+    public static /* synthetic */ void c0(r0 r0Var, g gVar, String str, h hVar, List list) {
+        r0Var.getClass();
+        ApplicationUtil.runOnMainThread(new W(r0Var, hVar, gVar, str, list));
+    }
+
+    public static /* synthetic */ void z(r0 r0Var, Activity activity) {
+        if (r0Var.o) {
+            r0Var.P1(true);
+            return;
+        }
+        if (activity instanceof IbisPaintActivity) {
+            r0Var.P1(false);
+        }
+    }
+
+    public g C0(URI uri) {
+        return !g1(uri) ? g.c : A0(uri.getHost());
+    }
+
+    public void n0(t0 t0Var) {
+        if (t0Var != null && !this.e.contains(t0Var)) {
+            this.e.add(t0Var);
+        }
+    }
+
+    public static /* synthetic */ void i(r0 r0Var) {
+        r0Var.getClass();
+        r0Var.k = StringResource.getInstance().getText("Purchase_Error_In_App_Purchase");
+        r0Var.S0();
+    }
+
+    public static /* synthetic */ void s(r0 r0Var, boolean z, boolean z2) {
+        if (z) {
+            r0Var.W0(-1);
+        } else if (z2) {
+            r0Var.J0(-1);
+        } else {
+            r0Var.getClass();
+        }
+    }
+
+    private void W0(int i) {
+        if (this.j) {
+            this.k = x0(i);
+            S0();
+        }
+    }
+
+    public static /* synthetic */ void p(r0 r0Var, h hVar, int i, String str, List list) {
+        r0Var.getClass();
+        if (hVar.b() != 0) {
+            r0Var.W0(i);
+        } else {
+            r0Var.X0(str, list);
+        }
+    }
+
+    public boolean o0() {
+        return this.f != null;
+    }
+
+    public void u1() {
+        if (this.l.size() > 0) {
+            N0();
+        }
+    }
+
+    public static /* synthetic */ void J(r0 r0Var, Runnable runnable, String str, h hVar) {
+        r0Var.getClass();
+        ApplicationUtil.runOnMainThread(new h0(r0Var, hVar, runnable, str));
+    }
+
+    public static /* synthetic */ void W(r0 r0Var, g gVar, h hVar, List list) {
+        r0Var.getClass();
+        ApplicationUtil.runOnMainThread(new M(r0Var, hVar, list, gVar));
+    }
+
+    public static /* synthetic */ void f(r0 r0Var, Set set, h hVar, List list) {
+        r0Var.getClass();
+        ApplicationUtil.runOnMainThread(new U(r0Var, hVar, set, list));
+    }
+
+    public static /* synthetic */ void n(r0 r0Var, g gVar, h hVar, List list) {
+        r0Var.getClass();
+        ApplicationUtil.runOnMainThread(new j0(r0Var, hVar, gVar, list));
+    }
+
+    public static /* synthetic */ void r(r0 r0Var, String str, Runnable runnable, h hVar, List list) {
+        r0Var.getClass();
+        ApplicationUtil.runOnMainThread(new Z(r0Var, hVar, str, runnable));
+    }
+
+    public static /* synthetic */ void t(r0 r0Var, h hVar, Runnable runnable, h hVar2, List list) {
+        r0Var.getClass();
+        ApplicationUtil.runOnMainThread(new O(r0Var, list, hVar, runnable));
+    }
+
+    public void w1(t0 t0Var) {
+        if (t0Var != null) {
+            this.e.remove(t0Var);
+        }
+    }
+
+    private void m0(h hVar, Runnable runnable) {
+        t0(new c0(this, hVar, runnable), runnable);
+    }
+
+    public String D0() {
+        return "ibispaintpurchase";
+    }
+
+    public boolean Z0() {
+        return true;
+    }
+
+    public void o1() {
+    }
+
+    public void q1(Bundle bundle) {
+    }
+
+    public boolean r1(int i, int i2, Intent intent) {
+        return false;
+    }
+
+    public void s1() {
+    }
+
+    public void v1() {
+    }
+}
