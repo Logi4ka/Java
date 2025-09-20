@@ -1,0 +1,1535 @@
+//
+// Decompiled by Jadx - 8
+
+// By developer-krushna (https://github.com/developer-krushna/)
+
+package dx;
+
+import android.text.TextUtils;
+import android.util.Base64;
+import android.util.Log;
+import java.io.IOException;
+import java.security.InvalidKeyException;
+import java.security.KeyFactory;
+import java.security.NoSuchAlgorithmException;
+import java.security.PublicKey;
+import java.security.SignatureException;
+import java.security.spec.InvalidKeySpecException;
+import java.security.spec.X509EncodedKeySpec;
+
+/* compiled from: Security */
+class f {
+    private static Boolean b(PublicKey publicKey, String str, String str2) {
+        String str3 = "IABUtil/Security";
+        try {
+            byte[] decode = Base64.decode(str2, 0);
+            try {
+                KeyFactory instance = KeyFactory.getInstance("SHA1withRSA");
+                instance.initVerify(publicKey);
+                instance.update(str.getBytes());
+                if (instance.verify(decode)) {
+                    return Boolean.TRUE;
+                }
+                Log.w(str3, "Signature verification failed...");
+                return Boolean.FALSE;
+            } catch (NoSuchAlgorithmException e) {
+                throw new RuntimeException(e);
+            } catch (InvalidKeyException unused) {
+                Log.e(str3, "Invalid key specification.");
+                return Boolean.FALSE;
+            } catch (SignatureException unused2) {
+                Log.e(str3, "Signature exception.");
+                return Boolean.FALSE;
+            }
+        } catch (IllegalArgumentException unused3) {
+            Log.w(str3, "Base64 decoding failed.");
+            return Boolean.FALSE;
+        }
+    }
+
+    public static boolean c(String str, String str2, String str3) {
+        String str4 = "IABUtil/Security";
+        if (!(TextUtils.isEmpty(str2) || TextUtils.isEmpty(str))) {
+            if (!TextUtils.isEmpty(str3)) {
+                try {
+                    return b(a(str), str2, str3).booleanValue();
+                } catch (IOException e) {
+                    StringBuilder stringBuilder = new StringBuilder();
+                    stringBuilder.append("Error generating PublicKey from encoded key: ");
+                    stringBuilder.append(e.getMessage());
+                    Log.e(str4, stringBuilder.toString());
+                    return false;
+                }
+            }
+        }
+        Log.w(str4, "Purchase verification failed: missing data.");
+        return false;
+    }
+
+    private static PublicKey a(String str) {
+        try {
+            return KeyFactory.getInstance("RSA").generatePublic(new X509EncodedKeySpec(Base64.decode(str, 0)));
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        } catch (InvalidKeySpecException e2) {
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append("Invalid key specification: ");
+            stringBuilder.append(e2);
+            str = stringBuilder.toString();
+            Log.w("IABUtil/Security", str);
+            throw new IOException(str);
+        }
+    }
+}
+
+// By developer-krushna (https://github.com/developer-krushna/)
+
+//
+// Decompiled by Jadx - 20
+
+// By developer-krushna (https://github.com/developer-krushna/)
+
+package Kv;
+
+import Ev.a;
+import Ev.c;
+import Gv.b;
+import Iv.e;
+import Jv.h;
+import com.yubico.yubikit.core.application.BadResponseException;
+import com.yubico.yubikit.core.smartcard.ApduException;
+import com.yubico.yubikit.piv.InvalidPinException;
+import j$.util.Objects;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.math.BigInteger;
+import java.nio.ByteBuffer;
+import java.nio.CharBuffer;
+import java.nio.charset.StandardCharsets;
+import java.security.NoSuchAlgorithmException;
+import java.security.PrivateKey;
+import java.security.PublicKey;
+import java.security.cert.CertificateEncodingException;
+import java.security.cert.CertificateException;
+import java.security.cert.CertificateFactory;
+import java.security.cert.X509Certificate;
+import java.security.spec.ECPoint;
+import java.security.spec.InvalidKeySpecException;
+import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.Locale;
+import java.util.Map;
+import xH.d;
+
+/* compiled from: PivSession */
+public class f extends a<f> {
+    public static final c<f> K = new c.a("AES Management Key", 5, 4, 0);
+    public static final c<f> L = new a("RSA key generation");
+    private static final d M = xH.f.k(f.class);
+    public static final c<f> p = new c.a("Curve P384", 4, 0, 0);
+    public static final c<f> q = new c.a("PIN/Touch Policy", 4, 0, 0);
+    public static final c<f> r = new c.a("Cached Touch Policy", 4, 3, 0);
+    public static final c<f> t = new c.a("Attestation", 4, 3, 0);
+    public static final c<f> x = new c.a("Serial Number", 5, 0, 0);
+    public static final c<f> y = new c.a("Metadata", 5, 3, 0);
+    private final Iv.f d;
+    private final Dv.c e;
+    private int k = 3;
+    private int n = 3;
+
+    public b S(g gVar, b bVar, e eVar, i iVar) {
+        b i = b.i(bVar);
+        h(i, eVar, iVar, false);
+        b.d dVar = i.e;
+        LinkedHashMap linkedHashMap = new LinkedHashMap();
+        int i2 = b.a[dVar.a.ordinal()];
+        if (i2 == 1) {
+            int i3 = (dVar.b / 8) / 2;
+            b.b bVar2 = (b.b) bVar;
+            linkedHashMap.put(Integer.valueOf(1), Jv.a.a(bVar2.h(), i3));
+            linkedHashMap.put(Integer.valueOf(2), Jv.a.a(bVar2.i(), i3));
+            Integer valueOf = Integer.valueOf(3);
+            BigInteger f = bVar2.f();
+            Objects.requireNonNull(f);
+            linkedHashMap.put(valueOf, Jv.a.a(f, i3));
+            valueOf = Integer.valueOf(4);
+            f = bVar2.g();
+            Objects.requireNonNull(f);
+            linkedHashMap.put(valueOf, Jv.a.a(f, i3));
+            valueOf = Integer.valueOf(5);
+            BigInteger e = bVar2.e();
+            Objects.requireNonNull(e);
+            linkedHashMap.put(valueOf, Jv.a.a(e, i3));
+        } else if (i2 == 2) {
+            linkedHashMap.put(Integer.valueOf(6), ((b.a) bVar).d());
+        }
+        if (eVar != e.e) {
+            linkedHashMap.put(Integer.valueOf(170), new byte[]{(byte) eVar.d});
+        }
+        if (iVar != i.e) {
+            linkedHashMap.put(Integer.valueOf(171), new byte[]{(byte) iVar.d});
+        }
+        d dVar2 = M;
+        Fv.a.c(dVar2, "Importing key with pin_policy={}, touch_policy={}", eVar, iVar);
+        this.d.h(new Iv.a(0, -2, i.d, gVar.d, h.d(linkedHashMap)));
+        Fv.a.e(dVar2, "Private key imported in slot {} of type {}", gVar, i);
+        return i;
+    }
+
+    public h E(g gVar) {
+        Fv.a.b(M, "Getting metadata for slot {}", gVar);
+        d(y);
+        Map b = h.b(this.d.h(new Iv.a(0, -9, 0, gVar.d, null)));
+        byte[] bArr = (byte[]) b.get(Integer.valueOf(2));
+        boolean z = true;
+        b j = b.j(((byte[]) b.get(Integer.valueOf(1)))[0]);
+        e f = e.f(bArr[0]);
+        i f2 = i.f(bArr[1]);
+        if (((byte[]) b.get(Integer.valueOf(3)))[0] != (byte) 1) {
+            z = false;
+        }
+        e eVar = f;
+        boolean z2 = z;
+        return new h(j, eVar, f2, z2, (byte[]) b.get(Integer.valueOf(4)));
+    }
+
+    private byte[] X(g gVar, b bVar, byte[] bArr, boolean z) {
+        LinkedHashMap linkedHashMap = new LinkedHashMap();
+        linkedHashMap.put(Integer.valueOf(130), null);
+        linkedHashMap.put(Integer.valueOf(z ? 133 : 129), bArr);
+        try {
+            gVar = h.e(130, h.e(124, this.d.h(new Iv.a(0, -121, bVar.d, gVar.d, new BigInteger(124, h.d(linkedHashMap)).a()))));
+            return gVar;
+        } catch (ApduException e) {
+            ApduException apduException = e;
+            if ((short) 27264 == apduException.a()) {
+                short a = apduException.a();
+                Locale locale = Locale.ROOT;
+                String name = bVar.name();
+                Integer valueOf = Integer.valueOf(gVar.d);
+                throw new ApduException(a, String.format(locale, "Make sure that %s key is generated on slot %02X", new Object[]{name, valueOf}));
+            }
+            throw apduException;
+        }
+    }
+
+    public Gv.c m(g gVar, b bVar, e eVar, i iVar) {
+        h(bVar, eVar, iVar, true);
+        LinkedHashMap linkedHashMap = new LinkedHashMap();
+        linkedHashMap.put(Integer.valueOf(128), new byte[]{bVar.d});
+        if (eVar != e.e) {
+            linkedHashMap.put(Integer.valueOf(170), new byte[]{(byte) eVar.d});
+        }
+        if (iVar != i.e) {
+            linkedHashMap.put(Integer.valueOf(171), new byte[]{(byte) iVar.d});
+        }
+        d dVar = M;
+        Fv.a.c(dVar, "Generating key with pin_policy={}, touch_policy={}", eVar, iVar);
+        byte[] h = this.d.h(new Iv.a(0, 71, 0, gVar.d, new BigInteger(-84, h.d(linkedHashMap)).a()));
+        Fv.a.e(dVar, "Private key generated in slot {} of type {}", gVar, bVar);
+        return K(bVar, h.e(32585, h));
+    }
+
+    public void h(b bVar, e eVar, i iVar, boolean z) {
+        if (this.e.d != (byte) 0) {
+            if (bVar == b.q) {
+                d(p);
+            }
+            if (!(eVar == e.e && iVar == i.e)) {
+                d(q);
+                if (iVar == i.p) {
+                    d(r);
+                }
+            }
+            if (z && bVar.e.a == b.b.d) {
+                d(L);
+            }
+            if (!this.e.m(4, 4, 0) || !this.e.n(4, 5, 0)) {
+                return;
+            }
+            if (bVar == b.k) {
+                throw new a("RSA 1024 is not supported on YubiKey FIPS");
+            } else if (eVar == e.k) {
+                throw new a("PinPolicy.NEVER is not allowed on YubiKey FIPS");
+            }
+        }
+    }
+
+    static Gv.c K(b bVar, byte[] bArr) {
+        Map b = h.b(bArr);
+        b.d dVar = bVar.e;
+        if (dVar.a == b.b.d) {
+            return new Gv.c.c(new BigInteger(1, (byte[]) b.get(Integer.valueOf(129))), new BigInteger(1, (byte[]) b.get(Integer.valueOf(130))));
+        }
+        if (dVar instanceof b.c) {
+            return Gv.c.b.d(((b.c) dVar).b(), (byte[]) b.get(Integer.valueOf(134)));
+        }
+        throw new a("Unsupported key type");
+    }
+
+    public X509Certificate n(g gVar) {
+        Fv.a.b(M, "Reading certificate in slot {}", gVar);
+        Map b = h.b(o(gVar.e));
+        byte[] bArr = (byte[]) b.get(Integer.valueOf(113));
+        byte[] bArr2 = (byte[]) b.get(Integer.valueOf(112));
+        if (!(bArr == null || bArr.length <= 0 || bArr[0] == (byte) 0)) {
+            try {
+                bArr2 = a.b(bArr2);
+            } catch (IOException e) {
+                throw new BadResponseException("Failed to decompress certificate", e);
+            }
+        }
+        try {
+            return I(bArr2);
+        } catch (CertificateException e2) {
+            throw new BadResponseException("Failed to parse certificate: ", e2);
+        }
+    }
+
+    public void Q(g gVar, X509Certificate x509Certificate, boolean z) {
+        byte[] bArr = new byte[]{z};
+        Fv.a.c(M, "Storing {}certificate in slot {}", z ? "compressed " : "", gVar);
+        try {
+            Object encoded = x509Certificate.getEncoded();
+            if (z) {
+                encoded = a.a(encoded);
+            }
+            LinkedHashMap linkedHashMap = new LinkedHashMap();
+            linkedHashMap.put(Integer.valueOf(112), encoded);
+            linkedHashMap.put(Integer.valueOf(113), bArr);
+            linkedHashMap.put(Integer.valueOf(254), null);
+            U(gVar.e, h.d(linkedHashMap));
+        } catch (CertificateEncodingException e) {
+            throw new IllegalArgumentException("Failed to get encoded version of certificate", e);
+        }
+    }
+
+    private d u(byte b) {
+        d(y);
+        Map b2 = h.b(this.d.h(new Iv.a(0, -9, 0, b, null)));
+        byte[] bArr = (byte[]) b2.get(Integer.valueOf(6));
+        return new d(((byte[]) b2.get(Integer.valueOf(5)))[0] != (byte) 0, bArr[0], bArr[1]);
+    }
+
+    public int r() {
+        d dVar = M;
+        Fv.a.a(dVar, "Getting PIN attempts");
+        if (f(y)) {
+            return t().a();
+        }
+        try {
+            this.d.h(new Iv.a(0, 32, 0, -128, null));
+            Fv.a.a(dVar, "Using cached value, may be incorrect");
+            return this.k;
+        } catch (ApduException e) {
+            int D = D(e.a());
+            if (D >= 0) {
+                this.k = D;
+                Fv.a.a(M, "Using value from empty verify");
+                return D;
+            }
+            throw e;
+        }
+    }
+
+    public f(e eVar) {
+        Iv.f fVar = new Iv.f(eVar);
+        this.d = fVar;
+        fVar.g(Iv.d.d);
+        Dv.c j = Dv.c.j(fVar.h(new Iv.a(0, -3, 0, 0, null)));
+        this.e = j;
+        fVar.a(j);
+        if (eVar.k1() && j.m(4, 0, 0)) {
+            fVar.k(Iv.b.e);
+        }
+        Fv.a.b(M, "PIV session initialized (version={})", j);
+    }
+
+    private static byte[] O(char[] cArr) {
+        ByteBuffer encode = StandardCharsets.UTF_8.encode(CharBuffer.wrap(cArr));
+        try {
+            int limit = encode.limit() - encode.position();
+            if (limit <= 8) {
+                byte[] copyOf = Arrays.copyOf(encode.array(), 8);
+                Arrays.fill(copyOf, limit, 8, (byte) -1);
+                return copyOf;
+            }
+            throw new a("PIN/PUK must be no longer than 8 bytes");
+        } finally {
+            Arrays.fill(encode.array(), (byte) 0);
+        }
+    }
+
+    public byte[] W(g gVar, b bVar, byte[] bArr) {
+        b.d dVar = bVar.e;
+        int i = dVar.b / 8;
+        if (bArr.length > i) {
+            if (dVar.a == b.b.e) {
+                bArr = Arrays.copyOf(bArr, i);
+            } else {
+                throw new a("Payload too large for key");
+            }
+        } else if (bArr.length < i) {
+            byte[] bArr2 = new byte[i];
+            System.arraycopy(bArr, 0, bArr2, i - bArr.length, bArr.length);
+            bArr = bArr2;
+        }
+        Fv.a.c(M, "Decrypting data with key in slot {} of type {}", gVar, bVar);
+        return X(gVar, bVar, bArr, false);
+    }
+
+    public void U(int i, byte[] bArr) {
+        Fv.a.b(M, "Writing data to object slot {}", Integer.toString(i, 16));
+        LinkedHashMap linkedHashMap = new LinkedHashMap();
+        linkedHashMap.put(Integer.valueOf(92), c.a(i));
+        linkedHashMap.put(Integer.valueOf(83), bArr);
+        this.d.h(new Iv.a(0, -37, 63, 255, h.d(linkedHashMap)));
+    }
+
+    public void Y(char[] cArr) {
+        try {
+            Fv.a.a(M, "Verifying PIN");
+            this.d.h(new Iv.a(0, 32, 0, -128, O(cArr)));
+            this.k = this.n;
+        } catch (ApduException e) {
+            ApduException apduException = e;
+            int D = D(apduException.a());
+            if (D >= 0) {
+                this.k = D;
+                throw new InvalidPinException(D);
+            }
+            throw apduException;
+        }
+    }
+
+    public byte[] g(g gVar, ECPoint eCPoint) {
+        b bVar = eCPoint.getAffineX().bitLength() > 256 ? b.q : b.p;
+        byte[] g = new Gv.c.b(((b.c) bVar.e).b(), eCPoint.getAffineX(), eCPoint.getAffineY()).g();
+        Fv.a.c(M, "Performing key agreement with key in slot {} of type {}", gVar, bVar);
+        return X(gVar, bVar, g, true);
+    }
+
+    public byte[] o(int i) {
+        Fv.a.b(M, "Reading data from object slot {}", Integer.toString(i, 16));
+        return h.e(83, this.d.h(new Iv.a(0, -53, 63, 255, new BigInteger(92, c.a(i)).a())));
+    }
+
+    private int D(int i) {
+        if (i == 27011) {
+            return 0;
+        }
+        if (this.e.n(1, 0, 4)) {
+            if (i >= 25344 && i <= 25599) {
+                return i & 255;
+            }
+        } else if (i >= 25536 && i <= 25551) {
+            return i & 15;
+        }
+        return -1;
+    }
+
+    @Deprecated
+    public PublicKey l(g gVar, b bVar, e eVar, i iVar) {
+        Throwable e;
+        try {
+            return m(gVar, bVar, eVar, iVar).c();
+        } catch (NoSuchAlgorithmException e2) {
+            e = e2;
+            throw new RuntimeException(e);
+        } catch (InvalidKeySpecException e3) {
+            e = e3;
+            throw new RuntimeException(e);
+        }
+    }
+
+    private X509Certificate I(byte[] bArr) {
+        return (X509Certificate) CertificateFactory.getInstance("X.509").generateCertificate(new ByteArrayInputStream(bArr));
+    }
+
+    public void k(g gVar) {
+        Fv.a.b(M, "Deleting certificate in slot {}", gVar);
+        U(gVar.e, null);
+    }
+
+    public d t() {
+        Fv.a.a(M, "Getting PIN metadata");
+        return u(Byte.MIN_VALUE);
+    }
+
+    @Deprecated
+    public b T(g gVar, PrivateKey privateKey, e eVar, i iVar) {
+        return S(gVar, b.a(privateKey), eVar, iVar);
+    }
+
+    public void P(g gVar, X509Certificate x509Certificate) {
+        Q(gVar, x509Certificate, false);
+    }
+
+    public void close() {
+        this.d.close();
+    }
+
+    public Dv.c a() {
+        return this.e;
+    }
+}
+
+// By developer-krushna (https://github.com/developer-krushna/)
+
+//
+// Decompiled by Jadx - 12
+
+// By developer-krushna (https://github.com/developer-krushna/)
+
+package Lv;
+
+import Jv.b;
+import Jv.e;
+import Kv.f;
+import Lv.v.c;
+import java.security.AlgorithmParameters;
+import java.security.InvalidKeyException;
+import java.security.InvalidParameterException;
+import java.security.KeyPair;
+import java.security.NoSuchAlgorithmException;
+import java.security.PrivateKey;
+import java.security.PublicKey;
+import java.security.Signature;
+import java.security.SignatureException;
+import java.security.SignatureSpi;
+import java.security.spec.AlgorithmParameterSpec;
+import java.util.Map;
+
+/* compiled from: PivRsaSignatureSpi */
+public class A extends SignatureSpi {
+    private final b<b<e<f, Exception>>> a;
+    private final Map<Kv.b, KeyPair> b;
+    private final String c;
+    private c d;
+    private Signature e;
+
+    protected byte[] engineSign() {
+        if (this.d == null || this.e == null) {
+            throw new InvalidParameterException("Not initialized");
+        }
+        try {
+            Signature instance = Signature.getInstance("RSA/ECB/NoPadding");
+            instance.init(1, ((KeyPair) this.b.get(this.d.e)).getPublic());
+            return this.d.d(this.a, instance.doFinal(this.e.sign()));
+        } catch (Exception e) {
+            throw new SignatureException(e);
+        }
+    }
+
+    protected void engineInitSign(PrivateKey privateKey) {
+        if (privateKey instanceof c) {
+            c cVar = (c) privateKey;
+            this.d = cVar;
+            try {
+                a(false).initSign(((KeyPair) this.b.get(cVar.e)).getPrivate());
+                return;
+            } catch (NoSuchAlgorithmException e) {
+                throw new InvalidKeyException(e);
+            }
+        }
+        throw new InvalidParameterException("Unsupported key type");
+    }
+
+    private Signature a(boolean z) {
+        if (this.e == null) {
+            Signature instance = Signature.getInstance(this.c);
+            this.e = instance;
+            if (z) {
+                try {
+                    instance.initSign(((KeyPair) this.b.get(Kv.b.n)).getPrivate());
+                } catch (InvalidKeyException unused) {
+                    throw new NoSuchAlgorithmException();
+                }
+            }
+        }
+        return this.e;
+    }
+
+    protected Object engineGetParameter(String str) {
+        Signature signature = this.e;
+        if (signature != null) {
+            return signature.getParameter(str);
+        }
+        throw new InvalidParameterException("Not initialized");
+    }
+
+    protected AlgorithmParameters engineGetParameters() {
+        Signature signature = this.e;
+        if (signature != null) {
+            return signature.getParameters();
+        }
+        throw new InvalidParameterException("Not initialized");
+    }
+
+    A(b<b<e<f, Exception>>> bVar, Map<Kv.b, KeyPair> map, String str) {
+        this.a = bVar;
+        this.b = map;
+        this.c = str;
+    }
+
+    protected void engineInitVerify(PublicKey publicKey) {
+        throw new InvalidParameterException("Can only be used for signing.");
+    }
+
+    protected boolean engineVerify(byte[] bArr) {
+        throw new InvalidParameterException("Not initialized");
+    }
+
+    protected void engineUpdate(byte b) {
+        Signature signature = this.e;
+        if (signature != null) {
+            signature.update(b);
+            return;
+        }
+        throw new InvalidParameterException("Not initialized");
+    }
+
+    protected void engineUpdate(byte[] bArr, int i, int i2) {
+        Signature signature = this.e;
+        if (signature != null) {
+            signature.update(bArr, i, i2);
+            return;
+        }
+        throw new InvalidParameterException("Not initialized");
+    }
+
+    protected void engineSetParameter(String str, Object obj) {
+        try {
+            a(true).setParameter(str, obj);
+        } catch (NoSuchAlgorithmException unused) {
+            throw new InvalidParameterException("Not initialized");
+        }
+    }
+
+    protected void engineSetParameter(AlgorithmParameterSpec algorithmParameterSpec) {
+        try {
+            a(true).setParameter(algorithmParameterSpec);
+        } catch (NoSuchAlgorithmException unused) {
+            throw new InvalidParameterException("Not initialized");
+        }
+    }
+}
+
+// By developer-krushna (https://github.com/developer-krushna/)
+
+//
+// Decompiled by Jadx - 9
+
+// By developer-krushna (https://github.com/developer-krushna/)
+
+package Lv;
+
+import Jv.b;
+import Jv.e;
+import Kv.f;
+import java.security.InvalidParameterException;
+import java.security.PrivateKey;
+import java.security.PublicKey;
+import java.security.SignatureException;
+import java.security.SignatureSpi;
+
+/* compiled from: PivEcSignatureSpi */
+public abstract class c extends SignatureSpi {
+    private final b<b<e<f, Exception>>> a;
+    private v.b b;
+
+    protected byte[] engineSign() {
+        v.b bVar = this.b;
+        if (bVar != null) {
+            try {
+                return bVar.d(this.a, a());
+            } catch (Exception e) {
+                throw new SignatureException(e);
+            }
+        }
+        throw new InvalidParameterException("Not initialized");
+    }
+
+    protected void engineInitSign(PrivateKey privateKey) {
+        if (privateKey instanceof v.b) {
+            this.b = (v.b) privateKey;
+            return;
+        }
+        throw new InvalidParameterException("Unsupported key type");
+    }
+
+    protected Object engineGetParameter(String str) {
+        throw new InvalidParameterException("ECDSA doesn't take parameters");
+    }
+
+    protected void engineInitVerify(PublicKey publicKey) {
+        throw new InvalidParameterException("Can only be used for signing.");
+    }
+
+    protected void engineSetParameter(String str, Object obj) {
+        throw new InvalidParameterException("ECDSA doesn't take parameters");
+    }
+
+    protected boolean engineVerify(byte[] bArr) {
+        throw new InvalidParameterException("Not initialized");
+    }
+
+    protected c(b<b<e<f, Exception>>> bVar) {
+        this.a = bVar;
+    }
+
+    protected void engineUpdate(byte b) {
+        if (this.b != null) {
+            b(b);
+            return;
+        }
+        throw new InvalidParameterException("Not initialized");
+    }
+
+    protected void engineUpdate(byte[] bArr, int i, int i2) {
+        if (this.b != null) {
+            c(bArr, i, i2);
+            return;
+        }
+        throw new InvalidParameterException("Not initialized");
+    }
+
+    protected abstract byte[] a();
+
+    protected abstract void b(byte b);
+
+    protected abstract void c(byte[] bArr, int i, int i2);
+}
+
+// By developer-krushna (https://github.com/developer-krushna/)
+
+//
+// Decompiled by Jadx - 9
+
+// By developer-krushna (https://github.com/developer-krushna/)
+
+package Ot;
+
+import android.content.Context;
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.pm.Signature;
+import android.os.Build;
+
+/* compiled from: com.google.android.play:app-update@@2.1.0 */
+public final class c {
+    private static final s a = new s("PhoneskyVerificationUtils");
+
+    public static boolean a(Context context) {
+        String str = "com.android.vending";
+        try {
+            if (context.getPackageManager().getApplicationInfo(str, 0).enabled) {
+                Signature[] signatureArr = context.getPackageManager().getPackageInfo(str, 64).signatures;
+                if (signatureArr != null) {
+                    int length = signatureArr.length;
+                    if (length != 0) {
+                        int i = 0;
+                        while (i < length) {
+                            String a = b.a(signatureArr[i].toByteArray());
+                            if (!"8P1sW0EPJcslw7UzRsiXL64w-O50Ed-RBICtay1g24M".equals(a)) {
+                                String str2 = Build.TAGS;
+                                if ((!str2.contains("dev-keys") && !str2.contains("test-keys")) || !"GXWy8XF3vIml3_MfnmSmyuKBpT3B0dWbHRR_4cgq-gA".equals(a)) {
+                                    i++;
+                                }
+                            }
+                            return true;
+                        }
+                    }
+                }
+                a.e("Phonesky package is not signed -- possibly self-built package. Could not verify.", new Object[0]);
+            }
+        } catch (NameNotFoundException unused) {
+        }
+        return false;
+    }
+}
+
+// By developer-krushna (https://github.com/developer-krushna/)
+
+//
+// Decompiled by Jadx - 10
+
+// By developer-krushna (https://github.com/developer-krushna/)
+
+package Ot;
+
+import android.os.Process;
+import android.text.TextUtils;
+import android.util.Log;
+import java.util.IllegalFormatException;
+import java.util.Locale;
+
+/* compiled from: com.google.android.play:app-update@@2.1.0 */
+public final class s {
+    private final String a;
+
+    private static String f(String str, String str2, Object... objArr) {
+        if (objArr.length > 0) {
+            try {
+                str2 = String.format(Locale.US, str2, objArr);
+            } catch (IllegalFormatException e) {
+                Log.e("PlayCore", "Unable to format ".concat(str2), e);
+                String join = TextUtils.join(", ", objArr);
+                StringBuilder stringBuilder = new StringBuilder();
+                stringBuilder.append(str2);
+                stringBuilder.append(" [");
+                stringBuilder.append(join);
+                stringBuilder.append("]");
+                str2 = stringBuilder.toString();
+            }
+        }
+        StringBuilder stringBuilder2 = new StringBuilder();
+        stringBuilder2.append(str);
+        stringBuilder2.append(" : ");
+        stringBuilder2.append(str2);
+        return stringBuilder2.toString();
+    }
+
+    public s(String str) {
+        int myUid = Process.myUid();
+        int myPid = Process.myPid();
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("UID: [");
+        stringBuilder.append(myUid);
+        stringBuilder.append("]  PID: [");
+        stringBuilder.append(myPid);
+        stringBuilder.append("] ");
+        this.a = stringBuilder.toString().concat(str);
+    }
+
+    public final int e(String str, Object... objArr) {
+        String str2 = "PlayCore";
+        return Log.isLoggable(str2, 5) ? Log.w(str2, f(this.a, "Phonesky package is not signed -- possibly self-built package. Could not verify.", objArr)) : 0;
+    }
+
+    public final int a(String str, Object... objArr) {
+        String str2 = "PlayCore";
+        return Log.isLoggable(str2, 3) ? Log.d(str2, f(this.a, str, objArr)) : 0;
+    }
+
+    public final int b(String str, Object... objArr) {
+        String str2 = "PlayCore";
+        return Log.isLoggable(str2, 6) ? Log.e(str2, f(this.a, str, objArr)) : 0;
+    }
+
+    public final int c(Throwable th, String str, Object... objArr) {
+        String str2 = "PlayCore";
+        return Log.isLoggable(str2, 6) ? Log.e(str2, f(this.a, str, objArr), th) : 0;
+    }
+
+    public final int d(String str, Object... objArr) {
+        String str2 = "PlayCore";
+        return Log.isLoggable(str2, 4) ? Log.i(str2, f(this.a, str, objArr)) : 0;
+    }
+}
+
+// By developer-krushna (https://github.com/developer-krushna/)
+
+//
+// Decompiled by Jadx - 10
+
+// By developer-krushna (https://github.com/developer-krushna/)
+
+package Ut;
+
+import android.content.Context;
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.pm.Signature;
+import android.os.Build;
+import java.util.ArrayList;
+import java.util.Iterator;
+
+/* compiled from: com.google.android.play:review@@2.0.2 */
+public final class v {
+    private static final i a = new i("PhoneskyVerificationUtils");
+
+    public static boolean a(Context context) {
+        String str = "Play Store package is not found.";
+        String str2 = "com.android.vending";
+        try {
+            if (context.getPackageManager().getApplicationInfo(str2, 0).enabled) {
+                try {
+                    Signature[] signatureArr = context.getPackageManager().getPackageInfo(str2, 64).signatures;
+                    if (signatureArr != null) {
+                        int length = signatureArr.length;
+                        if (length != 0) {
+                            ArrayList arrayList = new ArrayList();
+                            int i = 0;
+                            while (i < length) {
+                                String a = u.a(signatureArr[i].toByteArray());
+                                arrayList.add(a);
+                                if (!"8P1sW0EPJcslw7UzRsiXL64w-O50Ed-RBICtay1g24M".equals(a)) {
+                                    String str3 = Build.TAGS;
+                                    if ((!str3.contains("dev-keys") && !str3.contains("test-keys")) || !"GXWy8XF3vIml3_MfnmSmyuKBpT3B0dWbHRR_4cgq-gA".equals(a)) {
+                                        i++;
+                                    }
+                                }
+                                return true;
+                            }
+                            i iVar = a;
+                            StringBuilder stringBuilder = new StringBuilder();
+                            Iterator it = arrayList.iterator();
+                            if (it.hasNext()) {
+                                while (true) {
+                                    stringBuilder.append((CharSequence) it.next());
+                                    if (!it.hasNext()) {
+                                        break;
+                                    }
+                                    stringBuilder.append(", ");
+                                }
+                            }
+                            iVar.d(String.format("Play Store package certs are not valid. Found these sha256 certs: [%s].", new Object[]{stringBuilder.toString()}), new Object[0]);
+                        }
+                    }
+                    a.d("Play Store package is not signed -- possibly self-built package. Could not verify.", new Object[0]);
+                } catch (NameNotFoundException unused) {
+                    a.d(str, new Object[0]);
+                }
+            } else {
+                a.d("Play Store package is disabled.", new Object[0]);
+            }
+        } catch (NameNotFoundException unused2) {
+            a.d(str, new Object[0]);
+        }
+        return false;
+    }
+}
+
+// By developer-krushna (https://github.com/developer-krushna/)
+
+//
+// Decompiled by Jadx - 20
+
+// By developer-krushna (https://github.com/developer-krushna/)
+
+package Vx;
+
+import Sx.B;
+import Sx.a;
+import Sx.e;
+import Sx.i;
+import Sx.j;
+import Sx.o;
+import Sx.p;
+import Sx.r;
+import Sx.s;
+import Sx.u;
+import Sx.v;
+import Sx.x;
+import Sx.z;
+import Yx.f;
+import Yx.f.h;
+import cy.d;
+import dy.C;
+import dy.g;
+import java.io.IOException;
+import java.lang.ref.Reference;
+import java.net.ConnectException;
+import java.net.Proxy;
+import java.net.Proxy.Type;
+import java.net.Socket;
+import java.net.SocketTimeoutException;
+import java.security.cert.X509Certificate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+import javax.net.ssl.SSLPeerUnverifiedException;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.SSLSocket;
+import okhttp3.internal.connection.RouteException;
+
+/* compiled from: RealConnection */
+public final class c extends h implements Sx.h {
+    private final i b;
+    private final B c;
+    private Socket d;
+    private Socket e;
+    private p f;
+    private v g;
+    private f h;
+    private dy.h i;
+    private g j;
+    public boolean k;
+    public int l;
+    public int m = 1;
+    public final List<Reference<f>> n = new ArrayList();
+    public long o = Long.MAX_VALUE;
+
+    /* JADX WARNING: Removed duplicated region for block: B:59:0x0121  */
+    /* JADX WARNING: Removed duplicated region for block: B:58:0x011b  */
+    /* JADX WARNING: Removed duplicated region for block: B:58:0x011b  */
+    /* JADX WARNING: Removed duplicated region for block: B:59:0x0121  */
+    /* JADX WARNING: Removed duplicated region for block: B:69:0x012e A:{SYNTHETIC, SKIP, EDGE_INSN: B:69:0x012e->B:64:0x012e ?: BREAK  } */
+    /* JADX WARNING: Removed duplicated region for block: B:61:0x0126  */
+    /* JADX WARNING: Missing block: B:35:0x00bc, code:
+            if (r12.c.c() == false) goto L_0x00d0;
+     */
+    /* JADX WARNING: Missing block: B:37:0x00c0, code:
+            if (r12.d == null) goto L_0x00c3;
+     */
+    /* JADX WARNING: Missing block: B:40:0x00cf, code:
+            throw new okhttp3.internal.connection.RouteException(new java.net.ConnectException("Too many tunnel connections attempted: 21"));
+     */
+    /* JADX WARNING: Missing block: B:42:0x00d2, code:
+            if (r12.h == null) goto L_?;
+     */
+    /* JADX WARNING: Missing block: B:43:0x00d4, code:
+            r13 = r12.b;
+     */
+    /* JADX WARNING: Missing block: B:44:0x00d6, code:
+            monitor-enter(r13);
+     */
+    /* JADX WARNING: Missing block: B:46:?, code:
+            r12.m = r12.h.o();
+     */
+    /* JADX WARNING: Missing block: B:47:0x00df, code:
+            monitor-exit(r13);
+     */
+    /* JADX WARNING: Missing block: B:49:0x00e1, code:
+            r0 = move-exception;
+     */
+    /* JADX WARNING: Missing block: B:50:0x00e2, code:
+            r14 = r0;
+     */
+    /* JADX WARNING: Missing block: B:71:?, code:
+            return;
+     */
+    /* JADX WARNING: Missing block: B:72:?, code:
+            return;
+     */
+    /* Code decompiled incorrectly, please refer to instructions dump. */
+    public void c(int i, int i2, int i3, int i4, boolean z, e eVar, o oVar) {
+        IOException e;
+        int i5;
+        IOException iOException;
+        if (this.g == null) {
+            List b = this.c.a().b();
+            b bVar = new b(b);
+            if (this.c.a().k() == null) {
+                if (b.contains(j.h)) {
+                    String k = this.c.a().l().k();
+                    if (!ay.f.i().n(k)) {
+                        StringBuilder stringBuilder = new StringBuilder();
+                        stringBuilder.append("CLEARTEXT communication to ");
+                        stringBuilder.append(k);
+                        stringBuilder.append(" not permitted by network security policy");
+                        throw new RouteException(new ConnectException(stringBuilder.toString()));
+                    }
+                } else {
+                    throw new RouteException(new ConnectException("CLEARTEXT communication not enabled for client"));
+                }
+            }
+            RouteException routeException = null;
+            while (true) {
+                o oVar2;
+                e eVar2;
+                int i6;
+                try {
+                    if (this.c.c()) {
+                        oVar2 = this;
+                        eVar2 = i;
+                        int i7 = i2;
+                        e eVar3 = eVar;
+                        o oVar3 = oVar;
+                        try {
+                            oVar2.f(eVar2, i7, i3, eVar3, oVar3);
+                            i6 = i7;
+                            eVar2 = eVar3;
+                            oVar2 = oVar3;
+                            try {
+                                if (this.d == null) {
+                                    break;
+                                }
+                            } catch (IOException e2) {
+                                e = e2;
+                                i5 = i4;
+                                iOException = e;
+                                Tx.c.e(this.e);
+                                Tx.c.e(this.d);
+                                this.e = null;
+                                this.d = null;
+                                this.i = null;
+                                this.j = null;
+                                this.f = null;
+                                this.g = null;
+                                this.h = null;
+                                oVar2.e(eVar2, this.c.d(), this.c.b(), null, iOException);
+                                if (routeException == null) {
+                                }
+                                if (!z) {
+                                }
+                                throw routeException;
+                            }
+                        } catch (IOException e3) {
+                            e = e3;
+                            i6 = i7;
+                            eVar2 = eVar3;
+                            oVar2 = oVar3;
+                            i5 = i4;
+                            iOException = e;
+                            Tx.c.e(this.e);
+                            Tx.c.e(this.d);
+                            this.e = null;
+                            this.d = null;
+                            this.i = null;
+                            this.j = null;
+                            this.f = null;
+                            this.g = null;
+                            this.h = null;
+                            oVar2.e(eVar2, this.c.d(), this.c.b(), null, iOException);
+                            if (routeException == null) {
+                            }
+                            if (!z) {
+                                break;
+                            }
+                            break;
+                            throw routeException;
+                        }
+                    }
+                    i6 = i2;
+                    eVar2 = eVar;
+                    oVar2 = oVar;
+                    d(i, i2, eVar2, oVar2);
+                    try {
+                        i(bVar, i4, eVar2, oVar2);
+                        oVar2.d(eVar2, this.c.d(), this.c.b(), this.g);
+                        break;
+                    } catch (IOException e4) {
+                        e = e4;
+                    }
+                } catch (IOException e5) {
+                    e = e5;
+                    i6 = i2;
+                    i5 = i4;
+                    eVar2 = eVar;
+                    oVar2 = oVar;
+                    iOException = e;
+                    Tx.c.e(this.e);
+                    Tx.c.e(this.d);
+                    this.e = null;
+                    this.d = null;
+                    this.i = null;
+                    this.j = null;
+                    this.f = null;
+                    this.g = null;
+                    this.h = null;
+                    oVar2.e(eVar2, this.c.d(), this.c.b(), null, iOException);
+                    if (routeException == null) {
+                        routeException = new RouteException(iOException);
+                    } else {
+                        routeException.a(iOException);
+                    }
+                    if (!z || !bVar.b(iOException)) {
+                        throw routeException;
+                    }
+                }
+            }
+            throw routeException;
+        }
+        throw new ConnectException("already connected");
+    }
+
+    /* JADX WARNING: Removed duplicated region for block: B:39:0x0127  */
+    /* JADX WARNING: Removed duplicated region for block: B:37:0x0124 A:{Catch:{ all -> 0x0115 }} */
+    /* JADX WARNING: Removed duplicated region for block: B:35:0x011e A:{Catch:{ all -> 0x0115 }} */
+    /* Code decompiled incorrectly, please refer to instructions dump. */
+    private void e(b bVar) {
+        AssertionError e;
+        Throwable th;
+        a a = this.c.a();
+        SSLSocket sSLSocket = null;
+        try {
+            SSLSocket sSLSocket2 = (SSLSocket) a.k().createSocket(this.d, a.l().k(), a.l().w(), true);
+            try {
+                j a2 = bVar.a(sSLSocket2);
+                if (a2.f()) {
+                    ay.f.i().f(sSLSocket2, a.l().k(), a.f());
+                }
+                sSLSocket2.startHandshake();
+                SSLSession session = sSLSocket2.getSession();
+                if (n(session)) {
+                    p c = p.c(session);
+                    if (a.e().verify(a.l().k(), session)) {
+                        String l;
+                        a.a().a(a.l().k(), c.e());
+                        if (a2.f()) {
+                            l = ay.f.i().l(sSLSocket2);
+                        }
+                        this.e = sSLSocket2;
+                        this.i = dy.p.d(dy.p.m(sSLSocket2));
+                        this.j = dy.p.c(dy.p.i(this.e));
+                        this.f = c;
+                        this.g = l != null ? v.e(l) : v.k;
+                        ay.f.i().a(sSLSocket2);
+                        return;
+                    }
+                    X509Certificate x509Certificate = (X509Certificate) c.e().get(0);
+                    StringBuilder stringBuilder = new StringBuilder();
+                    stringBuilder.append("Hostname ");
+                    stringBuilder.append(a.l().k());
+                    stringBuilder.append(" not verified:\n    certificate: ");
+                    stringBuilder.append(Sx.f.c(x509Certificate));
+                    stringBuilder.append("\n    DN: ");
+                    stringBuilder.append(x509Certificate.getSubjectDN().getName());
+                    stringBuilder.append("\n    subjectAltNames: ");
+                    stringBuilder.append(d.a(x509Certificate));
+                    throw new ConnectException(stringBuilder.toString());
+                }
+                throw new ConnectException("a valid ssl session was not established");
+            } catch (AssertionError e2) {
+                e = e2;
+                sSLSocket = sSLSocket2;
+                try {
+                    if (Tx.c.w(e)) {
+                        throw e;
+                    }
+                    throw new IOException(e);
+                } catch (Throwable th2) {
+                    th = th2;
+                    if (sSLSocket != null) {
+                        ay.f.i().a(sSLSocket);
+                    }
+                    Tx.c.e(sSLSocket);
+                    throw th;
+                }
+            } catch (Throwable th3) {
+                th = th3;
+                sSLSocket = sSLSocket2;
+                if (sSLSocket != null) {
+                }
+                Tx.c.e(sSLSocket);
+                throw th;
+            }
+        } catch (AssertionError e3) {
+            e = e3;
+            if (Tx.c.w(e)) {
+            }
+        }
+    }
+
+    private x g(int i, int i2, x xVar, r rVar) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("CONNECT ");
+        stringBuilder.append(Tx.c.p(rVar, true));
+        stringBuilder.append(" HTTP/1.1");
+        String stringBuilder2 = stringBuilder.toString();
+        while (true) {
+            Xx.a aVar = new Xx.a(null, null, this.i, this.j);
+            C j = this.i.j();
+            long j2 = (long) i;
+            TimeUnit timeUnit = TimeUnit.MILLISECONDS;
+            j.g(j2, timeUnit);
+            this.j.j().g((long) i2, timeUnit);
+            aVar.o(xVar.d(), stringBuilder2);
+            aVar.a();
+            z c = aVar.d(false).o(xVar).c();
+            j2 = Wx.e.b(c);
+            if (j2 == -1) {
+                j2 = 0;
+            }
+            dy.B k = aVar.k(j2);
+            Tx.c.y(k, Integer.MAX_VALUE, timeUnit);
+            k.close();
+            int g = c.g();
+            if (g != 200) {
+                if (g == 407) {
+                    x a = this.c.a().h().a(this.c, c);
+                    if (a != null) {
+                        if ("close".equalsIgnoreCase(c.k("Connection"))) {
+                            return a;
+                        }
+                        xVar = a;
+                    } else {
+                        throw new ConnectException("Failed to authenticate with proxy");
+                    }
+                }
+                StringBuilder stringBuilder3 = new StringBuilder();
+                stringBuilder3.append("Unexpected response code for CONNECT: ");
+                stringBuilder3.append(c.g());
+                throw new ConnectException(stringBuilder3.toString());
+            } else if (this.i.i().R() && this.j.i().R()) {
+                return null;
+            } else {
+                throw new ConnectException("TLS tunnel buffered too many bytes!");
+            }
+        }
+    }
+
+    public boolean k(a aVar, B b) {
+        if (this.n.size() < this.m) {
+            if (!this.k) {
+                if (!Tx.a.a.g(this.c.a(), aVar)) {
+                    return false;
+                }
+                if (aVar.l().k().equals(p().a().l().k())) {
+                    return true;
+                }
+                if (this.h == null || b == null) {
+                    return false;
+                }
+                Type type = b.b().type();
+                Type type2 = Type.DIRECT;
+                if (type != type2 || this.c.b().type() != type2 || !this.c.d().equals(b.d()) || b.a().e() != d.a || !r(aVar.l())) {
+                    return false;
+                }
+                try {
+                    aVar.a().a(aVar.l().k(), j().e());
+                    return true;
+                } catch (SSLPeerUnverifiedException unused) {
+                }
+            }
+        }
+        return false;
+    }
+
+    private void d(int i, int i2, e eVar, o oVar) {
+        Socket socket;
+        Proxy b = this.c.b();
+        a a = this.c.a();
+        if (b.type() != Type.DIRECT) {
+            if (b.type() != Type.HTTP) {
+                socket = new Socket(b);
+                this.d = socket;
+                oVar.f(eVar, this.c.d(), b);
+                this.d.setSoTimeout(i2);
+                ay.f.i().g(this.d, this.c.d(), i);
+                this.i = dy.p.d(dy.p.m(this.d));
+                this.j = dy.p.c(dy.p.i(this.d));
+            }
+        }
+        socket = a.j().createSocket();
+        this.d = socket;
+        oVar.f(eVar, this.c.d(), b);
+        this.d.setSoTimeout(i2);
+        try {
+            ay.f.i().g(this.d, this.c.d(), i);
+            try {
+                this.i = dy.p.d(dy.p.m(this.d));
+                this.j = dy.p.c(dy.p.i(this.d));
+            } catch (NullPointerException e) {
+                if ("throw with null exception".equals(e.getMessage())) {
+                    throw new IOException(e);
+                }
+            }
+        } catch (ConnectException e2) {
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append("Failed to connect to ");
+            stringBuilder.append(this.c.d());
+            ConnectException connectException = new ConnectException(stringBuilder.toString());
+            connectException.initCause(e2);
+            throw connectException;
+        }
+    }
+
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Connection{");
+        stringBuilder.append(this.c.a().l().k());
+        stringBuilder.append(":");
+        stringBuilder.append(this.c.a().l().w());
+        stringBuilder.append(", proxy=");
+        stringBuilder.append(this.c.b());
+        stringBuilder.append(" hostAddress=");
+        stringBuilder.append(this.c.d());
+        stringBuilder.append(" cipherSuite=");
+        p pVar = this.f;
+        stringBuilder.append(pVar != null ? pVar.a() : "none");
+        stringBuilder.append(" protocol=");
+        stringBuilder.append(this.g);
+        stringBuilder.append('}');
+        return stringBuilder.toString();
+    }
+
+    private void i(b bVar, int i, e eVar, o oVar) {
+        if (this.c.a().k() == null) {
+            this.g = v.k;
+            this.e = this.d;
+            return;
+        }
+        oVar.u(eVar);
+        e(bVar);
+        oVar.t(eVar, this.f);
+        if (this.g == v.p) {
+            this.e.setSoTimeout(0);
+            f a = new f.g(true).d(this.e, this.c.a().l().k(), this.i, this.j).b(this).c(i).a();
+            this.h = a;
+            a.Q();
+        }
+    }
+
+    public boolean l(boolean z) {
+        if (!(this.e.isClosed() || this.e.isInputShutdown())) {
+            if (!this.e.isOutputShutdown()) {
+                f fVar = this.h;
+                if (fVar != null) {
+                    return fVar.n() ^ 1;
+                }
+                if (z) {
+                    try {
+                        int soTimeout = this.e.getSoTimeout();
+                        try {
+                            this.e.setSoTimeout(1);
+                            if (this.i.R()) {
+                                return false;
+                            }
+                            this.e.setSoTimeout(soTimeout);
+                            return true;
+                        } finally {
+                            this.e.setSoTimeout(soTimeout);
+                        }
+                    } catch (SocketTimeoutException unused) {
+                    } catch (IOException unused2) {
+                        return false;
+                    }
+                }
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean r(r rVar) {
+        if (rVar.w() != this.c.a().l().w()) {
+            return false;
+        }
+        if (rVar.k().equals(this.c.a().l().k())) {
+            return true;
+        }
+        return this.f != null && d.a.c(rVar.k(), (X509Certificate) this.f.e().get(0));
+    }
+
+    private x h() {
+        return new x.a().g(this.c.a().l()).c("Host", Tx.c.p(this.c.a().l(), true)).c("Proxy-Connection", "Keep-Alive").c("User-Agent", Tx.d.a()).a();
+    }
+
+    public Wx.c o(u uVar, s.a aVar, f fVar) {
+        if (this.h != null) {
+            return new Yx.e(uVar, aVar, fVar, this.h);
+        }
+        this.e.setSoTimeout(aVar.a());
+        C j = this.i.j();
+        long a = (long) aVar.a();
+        TimeUnit timeUnit = TimeUnit.MILLISECONDS;
+        j.g(a, timeUnit);
+        this.j.j().g((long) aVar.b(), timeUnit);
+        return new Xx.a(uVar, fVar, this.i, this.j);
+    }
+
+    private void f(int i, int i2, int i3, e eVar, o oVar) {
+        x h = h();
+        r i4 = h.i();
+        int i5 = 0;
+        while (i5 < 21) {
+            d(i, i2, eVar, oVar);
+            h = g(i2, i3, h, i4);
+            if (h != null) {
+                Tx.c.e(this.d);
+                this.d = null;
+                this.j = null;
+                this.i = null;
+                oVar.d(eVar, this.c.d(), this.c.b(), null);
+                i5++;
+            } else {
+                return;
+            }
+        }
+    }
+
+    private boolean n(SSLSession sSLSession) {
+        return ("NONE".equals(sSLSession.getProtocol()) || "SSL_NULL_WITH_NULL_NULL".equals(sSLSession.getCipherSuite())) ? false : true;
+    }
+
+    public c(i iVar, B b) {
+        this.b = iVar;
+        this.c = b;
+    }
+
+    public void a(f fVar) {
+        synchronized (this.b) {
+            this.m = fVar.o();
+        }
+    }
+
+    public boolean m() {
+        return this.h != null;
+    }
+
+    public void b(Yx.h hVar) {
+        hVar.d(Yx.a.q);
+    }
+
+    public p j() {
+        return this.f;
+    }
+
+    public B p() {
+        return this.c;
+    }
+
+    public Socket q() {
+        return this.e;
+    }
+}
+
+// By developer-krushna (https://github.com/developer-krushna/)
+
+//
+// Decompiled by Jadx - 8
+
+// By developer-krushna (https://github.com/developer-krushna/)
+
+package Xv;
+
+import fw.K;
+import java.util.List;
+
+/* compiled from: HAProxySSLTLV */
+public final class g extends h {
+    private final int n;
+    private final List<h> p;
+    private final byte q;
+
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(K.i(this));
+        stringBuilder.append("(type: ");
+        stringBuilder.append(f());
+        stringBuilder.append(", typeByteValue: ");
+        stringBuilder.append(g());
+        stringBuilder.append(", client: ");
+        stringBuilder.append(j());
+        stringBuilder.append(", verify: ");
+        stringBuilder.append(l());
+        stringBuilder.append(", numEncapsulatedTlvs: ");
+        stringBuilder.append(this.p.size());
+        stringBuilder.append(')');
+        return stringBuilder.toString();
+    }
+
+    int c() {
+        int i = 0;
+        for (int i2 = 0; i2 < this.p.size(); i2++) {
+            i += ((h) this.p.get(i2)).d();
+        }
+        return i + 5;
+    }
+
+    public byte j() {
+        return this.q;
+    }
+
+    public List<h> k() {
+        return this.p;
+    }
+
+    public int l() {
+        return this.n;
+    }
+}
+
+// By developer-krushna (https://github.com/developer-krushna/)
+
