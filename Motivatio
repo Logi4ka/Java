@@ -1,0 +1,4557 @@
+.class public final Lcom/hrd/managers/f1;
+.super Ljava/lang/Object;
+.source "SourceFile"
+
+
+# static fields
+.field public static final a:Lcom/hrd/managers/f1;
+
+.field static final synthetic b:[LHd/l;
+
+.field private static final c:LDd/e;
+
+.field private static final d:Lmd/o;
+
+.field private static e:Z
+
+.field public static final f:I
+
+
+# direct methods
+.method static constructor <clinit>()V
+    .registers 7
+
+    new-instance v6, Lkotlin/jvm/internal/x;
+
+    sget-object v1, Lcom/hrd/managers/f1;->a:Lcom/hrd/managers/f1;
+
+    const-string v4, "getContext()Landroid/content/Context;"
+
+    const/4 v5, 0x0
+
+    const-class v2, Lcom/hrd/managers/f1;
+
+    const-string v3, "context"
+
+    move-object v0, v6
+
+    invoke-direct/range {v0 .. v5}, Lkotlin/jvm/internal/x;-><init>(Ljava/lang/Object;Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;I)V
+
+    invoke-static {v6}, Lkotlin/jvm/internal/O;->d(Lkotlin/jvm/internal/w;)LHd/g;
+
+    move-result-object v0
+
+    const/4 v1, 0x1
+
+    new-array v1, v1, [LHd/l;
+
+    const/4 v2, 0x0
+
+    aput-object v0, v1, v2
+
+    sput-object v1, Lcom/hrd/managers/f1;->b:[LHd/l;
+
+    new-instance v0, Lcom/hrd/managers/f1;
+
+    invoke-direct {v0}, Lcom/hrd/managers/f1;-><init>()V
+
+    sput-object v0, Lcom/hrd/managers/f1;->a:Lcom/hrd/managers/f1;
+
+    sget-object v0, LDd/a;->a:LDd/a;
+
+    invoke-virtual {v0}, LDd/a;->a()LDd/e;
+
+    move-result-object v0
+
+    sput-object v0, Lcom/hrd/managers/f1;->c:LDd/e;
+
+    new-instance v0, Lcom/hrd/managers/e1;
+
+    invoke-direct {v0}, Lcom/hrd/managers/e1;-><init>()V
+
+    invoke-static {v0}, Lmd/p;->a(Lkotlin/jvm/functions/Function0;)Lmd/o;
+
+    move-result-object v0
+
+    sput-object v0, Lcom/hrd/managers/f1;->d:Lmd/o;
+
+    const/16 v0, 0x8
+
+    sput v0, Lcom/hrd/managers/f1;->f:I
+
+    return-void
+.end method
+
+.method private constructor <init>()V
+    .registers 1
+
+    invoke-direct {p0}, Ljava/lang/Object;-><init>()V
+
+    return-void
+.end method
+
+.method public static final C1(Ljava/lang/String;)V
+    .registers 3
+
+    sget-object v0, Lcom/hrd/managers/f1;->a:Lcom/hrd/managers/f1;
+
+    invoke-direct {v0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    const-string v1, "premium_tier_com.hrd.motivation"
+
+    invoke-interface {v0, v1, p0}, Landroid/content/SharedPreferences$Editor;->putString(Ljava/lang/String;Ljava/lang/String;)Landroid/content/SharedPreferences$Editor;
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    return-void
+.end method
+
+.method public static final F1(Ljava/lang/String;)V
+    .registers 3
+
+    sget-object v0, Lcom/hrd/managers/f1;->a:Lcom/hrd/managers/f1;
+
+    invoke-direct {v0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    const-string v1, "push_tokencom.hrd.motivation"
+
+    invoke-interface {v0, v1, p0}, Landroid/content/SharedPreferences$Editor;->putString(Ljava/lang/String;Ljava/lang/String;)Landroid/content/SharedPreferences$Editor;
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    return-void
+.end method
+
+.method public static final G()Ljava/lang/String;
+    .registers 3
+
+    sget-object v0, Lcom/hrd/managers/f1;->a:Lcom/hrd/managers/f1;
+
+    invoke-direct {v0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    const-string v1, "pref_languagecom.hrd.motivation"
+
+    const-string v2, "en"
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getString(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object v0
+
+    if-nez v0, :cond_11
+
+    goto :goto_12
+
+    :cond_11
+    move-object v2, v0
+
+    :goto_12
+    return-object v2
+.end method
+
+.method public static final H()Ljava/lang/String;
+    .registers 4
+
+    sget-object v0, Lcom/hrd/managers/f1;->a:Lcom/hrd/managers/f1;
+
+    invoke-direct {v0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v1
+
+    const-string v2, "pref_languagecom.hrd.motivation"
+
+    const-string v3, ""
+
+    invoke-interface {v1, v2, v3}, Landroid/content/SharedPreferences;->getString(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object v1
+
+    if-nez v1, :cond_11
+
+    goto :goto_12
+
+    :cond_11
+    move-object v3, v1
+
+    :goto_12
+    invoke-direct {v0, v3}, Lcom/hrd/managers/f1;->b2(Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object v0
+
+    return-object v0
+.end method
+
+.method public static final J1()V
+    .registers 3
+
+    sget-object v0, Lcom/hrd/managers/f1;->a:Lcom/hrd/managers/f1;
+
+    invoke-direct {v0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    const-string v1, "pref_rate_down_com.hrd.motivation"
+
+    const/4 v2, 0x1
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences$Editor;->putBoolean(Ljava/lang/String;Z)Landroid/content/SharedPreferences$Editor;
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    return-void
+.end method
+
+.method public static final K0(Z)V
+    .registers 3
+
+    sget-object v0, Lcom/hrd/managers/f1;->a:Lcom/hrd/managers/f1;
+
+    invoke-direct {v0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    const-string v1, "watermark_com.hrd.motivation"
+
+    invoke-interface {v0, v1, p0}, Landroid/content/SharedPreferences$Editor;->putBoolean(Ljava/lang/String;Z)Landroid/content/SharedPreferences$Editor;
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    return-void
+.end method
+
+.method public static final M()I
+    .registers 3
+
+    sget-object v0, Lcom/hrd/managers/f1;->a:Lcom/hrd/managers/f1;
+
+    invoke-direct {v0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    const-string v1, "pref_numbeR_quotes_readcom.hrd.motivation"
+
+    const/4 v2, 0x0
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getInt(Ljava/lang/String;I)I
+
+    move-result v0
+
+    return v0
+.end method
+
+.method public static final N1(Ljava/util/List;)V
+    .registers 4
+
+    const-string v0, "tags"
+
+    invoke-static {p0, v0}, Lkotlin/jvm/internal/t;->h(Ljava/lang/Object;Ljava/lang/String;)V
+
+    :try_start_5
+    sget-object v0, Lmd/x;->b:Lmd/x$a;
+
+    invoke-static {}, LLa/f;->a()Lcom/google/gson/Gson;
+
+    move-result-object v0
+
+    invoke-virtual {v0, p0}, Lcom/google/gson/Gson;->w(Ljava/lang/Object;)Ljava/lang/String;
+
+    move-result-object p0
+
+    invoke-static {p0}, Lmd/x;->b(Ljava/lang/Object;)Ljava/lang/Object;
+
+    move-result-object p0
+    :try_end_13
+    .catchall {:try_start_5 .. :try_end_13} :catchall_14
+
+    goto :goto_1f
+
+    :catchall_14
+    move-exception p0
+
+    sget-object v0, Lmd/x;->b:Lmd/x$a;
+
+    invoke-static {p0}, Lmd/y;->a(Ljava/lang/Throwable;)Ljava/lang/Object;
+
+    move-result-object p0
+
+    invoke-static {p0}, Lmd/x;->b(Ljava/lang/Object;)Ljava/lang/Object;
+
+    move-result-object p0
+
+    :goto_1f
+    invoke-static {p0}, Lmd/x;->h(Ljava/lang/Object;)Z
+
+    move-result v0
+
+    if-eqz v0, :cond_3a
+
+    move-object v0, p0
+
+    check-cast v0, Ljava/lang/String;
+
+    sget-object v1, Lcom/hrd/managers/f1;->a:Lcom/hrd/managers/f1;
+
+    invoke-direct {v1}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v1
+
+    invoke-interface {v1}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v1
+
+    const-string v2, "pref_tagscom.hrd.motivation"
+
+    invoke-interface {v1, v2, v0}, Landroid/content/SharedPreferences$Editor;->putString(Ljava/lang/String;Ljava/lang/String;)Landroid/content/SharedPreferences$Editor;
+
+    invoke-interface {v1}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    :cond_3a
+    invoke-static {p0}, Lmd/x;->h(Ljava/lang/Object;)Z
+
+    move-result v0
+
+    if-eqz v0, :cond_48
+
+    move-object v0, p0
+
+    check-cast v0, Ljava/lang/String;
+
+    sget-object v0, Lcom/hrd/managers/B;->a:Lcom/hrd/managers/B;
+
+    invoke-virtual {v0}, Lcom/hrd/managers/B;->x()V
+
+    :cond_48
+    invoke-static {p0}, LHa/E;->f(Ljava/lang/Object;)Ljava/lang/Object;
+
+    return-void
+.end method
+
+.method public static final Q0(Ljava/lang/String;)V
+    .registers 3
+
+    sget-object v0, Lcom/hrd/managers/f1;->a:Lcom/hrd/managers/f1;
+
+    invoke-direct {v0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    const-string v1, "subscription_autorenewal_status_com.hrd.motivation"
+
+    invoke-interface {v0, v1, p0}, Landroid/content/SharedPreferences$Editor;->putString(Ljava/lang/String;Ljava/lang/String;)Landroid/content/SharedPreferences$Editor;
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    return-void
+.end method
+
+.method public static final S0(Ljava/lang/String;)V
+    .registers 3
+
+    sget-object v0, Lcom/hrd/managers/f1;->a:Lcom/hrd/managers/f1;
+
+    invoke-direct {v0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    const-string v1, "billing_issue_com.hrd.motivation"
+
+    invoke-interface {v0, v1, p0}, Landroid/content/SharedPreferences$Editor;->putString(Ljava/lang/String;Ljava/lang/String;)Landroid/content/SharedPreferences$Editor;
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    return-void
+.end method
+
+.method public static final S1(Ljava/lang/String;)V
+    .registers 3
+
+    sget-object v0, Lcom/hrd/managers/f1;->a:Lcom/hrd/managers/f1;
+
+    invoke-direct {v0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    const-string v1, "subscription_status_com.hrd.motivation"
+
+    invoke-interface {v0, v1, p0}, Landroid/content/SharedPreferences$Editor;->putString(Ljava/lang/String;Ljava/lang/String;)Landroid/content/SharedPreferences$Editor;
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    return-void
+.end method
+
+.method public static final T()Ljava/lang/String;
+    .registers 3
+
+    sget-object v0, Lcom/hrd/managers/f1;->a:Lcom/hrd/managers/f1;
+
+    invoke-direct {v0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    const-string v1, "premium_tier_com.hrd.motivation"
+
+    const-string v2, "none"
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getString(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object v0
+
+    return-object v0
+.end method
+
+.method public static final U()Ljava/lang/String;
+    .registers 3
+
+    sget-object v0, Lcom/hrd/managers/f1;->a:Lcom/hrd/managers/f1;
+
+    invoke-direct {v0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    const-string v1, "push_tokencom.hrd.motivation"
+
+    const/4 v2, 0x0
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getString(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object v0
+
+    return-object v0
+.end method
+
+.method public static final W0(Landroid/content/Context;)V
+    .registers 5
+
+    const-string v0, "<set-?>"
+
+    invoke-static {p0, v0}, Lkotlin/jvm/internal/t;->h(Ljava/lang/Object;Ljava/lang/String;)V
+
+    sget-object v0, Lcom/hrd/managers/f1;->c:LDd/e;
+
+    sget-object v1, Lcom/hrd/managers/f1;->a:Lcom/hrd/managers/f1;
+
+    sget-object v2, Lcom/hrd/managers/f1;->b:[LHd/l;
+
+    const/4 v3, 0x0
+
+    aget-object v2, v2, v3
+
+    invoke-interface {v0, v1, v2, p0}, LDd/e;->b(Ljava/lang/Object;LHd/l;Ljava/lang/Object;)V
+
+    return-void
+.end method
+
+.method public static final X0(Z)V
+    .registers 3
+
+    sget-object v0, Lcom/hrd/managers/f1;->a:Lcom/hrd/managers/f1;
+
+    invoke-direct {v0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    const-string v1, "pref_dark_modecom.hrd.motivation"
+
+    invoke-interface {v0, v1, p0}, Landroid/content/SharedPreferences$Editor;->putBoolean(Ljava/lang/String;Z)Landroid/content/SharedPreferences$Editor;
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    return-void
+.end method
+
+.method public static synthetic a()LPd/B;
+    .registers 1
+
+    invoke-static {}, Lcom/hrd/managers/f1;->b()LPd/B;
+
+    move-result-object v0
+
+    return-object v0
+.end method
+
+.method private static final b()LPd/B;
+    .registers 1
+
+    sget-object v0, Ljava/lang/Boolean;->FALSE:Ljava/lang/Boolean;
+
+    invoke-static {v0}, LPd/S;->a(Ljava/lang/Object;)LPd/B;
+
+    move-result-object v0
+
+    return-object v0
+.end method
+
+.method private final b2(Ljava/lang/String;)Ljava/lang/String;
+    .registers 6
+
+    invoke-interface {p1}, Ljava/lang/CharSequence;->length()I
+
+    move-result v0
+
+    if-nez v0, :cond_c
+
+    sget-object p1, Lcom/hrd/managers/h0;->a:Lcom/hrd/managers/h0;
+
+    invoke-virtual {p1}, Lcom/hrd/managers/h0;->j()Ljava/lang/String;
+
+    move-result-object p1
+
+    :cond_c
+    const/4 v0, 0x2
+
+    const/4 v1, 0x0
+
+    const-string v2, "en"
+
+    const/4 v3, 0x0
+
+    invoke-static {p1, v2, v3, v0, v1}, LJd/r;->T(Ljava/lang/CharSequence;Ljava/lang/CharSequence;ZILjava/lang/Object;)Z
+
+    move-result v0
+
+    if-eqz v0, :cond_1a
+
+    const-string p1, ""
+
+    goto :goto_2b
+
+    :cond_1a
+    new-instance v0, Ljava/lang/StringBuilder;
+
+    invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v1, "_"
+
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v0, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object p1
+
+    :goto_2b
+    return-object p1
+.end method
+
+.method public static final c0()Ljava/util/List;
+    .registers 5
+
+    sget-object v0, Lcom/hrd/managers/f1;->a:Lcom/hrd/managers/f1;
+
+    invoke-direct {v0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    const-string v1, "pref_tagscom.hrd.motivation"
+
+    const/4 v2, 0x0
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getString(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object v0
+
+    const/4 v1, 0x1
+
+    new-array v1, v1, [Ljava/lang/reflect/Type;
+
+    const-class v3, Lcom/hrd/model/Tag;
+
+    const/4 v4, 0x0
+
+    aput-object v3, v1, v4
+
+    const-class v3, Ljava/util/List;
+
+    invoke-static {v3, v1}, Lcom/google/gson/reflect/a;->c(Ljava/lang/reflect/Type;[Ljava/lang/reflect/Type;)Lcom/google/gson/reflect/a;
+
+    move-result-object v1
+
+    :try_start_1b
+    sget-object v3, Lmd/x;->b:Lmd/x$a;
+
+    new-instance v3, Lcom/google/gson/Gson;
+
+    invoke-direct {v3}, Lcom/google/gson/Gson;-><init>()V
+
+    invoke-virtual {v1}, Lcom/google/gson/reflect/a;->e()Ljava/lang/reflect/Type;
+
+    move-result-object v1
+
+    invoke-virtual {v3, v0, v1}, Lcom/google/gson/Gson;->n(Ljava/lang/String;Ljava/lang/reflect/Type;)Ljava/lang/Object;
+
+    move-result-object v0
+
+    check-cast v0, Ljava/util/List;
+
+    invoke-static {v0}, Lmd/x;->b(Ljava/lang/Object;)Ljava/lang/Object;
+
+    move-result-object v0
+    :try_end_30
+    .catchall {:try_start_1b .. :try_end_30} :catchall_31
+
+    goto :goto_3c
+
+    :catchall_31
+    move-exception v0
+
+    sget-object v1, Lmd/x;->b:Lmd/x$a;
+
+    invoke-static {v0}, Lmd/y;->a(Ljava/lang/Throwable;)Ljava/lang/Object;
+
+    move-result-object v0
+
+    invoke-static {v0}, Lmd/x;->b(Ljava/lang/Object;)Ljava/lang/Object;
+
+    move-result-object v0
+
+    :goto_3c
+    invoke-static {v0}, Lmd/x;->e(Ljava/lang/Object;)Ljava/lang/Throwable;
+
+    move-result-object v1
+
+    if-eqz v1, :cond_49
+
+    invoke-static {}, Lcom/google/firebase/crashlytics/b;->b()Lcom/google/firebase/crashlytics/b;
+
+    move-result-object v3
+
+    invoke-virtual {v3, v1}, Lcom/google/firebase/crashlytics/b;->f(Ljava/lang/Throwable;)V
+
+    :cond_49
+    invoke-static {v0}, Lmd/x;->h(Ljava/lang/Object;)Z
+
+    move-result v1
+
+    if-eqz v1, :cond_5e
+
+    check-cast v0, Ljava/util/List;
+
+    if-eqz v0, :cond_59
+
+    check-cast v0, Ljava/lang/Iterable;
+
+    invoke-static {v0}, Lnd/v;->o0(Ljava/lang/Iterable;)Ljava/util/List;
+
+    move-result-object v2
+
+    :cond_59
+    invoke-static {v2}, Lmd/x;->b(Ljava/lang/Object;)Ljava/lang/Object;
+
+    move-result-object v0
+
+    goto :goto_62
+
+    :cond_5e
+    invoke-static {v0}, Lmd/x;->b(Ljava/lang/Object;)Ljava/lang/Object;
+
+    move-result-object v0
+
+    :goto_62
+    invoke-static {v0}, Lmd/x;->e(Ljava/lang/Object;)Ljava/lang/Throwable;
+
+    move-result-object v1
+
+    if-nez v1, :cond_69
+
+    goto :goto_6d
+
+    :cond_69
+    invoke-static {}, Lnd/v;->n()Ljava/util/List;
+
+    move-result-object v0
+
+    :goto_6d
+    check-cast v0, Ljava/util/List;
+
+    if-nez v0, :cond_75
+
+    invoke-static {}, Lnd/v;->n()Ljava/util/List;
+
+    move-result-object v0
+
+    :cond_75
+    return-object v0
+.end method
+
+.method public static final g()Z
+    .registers 3
+
+    sget-object v0, Lcom/hrd/managers/f1;->a:Lcom/hrd/managers/f1;
+
+    invoke-direct {v0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    const-string v1, "watermark_com.hrd.motivation"
+
+    const/4 v2, 0x1
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getBoolean(Ljava/lang/String;Z)Z
+
+    move-result v0
+
+    return v0
+.end method
+
+.method private final g0()Landroid/content/SharedPreferences;
+    .registers 2
+
+    invoke-static {}, Lcom/hrd/managers/f1;->r()Landroid/content/Context;
+
+    move-result-object v0
+
+    invoke-static {v0}, LHa/p;->h(Landroid/content/Context;)Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    return-object v0
+.end method
+
+.method public static final h0()Ljava/lang/String;
+    .registers 3
+
+    sget-object v0, Lcom/hrd/managers/f1;->a:Lcom/hrd/managers/f1;
+
+    invoke-direct {v0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    const-string v1, "subscription_status_com.hrd.motivation"
+
+    const-string v2, "free"
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getString(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object v0
+
+    return-object v0
+.end method
+
+.method public static final l()Ljava/lang/String;
+    .registers 3
+
+    sget-object v0, Lcom/hrd/managers/f1;->a:Lcom/hrd/managers/f1;
+
+    invoke-direct {v0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    const-string v1, "subscription_autorenewal_status_com.hrd.motivation"
+
+    const-string v2, "none"
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getString(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object v0
+
+    return-object v0
+.end method
+
+.method private final n0()LPd/B;
+    .registers 2
+
+    sget-object v0, Lcom/hrd/managers/f1;->d:Lmd/o;
+
+    invoke-interface {v0}, Lmd/o;->getValue()Ljava/lang/Object;
+
+    move-result-object v0
+
+    check-cast v0, LPd/B;
+
+    return-object v0
+.end method
+
+.method public static final o()Ljava/lang/String;
+    .registers 3
+
+    sget-object v0, Lcom/hrd/managers/f1;->a:Lcom/hrd/managers/f1;
+
+    invoke-direct {v0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    const-string v1, "billing_issue_com.hrd.motivation"
+
+    const/4 v2, 0x0
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getString(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object v0
+
+    return-object v0
+.end method
+
+.method public static final p1(Ljava/lang/String;)V
+    .registers 3
+
+    const-string v0, "language"
+
+    invoke-static {p0, v0}, Lkotlin/jvm/internal/t;->h(Ljava/lang/Object;Ljava/lang/String;)V
+
+    sget-object v0, Lcom/hrd/managers/f1;->a:Lcom/hrd/managers/f1;
+
+    invoke-direct {v0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    const-string v1, "pref_languagecom.hrd.motivation"
+
+    invoke-interface {v0, v1, p0}, Landroid/content/SharedPreferences$Editor;->putString(Ljava/lang/String;Ljava/lang/String;)Landroid/content/SharedPreferences$Editor;
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    return-void
+.end method
+
+.method public static final r()Landroid/content/Context;
+    .registers 4
+
+    sget-object v0, Lcom/hrd/managers/f1;->c:LDd/e;
+
+    sget-object v1, Lcom/hrd/managers/f1;->a:Lcom/hrd/managers/f1;
+
+    sget-object v2, Lcom/hrd/managers/f1;->b:[LHd/l;
+
+    const/4 v3, 0x0
+
+    aget-object v2, v2, v3
+
+    invoke-interface {v0, v1, v2}, LDd/e;->a(Ljava/lang/Object;LHd/l;)Ljava/lang/Object;
+
+    move-result-object v0
+
+    check-cast v0, Landroid/content/Context;
+
+    return-object v0
+.end method
+
+.method public static final r0()Z
+    .registers 3
+
+    sget-object v0, Lcom/hrd/managers/f1;->a:Lcom/hrd/managers/f1;
+
+    invoke-direct {v0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    const-string v1, "pref_dark_modecom.hrd.motivation"
+
+    const/4 v2, 0x0
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getBoolean(Ljava/lang/String;Z)Z
+
+    move-result v0
+
+    return v0
+.end method
+
+.method public static final w1(I)V
+    .registers 3
+
+    sget-object v0, Lcom/hrd/managers/f1;->a:Lcom/hrd/managers/f1;
+
+    invoke-direct {v0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    const-string v1, "pref_numbeR_quotes_readcom.hrd.motivation"
+
+    invoke-interface {v0, v1, p0}, Landroid/content/SharedPreferences$Editor;->putInt(Ljava/lang/String;I)Landroid/content/SharedPreferences$Editor;
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    return-void
+.end method
+
+.method public static final y0()Z
+    .registers 3
+
+    sget-object v0, Lcom/hrd/managers/f1;->a:Lcom/hrd/managers/f1;
+
+    invoke-direct {v0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    const-string v1, "premium_com.hrd.motivation"
+
+    const/4 v2, 0x0
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getBoolean(Ljava/lang/String;Z)Z
+
+    move-result v0
+
+    return v0
+.end method
+
+.method public static final z1(Z)V
+    .registers 4
+
+    sget-object v0, Lcom/hrd/managers/f1;->a:Lcom/hrd/managers/f1;
+
+    invoke-direct {v0}, Lcom/hrd/managers/f1;->n0()LPd/B;
+
+    move-result-object v1
+
+    invoke-static {p0}, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
+
+    move-result-object v2
+
+    invoke-interface {v1, v2}, LPd/B;->setValue(Ljava/lang/Object;)V
+
+    invoke-direct {v0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    const-string v1, "premium_com.hrd.motivation"
+
+    invoke-interface {v0, v1, p0}, Landroid/content/SharedPreferences$Editor;->putBoolean(Ljava/lang/String;Z)Landroid/content/SharedPreferences$Editor;
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    return-void
+.end method
+
+
+# virtual methods
+.method public final A()Ljava/lang/String;
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    const-string v1, "date_show_whats_new_bible"
+
+    const/4 v2, 0x0
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getString(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object v0
+
+    return-object v0
+.end method
+
+.method public final A0()Z
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    const-string v1, "promote_widgets_notification_viewed"
+
+    const/4 v2, 0x0
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getBoolean(Ljava/lang/String;Z)Z
+
+    move-result v0
+
+    return v0
+.end method
+
+.method public final A1(Ljava/lang/String;)V
+    .registers 4
+
+    const-string v0, "value"
+
+    invoke-static {p1, v0}, Lkotlin/jvm/internal/t;->h(Ljava/lang/Object;Ljava/lang/String;)V
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    const-string v1, "premium_expires_date"
+
+    invoke-interface {v0, v1, p1}, Landroid/content/SharedPreferences$Editor;->putString(Ljava/lang/String;Ljava/lang/String;)Landroid/content/SharedPreferences$Editor;
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    return-void
+.end method
+
+.method public final B()F
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    const-string v1, "pref_device_sound_volume"
+
+    const/high16 v2, 0x42480000  # 50.0f
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getFloat(Ljava/lang/String;F)F
+
+    move-result v0
+
+    return v0
+.end method
+
+.method public final B0()Z
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    const-string v1, "quote_swipedcom.hrd.motivation"
+
+    const/4 v2, 0x0
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getBoolean(Ljava/lang/String;Z)Z
+
+    move-result v0
+
+    return v0
+.end method
+
+.method public final B1(Ljava/lang/String;)V
+    .registers 4
+
+    const-string v0, "value"
+
+    invoke-static {p1, v0}, Lkotlin/jvm/internal/t;->h(Ljava/lang/Object;Ljava/lang/String;)V
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    const-string v1, "premium_purchased_date"
+
+    invoke-interface {v0, v1, p1}, Landroid/content/SharedPreferences$Editor;->putString(Ljava/lang/String;Ljava/lang/String;)Landroid/content/SharedPreferences$Editor;
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    return-void
+.end method
+
+.method public final C()Lcom/hrd/model/FirebaseCrossPromotionAdsJson;
+    .registers 10
+
+    const/4 v0, 0x1
+
+    sget-object v1, Lcom/hrd/managers/U0;->a:Lcom/hrd/managers/U0;
+
+    const-string v2, "v1_ad_cross_promotion"
+
+    const/4 v3, 0x0
+
+    :try_start_6
+    sget-object v4, Lmd/x;->b:Lmd/x$a;
+
+    invoke-virtual {v1, v2}, Lcom/hrd/managers/U0;->e(Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object v1
+
+    invoke-interface {v1}, Ljava/lang/CharSequence;->length()I
+
+    move-result v4
+
+    if-lez v4, :cond_13
+
+    goto :goto_14
+
+    :cond_13
+    move-object v1, v3
+
+    :goto_14
+    if-eqz v1, :cond_1d
+
+    invoke-static {v1}, Lmd/x;->b(Ljava/lang/Object;)Ljava/lang/Object;
+
+    move-result-object v1
+
+    goto :goto_2f
+
+    :catchall_1b
+    move-exception v1
+
+    goto :goto_25
+
+    :cond_1d
+    const-string v1, "Required value was null."
+
+    new-instance v4, Ljava/lang/IllegalArgumentException;
+
+    invoke-direct {v4, v1}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
+
+    throw v4
+    :try_end_25
+    .catchall {:try_start_6 .. :try_end_25} :catchall_1b
+
+    :goto_25
+    sget-object v4, Lmd/x;->b:Lmd/x$a;
+
+    invoke-static {v1}, Lmd/y;->a(Ljava/lang/Throwable;)Ljava/lang/Object;
+
+    move-result-object v1
+
+    invoke-static {v1}, Lmd/x;->b(Ljava/lang/Object;)Ljava/lang/Object;
+
+    move-result-object v1
+
+    :goto_2f
+    invoke-static {v1}, Lmd/x;->h(Ljava/lang/Object;)Z
+
+    move-result v4
+
+    const-class v5, Lcom/hrd/model/FirebaseCrossPromotionAdsJson;
+
+    if-eqz v4, :cond_78
+
+    :try_start_37
+    check-cast v1, Ljava/lang/String;
+
+    invoke-virtual {v5}, Ljava/lang/Class;->getAnnotations()[Ljava/lang/annotation/Annotation;
+
+    move-result-object v4
+
+    const-string v6, "getAnnotations(...)"
+
+    invoke-static {v4, v6}, Lkotlin/jvm/internal/t;->g(Ljava/lang/Object;Ljava/lang/String;)V
+
+    array-length v6, v4
+
+    const/4 v7, 0x0
+
+    :goto_44
+    if-ge v7, v6, :cond_65
+
+    aget-object v8, v4, v7
+
+    instance-of v8, v8, LYd/p;
+
+    if-eqz v8, :cond_63
+
+    invoke-static {}, LLa/f;->b()Lkotlinx/serialization/json/b;
+
+    move-result-object v4
+
+    invoke-virtual {v4}, Lkotlinx/serialization/json/b;->a()Lee/b;
+
+    move-result-object v6
+
+    invoke-static {v5}, Lkotlin/jvm/internal/O;->b(Ljava/lang/Class;)LHd/c;
+
+    move-result-object v7
+
+    invoke-static {v6, v7}, LYd/z;->a(Lee/b;LHd/c;)LYd/d;
+
+    move-result-object v6
+
+    invoke-virtual {v4, v6, v1}, Lkotlinx/serialization/json/b;->c(LYd/c;Ljava/lang/String;)Ljava/lang/Object;
+
+    move-result-object v1
+
+    goto :goto_6d
+
+    :catchall_61
+    move-exception v1
+
+    goto :goto_72
+
+    :cond_63
+    add-int/2addr v7, v0
+
+    goto :goto_44
+
+    :cond_65
+    invoke-static {}, LLa/f;->a()Lcom/google/gson/Gson;
+
+    move-result-object v4
+
+    invoke-virtual {v4, v1, v5}, Lcom/google/gson/Gson;->m(Ljava/lang/String;Ljava/lang/Class;)Ljava/lang/Object;
+
+    move-result-object v1
+
+    :goto_6d
+    invoke-static {v1}, Lmd/x;->b(Ljava/lang/Object;)Ljava/lang/Object;
+
+    move-result-object v1
+    :try_end_71
+    .catchall {:try_start_37 .. :try_end_71} :catchall_61
+
+    goto :goto_7c
+
+    :goto_72
+    sget-object v4, Lmd/x;->b:Lmd/x$a;
+
+    invoke-static {v1}, Lmd/y;->a(Ljava/lang/Throwable;)Ljava/lang/Object;
+
+    move-result-object v1
+
+    :cond_78
+    invoke-static {v1}, Lmd/x;->b(Ljava/lang/Object;)Ljava/lang/Object;
+
+    move-result-object v1
+
+    :goto_7c
+    invoke-static {v1}, Lmd/x;->e(Ljava/lang/Object;)Ljava/lang/Throwable;
+
+    move-result-object v4
+
+    if-eqz v4, :cond_a8
+
+    invoke-static {v5}, Lkotlin/jvm/internal/O;->b(Ljava/lang/Class;)LHd/c;
+
+    move-result-object v4
+
+    invoke-interface {v4}, LHd/c;->h()Ljava/lang/String;
+
+    move-result-object v4
+
+    new-instance v5, Ljava/lang/StringBuilder;
+
+    invoke-direct {v5}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v6, "Cannot deserialize string to "
+
+    invoke-virtual {v5, v6}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v5, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    const-string v4, " with key: "
+
+    invoke-virtual {v5, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v5, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v5}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v2
+
+    const-string v4, "RemoteConfigManager"
+
+    invoke-static {v4, v2}, LHa/E;->b(Ljava/lang/String;Ljava/lang/Object;)V
+
+    :cond_a8
+    invoke-static {v1}, Lmd/x;->e(Ljava/lang/Object;)Ljava/lang/Throwable;
+
+    move-result-object v2
+
+    if-nez v2, :cond_af
+
+    goto :goto_b4
+
+    :cond_af
+    new-instance v1, Lcom/hrd/model/FirebaseCrossPromotionAdsJson;
+
+    invoke-direct {v1, v3, v0, v3}, Lcom/hrd/model/FirebaseCrossPromotionAdsJson;-><init>(Ljava/util/List;ILkotlin/jvm/internal/k;)V
+
+    :goto_b4
+    check-cast v1, Lcom/hrd/model/FirebaseCrossPromotionAdsJson;
+
+    return-object v1
+.end method
+
+.method public final C0()Z
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    const-string v1, "pref_rate_down_com.hrd.motivation"
+
+    const/4 v2, 0x0
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getBoolean(Ljava/lang/String;Z)Z
+
+    move-result v0
+
+    return v0
+.end method
+
+.method public final D()Lcom/hrd/model/FirebaseAdsJson;
+    .registers 12
+
+    sget-object v0, Lcom/hrd/managers/U0;->a:Lcom/hrd/managers/U0;
+
+    const-string v1, "v2_ad_signal"
+
+    :try_start_4
+    sget-object v2, Lmd/x;->b:Lmd/x$a;
+
+    invoke-virtual {v0, v1}, Lcom/hrd/managers/U0;->e(Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Ljava/lang/CharSequence;->length()I
+
+    move-result v2
+
+    if-lez v2, :cond_11
+
+    goto :goto_12
+
+    :cond_11
+    const/4 v0, 0x0
+
+    :goto_12
+    if-eqz v0, :cond_1b
+
+    invoke-static {v0}, Lmd/x;->b(Ljava/lang/Object;)Ljava/lang/Object;
+
+    move-result-object v0
+
+    goto :goto_2d
+
+    :catchall_19
+    move-exception v0
+
+    goto :goto_23
+
+    :cond_1b
+    const-string v0, "Required value was null."
+
+    new-instance v2, Ljava/lang/IllegalArgumentException;
+
+    invoke-direct {v2, v0}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
+
+    throw v2
+    :try_end_23
+    .catchall {:try_start_4 .. :try_end_23} :catchall_19
+
+    :goto_23
+    sget-object v2, Lmd/x;->b:Lmd/x$a;
+
+    invoke-static {v0}, Lmd/y;->a(Ljava/lang/Throwable;)Ljava/lang/Object;
+
+    move-result-object v0
+
+    invoke-static {v0}, Lmd/x;->b(Ljava/lang/Object;)Ljava/lang/Object;
+
+    move-result-object v0
+
+    :goto_2d
+    invoke-static {v0}, Lmd/x;->h(Ljava/lang/Object;)Z
+
+    move-result v2
+
+    const-class v3, Lcom/hrd/model/FirebaseAdsJson;
+
+    if-eqz v2, :cond_77
+
+    :try_start_35
+    check-cast v0, Ljava/lang/String;
+
+    invoke-virtual {v3}, Ljava/lang/Class;->getAnnotations()[Ljava/lang/annotation/Annotation;
+
+    move-result-object v2
+
+    const-string v4, "getAnnotations(...)"
+
+    invoke-static {v2, v4}, Lkotlin/jvm/internal/t;->g(Ljava/lang/Object;Ljava/lang/String;)V
+
+    array-length v4, v2
+
+    const/4 v5, 0x0
+
+    :goto_42
+    if-ge v5, v4, :cond_64
+
+    aget-object v6, v2, v5
+
+    instance-of v6, v6, LYd/p;
+
+    if-eqz v6, :cond_61
+
+    invoke-static {}, LLa/f;->b()Lkotlinx/serialization/json/b;
+
+    move-result-object v2
+
+    invoke-virtual {v2}, Lkotlinx/serialization/json/b;->a()Lee/b;
+
+    move-result-object v4
+
+    invoke-static {v3}, Lkotlin/jvm/internal/O;->b(Ljava/lang/Class;)LHd/c;
+
+    move-result-object v5
+
+    invoke-static {v4, v5}, LYd/z;->a(Lee/b;LHd/c;)LYd/d;
+
+    move-result-object v4
+
+    invoke-virtual {v2, v4, v0}, Lkotlinx/serialization/json/b;->c(LYd/c;Ljava/lang/String;)Ljava/lang/Object;
+
+    move-result-object v0
+
+    goto :goto_6c
+
+    :catchall_5f
+    move-exception v0
+
+    goto :goto_71
+
+    :cond_61
+    add-int/lit8 v5, v5, 0x1
+
+    goto :goto_42
+
+    :cond_64
+    invoke-static {}, LLa/f;->a()Lcom/google/gson/Gson;
+
+    move-result-object v2
+
+    invoke-virtual {v2, v0, v3}, Lcom/google/gson/Gson;->m(Ljava/lang/String;Ljava/lang/Class;)Ljava/lang/Object;
+
+    move-result-object v0
+
+    :goto_6c
+    invoke-static {v0}, Lmd/x;->b(Ljava/lang/Object;)Ljava/lang/Object;
+
+    move-result-object v0
+    :try_end_70
+    .catchall {:try_start_35 .. :try_end_70} :catchall_5f
+
+    goto :goto_7b
+
+    :goto_71
+    sget-object v2, Lmd/x;->b:Lmd/x$a;
+
+    invoke-static {v0}, Lmd/y;->a(Ljava/lang/Throwable;)Ljava/lang/Object;
+
+    move-result-object v0
+
+    :cond_77
+    invoke-static {v0}, Lmd/x;->b(Ljava/lang/Object;)Ljava/lang/Object;
+
+    move-result-object v0
+
+    :goto_7b
+    invoke-static {v0}, Lmd/x;->e(Ljava/lang/Object;)Ljava/lang/Throwable;
+
+    move-result-object v2
+
+    if-eqz v2, :cond_a7
+
+    invoke-static {v3}, Lkotlin/jvm/internal/O;->b(Ljava/lang/Class;)LHd/c;
+
+    move-result-object v2
+
+    invoke-interface {v2}, LHd/c;->h()Ljava/lang/String;
+
+    move-result-object v2
+
+    new-instance v3, Ljava/lang/StringBuilder;
+
+    invoke-direct {v3}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v4, "Cannot deserialize string to "
+
+    invoke-virtual {v3, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v3, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    const-string v2, " with key: "
+
+    invoke-virtual {v3, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v3, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v3}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v1
+
+    const-string v2, "RemoteConfigManager"
+
+    invoke-static {v2, v1}, LHa/E;->b(Ljava/lang/String;Ljava/lang/Object;)V
+
+    :cond_a7
+    invoke-static {v0}, Lmd/x;->e(Ljava/lang/Object;)Ljava/lang/Throwable;
+
+    move-result-object v1
+
+    if-nez v1, :cond_ae
+
+    goto :goto_bd
+
+    :cond_ae
+    new-instance v0, Lcom/hrd/model/FirebaseAdsJson;
+
+    const/16 v9, 0x3f
+
+    const/4 v10, 0x0
+
+    const/4 v3, 0x0
+
+    const/4 v4, 0x0
+
+    const/4 v5, 0x0
+
+    const/4 v6, 0x0
+
+    const/4 v7, 0x0
+
+    const/4 v8, 0x0
+
+    move-object v2, v0
+
+    invoke-direct/range {v2 .. v10}, Lcom/hrd/model/FirebaseAdsJson;-><init>(Lcom/hrd/model/FirebaseGroupAd;Lcom/hrd/model/FirebaseGroupAd;Lcom/hrd/model/FirebaseGroupAd;Lcom/hrd/model/FirebaseGroupAd;Lcom/hrd/model/FirebaseGroupAd;Lcom/hrd/model/FirebaseGroupAd;ILkotlin/jvm/internal/k;)V
+
+    :goto_bd
+    check-cast v0, Lcom/hrd/model/FirebaseAdsJson;
+
+    return-object v0
+.end method
+
+.method public final D0()Z
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    const-string v1, "pref_practice_soundcom.hrd.motivation"
+
+    const/4 v2, 0x0
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getBoolean(Ljava/lang/String;Z)Z
+
+    move-result v0
+
+    return v0
+.end method
+
+.method public final D1(Z)V
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    const-string v1, "previous_premium_com.hrd.motivation"
+
+    invoke-interface {v0, v1, p1}, Landroid/content/SharedPreferences$Editor;->putBoolean(Ljava/lang/String;Z)Landroid/content/SharedPreferences$Editor;
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    return-void
+.end method
+
+.method public final E()Lcom/hrd/badges/HomeBadgePrefs;
+    .registers 5
+
+    const/4 v0, 0x0
+
+    :try_start_1
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v1
+
+    const-string v2, "pref_home_badge_state"
+
+    invoke-interface {v1, v2, v0}, Landroid/content/SharedPreferences;->getString(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object v1
+
+    if-eqz v1, :cond_23
+
+    invoke-static {}, LLa/f;->b()Lkotlinx/serialization/json/b;
+
+    move-result-object v2
+
+    invoke-virtual {v2}, Lkotlinx/serialization/json/b;->a()Lee/b;
+
+    sget-object v3, Lcom/hrd/badges/HomeBadgePrefs;->Companion:Lcom/hrd/badges/HomeBadgePrefs$b;
+
+    invoke-virtual {v3}, Lcom/hrd/badges/HomeBadgePrefs$b;->serializer()LYd/d;
+
+    move-result-object v3
+
+    invoke-virtual {v2, v3, v1}, Lkotlinx/serialization/json/b;->c(LYd/c;Ljava/lang/String;)Ljava/lang/Object;
+
+    move-result-object v1
+
+    check-cast v1, Lcom/hrd/badges/HomeBadgePrefs;
+
+    goto :goto_24
+
+    :catch_21
+    move-exception v1
+
+    goto :goto_28
+
+    :cond_23
+    move-object v1, v0
+
+    :goto_24
+    invoke-static {v1}, Lkotlin/jvm/internal/t;->e(Ljava/lang/Object;)V
+    :try_end_27
+    .catch Ljava/lang/Exception; {:try_start_1 .. :try_end_27} :catch_21
+
+    goto :goto_32
+
+    :goto_28
+    const/4 v2, 0x2
+
+    invoke-static {v1, v0, v2, v0}, LHa/E;->d(Ljava/lang/Throwable;Ljava/util/Map;ILjava/lang/Object;)V
+
+    new-instance v1, Lcom/hrd/badges/HomeBadgePrefs;
+
+    const/4 v2, 0x1
+
+    invoke-direct {v1, v0, v2, v0}, Lcom/hrd/badges/HomeBadgePrefs;-><init>(Ljava/util/List;ILkotlin/jvm/internal/k;)V
+
+    :goto_32
+    return-object v1
+.end method
+
+.method public final E0()Z
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    const-string v1, "tap_to_activate_check"
+
+    const/4 v2, 0x0
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getBoolean(Ljava/lang/String;Z)Z
+
+    move-result v0
+
+    return v0
+.end method
+
+.method public final E1(Z)V
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    const-string v1, "promote_widgets_notification_viewed"
+
+    invoke-interface {v0, v1, p1}, Landroid/content/SharedPreferences$Editor;->putBoolean(Ljava/lang/String;Z)Landroid/content/SharedPreferences$Editor;
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    return-void
+.end method
+
+.method public final F()I
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    const-string v1, "home_screen_count_created"
+
+    const/4 v2, 0x0
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getInt(Ljava/lang/String;I)I
+
+    move-result v0
+
+    return v0
+.end method
+
+.method public final F0()Z
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    const-string v1, "tap_to_activate_show"
+
+    const/4 v2, 0x1
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getBoolean(Ljava/lang/String;Z)Z
+
+    move-result v0
+
+    return v0
+.end method
+
+.method public final G0()Z
+    .registers 2
+
+    sget-boolean v0, Lcom/hrd/managers/f1;->e:Z
+
+    return v0
+.end method
+
+.method public final G1(Z)V
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    const-string v1, "quote_swipedcom.hrd.motivation"
+
+    invoke-interface {v0, v1, p1}, Landroid/content/SharedPreferences$Editor;->putBoolean(Ljava/lang/String;Z)Landroid/content/SharedPreferences$Editor;
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    return-void
+.end method
+
+.method public final H0(LRb/a;)V
+    .registers 4
+
+    const-string v0, "whatsNewType"
+
+    invoke-static {p1, v0}, Lkotlin/jvm/internal/t;->h(Ljava/lang/Object;Ljava/lang/String;)V
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    invoke-virtual {p1}, LRb/a;->c()Ljava/lang/String;
+
+    move-result-object p1
+
+    const/4 v1, 0x1
+
+    invoke-interface {v0, p1, v1}, Landroid/content/SharedPreferences$Editor;->putBoolean(Ljava/lang/String;Z)Landroid/content/SharedPreferences$Editor;
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    return-void
+.end method
+
+.method public final H1(I)V
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    const-string v1, "quotes_read_since_ad"
+
+    invoke-interface {v0, v1, p1}, Landroid/content/SharedPreferences$Editor;->putInt(Ljava/lang/String;I)Landroid/content/SharedPreferences$Editor;
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    return-void
+.end method
+
+.method public final I()Ljava/lang/String;
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    const-string v1, "billing_issue_show_datecom.hrd.motivation"
+
+    const-string v2, "01-01-2000"
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getString(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object v0
+
+    invoke-static {v0}, Lkotlin/jvm/internal/t;->e(Ljava/lang/Object;)V
+
+    return-object v0
+.end method
+
+.method public final I0()V
+    .registers 7
+
+    const/4 v0, 0x0
+
+    invoke-static {v0}, Lcom/hrd/managers/f1;->z1(Z)V
+
+    const/4 v1, 0x1
+
+    invoke-static {v1}, Lcom/hrd/managers/f1;->K0(Z)V
+
+    sget-object v1, Lcom/hrd/managers/p;->a:Lcom/hrd/managers/p;
+
+    invoke-virtual {v1}, Lcom/hrd/managers/p;->o()Ljava/util/List;
+
+    move-result-object v1
+
+    check-cast v1, Ljava/lang/Iterable;
+
+    new-instance v2, Ljava/util/ArrayList;
+
+    invoke-direct {v2}, Ljava/util/ArrayList;-><init>()V
+
+    invoke-interface {v1}, Ljava/lang/Iterable;->iterator()Ljava/util/Iterator;
+
+    move-result-object v1
+
+    :cond_19
+    :goto_19
+    invoke-interface {v1}, Ljava/util/Iterator;->hasNext()Z
+
+    move-result v3
+
+    if-eqz v3, :cond_32
+
+    invoke-interface {v1}, Ljava/util/Iterator;->next()Ljava/lang/Object;
+
+    move-result-object v3
+
+    move-object v4, v3
+
+    check-cast v4, Ljava/lang/String;
+
+    sget-object v5, Lcom/hrd/managers/p;->a:Lcom/hrd/managers/p;
+
+    invoke-virtual {v5, v4}, Lcom/hrd/managers/p;->v(Ljava/lang/String;)Z
+
+    move-result v4
+
+    if-eqz v4, :cond_19
+
+    invoke-interface {v2, v3}, Ljava/util/Collection;->add(Ljava/lang/Object;)Z
+
+    goto :goto_19
+
+    :cond_32
+    invoke-interface {v2}, Ljava/util/List;->isEmpty()Z
+
+    move-result v1
+
+    if-eqz v1, :cond_3d
+
+    sget-object v1, Lcom/hrd/managers/p;->a:Lcom/hrd/managers/p;
+
+    invoke-virtual {v1}, Lcom/hrd/managers/p;->x()V
+
+    :cond_3d
+    sget-object v1, Lcom/hrd/managers/C1;->a:Lcom/hrd/managers/C1;
+
+    invoke-virtual {v1}, Lcom/hrd/managers/C1;->m()Lcom/hrd/model/Theme;
+
+    move-result-object v2
+
+    invoke-virtual {v2}, Lcom/hrd/model/Theme;->getName()Ljava/lang/String;
+
+    move-result-object v2
+
+    const-string v3, "random"
+
+    invoke-static {v2, v3}, Lkotlin/jvm/internal/t;->c(Ljava/lang/Object;Ljava/lang/Object;)Z
+
+    move-result v2
+
+    if-nez v2, :cond_59
+
+    invoke-virtual {v1}, Lcom/hrd/managers/C1;->m()Lcom/hrd/model/Theme;
+
+    move-result-object v2
+
+    invoke-static {v2}, LY9/i0;->b(Lcom/hrd/model/Theme;)Z
+
+    move-result v2
+
+    if-eqz v2, :cond_6b
+
+    :cond_59
+    new-instance v2, LDa/d$d;
+
+    sget-object v3, LAa/a;->a:LAa/a;
+
+    invoke-virtual {v3}, LAa/a;->b()LDa/a;
+
+    move-result-object v3
+
+    invoke-virtual {v3}, LDa/a;->j()Ljava/lang/String;
+
+    move-result-object v3
+
+    invoke-direct {v2, v3}, LDa/d$d;-><init>(Ljava/lang/String;)V
+
+    invoke-virtual {v1, v2}, Lcom/hrd/managers/C1;->t(LDa/d;)V
+
+    :cond_6b
+    sget-object v1, Lcom/hrd/managers/b1;->a:Lcom/hrd/managers/b1;
+
+    invoke-virtual {v1}, Lcom/hrd/managers/b1;->l()Ljava/util/List;
+
+    move-result-object v1
+
+    check-cast v1, Ljava/lang/Iterable;
+
+    new-instance v2, Ljava/util/ArrayList;
+
+    const/16 v3, 0xa
+
+    invoke-static {v1, v3}, Lnd/v;->z(Ljava/lang/Iterable;I)I
+
+    move-result v3
+
+    invoke-direct {v2, v3}, Ljava/util/ArrayList;-><init>(I)V
+
+    invoke-interface {v1}, Ljava/lang/Iterable;->iterator()Ljava/util/Iterator;
+
+    move-result-object v1
+
+    :goto_82
+    invoke-interface {v1}, Ljava/util/Iterator;->hasNext()Z
+
+    move-result v3
+
+    if-eqz v3, :cond_9d
+
+    invoke-interface {v1}, Ljava/util/Iterator;->next()Ljava/lang/Object;
+
+    move-result-object v3
+
+    check-cast v3, Lcom/hrd/model/Routine;
+
+    invoke-virtual {v3}, Lcom/hrd/model/Routine;->isPremium()Z
+
+    move-result v4
+
+    if-eqz v4, :cond_97
+
+    invoke-virtual {v3, v0}, Lcom/hrd/model/Routine;->setActive(Z)V
+
+    :cond_97
+    sget-object v3, Lmd/N;->a:Lmd/N;
+
+    invoke-interface {v2, v3}, Ljava/util/Collection;->add(Ljava/lang/Object;)Z
+
+    goto :goto_82
+
+    :cond_9d
+    const-string v0, "ED42pF7eL0Ra2a7LdlOv"
+
+    invoke-virtual {p0, v0}, Lcom/hrd/managers/f1;->O0(Ljava/lang/String;)V
+
+    return-void
+.end method
+
+.method public final I1(Ljava/lang/String;)V
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    const-string v1, "pref_new_rate_showed"
+
+    invoke-interface {v0, v1, p1}, Landroid/content/SharedPreferences$Editor;->putString(Ljava/lang/String;Ljava/lang/String;)Landroid/content/SharedPreferences$Editor;
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    return-void
+.end method
+
+.method public final J()Ljava/util/Date;
+    .registers 5
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    const-string v1, "last_sale_reminder_showed"
+
+    const-wide/16 v2, 0x0
+
+    invoke-interface {v0, v1, v2, v3}, Landroid/content/SharedPreferences;->getLong(Ljava/lang/String;J)J
+
+    move-result-wide v0
+
+    cmp-long v2, v0, v2
+
+    if-nez v2, :cond_12
+
+    const/4 v0, 0x0
+
+    return-object v0
+
+    :cond_12
+    new-instance v2, Ljava/util/Date;
+
+    invoke-direct {v2, v0, v1}, Ljava/util/Date;-><init>(J)V
+
+    return-object v2
+.end method
+
+.method public final J0(I)V
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    const-string v1, "actions_triggered_since_ad"
+
+    invoke-interface {v0, v1, p1}, Landroid/content/SharedPreferences$Editor;->putInt(Ljava/lang/String;I)Landroid/content/SharedPreferences$Editor;
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    return-void
+.end method
+
+.method public final K()Ljava/lang/String;
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    const-string v1, "pref_mixpanel_distinct_id_namecom.hrd.motivation"
+
+    const/4 v2, 0x0
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getString(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object v0
+
+    if-nez v0, :cond_16
+
+    sget-object v0, LHa/w;->a:LHa/w;
+
+    invoke-virtual {v0}, LHa/w;->b()Ljava/lang/String;
+
+    move-result-object v0
+
+    invoke-virtual {p0, v0}, Lcom/hrd/managers/f1;->t1(Ljava/lang/String;)V
+
+    :cond_16
+    return-object v0
+.end method
+
+.method public final K1(Lh9/i;)V
+    .registers 7
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    const-string v1, "pref_renewal_days_left"
+
+    if-nez p1, :cond_10
+
+    invoke-interface {v0, v1}, Landroid/content/SharedPreferences$Editor;->remove(Ljava/lang/String;)Landroid/content/SharedPreferences$Editor;
+
+    goto :goto_33
+
+    :cond_10
+    invoke-virtual {p1}, Lh9/i;->d()Ljava/util/Date;
+
+    move-result-object v2
+
+    invoke-virtual {v2}, Ljava/util/Date;->getTime()J
+
+    move-result-wide v2
+
+    invoke-virtual {p1}, Lh9/i;->c()I
+
+    move-result p1
+
+    new-instance v4, Ljava/lang/StringBuilder;
+
+    invoke-direct {v4}, Ljava/lang/StringBuilder;-><init>()V
+
+    invoke-virtual {v4, v2, v3}, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;
+
+    const-string v2, "#"
+
+    invoke-virtual {v4, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v4, p1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v4}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object p1
+
+    invoke-interface {v0, v1, p1}, Landroid/content/SharedPreferences$Editor;->putString(Ljava/lang/String;Ljava/lang/String;)Landroid/content/SharedPreferences$Editor;
+
+    :goto_33
+    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    return-void
+.end method
+
+.method public final L()I
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    const-string v1, "pref_mode_selectedcom.hrd.motivation"
+
+    const/16 v2, 0x3e7
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getInt(Ljava/lang/String;I)I
+
+    move-result v0
+
+    return v0
+.end method
+
+.method public final L0(Z)V
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    const-string v1, "ad_bible_category_showed"
+
+    invoke-interface {v0, v1, p1}, Landroid/content/SharedPreferences$Editor;->putBoolean(Ljava/lang/String;Z)Landroid/content/SharedPreferences$Editor;
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    return-void
+.end method
+
+.method public final L1(I)V
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    const-string v1, "saved_images_since_ad"
+
+    invoke-interface {v0, v1, p1}, Landroid/content/SharedPreferences$Editor;->putInt(Ljava/lang/String;I)Landroid/content/SharedPreferences$Editor;
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    return-void
+.end method
+
+.method public final M0(Z)V
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    const-string v1, "ad_showed_last_seconds"
+
+    invoke-interface {v0, v1, p1}, Landroid/content/SharedPreferences$Editor;->putBoolean(Ljava/lang/String;Z)Landroid/content/SharedPreferences$Editor;
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    return-void
+.end method
+
+.method public final M1(I)V
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    const-string v1, "saved_in_collections"
+
+    invoke-interface {v0, v1, p1}, Landroid/content/SharedPreferences$Editor;->putInt(Ljava/lang/String;I)Landroid/content/SharedPreferences$Editor;
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    return-void
+.end method
+
+.method public final N()I
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    const-string v1, "number_show_whats_new_bible"
+
+    const/4 v2, 0x0
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getInt(Ljava/lang/String;I)I
+
+    move-result v0
+
+    return v0
+.end method
+
+.method public final N0(Z)V
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    const-string v1, "pref_add_to_collection_showedcom.hrd.motivation"
+
+    invoke-interface {v0, v1, p1}, Landroid/content/SharedPreferences$Editor;->putBoolean(Ljava/lang/String;Z)Landroid/content/SharedPreferences$Editor;
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    return-void
+.end method
+
+.method public final O()I
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    const-string v1, "paywalls_viewed_count"
+
+    const/4 v2, 0x0
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getInt(Ljava/lang/String;I)I
+
+    move-result v0
+
+    return v0
+.end method
+
+.method public final O0(Ljava/lang/String;)V
+    .registers 4
+
+    const-string v0, "value"
+
+    invoke-static {p1, v0}, Lkotlin/jvm/internal/t;->h(Ljava/lang/Object;Ljava/lang/String;)V
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    const-string v1, "selected_ai_voice"
+
+    invoke-interface {v0, v1, p1}, Landroid/content/SharedPreferences$Editor;->putString(Ljava/lang/String;Ljava/lang/String;)Landroid/content/SharedPreferences$Editor;
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    return-void
+.end method
+
+.method public final O1(Z)V
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    const-string v1, "pref_set_daily_reminders_showedcom.hrd.motivation"
+
+    invoke-interface {v0, v1, p1}, Landroid/content/SharedPreferences$Editor;->putBoolean(Ljava/lang/String;Z)Landroid/content/SharedPreferences$Editor;
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    return-void
+.end method
+
+.method public final P()I
+    .registers 6
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    const-string v1, "ab_population"
+
+    const/4 v2, -0x1
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getInt(Ljava/lang/String;I)I
+
+    move-result v0
+
+    if-ne v0, v2, :cond_45
+
+    const/4 v0, 0x1
+
+    invoke-static {v0}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+
+    move-result-object v0
+
+    const/4 v2, 0x2
+
+    invoke-static {v2}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+
+    move-result-object v2
+
+    const/4 v3, 0x3
+
+    invoke-static {v3}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+
+    move-result-object v3
+
+    const/4 v4, 0x4
+
+    invoke-static {v4}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+
+    move-result-object v4
+
+    filled-new-array {v0, v2, v3, v4}, [Ljava/lang/Integer;
+
+    move-result-object v0
+
+    invoke-static {v0}, Lnd/v;->q([Ljava/lang/Object;)Ljava/util/List;
+
+    move-result-object v0
+
+    check-cast v0, Ljava/util/Collection;
+
+    sget-object v2, LEd/d;->a:LEd/d$a;
+
+    invoke-static {v0, v2}, Lnd/v;->O0(Ljava/util/Collection;LEd/d;)Ljava/lang/Object;
+
+    move-result-object v0
+
+    check-cast v0, Ljava/lang/Number;
+
+    invoke-virtual {v0}, Ljava/lang/Number;->intValue()I
+
+    move-result v0
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v2
+
+    invoke-interface {v2}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v2
+
+    invoke-interface {v2, v1, v0}, Landroid/content/SharedPreferences$Editor;->putInt(Ljava/lang/String;I)Landroid/content/SharedPreferences$Editor;
+
+    invoke-interface {v2}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    :cond_45
+    return v0
+.end method
+
+.method public final P0(Z)V
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    const-string v1, "ai_voices_bottom_sheet_showed"
+
+    invoke-interface {v0, v1, p1}, Landroid/content/SharedPreferences$Editor;->putBoolean(Ljava/lang/String;Z)Landroid/content/SharedPreferences$Editor;
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    return-void
+.end method
+
+.method public final P1(Z)V
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    const-string v1, "pref_share_quote_showedcom.hrd.motivation"
+
+    invoke-interface {v0, v1, p1}, Landroid/content/SharedPreferences$Editor;->putBoolean(Ljava/lang/String;Z)Landroid/content/SharedPreferences$Editor;
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    return-void
+.end method
+
+.method public final Q()Ljava/lang/String;
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    const-string v1, "premium_expires_date"
+
+    const-string v2, ""
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getString(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object v0
+
+    if-nez v0, :cond_f
+
+    goto :goto_10
+
+    :cond_f
+    move-object v2, v0
+
+    :goto_10
+    return-object v2
+.end method
+
+.method public final Q1(I)V
+    .registers 4
+
+    const-string v0, "SettingsManager"
+
+    const-string v1, "Increased share count"
+
+    invoke-static {v0, v1}, LHa/E;->b(Ljava/lang/String;Ljava/lang/Object;)V
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    const-string v1, "pref_number_quotes_sharedcom.hrd.motivation"
+
+    invoke-interface {v0, v1, p1}, Landroid/content/SharedPreferences$Editor;->putInt(Ljava/lang/String;I)Landroid/content/SharedPreferences$Editor;
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    return-void
+.end method
+
+.method public final R()Ljava/lang/String;
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    const-string v1, "premium_purchased_date"
+
+    const-string v2, ""
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getString(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object v0
+
+    if-nez v0, :cond_f
+
+    goto :goto_10
+
+    :cond_f
+    move-object v2, v0
+
+    :goto_10
+    return-object v2
+.end method
+
+.method public final R0(Ljava/lang/String;)V
+    .registers 4
+
+    const-string v0, "value"
+
+    invoke-static {p1, v0}, Lkotlin/jvm/internal/t;->h(Ljava/lang/Object;Ljava/lang/String;)V
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    const-string v1, "selected_background_sound"
+
+    invoke-interface {v0, v1, p1}, Landroid/content/SharedPreferences$Editor;->putString(Ljava/lang/String;Ljava/lang/String;)Landroid/content/SharedPreferences$Editor;
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    return-void
+.end method
+
+.method public final R1(Z)V
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    const-string v1, "pref_practice_soundcom.hrd.motivation"
+
+    invoke-interface {v0, v1, p1}, Landroid/content/SharedPreferences$Editor;->putBoolean(Ljava/lang/String;Z)Landroid/content/SharedPreferences$Editor;
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    return-void
+.end method
+
+.method public final S()LPd/P;
+    .registers 2
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->n0()LPd/B;
+
+    move-result-object v0
+
+    return-object v0
+.end method
+
+.method public final T0(Z)V
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    const-string v1, "bookmark_tooltip_viewed"
+
+    invoke-interface {v0, v1, p1}, Landroid/content/SharedPreferences$Editor;->putBoolean(Ljava/lang/String;Z)Landroid/content/SharedPreferences$Editor;
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    return-void
+.end method
+
+.method public final T1(Z)V
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    const-string v1, "tap_to_activate_check"
+
+    invoke-interface {v0, v1, p1}, Landroid/content/SharedPreferences$Editor;->putBoolean(Ljava/lang/String;Z)Landroid/content/SharedPreferences$Editor;
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    return-void
+.end method
+
+.method public final U0(Ljava/lang/String;)V
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    const-string v1, "categories_last_update_com.hrd.motivation"
+
+    invoke-interface {v0, v1, p1}, Landroid/content/SharedPreferences$Editor;->putString(Ljava/lang/String;Ljava/lang/String;)Landroid/content/SharedPreferences$Editor;
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    return-void
+.end method
+
+.method public final U1(Z)V
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    const-string v1, "tap_to_activate_show"
+
+    invoke-interface {v0, v1, p1}, Landroid/content/SharedPreferences$Editor;->putBoolean(Ljava/lang/String;Z)Landroid/content/SharedPreferences$Editor;
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    return-void
+.end method
+
+.method public final V()F
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    const-string v1, "pref_quote_sound_volume"
+
+    const/high16 v2, 0x42480000  # 50.0f
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getFloat(Ljava/lang/String;F)F
+
+    move-result v0
+
+    return v0
+.end method
+
+.method public final V0(Z)V
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    const-string v1, "tooltip_categories_viewed"
+
+    invoke-interface {v0, v1, p1}, Landroid/content/SharedPreferences$Editor;->putBoolean(Ljava/lang/String;Z)Landroid/content/SharedPreferences$Editor;
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    return-void
+.end method
+
+.method public final V1(F)V
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    const-string v1, "pref_theme_sound_volume"
+
+    invoke-interface {v0, v1, p1}, Landroid/content/SharedPreferences$Editor;->putFloat(Ljava/lang/String;F)Landroid/content/SharedPreferences$Editor;
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    return-void
+.end method
+
+.method public final W()I
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    const-string v1, "pref_quotes_before_adscom.hrd.motivation"
+
+    const/16 v2, 0x1c
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getInt(Ljava/lang/String;I)I
+
+    move-result v0
+
+    return v0
+.end method
+
+.method public final W1(I)V
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    const-string v1, "themes_categories_selected_since_ad"
+
+    invoke-interface {v0, v1, p1}, Landroid/content/SharedPreferences$Editor;->putInt(Ljava/lang/String;I)Landroid/content/SharedPreferences$Editor;
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    return-void
+.end method
+
+.method public final X()I
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    const-string v1, "quotes_read_since_ad"
+
+    const/4 v2, 0x0
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getInt(Ljava/lang/String;I)I
+
+    move-result v0
+
+    return v0
+.end method
+
+.method public final X1(I)V
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    const-string v1, "themes_screen_count_created"
+
+    invoke-interface {v0, v1, p1}, Landroid/content/SharedPreferences$Editor;->putInt(Ljava/lang/String;I)Landroid/content/SharedPreferences$Editor;
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    return-void
+.end method
+
+.method public final Y()Ljava/lang/String;
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    const-string v1, "pref_new_rate_showed"
+
+    const/4 v2, 0x0
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getString(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object v0
+
+    return-object v0
+.end method
+
+.method public final Y0(Ljava/lang/String;)V
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    const-string v1, "pref_date_access_categoriescom.hrd.motivation"
+
+    invoke-interface {v0, v1, p1}, Landroid/content/SharedPreferences$Editor;->putString(Ljava/lang/String;Ljava/lang/String;)Landroid/content/SharedPreferences$Editor;
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    return-void
+.end method
+
+.method public final Y1(Z)V
+    .registers 2
+
+    sput-boolean p1, Lcom/hrd/managers/f1;->e:Z
+
+    return-void
+.end method
+
+.method public final Z()Lh9/i;
+    .registers 10
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    const-string v1, "pref_renewal_days_left"
+
+    const/4 v2, 0x0
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getString(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object v3
+
+    if-eqz v3, :cond_3b
+
+    const-string v0, "#"
+
+    filled-new-array {v0}, [Ljava/lang/String;
+
+    move-result-object v4
+
+    const/4 v7, 0x6
+
+    const/4 v8, 0x0
+
+    const/4 v5, 0x0
+
+    const/4 v6, 0x0
+
+    invoke-static/range {v3 .. v8}, LJd/r;->L0(Ljava/lang/CharSequence;[Ljava/lang/String;ZIILjava/lang/Object;)Ljava/util/List;
+
+    move-result-object v0
+
+    const/4 v1, 0x0
+
+    invoke-interface {v0, v1}, Ljava/util/List;->get(I)Ljava/lang/Object;
+
+    move-result-object v1
+
+    check-cast v1, Ljava/lang/String;
+
+    const/4 v2, 0x1
+
+    invoke-interface {v0, v2}, Ljava/util/List;->get(I)Ljava/lang/Object;
+
+    move-result-object v0
+
+    check-cast v0, Ljava/lang/String;
+
+    new-instance v2, Lh9/i;
+
+    new-instance v3, Ljava/util/Date;
+
+    invoke-static {v1}, Ljava/lang/Long;->parseLong(Ljava/lang/String;)J
+
+    move-result-wide v4
+
+    invoke-direct {v3, v4, v5}, Ljava/util/Date;-><init>(J)V
+
+    invoke-static {v0}, Ljava/lang/Integer;->parseInt(Ljava/lang/String;)I
+
+    move-result v0
+
+    invoke-direct {v2, v3, v0}, Lh9/i;-><init>(Ljava/util/Date;I)V
+
+    :cond_3b
+    return-object v2
+.end method
+
+.method public final Z0(Ljava/lang/String;)V
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    const-string v1, "pref_date_access_themescom.hrd.motivation"
+
+    invoke-interface {v0, v1, p1}, Landroid/content/SharedPreferences$Editor;->putString(Ljava/lang/String;Ljava/lang/String;)Landroid/content/SharedPreferences$Editor;
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    return-void
+.end method
+
+.method public final Z1(Z)V
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    const-string v1, "try_practice_notification_viewed"
+
+    invoke-interface {v0, v1, p1}, Landroid/content/SharedPreferences$Editor;->putBoolean(Ljava/lang/String;Z)Landroid/content/SharedPreferences$Editor;
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    return-void
+.end method
+
+.method public final a0()I
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    const-string v1, "saved_images_since_ad"
+
+    const/4 v2, 0x0
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getInt(Ljava/lang/String;I)I
+
+    move-result v0
+
+    return v0
+.end method
+
+.method public final a1(Ljava/lang/String;)V
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    const-string v1, "pref_date_access_appcom.hrd.motivation"
+
+    invoke-interface {v0, v1, p1}, Landroid/content/SharedPreferences$Editor;->putString(Ljava/lang/String;Ljava/lang/String;)Landroid/content/SharedPreferences$Editor;
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    return-void
+.end method
+
+.method public final a2(Ljava/lang/String;)V
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    const-string v1, "pref_unique_user_idcom.hrd.motivation"
+
+    invoke-interface {v0, v1, p1}, Landroid/content/SharedPreferences$Editor;->putString(Ljava/lang/String;Ljava/lang/String;)Landroid/content/SharedPreferences$Editor;
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    return-void
+.end method
+
+.method public final b0()I
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    const-string v1, "saved_in_collections"
+
+    const/4 v2, 0x0
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getInt(Ljava/lang/String;I)I
+
+    move-result v0
+
+    return v0
+.end method
+
+.method public final b1(Ljava/lang/String;)V
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    const-string v1, "pref_date_opencom.hrd.motivation"
+
+    invoke-interface {v0, v1, p1}, Landroid/content/SharedPreferences$Editor;->putString(Ljava/lang/String;Ljava/lang/String;)Landroid/content/SharedPreferences$Editor;
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    return-void
+.end method
+
+.method public final c()I
+    .registers 3
+
+    invoke-virtual {p0}, Lcom/hrd/managers/f1;->e()Ljava/util/Date;
+
+    move-result-object v0
+
+    if-eqz v0, :cond_10
+
+    new-instance v1, Ljava/util/Date;
+
+    invoke-direct {v1}, Ljava/util/Date;-><init>()V
+
+    invoke-static {v0, v1}, LHa/r;->b(Ljava/util/Date;Ljava/util/Date;)I
+
+    move-result v0
+
+    goto :goto_11
+
+    :cond_10
+    const/4 v0, -0x1
+
+    :goto_11
+    return v0
+.end method
+
+.method public final c1(Ljava/lang/String;)V
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    const-string v1, "pref_date_sale_showedcom.hrd.motivation"
+
+    invoke-interface {v0, v1, p1}, Landroid/content/SharedPreferences$Editor;->putString(Ljava/lang/String;Ljava/lang/String;)Landroid/content/SharedPreferences$Editor;
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    return-void
+.end method
+
+.method public final c2()V
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    const-string v1, "billing_issue_show_datecom.hrd.motivation"
+
+    invoke-static {}, LHa/t;->b()Ljava/lang/String;
+
+    move-result-object v2
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences$Editor;->putString(Ljava/lang/String;Ljava/lang/String;)Landroid/content/SharedPreferences$Editor;
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    return-void
+.end method
+
+.method public final d()V
+    .registers 4
+
+    invoke-virtual {p0}, Lcom/hrd/managers/f1;->W()I
+
+    move-result v0
+
+    add-int/lit8 v0, v0, -0x1
+
+    if-gtz v0, :cond_9
+
+    const/4 v0, 0x0
+
+    :cond_9
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v1
+
+    invoke-interface {v1}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v1
+
+    const-string v2, "pref_quotes_before_adscom.hrd.motivation"
+
+    invoke-interface {v1, v2, v0}, Landroid/content/SharedPreferences$Editor;->putInt(Ljava/lang/String;I)Landroid/content/SharedPreferences$Editor;
+
+    invoke-interface {v1}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    return-void
+.end method
+
+.method public final d0()Z
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    const-string v1, "pref_set_daily_reminders_showedcom.hrd.motivation"
+
+    const/4 v2, 0x0
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getBoolean(Ljava/lang/String;Z)Z
+
+    move-result v0
+
+    return v0
+.end method
+
+.method public final d1(Ljava/lang/String;)V
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    const-string v1, "pref_date_winback_showedcom.hrd.motivation"
+
+    invoke-interface {v0, v1, p1}, Landroid/content/SharedPreferences$Editor;->putString(Ljava/lang/String;Ljava/lang/String;)Landroid/content/SharedPreferences$Editor;
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    return-void
+.end method
+
+.method public final d2(LFa/b;)V
+    .registers 6
+
+    const-string v0, "dateIntervalState"
+
+    invoke-static {p1, v0}, Lkotlin/jvm/internal/t;->h(Ljava/lang/Object;Ljava/lang/String;)V
+
+    invoke-virtual {p1}, LFa/b;->c()Ljava/util/Date;
+
+    move-result-object v0
+
+    invoke-virtual {v0}, Ljava/util/Date;->getTime()J
+
+    move-result-wide v0
+
+    invoke-virtual {p1}, LFa/b;->d()Ljava/util/Date;
+
+    move-result-object p1
+
+    invoke-virtual {p1}, Ljava/util/Date;->getTime()J
+
+    move-result-wide v2
+
+    new-instance p1, Ljava/lang/StringBuilder;
+
+    invoke-direct {p1}, Ljava/lang/StringBuilder;-><init>()V
+
+    invoke-virtual {p1, v0, v1}, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;
+
+    const-string v0, "#"
+
+    invoke-virtual {p1, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {p1, v2, v3}, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;
+
+    invoke-virtual {p1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object p1
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    const-string v1, "volume_alert_show_date_com.hrd.motivation"
+
+    invoke-interface {v0, v1, p1}, Landroid/content/SharedPreferences$Editor;->putString(Ljava/lang/String;Ljava/lang/String;)Landroid/content/SharedPreferences$Editor;
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    return-void
+.end method
+
+.method public final e()Ljava/util/Date;
+    .registers 4
+
+    invoke-virtual {p0}, Lcom/hrd/managers/f1;->u()Ljava/lang/String;
+
+    move-result-object v0
+
+    if-nez v0, :cond_c
+
+    new-instance v0, Ljava/util/Date;
+
+    invoke-direct {v0}, Ljava/util/Date;-><init>()V
+
+    goto :goto_16
+
+    :cond_c
+    const-string v1, "yyyyMMdd"
+
+    invoke-static {}, Lcom/hrd/managers/h0;->k()Ljava/util/List;
+
+    move-result-object v2
+
+    invoke-static {v0, v1, v2}, LHa/r;->n(Ljava/lang/String;Ljava/lang/String;Ljava/util/List;)Ljava/util/Date;
+
+    move-result-object v0
+
+    :goto_16
+    return-object v0
+.end method
+
+.method public final e0()Z
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    const-string v1, "pref_share_quote_showedcom.hrd.motivation"
+
+    const/4 v2, 0x0
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getBoolean(Ljava/lang/String;Z)Z
+
+    move-result v0
+
+    return v0
+.end method
+
+.method public final e1(Ljava/lang/String;)V
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    const-string v1, "date_show_categories_badge"
+
+    invoke-interface {v0, v1, p1}, Landroid/content/SharedPreferences$Editor;->putString(Ljava/lang/String;Ljava/lang/String;)Landroid/content/SharedPreferences$Editor;
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    return-void
+.end method
+
+.method public final e2()LFa/b;
+    .registers 10
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    const-string v1, "volume_alert_show_date_com.hrd.motivation"
+
+    const/4 v2, 0x0
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getString(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object v3
+
+    if-eqz v3, :cond_60
+
+    const/4 v0, 0x0
+
+    const/4 v1, 0x2
+
+    const-string v4, "#"
+
+    invoke-static {v3, v4, v0, v1, v2}, LJd/r;->T(Ljava/lang/CharSequence;Ljava/lang/CharSequence;ZILjava/lang/Object;)Z
+
+    move-result v0
+
+    if-nez v0, :cond_18
+
+    goto :goto_60
+
+    :cond_18
+    filled-new-array {v4}, [Ljava/lang/String;
+
+    move-result-object v4
+
+    const/4 v7, 0x6
+
+    const/4 v8, 0x0
+
+    const/4 v5, 0x0
+
+    const/4 v6, 0x0
+
+    invoke-static/range {v3 .. v8}, LJd/r;->L0(Ljava/lang/CharSequence;[Ljava/lang/String;ZIILjava/lang/Object;)Ljava/util/List;
+
+    move-result-object v0
+
+    check-cast v0, Ljava/lang/Iterable;
+
+    new-instance v1, Ljava/util/ArrayList;
+
+    const/16 v2, 0xa
+
+    invoke-static {v0, v2}, Lnd/v;->z(Ljava/lang/Iterable;I)I
+
+    move-result v2
+
+    invoke-direct {v1, v2}, Ljava/util/ArrayList;-><init>(I)V
+
+    invoke-interface {v0}, Ljava/lang/Iterable;->iterator()Ljava/util/Iterator;
+
+    move-result-object v0
+
+    :goto_35
+    invoke-interface {v0}, Ljava/util/Iterator;->hasNext()Z
+
+    move-result v2
+
+    if-eqz v2, :cond_4e
+
+    invoke-interface {v0}, Ljava/util/Iterator;->next()Ljava/lang/Object;
+
+    move-result-object v2
+
+    check-cast v2, Ljava/lang/String;
+
+    new-instance v3, Ljava/util/Date;
+
+    invoke-static {v2}, Ljava/lang/Long;->parseLong(Ljava/lang/String;)J
+
+    move-result-wide v4
+
+    invoke-direct {v3, v4, v5}, Ljava/util/Date;-><init>(J)V
+
+    invoke-interface {v1, v3}, Ljava/util/Collection;->add(Ljava/lang/Object;)Z
+
+    goto :goto_35
+
+    :cond_4e
+    new-instance v0, LFa/b;
+
+    invoke-static {v1}, Lnd/v;->r0(Ljava/util/List;)Ljava/lang/Object;
+
+    move-result-object v2
+
+    check-cast v2, Ljava/util/Date;
+
+    invoke-static {v1}, Lnd/v;->D0(Ljava/util/List;)Ljava/lang/Object;
+
+    move-result-object v1
+
+    check-cast v1, Ljava/util/Date;
+
+    invoke-direct {v0, v2, v1}, LFa/b;-><init>(Ljava/util/Date;Ljava/util/Date;)V
+
+    return-object v0
+
+    :cond_60
+    :goto_60
+    return-object v2
+.end method
+
+.method public final f()I
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    const-string v1, "actions_triggered_since_ad"
+
+    const/4 v2, 0x0
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getInt(Ljava/lang/String;I)I
+
+    move-result v0
+
+    return v0
+.end method
+
+.method public final f0()I
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    const-string v1, "pref_number_quotes_sharedcom.hrd.motivation"
+
+    const/4 v2, 0x0
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getInt(Ljava/lang/String;I)I
+
+    move-result v0
+
+    return v0
+.end method
+
+.method public final f1(Ljava/lang/String;)V
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    const-string v1, "date_show_themes_badge"
+
+    invoke-interface {v0, v1, p1}, Landroid/content/SharedPreferences$Editor;->putString(Ljava/lang/String;Ljava/lang/String;)Landroid/content/SharedPreferences$Editor;
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    return-void
+.end method
+
+.method public final g1(Ljava/lang/String;)V
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    const-string v1, "date_show_whats_new_bible"
+
+    invoke-interface {v0, v1, p1}, Landroid/content/SharedPreferences$Editor;->putString(Ljava/lang/String;Ljava/lang/String;)Landroid/content/SharedPreferences$Editor;
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    return-void
+.end method
+
+.method public final h()Z
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    const-string v1, "ad_bible_category_showed"
+
+    const/4 v2, 0x0
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getBoolean(Ljava/lang/String;Z)Z
+
+    move-result v0
+
+    return v0
+.end method
+
+.method public final h1(F)V
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    const-string v1, "pref_device_sound_volume"
+
+    invoke-interface {v0, v1, p1}, Landroid/content/SharedPreferences$Editor;->putFloat(Ljava/lang/String;F)Landroid/content/SharedPreferences$Editor;
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    return-void
+.end method
+
+.method public final i()Z
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    const-string v1, "ad_showed_last_seconds"
+
+    const/4 v2, 0x0
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getBoolean(Ljava/lang/String;Z)Z
+
+    move-result v0
+
+    return v0
+.end method
+
+.method public final i0()F
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    const-string v1, "pref_theme_sound_volume"
+
+    const/4 v2, 0x0
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getFloat(Ljava/lang/String;F)F
+
+    move-result v0
+
+    return v0
+.end method
+
+.method public final i1()V
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    const-string v1, "pref_feed_favorites_showedcom.hrd.motivation"
+
+    const/4 v2, 0x1
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences$Editor;->putBoolean(Ljava/lang/String;Z)Landroid/content/SharedPreferences$Editor;
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    return-void
+.end method
+
+.method public final j()Z
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    const-string v1, "pref_add_to_collection_showedcom.hrd.motivation"
+
+    const/4 v2, 0x0
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getBoolean(Ljava/lang/String;Z)Z
+
+    move-result v0
+
+    return v0
+.end method
+
+.method public final j0()I
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    const-string v1, "themes_categories_selected_since_ad"
+
+    const/4 v2, 0x0
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getInt(Ljava/lang/String;I)I
+
+    move-result v0
+
+    return v0
+.end method
+
+.method public final j1(Ljava/util/Date;)V
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    const-string v1, "promote_favorite_reminder_first_of_day"
+
+    invoke-interface {v0, v1}, Landroid/content/SharedPreferences$Editor;->remove(Ljava/lang/String;)Landroid/content/SharedPreferences$Editor;
+
+    if-eqz p1, :cond_16
+
+    const-string v1, "yyyyMMdd"
+
+    invoke-static {p1, v1}, LHa/r;->k(Ljava/util/Date;Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object p1
+
+    goto :goto_17
+
+    :cond_16
+    const/4 p1, 0x0
+
+    :goto_17
+    const-string v1, "reminder_first_of_day"
+
+    invoke-interface {v0, v1, p1}, Landroid/content/SharedPreferences$Editor;->putString(Ljava/lang/String;Ljava/lang/String;)Landroid/content/SharedPreferences$Editor;
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    return-void
+.end method
+
+.method public final k()Ljava/lang/String;
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    const-string v1, "selected_ai_voice"
+
+    const-string v2, "ED42pF7eL0Ra2a7LdlOv"
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getString(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object v0
+
+    if-nez v0, :cond_10
+
+    const-string v0, ""
+
+    :cond_10
+    return-object v0
+.end method
+
+.method public final k0()I
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    const-string v1, "themes_screen_count_created"
+
+    const/4 v2, 0x0
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getInt(Ljava/lang/String;I)I
+
+    move-result v0
+
+    return v0
+.end method
+
+.method public final k1(Z)V
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    const-string v1, "pref_first_time_com.hrd.motivation"
+
+    invoke-interface {v0, v1, p1}, Landroid/content/SharedPreferences$Editor;->putBoolean(Ljava/lang/String;Z)Landroid/content/SharedPreferences$Editor;
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    return-void
+.end method
+
+.method public final l0()Ljava/lang/String;
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    const-string v1, "pref_unique_user_idcom.hrd.motivation"
+
+    const/4 v2, 0x0
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getString(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object v0
+
+    return-object v0
+.end method
+
+.method public final l1(Z)V
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    const-string v1, "first_time_appcom.hrd.motivation"
+
+    invoke-interface {v0, v1, p1}, Landroid/content/SharedPreferences$Editor;->putBoolean(Ljava/lang/String;Z)Landroid/content/SharedPreferences$Editor;
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    return-void
+.end method
+
+.method public final m()Ljava/lang/String;
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    const-string v1, "selected_background_sound"
+
+    const-string v2, "no_sound"
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getString(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object v0
+
+    if-nez v0, :cond_10
+
+    const-string v0, ""
+
+    :cond_10
+    return-object v0
+.end method
+
+.method public final m0()Ljava/lang/String;
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    const-string v1, "selected_tts_voice"
+
+    const-string v2, ""
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getString(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object v0
+
+    if-nez v0, :cond_f
+
+    goto :goto_10
+
+    :cond_f
+    move-object v2, v0
+
+    :goto_10
+    return-object v2
+.end method
+
+.method public final m1(Z)V
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    const-string v1, "have_subscriptioncom.hrd.motivation"
+
+    invoke-interface {v0, v1, p1}, Landroid/content/SharedPreferences$Editor;->putBoolean(Ljava/lang/String;Z)Landroid/content/SharedPreferences$Editor;
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    const/4 p1, 0x1
+
+    invoke-virtual {p0, p1}, Lcom/hrd/managers/f1;->D1(Z)V
+
+    return-void
+.end method
+
+.method public final n()F
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    const-string v1, "pref_background_sound_volume"
+
+    const/high16 v2, 0x41a00000  # 20.0f
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getFloat(Ljava/lang/String;F)F
+
+    move-result v0
+
+    return v0
+.end method
+
+.method public final n1(Lcom/hrd/badges/HomeBadgePrefs;)V
+    .registers 5
+
+    const-string v0, "value"
+
+    invoke-static {p1, v0}, Lkotlin/jvm/internal/t;->h(Ljava/lang/Object;Ljava/lang/String;)V
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    invoke-static {}, LLa/f;->b()Lkotlinx/serialization/json/b;
+
+    move-result-object v1
+
+    invoke-virtual {v1}, Lkotlinx/serialization/json/b;->a()Lee/b;
+
+    sget-object v2, Lcom/hrd/badges/HomeBadgePrefs;->Companion:Lcom/hrd/badges/HomeBadgePrefs$b;
+
+    invoke-virtual {v2}, Lcom/hrd/badges/HomeBadgePrefs$b;->serializer()LYd/d;
+
+    move-result-object v2
+
+    invoke-virtual {v1, v2, p1}, Lkotlinx/serialization/json/b;->b(LYd/r;Ljava/lang/Object;)Ljava/lang/String;
+
+    move-result-object v1
+
+    const-string v2, "pref_home_badge_state"
+
+    invoke-interface {v0, v2, v1}, Landroid/content/SharedPreferences$Editor;->putString(Ljava/lang/String;Ljava/lang/String;)Landroid/content/SharedPreferences$Editor;
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    sget-object v0, Lf9/a;->a:Lf9/a;
+
+    invoke-virtual {v0, p1}, Lf9/a;->b(Lcom/hrd/badges/HomeBadgePrefs;)V
+
+    return-void
+.end method
+
+.method public final o0()Z
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    const-string v1, "have_subscriptioncom.hrd.motivation"
+
+    const/4 v2, 0x0
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getBoolean(Ljava/lang/String;Z)Z
+
+    move-result v0
+
+    return v0
+.end method
+
+.method public final o1(I)V
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    const-string v1, "home_screen_count_created"
+
+    invoke-interface {v0, v1, p1}, Landroid/content/SharedPreferences$Editor;->putInt(Ljava/lang/String;I)Landroid/content/SharedPreferences$Editor;
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    return-void
+.end method
+
+.method public final p()Ljava/lang/String;
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    const-string v1, "categories_last_update_com.hrd.motivation"
+
+    const/4 v2, 0x0
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getString(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object v0
+
+    return-object v0
+.end method
+
+.method public final p0(Landroid/content/Context;)V
+    .registers 3
+
+    const-string v0, "context"
+
+    invoke-static {p1, v0}, Lkotlin/jvm/internal/t;->h(Ljava/lang/Object;Ljava/lang/String;)V
+
+    invoke-static {p1}, Lcom/hrd/managers/f1;->W0(Landroid/content/Context;)V
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->n0()LPd/B;
+
+    move-result-object p1
+
+    invoke-static {}, Lcom/hrd/managers/f1;->y0()Z
+
+    move-result v0
+
+    invoke-static {v0}, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
+
+    move-result-object v0
+
+    invoke-interface {p1, v0}, LPd/B;->setValue(Ljava/lang/Object;)V
+
+    return-void
+.end method
+
+.method public final q()Z
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    const-string v1, "tooltip_categories_viewed"
+
+    const/4 v2, 0x0
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getBoolean(Ljava/lang/String;Z)Z
+
+    move-result v0
+
+    return v0
+.end method
+
+.method public final q0()Z
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    const-string v1, "ai_voices_bottom_sheet_showed"
+
+    const/4 v2, 0x0
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getBoolean(Ljava/lang/String;Z)Z
+
+    move-result v0
+
+    return v0
+.end method
+
+.method public final q1()V
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    const-string v1, "pref_language_firstcom.hrd.motivation"
+
+    const/4 v2, 0x0
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences$Editor;->putBoolean(Ljava/lang/String;Z)Landroid/content/SharedPreferences$Editor;
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    return-void
+.end method
+
+.method public final r1(Ljava/util/Date;)V
+    .registers 6
+
+    if-eqz p1, :cond_18
+
+    sget-object v0, Lcom/hrd/managers/f1;->a:Lcom/hrd/managers/f1;
+
+    invoke-direct {v0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    const-string v1, "last_app_interaction"
+
+    invoke-virtual {p1}, Ljava/util/Date;->getTime()J
+
+    move-result-wide v2
+
+    invoke-interface {v0, v1, v2, v3}, Landroid/content/SharedPreferences$Editor;->putLong(Ljava/lang/String;J)Landroid/content/SharedPreferences$Editor;
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    :cond_18
+    return-void
+.end method
+
+.method public final s()Ljava/lang/String;
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    const-string v1, "pref_date_access_categoriescom.hrd.motivation"
+
+    const/4 v2, 0x0
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getString(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object v0
+
+    return-object v0
+.end method
+
+.method public final s0()Z
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    const-string v1, "pref_feed_favorites_showedcom.hrd.motivation"
+
+    const/4 v2, 0x0
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getBoolean(Ljava/lang/String;Z)Z
+
+    move-result v0
+
+    return v0
+.end method
+
+.method public final s1(Ljava/util/Date;)V
+    .registers 5
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    if-eqz p1, :cond_f
+
+    invoke-virtual {p1}, Ljava/util/Date;->getTime()J
+
+    move-result-wide v1
+
+    goto :goto_11
+
+    :cond_f
+    const-wide/16 v1, 0x0
+
+    :goto_11
+    const-string p1, "last_sale_reminder_showed"
+
+    invoke-interface {v0, p1, v1, v2}, Landroid/content/SharedPreferences$Editor;->putLong(Ljava/lang/String;J)Landroid/content/SharedPreferences$Editor;
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    return-void
+.end method
+
+.method public final t()Ljava/lang/String;
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    const-string v1, "pref_date_access_themescom.hrd.motivation"
+
+    const/4 v2, 0x0
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getString(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object v0
+
+    return-object v0
+.end method
+
+.method public final t0()Z
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    const-string v1, "pref_first_time_com.hrd.motivation"
+
+    const/4 v2, 0x1
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getBoolean(Ljava/lang/String;Z)Z
+
+    move-result v0
+
+    return v0
+.end method
+
+.method public final t1(Ljava/lang/String;)V
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    const-string v1, "pref_mixpanel_distinct_id_namecom.hrd.motivation"
+
+    invoke-interface {v0, v1, p1}, Landroid/content/SharedPreferences$Editor;->putString(Ljava/lang/String;Ljava/lang/String;)Landroid/content/SharedPreferences$Editor;
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    return-void
+.end method
+
+.method public final u()Ljava/lang/String;
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    const-string v1, "pref_date_access_appcom.hrd.motivation"
+
+    const/4 v2, 0x0
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getString(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object v0
+
+    return-object v0
+.end method
+
+.method public final u0()Z
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    const-string v1, "first_time_appcom.hrd.motivation"
+
+    const/4 v2, 0x1
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getBoolean(Ljava/lang/String;Z)Z
+
+    move-result v0
+
+    return v0
+.end method
+
+.method public final u1(ILandroid/content/Context;)V
+    .registers 5
+
+    const-string v0, "context"
+
+    invoke-static {p2, v0}, Lkotlin/jvm/internal/t;->h(Ljava/lang/Object;Ljava/lang/String;)V
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    const-string v1, "pref_mode_selectedcom.hrd.motivation"
+
+    invoke-interface {v0, v1, p1}, Landroid/content/SharedPreferences$Editor;->putInt(Ljava/lang/String;I)Landroid/content/SharedPreferences$Editor;
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object p1
+
+    const/16 v0, 0x3e7
+
+    invoke-interface {p1, v1, v0}, Landroid/content/SharedPreferences;->getInt(Ljava/lang/String;I)I
+
+    move-result p1
+
+    if-eqz p1, :cond_29
+
+    const/4 v0, 0x1
+
+    if-eq p1, v0, :cond_2a
+
+    invoke-static {p2}, LHa/p;->u(Landroid/content/Context;)Z
+
+    move-result v0
+
+    goto :goto_2a
+
+    :cond_29
+    const/4 v0, 0x0
+
+    :cond_2a
+    :goto_2a
+    invoke-static {v0}, Lcom/hrd/managers/f1;->X0(Z)V
+
+    return-void
+.end method
+
+.method public final v()Ljava/lang/String;
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    const-string v1, "pref_date_opencom.hrd.motivation"
+
+    const/4 v2, 0x0
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getString(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object v0
+
+    return-object v0
+.end method
+
+.method public final v0()Z
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    const-string v1, "pref_language_firstcom.hrd.motivation"
+
+    const/4 v2, 0x1
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getBoolean(Ljava/lang/String;Z)Z
+
+    move-result v0
+
+    return v0
+.end method
+
+.method public final v1()V
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    const-string v1, "pref_new_categories_alert_showed"
+
+    const v2, 0x30f5a
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences$Editor;->putInt(Ljava/lang/String;I)Landroid/content/SharedPreferences$Editor;
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    return-void
+.end method
+
+.method public final w()Ljava/lang/String;
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    const-string v1, "pref_date_sale_showedcom.hrd.motivation"
+
+    const/4 v2, 0x0
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getString(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object v0
+
+    return-object v0
+.end method
+
+.method public final w0()Z
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    const-string v1, "pref_new_categories_alert_showed"
+
+    const/4 v2, 0x0
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getInt(Ljava/lang/String;I)I
+
+    move-result v0
+
+    const v1, 0x30f5a
+
+    if-lt v0, v1, :cond_11
+
+    const/4 v2, 0x1
+
+    :cond_11
+    return v2
+.end method
+
+.method public final x()Ljava/lang/String;
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    const-string v1, "pref_date_winback_showedcom.hrd.motivation"
+
+    const/4 v2, 0x0
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getString(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object v0
+
+    return-object v0
+.end method
+
+.method public final x0()Z
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    invoke-virtual {p0}, Lcom/hrd/managers/f1;->b0()I
+
+    move-result v1
+
+    const/4 v2, 0x5
+
+    if-lt v1, v2, :cond_d
+
+    const/4 v1, 0x1
+
+    goto :goto_e
+
+    :cond_d
+    const/4 v1, 0x0
+
+    :goto_e
+    const-string v2, "quiz_tooltip_viewed"
+
+    invoke-interface {v0, v2, v1}, Landroid/content/SharedPreferences;->getBoolean(Ljava/lang/String;Z)Z
+
+    move-result v0
+
+    return v0
+.end method
+
+.method public final x1(I)V
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    const-string v1, "number_show_whats_new_bible"
+
+    invoke-interface {v0, v1, p1}, Landroid/content/SharedPreferences$Editor;->putInt(Ljava/lang/String;I)Landroid/content/SharedPreferences$Editor;
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    return-void
+.end method
+
+.method public final y()Ljava/lang/String;
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    const-string v1, "date_show_categories_badge"
+
+    const/4 v2, 0x0
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getString(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object v0
+
+    return-object v0
+.end method
+
+.method public final y1(I)V
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    const-string v1, "paywalls_viewed_count"
+
+    invoke-interface {v0, v1, p1}, Landroid/content/SharedPreferences$Editor;->putInt(Ljava/lang/String;I)Landroid/content/SharedPreferences$Editor;
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    return-void
+.end method
+
+.method public final z()Ljava/lang/String;
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    const-string v1, "date_show_themes_badge"
+
+    const-string v2, ""
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getString(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object v0
+
+    return-object v0
+.end method
+
+.method public final z0()Z
+    .registers 4
+
+    invoke-direct {p0}, Lcom/hrd/managers/f1;->g0()Landroid/content/SharedPreferences;
+
+    move-result-object v0
+
+    const-string v1, "previous_premium_com.hrd.motivation"
+
+    const/4 v2, 0x0
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getBoolean(Ljava/lang/String;Z)Z
+
+    move-result v0
+
+    return v0
+.end method
