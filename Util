@@ -1,0 +1,7930 @@
+.class public final Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;
+.super Ljava/lang/Object;
+.source "SourceFile"
+
+
+# static fields
+.field public static final CACERT_FILENAME:Ljava/lang/String; = "cacert.pem"
+
+.field public static final PRIVACY_LAW_CCPA:I = 0x2
+
+.field public static final PRIVACY_LAW_GDPR:I = 0x1
+
+.field public static final PRIVACY_LAW_JAPAN:I = 0x3
+
+.field public static final PRIVACY_LAW_UNKNOWN:I = 0x0
+
+.field public static final SERVICE_ID_APPLE:Ljava/lang/String; = "apple"
+
+.field public static final SERVICE_ID_FACEBOOK:Ljava/lang/String; = "facebook"
+
+.field public static final SERVICE_ID_IBIS_ACCOUNT:Ljava/lang/String; = "ibis"
+
+.field public static final SERVICE_ID_TWITTER:Ljava/lang/String; = "twitter"
+
+.field private static final a:Z
+
+.field private static final b:Z
+
+.field private static final c:Ljava/lang/String;
+
+.field private static final d:[Ljava/util/regex/Pattern;
+
+.field static e:Landroid/content/Context;
+
+.field private static f:Z
+
+.field private static g:I
+
+.field private static final h:Landroid/os/Handler;
+
+
+# direct methods
+.method static constructor <clinit>()V
+    .registers 4
+
+    .line 1
+    invoke-static {}, LT8/g;->b()V
+
+    .line 4
+    const/4 v0, 0x1
+
+    .line 5
+    sput-boolean v0, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->a:Z
+
+    .line 7
+    const/4 v0, 0x0
+
+    .line 8
+    sput-boolean v0, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->b:Z
+
+    .line 10
+    const-string v0, "ibispaintx"
+
+    .line 12
+    sput-object v0, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->c:Ljava/lang/String;
+
+    .line 14
+    const-string v0, "https?://www\\.youtube(-nocookie)?\\.com/(embed)/([\\w\\.\\+\\-_\\.\\!\\~\\*\'\\(\\)]+)([\\?#].*)*"
+
+    .line 16
+    invoke-static {v0}, Ljava/util/regex/Pattern;->compile(Ljava/lang/String;)Ljava/util/regex/Pattern;
+
+    .line 19
+    move-result-object v0
+
+    .line 20
+    const-string v1, "https?://www\\.youtube(-nocookie)?\\.com/watch\\?(.*&)*v=([\\w\\.\\+\\-_\\.\\!\\~\\*\'\\(\\)]+)([&#].*)*"
+
+    .line 22
+    invoke-static {v1}, Ljava/util/regex/Pattern;->compile(Ljava/lang/String;)Ljava/util/regex/Pattern;
+
+    .line 25
+    move-result-object v1
+
+    .line 26
+    const-string v2, "https?://www\\.youtube(-nocookie)?\\.com/(v)/([\\w\\.\\+\\-_\\.\\!\\~\\*\'\\(\\)]+)([\\?#].*)*"
+
+    .line 28
+    invoke-static {v2}, Ljava/util/regex/Pattern;->compile(Ljava/lang/String;)Ljava/util/regex/Pattern;
+
+    .line 31
+    move-result-object v2
+
+    .line 32
+    const-string v3, "https?://you(tu)\\.(be)/([\\w\\.\\+\\-_\\.\\!\\~\\*\'\\(\\)]+)([\\?#].*)*"
+
+    .line 34
+    invoke-static {v3}, Ljava/util/regex/Pattern;->compile(Ljava/lang/String;)Ljava/util/regex/Pattern;
+
+    .line 37
+    move-result-object v3
+
+    .line 38
+    filled-new-array {v0, v1, v2, v3}, [Ljava/util/regex/Pattern;
+
+    .line 41
+    move-result-object v0
+
+    .line 42
+    sput-object v0, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->d:[Ljava/util/regex/Pattern;
+
+    .line 44
+    new-instance v0, Landroid/os/Handler;
+
+    .line 46
+    invoke-static {}, Landroid/os/Looper;->getMainLooper()Landroid/os/Looper;
+
+    .line 49
+    move-result-object v1
+
+    .line 50
+    invoke-direct {v0, v1}, Landroid/os/Handler;-><init>(Landroid/os/Looper;)V
+
+    .line 53
+    sput-object v0, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->h:Landroid/os/Handler;
+
+    .line 55
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->i()V
+
+    .line 58
+    return-void
+.end method
+
+.method public static synthetic a(Ljp/ne/ibis/ibispaintx/app/glwtk/IbisPaintActivity;ZZ)V
+    .registers 3
+
+    .line 1
+    invoke-static {p0, p1, p2}, Ljp/ne/ibis/ibispaintx/app/advertisement/AdUtil;->confirmConsent(Landroid/app/Activity;ZZ)V
+
+    .line 4
+    return-void
+.end method
+
+.method private static b(Z)Landroid/graphics/Point;
+    .registers 8
+
+    .line 1
+    sget v0, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->g:I
+
+    .line 3
+    const/4 v1, 0x0
+
+    .line 4
+    if-nez v0, :cond_6
+
+    .line 6
+    return-object v1
+
+    .line 7
+    :cond_6
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->i()V
+
+    .line 10
+    sget-object v0, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->e:Landroid/content/Context;
+
+    .line 12
+    if-nez v0, :cond_e
+
+    .line 14
+    return-object v1
+
+    .line 15
+    :cond_e
+    new-instance v0, Landroid/graphics/Point;
+
+    .line 17
+    invoke-direct {v0}, Landroid/graphics/Point;-><init>()V
+
+    .line 20
+    sget-object v1, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->e:Landroid/content/Context;
+
+    .line 22
+    const-string v2, "window"
+
+    .line 24
+    invoke-virtual {v1, v2}, Landroid/content/Context;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;
+
+    .line 27
+    move-result-object v1
+
+    .line 28
+    check-cast v1, Landroid/view/WindowManager;
+
+    .line 30
+    sget v2, Landroid/os/Build$VERSION;->SDK_INT:I
+
+    .line 32
+    const/16 v3, 0x1e
+
+    .line 34
+    if-lt v2, v3, :cond_47
+
+    .line 36
+    sget-object v4, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->e:Landroid/content/Context;
+
+    .line 38
+    const-string v5, "display"
+
+    .line 40
+    invoke-virtual {v4, v5}, Landroid/content/Context;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;
+
+    .line 43
+    move-result-object v4
+
+    .line 44
+    check-cast v4, Landroid/hardware/display/DisplayManager;
+
+    .line 46
+    const/4 v5, 0x0
+
+    .line 47
+    invoke-virtual {v4, v5}, Landroid/hardware/display/DisplayManager;->getDisplay(I)Landroid/view/Display;
+
+    .line 50
+    move-result-object v4
+
+    .line 51
+    invoke-static {v1}, LN3/e;->a(Landroid/view/WindowManager;)Landroid/view/WindowMetrics;
+
+    .line 54
+    move-result-object v5
+
+    .line 55
+    invoke-static {v5}, Lcom/applovin/impl/J1;->a(Landroid/view/WindowMetrics;)Landroid/graphics/Rect;
+
+    .line 58
+    move-result-object v5
+
+    .line 59
+    invoke-virtual {v5}, Landroid/graphics/Rect;->width()I
+
+    .line 62
+    move-result v6
+
+    .line 63
+    iput v6, v0, Landroid/graphics/Point;->x:I
+
+    .line 65
+    invoke-virtual {v5}, Landroid/graphics/Rect;->height()I
+
+    .line 68
+    move-result v5
+
+    .line 69
+    iput v5, v0, Landroid/graphics/Point;->y:I
+
+    .line 71
+    goto :goto_4e
+
+    .line 72
+    :cond_47
+    invoke-interface {v1}, Landroid/view/WindowManager;->getDefaultDisplay()Landroid/view/Display;
+
+    .line 75
+    move-result-object v4
+
+    .line 76
+    invoke-virtual {v4, v0}, Landroid/view/Display;->getSize(Landroid/graphics/Point;)V
+
+    .line 79
+    :goto_4e
+    new-instance v5, Landroid/graphics/Point;
+
+    .line 81
+    invoke-direct {v5, v0}, Landroid/graphics/Point;-><init>(Landroid/graphics/Point;)V
+
+    .line 84
+    if-lt v2, v3, :cond_6a
+
+    .line 86
+    :try_start_55
+    invoke-static {v1}, LN3/e;->a(Landroid/view/WindowManager;)Landroid/view/WindowMetrics;
+
+    .line 89
+    move-result-object v1
+
+    .line 90
+    invoke-static {v1}, Lcom/applovin/impl/J1;->a(Landroid/view/WindowMetrics;)Landroid/graphics/Rect;
+
+    .line 93
+    move-result-object v1
+
+    .line 94
+    invoke-virtual {v1}, Landroid/graphics/Rect;->width()I
+
+    .line 97
+    move-result v2
+
+    .line 98
+    iput v2, v5, Landroid/graphics/Point;->x:I
+
+    .line 100
+    invoke-virtual {v1}, Landroid/graphics/Rect;->height()I
+
+    .line 103
+    move-result v1
+
+    .line 104
+    iput v1, v5, Landroid/graphics/Point;->y:I
+
+    .line 106
+    goto :goto_6d
+
+    .line 107
+    :cond_6a
+    invoke-virtual {v4, v5}, Landroid/view/Display;->getRealSize(Landroid/graphics/Point;)V
+    :try_end_6d
+    .catch Ljava/lang/Exception; {:try_start_55 .. :try_end_6d} :catch_6d
+
+    .line 110
+    :catch_6d
+    :goto_6d
+    iget v1, v0, Landroid/graphics/Point;->x:I
+
+    .line 112
+    iget v0, v0, Landroid/graphics/Point;->y:I
+
+    .line 114
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->isAppMultiplier()Z
+
+    .line 117
+    move-result v2
+
+    .line 118
+    if-eqz v2, :cond_79
+
+    .line 120
+    mul-int/lit8 v1, v1, 0x2
+
+    .line 122
+    :cond_79
+    new-instance v2, Landroid/graphics/Point;
+
+    .line 124
+    invoke-direct {v2}, Landroid/graphics/Point;-><init>()V
+
+    .line 127
+    iget v3, v5, Landroid/graphics/Point;->x:I
+
+    .line 129
+    const/16 v4, 0x400
+
+    .line 131
+    if-le v3, v4, :cond_98
+
+    .line 133
+    iget v3, v5, Landroid/graphics/Point;->y:I
+
+    .line 135
+    if-le v3, v4, :cond_98
+
+    .line 137
+    if-eqz p0, :cond_8f
+
+    .line 139
+    iput v1, v2, Landroid/graphics/Point;->x:I
+
+    .line 141
+    iput v0, v2, Landroid/graphics/Point;->y:I
+
+    .line 143
+    goto :goto_a7
+
+    .line 144
+    :cond_8f
+    div-int/lit8 v1, v1, 0x2
+
+    .line 146
+    iput v1, v2, Landroid/graphics/Point;->x:I
+
+    .line 148
+    div-int/lit8 v0, v0, 0x2
+
+    .line 150
+    iput v0, v2, Landroid/graphics/Point;->y:I
+
+    .line 152
+    goto :goto_a7
+
+    .line 153
+    :cond_98
+    if-eqz p0, :cond_a3
+
+    .line 155
+    mul-int/lit8 v1, v1, 0x2
+
+    .line 157
+    iput v1, v2, Landroid/graphics/Point;->x:I
+
+    .line 159
+    mul-int/lit8 v0, v0, 0x2
+
+    .line 161
+    iput v0, v2, Landroid/graphics/Point;->y:I
+
+    .line 163
+    goto :goto_a7
+
+    .line 164
+    :cond_a3
+    iput v1, v2, Landroid/graphics/Point;->x:I
+
+    .line 166
+    iput v0, v2, Landroid/graphics/Point;->y:I
+
+    .line 168
+    :goto_a7
+    iget p0, v2, Landroid/graphics/Point;->x:I
+
+    .line 170
+    sget v0, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->g:I
+
+    .line 172
+    if-le p0, v0, :cond_b5
+
+    .line 174
+    iget v1, v2, Landroid/graphics/Point;->y:I
+
+    .line 176
+    mul-int/2addr v1, v0
+
+    .line 177
+    div-int/2addr v1, p0
+
+    .line 178
+    iput v1, v2, Landroid/graphics/Point;->y:I
+
+    .line 180
+    iput v0, v2, Landroid/graphics/Point;->x:I
+
+    .line 182
+    :cond_b5
+    iget p0, v2, Landroid/graphics/Point;->y:I
+
+    .line 184
+    if-le p0, v0, :cond_c1
+
+    .line 186
+    iget v1, v2, Landroid/graphics/Point;->x:I
+
+    .line 188
+    mul-int/2addr v1, v0
+
+    .line 189
+    div-int/2addr v1, p0
+
+    .line 190
+    iput v1, v2, Landroid/graphics/Point;->x:I
+
+    .line 192
+    iput v0, v2, Landroid/graphics/Point;->y:I
+
+    .line 194
+    :cond_c1
+    iget p0, v2, Landroid/graphics/Point;->x:I
+
+    .line 196
+    and-int/lit8 v0, p0, 0x1
+
+    .line 198
+    sub-int/2addr p0, v0
+
+    .line 199
+    iput p0, v2, Landroid/graphics/Point;->x:I
+
+    .line 201
+    iget p0, v2, Landroid/graphics/Point;->y:I
+
+    .line 203
+    and-int/lit8 v0, p0, 0x1
+
+    .line 205
+    sub-int/2addr p0, v0
+
+    .line 206
+    iput p0, v2, Landroid/graphics/Point;->y:I
+
+    .line 208
+    return-object v2
+.end method
+
+.method private static c(Ljava/lang/String;)I
+    .registers 9
+
+    .line 1
+    const/4 v0, 0x0
+
+    .line 2
+    if-eqz p0, :cond_66
+
+    .line 4
+    invoke-virtual {p0}, Ljava/lang/String;->length()I
+
+    .line 7
+    move-result v1
+
+    .line 8
+    if-gtz v1, :cond_a
+
+    .line 10
+    goto :goto_66
+
+    .line 11
+    :cond_a
+    new-instance v1, Ljava/io/File;
+
+    .line 13
+    invoke-direct {v1, p0}, Ljava/io/File;-><init>(Ljava/lang/String;)V
+
+    .line 16
+    invoke-virtual {v1}, Ljava/io/File;->exists()Z
+
+    .line 19
+    move-result p0
+
+    .line 20
+    if-eqz p0, :cond_66
+
+    .line 22
+    invoke-virtual {v1}, Ljava/io/File;->isDirectory()Z
+
+    .line 25
+    move-result p0
+
+    .line 26
+    if-nez p0, :cond_1c
+
+    .line 28
+    goto :goto_66
+
+    .line 29
+    :cond_1c
+    invoke-virtual {v1}, Ljava/io/File;->listFiles()[Ljava/io/File;
+
+    .line 32
+    move-result-object p0
+
+    .line 33
+    if-eqz p0, :cond_66
+
+    .line 35
+    array-length v1, p0
+
+    .line 36
+    if-gtz v1, :cond_26
+
+    .line 38
+    goto :goto_66
+
+    .line 39
+    :cond_26
+    :try_start_26
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/art/ArtTool;->getIpvFileExtension()Ljava/lang/String;
+
+    .line 42
+    move-result-object v1
+
+    .line 43
+    sget-object v2, Ljava/util/Locale;->US:Ljava/util/Locale;
+
+    .line 45
+    invoke-virtual {v1, v2}, Ljava/lang/String;->toUpperCase(Ljava/util/Locale;)Ljava/lang/String;
+
+    .line 48
+    move-result-object v1
+    :try_end_30
+    .catch Ljp/ne/ibis/ibispaintx/app/jni/NativeException; {:try_start_26 .. :try_end_30} :catch_66
+
+    .line 49
+    array-length v2, p0
+
+    .line 50
+    move v3, v0
+
+    .line 51
+    :goto_32
+    if-ge v0, v2, :cond_65
+
+    .line 53
+    aget-object v4, p0, v0
+
+    .line 55
+    invoke-virtual {v4}, Ljava/io/File;->isFile()Z
+
+    .line 58
+    move-result v5
+
+    .line 59
+    if-nez v5, :cond_3d
+
+    .line 61
+    goto :goto_62
+
+    .line 62
+    :cond_3d
+    invoke-virtual {v4}, Ljava/io/File;->getName()Ljava/lang/String;
+
+    .line 65
+    move-result-object v5
+
+    .line 66
+    sget-object v6, Ljava/util/Locale;->US:Ljava/util/Locale;
+
+    .line 68
+    invoke-virtual {v5, v6}, Ljava/lang/String;->toUpperCase(Ljava/util/Locale;)Ljava/lang/String;
+
+    .line 71
+    move-result-object v6
+
+    .line 72
+    invoke-virtual {v6, v1}, Ljava/lang/String;->endsWith(Ljava/lang/String;)Z
+
+    .line 75
+    move-result v6
+
+    .line 76
+    if-eqz v6, :cond_62
+
+    .line 78
+    const-string v6, "."
+
+    .line 80
+    invoke-virtual {v5, v6}, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+
+    .line 83
+    move-result v5
+
+    .line 84
+    if-nez v5, :cond_62
+
+    .line 86
+    invoke-virtual {v4}, Ljava/io/File;->length()J
+
+    .line 89
+    move-result-wide v4
+
+    .line 90
+    const-wide/16 v6, 0x0
+
+    .line 92
+    cmp-long v4, v4, v6
+
+    .line 94
+    if-gtz v4, :cond_60
+
+    .line 96
+    goto :goto_62
+
+    .line 97
+    :cond_60
+    add-int/lit8 v3, v3, 0x1
+
+    .line 99
+    :cond_62
+    :goto_62
+    add-int/lit8 v0, v0, 0x1
+
+    .line 101
+    goto :goto_32
+
+    .line 102
+    :cond_65
+    return v3
+
+    .line 103
+    :catch_66
+    :cond_66
+    :goto_66
+    return v0
+.end method
+
+.method public static confirmAdMobConsent(ZZ)V
+    .registers 4
+
+    .line 1
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/IbisPaintApplication;->getApplication()Ljp/ne/ibis/ibispaintx/app/IbisPaintApplication;
+
+    .line 4
+    move-result-object v0
+
+    .line 5
+    invoke-virtual {v0}, Ljp/ne/ibis/ibispaintx/app/IbisPaintApplication;->f()Ljp/ne/ibis/ibispaintx/app/glwtk/IbisPaintActivity;
+
+    .line 8
+    move-result-object v0
+
+    .line 9
+    if-eqz v0, :cond_12
+
+    .line 11
+    new-instance v1, LT8/c;
+
+    .line 13
+    invoke-direct {v1, v0, p0, p1}, LT8/c;-><init>(Ljp/ne/ibis/ibispaintx/app/glwtk/IbisPaintActivity;ZZ)V
+
+    .line 16
+    invoke-static {v1}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->runOnMainThread(Ljava/lang/Runnable;)V
+
+    .line 19
+    :cond_12
+    return-void
+.end method
+
+.method public static copyResourceHtmlResourcesToCache(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
+    .registers 11
+
+    .line 1
+    const-string v0, ","
+
+    .line 3
+    invoke-virtual {p2, v0}, Ljava/lang/String;->split(Ljava/lang/String;)[Ljava/lang/String;
+
+    .line 6
+    move-result-object p2
+
+    .line 7
+    const/16 v0, 0x1000
+
+    .line 9
+    new-array v0, v0, [B
+
+    .line 11
+    new-instance v1, Ljava/io/File;
+
+    .line 13
+    invoke-direct {v1, p1}, Ljava/io/File;-><init>(Ljava/lang/String;)V
+
+    .line 16
+    invoke-virtual {v1}, Ljava/io/File;->mkdirs()Z
+
+    .line 19
+    array-length v1, p2
+
+    .line 20
+    const/4 v2, 0x0
+
+    .line 21
+    move v3, v2
+
+    .line 22
+    :goto_15
+    if-ge v3, v1, :cond_87
+
+    .line 24
+    aget-object v4, p2, v3
+
+    .line 26
+    new-instance v5, Ljava/lang/StringBuffer;
+
+    .line 28
+    invoke-direct {v5, p1}, Ljava/lang/StringBuffer;-><init>(Ljava/lang/String;)V
+
+    .line 31
+    sget-char v6, Ljava/io/File;->separatorChar:C
+
+    .line 33
+    invoke-virtual {v5, v6}, Ljava/lang/StringBuffer;->append(C)Ljava/lang/StringBuffer;
+
+    .line 36
+    invoke-virtual {v5, v4}, Ljava/lang/StringBuffer;->append(Ljava/lang/String;)Ljava/lang/StringBuffer;
+
+    .line 39
+    invoke-virtual {v5}, Ljava/lang/StringBuffer;->toString()Ljava/lang/String;
+
+    .line 42
+    move-result-object v5
+
+    .line 43
+    new-instance v6, Ljava/lang/StringBuilder;
+
+    .line 45
+    invoke-direct {v6}, Ljava/lang/StringBuilder;-><init>()V
+
+    .line 48
+    const-string v7, "htmls/"
+
+    .line 50
+    invoke-virtual {v6, v7}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    .line 53
+    invoke-virtual {v6, p0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    .line 56
+    const-string v7, "/"
+
+    .line 58
+    invoke-virtual {v6, v7}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    .line 61
+    invoke-virtual {v6, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    .line 64
+    invoke-virtual {v6}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    .line 67
+    move-result-object v4
+
+    .line 68
+    const/4 v6, 0x0
+
+    .line 69
+    :try_start_44
+    sget-object v7, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->e:Landroid/content/Context;
+
+    .line 71
+    invoke-virtual {v7}, Landroid/content/Context;->getAssets()Landroid/content/res/AssetManager;
+
+    .line 74
+    move-result-object v7
+
+    .line 75
+    invoke-virtual {v7, v4}, Landroid/content/res/AssetManager;->open(Ljava/lang/String;)Ljava/io/InputStream;
+
+    .line 78
+    move-result-object v4
+    :try_end_4e
+    .catch Ljava/io/IOException; {:try_start_44 .. :try_end_4e} :catch_6f
+    .catchall {:try_start_44 .. :try_end_4e} :catchall_6c
+
+    .line 79
+    :try_start_4e
+    new-instance v7, Ljava/io/FileOutputStream;
+
+    .line 81
+    invoke-direct {v7, v5}, Ljava/io/FileOutputStream;-><init>(Ljava/lang/String;)V
+    :try_end_53
+    .catch Ljava/io/IOException; {:try_start_4e .. :try_end_53} :catch_7c
+    .catchall {:try_start_4e .. :try_end_53} :catchall_6a
+
+    .line 84
+    :goto_53
+    :try_start_53
+    invoke-virtual {v4, v0}, Ljava/io/InputStream;->read([B)I
+
+    .line 87
+    move-result v5
+
+    .line 88
+    const/4 v6, -0x1
+
+    .line 89
+    if-eq v5, v6, :cond_63
+
+    .line 91
+    invoke-virtual {v7, v0, v2, v5}, Ljava/io/FileOutputStream;->write([BII)V
+    :try_end_5d
+    .catch Ljava/io/IOException; {:try_start_53 .. :try_end_5d} :catch_61
+    .catchall {:try_start_53 .. :try_end_5d} :catchall_5e
+
+    .line 94
+    goto :goto_53
+
+    .line 95
+    :catchall_5e
+    move-exception p0
+
+    .line 96
+    move-object v6, v7
+
+    .line 97
+    goto :goto_71
+
+    .line 98
+    :catch_61
+    move-object v6, v7
+
+    .line 99
+    goto :goto_7c
+
+    .line 100
+    :cond_63
+    :try_start_63
+    invoke-virtual {v7}, Ljava/io/FileOutputStream;->close()V
+    :try_end_66
+    .catch Ljava/io/IOException; {:try_start_63 .. :try_end_66} :catch_66
+
+    .line 103
+    :catch_66
+    :goto_66
+    :try_start_66
+    invoke-virtual {v4}, Ljava/io/InputStream;->close()V
+    :try_end_69
+    .catch Ljava/io/IOException; {:try_start_66 .. :try_end_69} :catch_84
+
+    .line 106
+    goto :goto_84
+
+    .line 107
+    :catchall_6a
+    move-exception p0
+
+    .line 108
+    goto :goto_71
+
+    .line 109
+    :catchall_6c
+    move-exception p0
+
+    .line 110
+    move-object v4, v6
+
+    .line 111
+    goto :goto_71
+
+    .line 112
+    :catch_6f
+    move-object v4, v6
+
+    .line 113
+    goto :goto_7c
+
+    .line 114
+    :goto_71
+    if-eqz v6, :cond_76
+
+    .line 116
+    :try_start_73
+    invoke-virtual {v6}, Ljava/io/FileOutputStream;->close()V
+    :try_end_76
+    .catch Ljava/io/IOException; {:try_start_73 .. :try_end_76} :catch_76
+
+    .line 119
+    :catch_76
+    :cond_76
+    if-eqz v4, :cond_7b
+
+    .line 121
+    :try_start_78
+    invoke-virtual {v4}, Ljava/io/InputStream;->close()V
+    :try_end_7b
+    .catch Ljava/io/IOException; {:try_start_78 .. :try_end_7b} :catch_7b
+
+    .line 124
+    :catch_7b
+    :cond_7b
+    throw p0
+
+    .line 125
+    :catch_7c
+    :goto_7c
+    if-eqz v6, :cond_81
+
+    .line 127
+    :try_start_7e
+    invoke-virtual {v6}, Ljava/io/FileOutputStream;->close()V
+    :try_end_81
+    .catch Ljava/io/IOException; {:try_start_7e .. :try_end_81} :catch_81
+
+    .line 130
+    :catch_81
+    :cond_81
+    if-eqz v4, :cond_84
+
+    .line 132
+    goto :goto_66
+
+    .line 133
+    :catch_84
+    :cond_84
+    :goto_84
+    add-int/lit8 v3, v3, 0x1
+
+    .line 135
+    goto :goto_15
+
+    .line 136
+    :cond_87
+    return-void
+.end method
+
+.method private static d(Ljava/lang/String;)J
+    .registers 11
+
+    .line 1
+    const-wide/16 v0, 0x0
+
+    .line 3
+    if-eqz p0, :cond_6c
+
+    .line 5
+    invoke-virtual {p0}, Ljava/lang/String;->length()I
+
+    .line 8
+    move-result v2
+
+    .line 9
+    if-gtz v2, :cond_b
+
+    .line 11
+    goto :goto_6c
+
+    .line 12
+    :cond_b
+    new-instance v2, Ljava/io/File;
+
+    .line 14
+    invoke-direct {v2, p0}, Ljava/io/File;-><init>(Ljava/lang/String;)V
+
+    .line 17
+    invoke-virtual {v2}, Ljava/io/File;->exists()Z
+
+    .line 20
+    move-result p0
+
+    .line 21
+    if-eqz p0, :cond_6c
+
+    .line 23
+    invoke-virtual {v2}, Ljava/io/File;->isDirectory()Z
+
+    .line 26
+    move-result p0
+
+    .line 27
+    if-nez p0, :cond_1d
+
+    .line 29
+    goto :goto_6c
+
+    .line 30
+    :cond_1d
+    invoke-virtual {v2}, Ljava/io/File;->listFiles()[Ljava/io/File;
+
+    .line 33
+    move-result-object p0
+
+    .line 34
+    if-eqz p0, :cond_6c
+
+    .line 36
+    array-length v2, p0
+
+    .line 37
+    if-gtz v2, :cond_27
+
+    .line 39
+    goto :goto_6c
+
+    .line 40
+    :cond_27
+    :try_start_27
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/art/ArtTool;->getIpvFileExtension()Ljava/lang/String;
+
+    .line 43
+    move-result-object v2
+
+    .line 44
+    sget-object v3, Ljava/util/Locale;->US:Ljava/util/Locale;
+
+    .line 46
+    invoke-virtual {v2, v3}, Ljava/lang/String;->toUpperCase(Ljava/util/Locale;)Ljava/lang/String;
+
+    .line 49
+    move-result-object v2
+    :try_end_31
+    .catch Ljp/ne/ibis/ibispaintx/app/jni/NativeException; {:try_start_27 .. :try_end_31} :catch_6c
+
+    .line 50
+    array-length v3, p0
+
+    .line 51
+    const/4 v4, 0x0
+
+    .line 52
+    move-wide v5, v0
+
+    .line 53
+    :goto_34
+    if-ge v4, v3, :cond_6b
+
+    .line 55
+    aget-object v7, p0, v4
+
+    .line 57
+    invoke-virtual {v7}, Ljava/io/File;->isFile()Z
+
+    .line 60
+    move-result v8
+
+    .line 61
+    if-nez v8, :cond_3f
+
+    .line 63
+    goto :goto_68
+
+    .line 64
+    :cond_3f
+    invoke-virtual {v7}, Ljava/io/File;->getName()Ljava/lang/String;
+
+    .line 67
+    move-result-object v8
+
+    .line 68
+    sget-object v9, Ljava/util/Locale;->US:Ljava/util/Locale;
+
+    .line 70
+    invoke-virtual {v8, v9}, Ljava/lang/String;->toUpperCase(Ljava/util/Locale;)Ljava/lang/String;
+
+    .line 73
+    move-result-object v9
+
+    .line 74
+    invoke-virtual {v9, v2}, Ljava/lang/String;->endsWith(Ljava/lang/String;)Z
+
+    .line 77
+    move-result v9
+
+    .line 78
+    if-eqz v9, :cond_68
+
+    .line 80
+    const-string v9, "."
+
+    .line 82
+    invoke-virtual {v8, v9}, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+
+    .line 85
+    move-result v8
+
+    .line 86
+    if-nez v8, :cond_68
+
+    .line 88
+    invoke-virtual {v7}, Ljava/io/File;->length()J
+
+    .line 91
+    move-result-wide v8
+
+    .line 92
+    cmp-long v8, v8, v0
+
+    .line 94
+    if-gtz v8, :cond_60
+
+    .line 96
+    goto :goto_68
+
+    .line 97
+    :cond_60
+    invoke-virtual {v7}, Ljava/io/File;->lastModified()J
+
+    .line 100
+    move-result-wide v7
+
+    .line 101
+    invoke-static {v5, v6, v7, v8}, Ljava/lang/Math;->max(JJ)J
+
+    .line 104
+    move-result-wide v5
+
+    .line 105
+    :cond_68
+    :goto_68
+    add-int/lit8 v4, v4, 0x1
+
+    .line 107
+    goto :goto_34
+
+    .line 108
+    :cond_6b
+    return-wide v5
+
+    .line 109
+    :catch_6c
+    :cond_6c
+    :goto_6c
+    return-wide v0
+.end method
+
+.method public static deleteResourceHtmlTemporaryDirectory(Ljava/lang/String;)V
+    .registers 2
+
+    .line 1
+    if-nez p0, :cond_3
+
+    .line 3
+    return-void
+
+    .line 4
+    :cond_3
+    new-instance v0, Ljava/io/File;
+
+    .line 6
+    invoke-direct {v0, p0}, Ljava/io/File;-><init>(Ljava/lang/String;)V
+
+    .line 9
+    invoke-static {v0}, Ljp/ne/ibis/ibispaintx/app/util/FileUtil;->deleteFile(Ljava/io/File;)V
+
+    .line 12
+    return-void
+.end method
+
+.method private static e()Ljava/lang/String;
+    .registers 2
+
+    .line 1
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/IbisPaintApplication;->getApplication()Ljp/ne/ibis/ibispaintx/app/IbisPaintApplication;
+
+    .line 4
+    move-result-object v0
+
+    .line 5
+    invoke-virtual {v0}, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
+
+    .line 8
+    move-result-object v0
+
+    .line 9
+    invoke-virtual {v0}, Landroid/content/res/Resources;->getConfiguration()Landroid/content/res/Configuration;
+
+    .line 12
+    move-result-object v0
+
+    .line 13
+    invoke-virtual {v0}, Landroid/content/res/Configuration;->getLocales()Landroid/os/LocaleList;
+
+    .line 16
+    move-result-object v0
+
+    .line 17
+    const/4 v1, 0x0
+
+    .line 18
+    invoke-virtual {v0, v1}, Landroid/os/LocaleList;->get(I)Ljava/util/Locale;
+
+    .line 21
+    move-result-object v0
+
+    .line 22
+    invoke-virtual {v0}, Ljava/util/Locale;->getCountry()Ljava/lang/String;
+
+    .line 25
+    move-result-object v0
+
+    .line 26
+    return-object v0
+.end method
+
+.method public static exitApplication(Landroid/app/Activity;)V
+    .registers 3
+
+    .line 1
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/IbisPaintApplication;->getApplication()Ljp/ne/ibis/ibispaintx/app/IbisPaintApplication;
+
+    .line 4
+    move-result-object v0
+
+    .line 5
+    const/4 v1, 0x0
+
+    .line 6
+    invoke-virtual {v0, v1}, Ljp/ne/ibis/ibispaintx/app/IbisPaintApplication;->H(Z)V
+
+    .line 9
+    if-eqz p0, :cond_10
+
+    .line 11
+    invoke-virtual {p0}, Landroid/app/Activity;->finishAffinity()V
+
+    .line 14
+    invoke-virtual {p0}, Landroid/app/Activity;->finishAndRemoveTask()V
+
+    .line 17
+    :cond_10
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/IbisPaintApplication;->getApplication()Ljp/ne/ibis/ibispaintx/app/IbisPaintApplication;
+
+    .line 20
+    move-result-object p0
+
+    .line 21
+    invoke-virtual {p0}, Ljp/ne/ibis/ibispaintx/app/IbisPaintApplication;->e()Ljp/ne/ibis/ibispaintx/app/glwtk/IbisPaintGlapeApplication;
+
+    .line 24
+    move-result-object p0
+
+    .line 25
+    if-eqz p0, :cond_2e
+
+    .line 27
+    invoke-virtual {p0}, Ljp/ne/ibis/ibispaintx/app/glwtk/GlapeApplication;->getDownloader()Ljp/ne/ibis/ibispaintx/app/glwtk/downloader/Downloader;
+
+    .line 30
+    move-result-object v0
+
+    .line 31
+    check-cast v0, Ljp/ne/ibis/ibispaintx/app/glwtk/downloader/IbisPaintDownloader;
+
+    .line 33
+    if-eqz v0, :cond_25
+
+    .line 35
+    invoke-virtual {v0}, Ljp/ne/ibis/ibispaintx/app/glwtk/downloader/Downloader;->cancelDownloadAll()V
+
+    .line 38
+    :cond_25
+    invoke-virtual {p0}, Ljp/ne/ibis/ibispaintx/app/glwtk/IbisPaintGlapeApplication;->getIpvFileDownloader()Ljp/ne/ibis/ibispaintx/app/glwtk/downloader/IbisPaintDownloader;
+
+    .line 41
+    move-result-object p0
+
+    .line 42
+    if-eqz p0, :cond_2e
+
+    .line 44
+    invoke-virtual {p0}, Ljp/ne/ibis/ibispaintx/app/glwtk/downloader/Downloader;->cancelDownloadAll()V
+
+    .line 47
+    :cond_2e
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/configuration/ConfigurationChunk;->e()Ljp/ne/ibis/ibispaintx/app/configuration/ConfigurationChunk;
+
+    .line 50
+    move-result-object p0
+
+    .line 51
+    invoke-virtual {p0}, Ljp/ne/ibis/ibispaintx/app/configuration/ConfigurationChunk;->t()V
+
+    .line 54
+    return-void
+.end method
+
+.method private static f(Landroid/os/StatFs;)J
+    .registers 5
+
+    .line 1
+    invoke-virtual {p0}, Landroid/os/StatFs;->getAvailableBlocksLong()J
+
+    .line 4
+    move-result-wide v0
+
+    .line 5
+    invoke-virtual {p0}, Landroid/os/StatFs;->getBlockSizeLong()J
+
+    .line 8
+    move-result-wide v2
+
+    .line 9
+    mul-long/2addr v0, v2
+
+    .line 10
+    return-wide v0
+.end method
+
+.method public static fixActivityScreenOrientation(Landroid/app/Activity;)V
+    .registers 5
+
+    .line 1
+    if-nez p0, :cond_3
+
+    .line 3
+    goto :goto_49
+
+    .line 4
+    :cond_3
+    sget v0, Landroid/os/Build$VERSION;->SDK_INT:I
+
+    .line 6
+    const/16 v1, 0x1e
+
+    .line 8
+    if-lt v0, v1, :cond_e
+
+    .line 10
+    invoke-static {p0}, LT8/b;->a(Landroid/app/Activity;)Landroid/view/Display;
+
+    .line 13
+    move-result-object v0
+
+    .line 14
+    goto :goto_16
+
+    .line 15
+    :cond_e
+    invoke-virtual {p0}, Landroid/app/Activity;->getWindowManager()Landroid/view/WindowManager;
+
+    .line 18
+    move-result-object v0
+
+    .line 19
+    invoke-interface {v0}, Landroid/view/WindowManager;->getDefaultDisplay()Landroid/view/Display;
+
+    .line 22
+    move-result-object v0
+
+    .line 23
+    :goto_16
+    invoke-virtual {v0}, Landroid/view/Display;->getRotation()I
+
+    .line 26
+    move-result v0
+
+    .line 27
+    invoke-virtual {p0}, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
+
+    .line 30
+    move-result-object v1
+
+    .line 31
+    invoke-virtual {v1}, Landroid/content/res/Resources;->getConfiguration()Landroid/content/res/Configuration;
+
+    .line 34
+    move-result-object v1
+
+    .line 35
+    iget v1, v1, Landroid/content/res/Configuration;->orientation:I
+
+    .line 37
+    const/4 v2, 0x1
+
+    .line 38
+    if-ne v1, v2, :cond_37
+
+    .line 40
+    if-eqz v0, :cond_33
+
+    .line 42
+    const/4 v1, 0x3
+
+    .line 43
+    if-ne v0, v1, :cond_2d
+
+    .line 45
+    goto :goto_33
+
+    .line 46
+    :cond_2d
+    const/16 v0, 0x9
+
+    .line 48
+    invoke-virtual {p0, v0}, Landroid/app/Activity;->setRequestedOrientation(I)V
+
+    .line 51
+    return-void
+
+    .line 52
+    :cond_33
+    :goto_33
+    invoke-virtual {p0, v2}, Landroid/app/Activity;->setRequestedOrientation(I)V
+
+    .line 55
+    return-void
+
+    .line 56
+    :cond_37
+    const/4 v3, 0x2
+
+    .line 57
+    if-ne v1, v3, :cond_49
+
+    .line 59
+    if-eqz v0, :cond_45
+
+    .line 61
+    if-ne v0, v2, :cond_3f
+
+    .line 63
+    goto :goto_45
+
+    .line 64
+    :cond_3f
+    const/16 v0, 0x8
+
+    .line 66
+    invoke-virtual {p0, v0}, Landroid/app/Activity;->setRequestedOrientation(I)V
+
+    .line 69
+    return-void
+
+    .line 70
+    :cond_45
+    :goto_45
+    const/4 v0, 0x0
+
+    .line 71
+    invoke-virtual {p0, v0}, Landroid/app/Activity;->setRequestedOrientation(I)V
+
+    .line 74
+    :cond_49
+    :goto_49
+    return-void
+.end method
+
+.method public static formatDateTimeToSettingsFile(D)Ljava/lang/String;
+    .registers 5
+
+    .line 1
+    new-instance v0, Ljava/util/Date;
+
+    .line 3
+    const-wide v1, 0x408f400000000000L  # 1000.0
+
+    .line 8
+    mul-double/2addr p0, v1
+
+    .line 9
+    double-to-long p0, p0
+
+    .line 10
+    invoke-direct {v0, p0, p1}, Ljava/util/Date;-><init>(J)V
+
+    .line 13
+    const-string p0, "yyyy-MM-dd"
+
+    .line 15
+    invoke-static {p0, v0}, Landroid/text/format/DateFormat;->format(Ljava/lang/CharSequence;Ljava/util/Date;)Ljava/lang/CharSequence;
+
+    .line 18
+    move-result-object p0
+
+    .line 19
+    invoke-interface {p0}, Ljava/lang/CharSequence;->toString()Ljava/lang/String;
+
+    .line 22
+    move-result-object p0
+
+    .line 23
+    return-object p0
+.end method
+
+.method private static g(Landroid/content/Context;)V
+    .registers 2
+
+    .line 1
+    if-eqz p0, :cond_e
+
+    .line 3
+    sput-object p0, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->e:Landroid/content/Context;
+
+    .line 5
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/util/DeviceUtil;->isTablet()Z
+
+    .line 8
+    move-result p0
+
+    .line 9
+    sput-boolean p0, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->f:Z
+
+    .line 11
+    const/4 p0, 0x0
+
+    .line 12
+    sput p0, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->g:I
+
+    .line 14
+    return-void
+
+    .line 15
+    :cond_e
+    new-instance p0, Ljava/lang/NullPointerException;
+
+    .line 17
+    const-string v0, "Parameter context must not be a null."
+
+    .line 19
+    invoke-direct {p0, v0}, Ljava/lang/NullPointerException;-><init>(Ljava/lang/String;)V
+
+    .line 22
+    throw p0
+.end method
+
+.method public static generateUuid()Ljava/lang/String;
+    .registers 1
+
+    .line 1
+    invoke-static {}, Ljava/util/UUID;->randomUUID()Ljava/util/UUID;
+
+    .line 4
+    move-result-object v0
+
+    .line 5
+    invoke-virtual {v0}, Ljava/util/UUID;->toString()Ljava/lang/String;
+
+    .line 8
+    move-result-object v0
+
+    .line 9
+    return-object v0
+.end method
+
+.method public static getAcceptDirectoryPath(I)Ljava/lang/String;
+    .registers 2
+
+    .line 1
+    invoke-static {p0}, Ljp/ne/ibis/ibispaintx/app/glwtk/io/FileSystem;->getCacheDirectoryPath(I)Ljava/lang/String;
+
+    .line 4
+    move-result-object p0
+
+    .line 5
+    if-nez p0, :cond_8
+
+    .line 7
+    const/4 p0, 0x0
+
+    .line 8
+    return-object p0
+
+    .line 9
+    :cond_8
+    new-instance v0, Ljava/lang/StringBuilder;
+
+    .line 11
+    invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
+
+    .line 14
+    invoke-virtual {v0, p0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    .line 17
+    const-string p0, "/"
+
+    .line 19
+    invoke-virtual {v0, p0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    .line 22
+    const-string p0, "accept"
+
+    .line 24
+    invoke-virtual {v0, p0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    .line 27
+    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    .line 30
+    move-result-object p0
+
+    .line 31
+    return-object p0
+.end method
+
+.method public static getAdManager()Ljp/ne/ibis/ibispaintx/app/advertisement/AdManager;
+    .registers 1
+
+    .line 1
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/IbisPaintApplication;->getApplication()Ljp/ne/ibis/ibispaintx/app/IbisPaintApplication;
+
+    .line 4
+    move-result-object v0
+
+    .line 5
+    invoke-virtual {v0}, Ljp/ne/ibis/ibispaintx/app/IbisPaintApplication;->e()Ljp/ne/ibis/ibispaintx/app/glwtk/IbisPaintGlapeApplication;
+
+    .line 8
+    move-result-object v0
+
+    .line 9
+    invoke-virtual {v0}, Ljp/ne/ibis/ibispaintx/app/glwtk/IbisPaintGlapeApplication;->getAdManager()Ljp/ne/ibis/ibispaintx/app/advertisement/AdManager;
+
+    .line 12
+    move-result-object v0
+
+    .line 13
+    return-object v0
+.end method
+
+.method public static getAdMobConsentAdOptimization()Z
+    .registers 1
+
+    .line 1
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/IbisPaintApplication;->getApplication()Ljp/ne/ibis/ibispaintx/app/IbisPaintApplication;
+
+    .line 4
+    move-result-object v0
+
+    .line 5
+    invoke-virtual {v0}, Ljp/ne/ibis/ibispaintx/app/IbisPaintApplication;->f()Ljp/ne/ibis/ibispaintx/app/glwtk/IbisPaintActivity;
+
+    .line 8
+    move-result-object v0
+
+    .line 9
+    if-eqz v0, :cond_f
+
+    .line 11
+    invoke-static {v0}, Ljp/ne/ibis/ibispaintx/app/advertisement/AdUtil;->getConsentAdOptimization(Landroid/app/Activity;)Z
+
+    .line 14
+    move-result v0
+
+    .line 15
+    return v0
+
+    .line 16
+    :cond_f
+    const/4 v0, 0x0
+
+    .line 17
+    return v0
+.end method
+
+.method public static getAdMobConsentAnalyticsData()Z
+    .registers 3
+
+    .line 1
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/IbisPaintApplication;->getApplication()Ljp/ne/ibis/ibispaintx/app/IbisPaintApplication;
+
+    .line 4
+    move-result-object v0
+
+    .line 5
+    invoke-virtual {v0}, Ljp/ne/ibis/ibispaintx/app/IbisPaintApplication;->f()Ljp/ne/ibis/ibispaintx/app/glwtk/IbisPaintActivity;
+
+    .line 8
+    move-result-object v0
+
+    .line 9
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->isEducationVersion()Z
+
+    .line 12
+    move-result v1
+
+    .line 13
+    const/4 v2, 0x0
+
+    .line 14
+    if-eqz v1, :cond_10
+
+    .line 16
+    return v2
+
+    .line 17
+    :cond_10
+    if-eqz v0, :cond_17
+
+    .line 19
+    invoke-static {v0}, Ljp/ne/ibis/ibispaintx/app/advertisement/AdUtil;->getConsentAnalyticsData(Landroid/app/Activity;)Z
+
+    .line 22
+    move-result v0
+
+    .line 23
+    return v0
+
+    .line 24
+    :cond_17
+    return v2
+.end method
+
+.method public static getAppHistoryPageUrl(Ljava/lang/String;)Ljava/lang/String;
+    .registers 3
+
+    .line 1
+    new-instance v0, Ljava/lang/StringBuffer;
+
+    .line 3
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->getServiceUrl()Ljava/lang/String;
+
+    .line 6
+    move-result-object v1
+
+    .line 7
+    invoke-direct {v0, v1}, Ljava/lang/StringBuffer;-><init>(Ljava/lang/String;)V
+
+    .line 10
+    const-string v1, "historyAndRights.jsp?newsID="
+
+    .line 12
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuffer;->append(Ljava/lang/String;)Ljava/lang/StringBuffer;
+
+    .line 15
+    invoke-virtual {v0, p0}, Ljava/lang/StringBuffer;->append(Ljava/lang/String;)Ljava/lang/StringBuffer;
+
+    .line 18
+    invoke-virtual {v0}, Ljava/lang/StringBuffer;->toString()Ljava/lang/String;
+
+    .line 21
+    move-result-object p0
+
+    .line 22
+    return-object p0
+.end method
+
+.method public static getApplicationBuildNumberString()Ljava/lang/String;
+    .registers 1
+
+    .line 1
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/IbisPaintApplication;->getApplication()Ljp/ne/ibis/ibispaintx/app/IbisPaintApplication;
+
+    .line 4
+    move-result-object v0
+
+    .line 5
+    invoke-virtual {v0}, Ljp/ne/ibis/ibispaintx/app/IbisPaintApplication;->d()Ljava/lang/String;
+
+    .line 8
+    move-result-object v0
+
+    .line 9
+    return-object v0
+.end method
+
+.method public static getApplicationIdentifier()Ljava/lang/String;
+    .registers 1
+
+    .line 1
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->i()V
+
+    .line 4
+    sget-object v0, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->e:Landroid/content/Context;
+
+    .line 6
+    if-nez v0, :cond_a
+
+    .line 8
+    const-string v0, ""
+
+    .line 10
+    return-object v0
+
+    .line 11
+    :cond_a
+    invoke-virtual {v0}, Landroid/content/Context;->getPackageName()Ljava/lang/String;
+
+    .line 14
+    move-result-object v0
+
+    .line 15
+    return-object v0
+.end method
+
+.method public static getApplicationName()Ljava/lang/String;
+    .registers 2
+
+    .line 1
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->i()V
+
+    .line 4
+    sget-object v0, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->e:Landroid/content/Context;
+
+    .line 6
+    if-nez v0, :cond_a
+
+    .line 8
+    const-string v0, ""
+
+    .line 10
+    return-object v0
+
+    .line 11
+    :cond_a
+    const v1, 0x7f130021
+
+    .line 14
+    invoke-virtual {v0, v1}, Landroid/content/Context;->getString(I)Ljava/lang/String;
+
+    .line 17
+    move-result-object v0
+
+    .line 18
+    return-object v0
+.end method
+
+.method public static getApplicationType()I
+    .registers 1
+
+    .line 1
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->isFreeVersion()Z
+
+    .line 4
+    move-result v0
+
+    .line 5
+    if-eqz v0, :cond_8
+
+    .line 7
+    const/4 v0, 0x2
+
+    .line 8
+    return v0
+
+    .line 9
+    :cond_8
+    const/4 v0, 0x1
+
+    .line 10
+    return v0
+.end method
+
+.method public static getApplicationVersionNumber()I
+    .registers 1
+
+    .line 1
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/IbisPaintApplication;->getApplication()Ljp/ne/ibis/ibispaintx/app/IbisPaintApplication;
+
+    .line 4
+    move-result-object v0
+
+    .line 5
+    invoke-virtual {v0}, Ljp/ne/ibis/ibispaintx/app/IbisPaintApplication;->l()I
+
+    .line 8
+    move-result v0
+
+    .line 9
+    return v0
+.end method
+
+.method public static getApplicationVersionNumberString()Ljava/lang/String;
+    .registers 1
+
+    .line 1
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/IbisPaintApplication;->getApplication()Ljp/ne/ibis/ibispaintx/app/IbisPaintApplication;
+
+    .line 4
+    move-result-object v0
+
+    .line 5
+    invoke-virtual {v0}, Ljp/ne/ibis/ibispaintx/app/IbisPaintApplication;->n()Ljava/lang/String;
+
+    .line 8
+    move-result-object v0
+
+    .line 9
+    return-object v0
+.end method
+
+.method public static getApplicationVersionString()Ljava/lang/String;
+    .registers 1
+
+    .line 1
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/IbisPaintApplication;->getApplication()Ljp/ne/ibis/ibispaintx/app/IbisPaintApplication;
+
+    .line 4
+    move-result-object v0
+
+    .line 5
+    invoke-virtual {v0}, Ljp/ne/ibis/ibispaintx/app/IbisPaintApplication;->p()Ljava/lang/String;
+
+    .line 8
+    move-result-object v0
+
+    .line 9
+    return-object v0
+.end method
+
+.method public static getArtIdFromArtPageUrl(Ljava/lang/String;)Ljava/lang/String;
+    .registers 5
+
+    .line 1
+    const/4 v0, 0x0
+
+    .line 2
+    if-eqz p0, :cond_24
+
+    .line 4
+    invoke-virtual {p0}, Ljava/lang/String;->length()I
+
+    .line 7
+    move-result v1
+
+    .line 8
+    if-gtz v1, :cond_a
+
+    .line 10
+    goto :goto_24
+
+    .line 11
+    :cond_a
+    const-string v1, "/art/"
+
+    .line 13
+    invoke-virtual {p0, v1}, Ljava/lang/String;->indexOf(Ljava/lang/String;)I
+
+    .line 16
+    move-result v1
+
+    .line 17
+    const/4 v2, -0x1
+
+    .line 18
+    if-ne v1, v2, :cond_14
+
+    .line 20
+    return-object v0
+
+    .line 21
+    :cond_14
+    add-int/lit8 v1, v1, 0x5
+
+    .line 23
+    const/16 v3, 0x2f
+
+    .line 25
+    invoke-virtual {p0, v3, v1}, Ljava/lang/String;->indexOf(II)I
+
+    .line 28
+    move-result v3
+
+    .line 29
+    if-ne v3, v2, :cond_1f
+
+    .line 31
+    return-object v0
+
+    .line 32
+    :cond_1f
+    invoke-virtual {p0, v1, v3}, Ljava/lang/String;->substring(II)Ljava/lang/String;
+
+    .line 35
+    move-result-object p0
+
+    .line 36
+    return-object p0
+
+    .line 37
+    :cond_24
+    :goto_24
+    return-object v0
+.end method
+
+.method public static getArtOriginalImageUrl(Ljava/lang/String;)Ljava/lang/String;
+    .registers 3
+
+    .line 1
+    new-instance v0, Ljava/lang/StringBuffer;
+
+    .line 3
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->getServiceUrl()Ljava/lang/String;
+
+    .line 6
+    move-result-object v1
+
+    .line 7
+    invoke-direct {v0, v1}, Ljava/lang/StringBuffer;-><init>(Ljava/lang/String;)V
+
+    .line 10
+    const-string v1, "image"
+
+    .line 12
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuffer;->append(Ljava/lang/String;)Ljava/lang/StringBuffer;
+
+    .line 15
+    invoke-virtual {v0, p0}, Ljava/lang/StringBuffer;->append(Ljava/lang/String;)Ljava/lang/StringBuffer;
+
+    .line 18
+    const-string p0, ".png"
+
+    .line 20
+    invoke-virtual {v0, p0}, Ljava/lang/StringBuffer;->append(Ljava/lang/String;)Ljava/lang/StringBuffer;
+
+    .line 23
+    invoke-virtual {v0}, Ljava/lang/StringBuffer;->toString()Ljava/lang/String;
+
+    .line 26
+    move-result-object p0
+
+    .line 27
+    return-object p0
+.end method
+
+.method public static getArtPageUrl(Ljava/lang/String;)Ljava/lang/String;
+    .registers 3
+
+    .line 1
+    new-instance v0, Ljava/lang/StringBuffer;
+
+    .line 3
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->getServiceUrl()Ljava/lang/String;
+
+    .line 6
+    move-result-object v1
+
+    .line 7
+    invoke-direct {v0, v1}, Ljava/lang/StringBuffer;-><init>(Ljava/lang/String;)V
+
+    .line 10
+    const-string v1, "art/"
+
+    .line 12
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuffer;->append(Ljava/lang/String;)Ljava/lang/StringBuffer;
+
+    .line 15
+    invoke-virtual {v0, p0}, Ljava/lang/StringBuffer;->append(Ljava/lang/String;)Ljava/lang/StringBuffer;
+
+    .line 18
+    const-string p0, "/"
+
+    .line 20
+    invoke-virtual {v0, p0}, Ljava/lang/StringBuffer;->append(Ljava/lang/String;)Ljava/lang/StringBuffer;
+
+    .line 23
+    invoke-virtual {v0}, Ljava/lang/StringBuffer;->toString()Ljava/lang/String;
+
+    .line 26
+    move-result-object p0
+
+    .line 27
+    return-object p0
+.end method
+
+.method public static final getCacheDirectoryPath()Ljava/lang/String;
+    .registers 1
+
+    .line 6
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->isUseExternalStorage()Z
+
+    move-result v0
+
+    invoke-static {v0}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->getCacheDirectoryPath(Z)Ljava/lang/String;
+
+    move-result-object v0
+
+    return-object v0
+.end method
+
+.method public static final getCacheDirectoryPath(Z)Ljava/lang/String;
+    .registers 3
+
+    .line 1
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->i()V
+
+    .line 2
+    sget-object v0, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->e:Landroid/content/Context;
+
+    const/4 v1, 0x0
+
+    if-nez v0, :cond_9
+
+    return-object v1
+
+    :cond_9
+    if-eqz p0, :cond_10
+
+    .line 3
+    invoke-virtual {v0}, Landroid/content/Context;->getExternalCacheDir()Ljava/io/File;
+
+    move-result-object p0
+
+    goto :goto_14
+
+    .line 4
+    :cond_10
+    invoke-virtual {v0}, Landroid/content/Context;->getCacheDir()Ljava/io/File;
+
+    move-result-object p0
+
+    :goto_14
+    if-nez p0, :cond_17
+
+    return-object v1
+
+    .line 5
+    :cond_17
+    invoke-virtual {p0}, Ljava/io/File;->getAbsolutePath()Ljava/lang/String;
+
+    move-result-object p0
+
+    return-object p0
+.end method
+
+.method public static getConnectionTimeout()I
+    .registers 1
+
+    const/16 v0, 0x7530
+
+    return v0
+.end method
+
+.method public static getErrorMessageFromNativeExceptionCode(JI)Ljava/lang/String;
+    .registers 5
+
+    .line 1
+    const-wide v0, -0x31ffffff00000000L  # -5.39199447563187E67
+
+    .line 6
+    cmp-long p2, p0, v0
+
+    .line 8
+    if-nez p2, :cond_14
+
+    .line 10
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/jni/StringResource;->getInstance()Ljp/ne/ibis/ibispaintx/app/jni/StringResource;
+
+    .line 13
+    move-result-object p0
+
+    .line 14
+    const-string p1, "Chunk_Error_Read"
+
+    .line 16
+    invoke-virtual {p0, p1}, Ljp/ne/ibis/ibispaintx/app/jni/StringResource;->getText(Ljava/lang/String;)Ljava/lang/String;
+
+    .line 19
+    move-result-object p0
+
+    .line 20
+    return-object p0
+
+    .line 21
+    :cond_14
+    const-wide v0, -0x31fffffe00000000L  # -5.391999617833611E67
+
+    .line 26
+    cmp-long p2, p0, v0
+
+    .line 28
+    if-nez p2, :cond_28
+
+    .line 30
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/jni/StringResource;->getInstance()Ljp/ne/ibis/ibispaintx/app/jni/StringResource;
+
+    .line 33
+    move-result-object p0
+
+    .line 34
+    const-string p1, "Chunk_Error_Write"
+
+    .line 36
+    invoke-virtual {p0, p1}, Ljp/ne/ibis/ibispaintx/app/jni/StringResource;->getText(Ljava/lang/String;)Ljava/lang/String;
+
+    .line 39
+    move-result-object p0
+
+    .line 40
+    return-object p0
+
+    .line 41
+    :cond_28
+    const-wide v0, -0x4ffeffff00000000L  # -1.835187465175998E-77
+
+    .line 46
+    cmp-long p2, p0, v0
+
+    .line 48
+    if-nez p2, :cond_3c
+
+    .line 50
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/jni/StringResource;->getInstance()Ljp/ne/ibis/ibispaintx/app/jni/StringResource;
+
+    .line 53
+    move-result-object p0
+
+    .line 54
+    const-string p1, "VectorPlayer_Error_File_Damaged"
+
+    .line 56
+    invoke-virtual {p0, p1}, Ljp/ne/ibis/ibispaintx/app/jni/StringResource;->getText(Ljava/lang/String;)Ljava/lang/String;
+
+    .line 59
+    move-result-object p0
+
+    .line 60
+    return-object p0
+
+    .line 61
+    :cond_3c
+    const-wide v0, -0x4ffefffe00000000L  # -1.8351891123944267E-77
+
+    .line 66
+    cmp-long p2, p0, v0
+
+    .line 68
+    if-nez p2, :cond_50
+
+    .line 70
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/jni/StringResource;->getInstance()Ljp/ne/ibis/ibispaintx/app/jni/StringResource;
+
+    .line 73
+    move-result-object p0
+
+    .line 74
+    const-string p1, "VectorPlayer_Error_File_Invalid_Format"
+
+    .line 76
+    invoke-virtual {p0, p1}, Ljp/ne/ibis/ibispaintx/app/jni/StringResource;->getText(Ljava/lang/String;)Ljava/lang/String;
+
+    .line 79
+    move-result-object p0
+
+    .line 80
+    return-object p0
+
+    .line 81
+    :cond_50
+    const-wide v0, -0x4ffdffff00000000L  # -1.9431395721146787E-77
+
+    .line 86
+    cmp-long p2, p0, v0
+
+    .line 88
+    if-nez p2, :cond_64
+
+    .line 90
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/jni/StringResource;->getInstance()Ljp/ne/ibis/ibispaintx/app/jni/StringResource;
+
+    .line 93
+    move-result-object p0
+
+    .line 94
+    const-string p1, "VectorPlayer_Error_Chunk_Invalid_Value"
+
+    .line 96
+    invoke-virtual {p0, p1}, Ljp/ne/ibis/ibispaintx/app/jni/StringResource;->getText(Ljava/lang/String;)Ljava/lang/String;
+
+    .line 99
+    move-result-object p0
+
+    .line 100
+    return-object p0
+
+    .line 101
+    :cond_64
+    const-wide v0, -0x4ffdfffe00000000L  # -1.9431412193331073E-77
+
+    .line 106
+    cmp-long p2, p0, v0
+
+    .line 108
+    if-nez p2, :cond_78
+
+    .line 110
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/jni/StringResource;->getInstance()Ljp/ne/ibis/ibispaintx/app/jni/StringResource;
+
+    .line 113
+    move-result-object p0
+
+    .line 114
+    const-string p1, "VectorPlayer_Error_Chunk_Inconsistent"
+
+    .line 116
+    invoke-virtual {p0, p1}, Ljp/ne/ibis/ibispaintx/app/jni/StringResource;->getText(Ljava/lang/String;)Ljava/lang/String;
+
+    .line 119
+    move-result-object p0
+
+    .line 120
+    return-object p0
+
+    .line 121
+    :cond_78
+    const-wide v0, -0x4ffcffff00000000L  # -2.0510916790533592E-77
+
+    .line 126
+    cmp-long p2, p0, v0
+
+    .line 128
+    if-nez p2, :cond_8c
+
+    .line 130
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/jni/StringResource;->getInstance()Ljp/ne/ibis/ibispaintx/app/jni/StringResource;
+
+    .line 133
+    move-result-object p0
+
+    .line 134
+    const-string p1, "VectorPlayer_Error_NotSupport_OverLayerNum"
+
+    .line 136
+    invoke-virtual {p0, p1}, Ljp/ne/ibis/ibispaintx/app/jni/StringResource;->getText(Ljava/lang/String;)Ljava/lang/String;
+
+    .line 139
+    move-result-object p0
+
+    .line 140
+    return-object p0
+
+    .line 141
+    :cond_8c
+    const-wide v0, -0x3ffeffff00000000L  # -2.125001907348633
+
+    .line 146
+    cmp-long p2, p0, v0
+
+    .line 148
+    if-nez p2, :cond_a0
+
+    .line 150
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/jni/StringResource;->getInstance()Ljp/ne/ibis/ibispaintx/app/jni/StringResource;
+
+    .line 153
+    move-result-object p0
+
+    .line 154
+    const-string p1, "VectorConverter_Error_File_No_Complete_Image"
+
+    .line 156
+    invoke-virtual {p0, p1}, Ljp/ne/ibis/ibispaintx/app/jni/StringResource;->getText(Ljava/lang/String;)Ljava/lang/String;
+
+    .line 159
+    move-result-object p0
+
+    .line 160
+    return-object p0
+
+    .line 161
+    :cond_a0
+    const-wide v0, -0x3ffefffe00000000L  # -2.1250038146972656
+
+    .line 166
+    cmp-long p2, p0, v0
+
+    .line 168
+    if-nez p2, :cond_b4
+
+    .line 170
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/jni/StringResource;->getInstance()Ljp/ne/ibis/ibispaintx/app/jni/StringResource;
+
+    .line 173
+    move-result-object p0
+
+    .line 174
+    const-string p1, "VectorConverter_Error_File_Invalid_Complete_Image"
+
+    .line 176
+    invoke-virtual {p0, p1}, Ljp/ne/ibis/ibispaintx/app/jni/StringResource;->getText(Ljava/lang/String;)Ljava/lang/String;
+
+    .line 179
+    move-result-object p0
+
+    .line 180
+    return-object p0
+
+    .line 181
+    :cond_b4
+    const-wide v0, -0x3ffdffff00000000L  # -2.250001907348633
+
+    .line 186
+    cmp-long p2, p0, v0
+
+    .line 188
+    if-nez p2, :cond_c8
+
+    .line 190
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/jni/StringResource;->getInstance()Ljp/ne/ibis/ibispaintx/app/jni/StringResource;
+
+    .line 193
+    move-result-object p0
+
+    .line 194
+    const-string p1, "VectorConverter_Error_Movie_Failed_Initialize"
+
+    .line 196
+    invoke-virtual {p0, p1}, Ljp/ne/ibis/ibispaintx/app/jni/StringResource;->getText(Ljava/lang/String;)Ljava/lang/String;
+
+    .line 199
+    move-result-object p0
+
+    .line 200
+    return-object p0
+
+    .line 201
+    :cond_c8
+    const-wide v0, -0x3ffdfffe00000000L  # -2.2500038146972656
+
+    .line 206
+    cmp-long p2, p0, v0
+
+    .line 208
+    if-nez p2, :cond_dc
+
+    .line 210
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/jni/StringResource;->getInstance()Ljp/ne/ibis/ibispaintx/app/jni/StringResource;
+
+    .line 213
+    move-result-object p0
+
+    .line 214
+    const-string p1, "VectorConverter_Error_Movie_Failed_Create"
+
+    .line 216
+    invoke-virtual {p0, p1}, Ljp/ne/ibis/ibispaintx/app/jni/StringResource;->getText(Ljava/lang/String;)Ljava/lang/String;
+
+    .line 219
+    move-result-object p0
+
+    .line 220
+    return-object p0
+
+    .line 221
+    :cond_dc
+    const-wide v0, -0x3ffdfffd00000000L  # -2.2500057220458984
+
+    .line 226
+    cmp-long p0, p0, v0
+
+    .line 228
+    if-nez p0, :cond_f0
+
+    .line 230
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/jni/StringResource;->getInstance()Ljp/ne/ibis/ibispaintx/app/jni/StringResource;
+
+    .line 233
+    move-result-object p0
+
+    .line 234
+    const-string p1, "VectorConverter_Error_Movie_No_Support_Format"
+
+    .line 236
+    invoke-virtual {p0, p1}, Ljp/ne/ibis/ibispaintx/app/jni/StringResource;->getText(Ljava/lang/String;)Ljava/lang/String;
+
+    .line 239
+    move-result-object p0
+
+    .line 240
+    return-object p0
+
+    .line 241
+    :cond_f0
+    const/4 p0, 0x0
+
+    .line 242
+    return-object p0
+.end method
+
+.method public static getExportFilePath(Ljava/io/File;Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+    .registers 10
+
+    .line 1
+    invoke-virtual {p0}, Ljava/io/File;->getAbsolutePath()Ljava/lang/String;
+
+    .line 4
+    move-result-object p0
+
+    .line 5
+    const-wide/16 v0, 0x0
+
+    .line 7
+    move-wide v2, v0
+
+    .line 8
+    :goto_7
+    const-wide v4, 0x7fffffffffffffffL
+
+    .line 13
+    cmp-long v4, v2, v4
+
+    .line 15
+    if-gtz v4, :cond_54
+
+    .line 17
+    new-instance v4, Ljava/lang/StringBuffer;
+
+    .line 19
+    invoke-direct {v4, p0}, Ljava/lang/StringBuffer;-><init>(Ljava/lang/String;)V
+
+    .line 22
+    sget-object v5, Ljava/io/File;->separator:Ljava/lang/String;
+
+    .line 24
+    invoke-virtual {v4, v5}, Ljava/lang/StringBuffer;->append(Ljava/lang/String;)Ljava/lang/StringBuffer;
+
+    .line 27
+    invoke-virtual {v4, p1}, Ljava/lang/StringBuffer;->append(Ljava/lang/String;)Ljava/lang/StringBuffer;
+
+    .line 30
+    cmp-long v5, v2, v0
+
+    .line 32
+    if-eqz v5, :cond_29
+
+    .line 34
+    const-string v5, "-"
+
+    .line 36
+    invoke-virtual {v4, v5}, Ljava/lang/StringBuffer;->append(Ljava/lang/String;)Ljava/lang/StringBuffer;
+
+    .line 39
+    invoke-virtual {v4, v2, v3}, Ljava/lang/StringBuffer;->append(J)Ljava/lang/StringBuffer;
+
+    .line 42
+    :cond_29
+    invoke-virtual {p2}, Ljava/lang/String;->length()I
+
+    .line 45
+    move-result v5
+
+    .line 46
+    if-lez v5, :cond_3d
+
+    .line 48
+    const/4 v5, 0x0
+
+    .line 49
+    invoke-virtual {p2, v5}, Ljava/lang/String;->charAt(I)C
+
+    .line 52
+    move-result v5
+
+    .line 53
+    const/16 v6, 0x2e
+
+    .line 55
+    if-eq v5, v6, :cond_3d
+
+    .line 57
+    const-string v5, "."
+
+    .line 59
+    invoke-virtual {v4, v5}, Ljava/lang/StringBuffer;->append(Ljava/lang/String;)Ljava/lang/StringBuffer;
+
+    .line 62
+    :cond_3d
+    invoke-virtual {v4, p2}, Ljava/lang/StringBuffer;->append(Ljava/lang/String;)Ljava/lang/StringBuffer;
+
+    .line 65
+    invoke-virtual {v4}, Ljava/lang/StringBuffer;->toString()Ljava/lang/String;
+
+    .line 68
+    move-result-object v4
+
+    .line 69
+    new-instance v5, Ljava/io/File;
+
+    .line 71
+    invoke-direct {v5, v4}, Ljava/io/File;-><init>(Ljava/lang/String;)V
+
+    .line 74
+    invoke-virtual {v5}, Ljava/io/File;->exists()Z
+
+    .line 77
+    move-result v5
+
+    .line 78
+    if-nez v5, :cond_50
+
+    .line 80
+    return-object v4
+
+    .line 81
+    :cond_50
+    const-wide/16 v4, 0x1
+
+    .line 83
+    add-long/2addr v2, v4
+
+    .line 84
+    goto :goto_7
+
+    .line 85
+    :cond_54
+    const/4 p0, 0x0
+
+    .line 86
+    return-object p0
+.end method
+
+.method public static getExternalStorageTypeCapitalizeString()Ljava/lang/String;
+    .registers 2
+
+    .line 1
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->i()V
+
+    .line 4
+    sget-object v0, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->e:Landroid/content/Context;
+
+    .line 6
+    if-nez v0, :cond_a
+
+    .line 8
+    const-string v0, ""
+
+    .line 10
+    return-object v0
+
+    .line 11
+    :cond_a
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->isExternalStorageRemovable()Z
+
+    .line 14
+    move-result v0
+
+    .line 15
+    if-eqz v0, :cond_1a
+
+    .line 17
+    sget-object v0, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->e:Landroid/content/Context;
+
+    .line 19
+    const v1, 0x7f13019e
+
+    .line 22
+    invoke-virtual {v0, v1}, Landroid/content/Context;->getString(I)Ljava/lang/String;
+
+    .line 25
+    move-result-object v0
+
+    .line 26
+    return-object v0
+
+    .line 27
+    :cond_1a
+    sget-object v0, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->e:Landroid/content/Context;
+
+    .line 29
+    const v1, 0x7f1301a3
+
+    .line 32
+    invoke-virtual {v0, v1}, Landroid/content/Context;->getString(I)Ljava/lang/String;
+
+    .line 35
+    move-result-object v0
+
+    .line 36
+    return-object v0
+.end method
+
+.method public static getExternalStorageTypeString()Ljava/lang/String;
+    .registers 2
+
+    .line 1
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->i()V
+
+    .line 4
+    sget-object v0, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->e:Landroid/content/Context;
+
+    .line 6
+    if-nez v0, :cond_a
+
+    .line 8
+    const-string v0, ""
+
+    .line 10
+    return-object v0
+
+    .line 11
+    :cond_a
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->isExternalStorageRemovable()Z
+
+    .line 14
+    move-result v0
+
+    .line 15
+    if-eqz v0, :cond_1a
+
+    .line 17
+    sget-object v0, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->e:Landroid/content/Context;
+
+    .line 19
+    const v1, 0x7f13019d
+
+    .line 22
+    invoke-virtual {v0, v1}, Landroid/content/Context;->getString(I)Ljava/lang/String;
+
+    .line 25
+    move-result-object v0
+
+    .line 26
+    return-object v0
+
+    .line 27
+    :cond_1a
+    sget-object v0, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->e:Landroid/content/Context;
+
+    .line 29
+    const v1, 0x7f1301a2
+
+    .line 32
+    invoke-virtual {v0, v1}, Landroid/content/Context;->getString(I)Ljava/lang/String;
+
+    .line 35
+    move-result-object v0
+
+    .line 36
+    return-object v0
+.end method
+
+.method public static getExternalStorageUnreadableMessage()Ljava/lang/String;
+    .registers 3
+
+    .line 1
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->i()V
+
+    .line 4
+    sget-object v0, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->e:Landroid/content/Context;
+
+    .line 6
+    if-nez v0, :cond_a
+
+    .line 8
+    const-string v0, ""
+
+    .line 10
+    return-object v0
+
+    .line 11
+    :cond_a
+    const v1, 0x7f13019c
+
+    .line 14
+    invoke-virtual {v0, v1}, Landroid/content/Context;->getString(I)Ljava/lang/String;
+
+    .line 17
+    move-result-object v0
+
+    .line 18
+    sget-object v1, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->e:Landroid/content/Context;
+
+    .line 20
+    const v2, 0x7f13019d
+
+    .line 23
+    invoke-virtual {v1, v2}, Landroid/content/Context;->getString(I)Ljava/lang/String;
+
+    .line 26
+    move-result-object v1
+
+    .line 27
+    const-string v2, "###TYPE###"
+
+    .line 29
+    invoke-virtual {v0, v2, v1}, Ljava/lang/String;->replace(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)Ljava/lang/String;
+
+    .line 32
+    move-result-object v0
+
+    .line 33
+    return-object v0
+.end method
+
+.method public static getExternalStorageUnwritableMessage()Ljava/lang/String;
+    .registers 3
+
+    .line 1
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->i()V
+
+    .line 4
+    sget-object v0, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->e:Landroid/content/Context;
+
+    .line 6
+    if-nez v0, :cond_a
+
+    .line 8
+    const-string v0, ""
+
+    .line 10
+    return-object v0
+
+    .line 11
+    :cond_a
+    const v1, 0x7f13019b
+
+    .line 14
+    invoke-virtual {v0, v1}, Landroid/content/Context;->getString(I)Ljava/lang/String;
+
+    .line 17
+    move-result-object v0
+
+    .line 18
+    sget-object v1, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->e:Landroid/content/Context;
+
+    .line 20
+    const v2, 0x7f13019d
+
+    .line 23
+    invoke-virtual {v1, v2}, Landroid/content/Context;->getString(I)Ljava/lang/String;
+
+    .line 26
+    move-result-object v1
+
+    .line 27
+    const-string v2, "###TYPE###"
+
+    .line 29
+    invoke-virtual {v0, v2, v1}, Ljava/lang/String;->replace(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)Ljava/lang/String;
+
+    .line 32
+    move-result-object v0
+
+    .line 33
+    return-object v0
+.end method
+
+.method public static getFeatureAccessManager()Ljp/ne/ibis/ibispaintx/app/purchase/FeatureAccessManager;
+    .registers 1
+
+    .line 1
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/IbisPaintApplication;->getApplication()Ljp/ne/ibis/ibispaintx/app/IbisPaintApplication;
+
+    .line 4
+    move-result-object v0
+
+    .line 5
+    invoke-virtual {v0}, Ljp/ne/ibis/ibispaintx/app/IbisPaintApplication;->e()Ljp/ne/ibis/ibispaintx/app/glwtk/IbisPaintGlapeApplication;
+
+    .line 8
+    move-result-object v0
+
+    .line 9
+    invoke-virtual {v0}, Ljp/ne/ibis/ibispaintx/app/glwtk/IbisPaintGlapeApplication;->getFeatureAccessManager()Ljp/ne/ibis/ibispaintx/app/purchase/FeatureAccessManager;
+
+    .line 12
+    move-result-object v0
+
+    .line 13
+    return-object v0
+.end method
+
+.method public static getFileDirectoryPath()Ljava/lang/String;
+    .registers 1
+
+    .line 6
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->isUseExternalStorage()Z
+
+    move-result v0
+
+    invoke-static {v0}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->getFileDirectoryPath(Z)Ljava/lang/String;
+
+    move-result-object v0
+
+    return-object v0
+.end method
+
+.method public static getFileDirectoryPath(Z)Ljava/lang/String;
+    .registers 3
+
+    .line 1
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->i()V
+
+    .line 2
+    sget-object v0, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->e:Landroid/content/Context;
+
+    const/4 v1, 0x0
+
+    if-nez v0, :cond_9
+
+    return-object v1
+
+    :cond_9
+    if-eqz p0, :cond_10
+
+    .line 3
+    invoke-virtual {v0, v1}, Landroid/content/Context;->getExternalFilesDir(Ljava/lang/String;)Ljava/io/File;
+
+    move-result-object p0
+
+    goto :goto_14
+
+    .line 4
+    :cond_10
+    invoke-virtual {v0}, Landroid/content/Context;->getFilesDir()Ljava/io/File;
+
+    move-result-object p0
+
+    :goto_14
+    if-nez p0, :cond_17
+
+    return-object v1
+
+    .line 5
+    :cond_17
+    invoke-virtual {p0}, Ljava/io/File;->getAbsolutePath()Ljava/lang/String;
+
+    move-result-object p0
+
+    return-object p0
+.end method
+
+.method public static getGoogleCloudProjectNumber()Ljava/lang/String;
+    .registers 1
+
+    .line 1
+    const-string v0, "828039187317"
+
+    .line 3
+    return-object v0
+.end method
+
+.method public static getGoogleOAuthClientId()Ljava/lang/String;
+    .registers 1
+
+    .line 1
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->isFreeVersion()Z
+
+    .line 4
+    move-result v0
+
+    .line 5
+    if-eqz v0, :cond_9
+
+    .line 7
+    const-string v0, "828039187317-cvba1lf6tnvg5ogg8s0b24khhjavrb03.apps.googleusercontent.com"
+
+    .line 9
+    return-object v0
+
+    .line 10
+    :cond_9
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->isEducationVersion()Z
+
+    .line 13
+    move-result v0
+
+    .line 14
+    if-eqz v0, :cond_12
+
+    .line 16
+    const-string v0, "828039187317-frfu336pf8n4q1i1icoo1nivqpcsh8ep.apps.googleusercontent.com"
+
+    .line 18
+    return-object v0
+
+    .line 19
+    :cond_12
+    const-string v0, "828039187317-se6ea4stnur92siuvjf48b42d5lmc0g3.apps.googleusercontent.com"
+
+    .line 21
+    return-object v0
+.end method
+
+.method public static getHttpRequestCustomHeaderMap(Ljava/lang/String;Ljava/lang/String;)Ljava/util/Map;
+    .registers 3
+    .annotation system Ldalvik/annotation/Signature;
+        value = {
+            "(",
+            "Ljava/lang/String;",
+            "Ljava/lang/String;",
+            ")",
+            "Ljava/util/Map<",
+            "Ljava/lang/String;",
+            "Ljava/lang/String;",
+            ">;"
+        }
+    .end annotation
+
+    .line 1
+    new-instance p0, Ljava/util/HashMap;
+
+    .line 3
+    invoke-direct {p0}, Ljava/util/HashMap;-><init>()V
+
+    .line 6
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->getHttpRequestCustomHeaderName()Ljava/lang/String;
+
+    .line 9
+    move-result-object p1
+
+    .line 10
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->getHttpRequestCustomHeaderValue()Ljava/lang/String;
+
+    .line 13
+    move-result-object v0
+
+    .line 14
+    invoke-interface {p0, p1, v0}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+
+    .line 17
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/configuration/ConfigurationChunk;->e()Ljp/ne/ibis/ibispaintx/app/configuration/ConfigurationChunk;
+
+    .line 20
+    move-result-object p1
+
+    .line 21
+    invoke-virtual {p1}, Ljp/ne/ibis/ibispaintx/app/configuration/ConfigurationChunk;->b()Ljava/lang/String;
+
+    .line 24
+    move-result-object p1
+
+    .line 25
+    const-string v0, "X-UUID"
+
+    .line 27
+    invoke-interface {p0, v0, p1}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+
+    .line 30
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->getPlatformType()I
+
+    .line 33
+    move-result p1
+
+    .line 34
+    const/4 v0, 0x3
+
+    .line 35
+    if-ne p1, v0, :cond_34
+
+    .line 37
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->isTabletUserInterface()Z
+
+    .line 40
+    move-result p1
+
+    .line 41
+    if-eqz p1, :cond_2d
+
+    .line 43
+    const-string p1, "tablet"
+
+    .line 45
+    goto :goto_2f
+
+    .line 46
+    :cond_2d
+    const-string p1, "phone"
+
+    .line 48
+    :goto_2f
+    const-string v0, "X-UIType"
+
+    .line 50
+    invoke-interface {p0, v0, p1}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+
+    .line 53
+    :cond_34
+    return-object p0
+.end method
+
+.method public static getHttpRequestCustomHeaderName()Ljava/lang/String;
+    .registers 1
+
+    .line 1
+    const-string v0, "X-IbisPaint"
+
+    .line 3
+    return-object v0
+.end method
+
+.method public static getHttpRequestCustomHeaderValue()Ljava/lang/String;
+    .registers 3
+
+    .line 1
+    new-instance v0, Ljava/lang/StringBuilder;
+
+    .line 3
+    invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
+
+    .line 6
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->getPlatformType()I
+
+    .line 9
+    move-result v1
+
+    .line 10
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    .line 13
+    const/16 v1, 0x2f
+
+    .line 15
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
+
+    .line 18
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->getApplicationType()I
+
+    .line 21
+    move-result v2
+
+    .line 22
+    invoke-virtual {v0, v2}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    .line 25
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
+
+    .line 28
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->getApplicationVersionNumber()I
+
+    .line 31
+    move-result v2
+
+    .line 32
+    invoke-virtual {v0, v2}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    .line 35
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
+
+    .line 38
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->isEducationVersion()Z
+
+    .line 41
+    move-result v1
+
+    .line 42
+    if-eqz v1, :cond_2e
+
+    .line 44
+    const-string v1, "1"
+
+    .line 46
+    goto :goto_30
+
+    .line 47
+    :cond_2e
+    const-string v1, "0"
+
+    .line 49
+    :goto_30
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    .line 52
+    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    .line 55
+    move-result-object v0
+
+    .line 56
+    return-object v0
+.end method
+
+.method public static getInitialConfiguration()Ljp/ne/ibis/ibispaintx/app/configuration/InitialConfiguration;
+    .registers 1
+
+    .line 1
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/IbisPaintApplication;->getApplication()Ljp/ne/ibis/ibispaintx/app/IbisPaintApplication;
+
+    .line 4
+    move-result-object v0
+
+    .line 5
+    invoke-virtual {v0}, Ljp/ne/ibis/ibispaintx/app/IbisPaintApplication;->e()Ljp/ne/ibis/ibispaintx/app/glwtk/IbisPaintGlapeApplication;
+
+    .line 8
+    move-result-object v0
+
+    .line 9
+    invoke-virtual {v0}, Ljp/ne/ibis/ibispaintx/app/glwtk/IbisPaintGlapeApplication;->getInitialConfiguration()Ljp/ne/ibis/ibispaintx/app/configuration/InitialConfiguration;
+
+    .line 12
+    move-result-object v0
+
+    .line 13
+    return-object v0
+.end method
+
+.method public static getIntentDebugString(Landroid/content/Intent;)Ljava/lang/String;
+    .registers 10
+
+    .line 1
+    const-string v0, "null"
+
+    .line 3
+    if-nez p0, :cond_5
+
+    .line 5
+    return-object v0
+
+    .line 6
+    :cond_5
+    new-instance v1, Ljava/lang/StringBuilder;
+
+    .line 8
+    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
+
+    .line 11
+    invoke-virtual {p0}, Ljava/lang/Object;->getClass()Ljava/lang/Class;
+
+    .line 14
+    move-result-object v2
+
+    .line 15
+    invoke-virtual {v2}, Ljava/lang/Class;->getName()Ljava/lang/String;
+
+    .line 18
+    move-result-object v2
+
+    .line 19
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    .line 22
+    const/16 v2, 0x40
+
+    .line 24
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
+
+    .line 27
+    invoke-static {p0}, Ljava/lang/System;->identityHashCode(Ljava/lang/Object;)I
+
+    .line 30
+    move-result v3
+
+    .line 31
+    invoke-static {v3}, Ljava/lang/Integer;->toHexString(I)Ljava/lang/String;
+
+    .line 34
+    move-result-object v3
+
+    .line 35
+    invoke-virtual {v1, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    .line 38
+    const/16 v3, 0xa
+
+    .line 40
+    invoke-virtual {v1, v3}, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
+
+    .line 43
+    const-string v4, " action: "
+
+    .line 45
+    invoke-virtual {v1, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    .line 48
+    invoke-virtual {p0}, Landroid/content/Intent;->getAction()Ljava/lang/String;
+
+    .line 51
+    move-result-object v4
+
+    .line 52
+    invoke-virtual {v1, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    .line 55
+    invoke-virtual {v1, v3}, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
+
+    .line 58
+    const-string v4, " data: "
+
+    .line 60
+    invoke-virtual {v1, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    .line 63
+    invoke-virtual {p0}, Landroid/content/Intent;->getData()Landroid/net/Uri;
+
+    .line 66
+    move-result-object v4
+
+    .line 67
+    invoke-virtual {v1, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+
+    .line 70
+    invoke-virtual {v1, v3}, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
+
+    .line 73
+    invoke-virtual {p0}, Landroid/content/Intent;->getCategories()Ljava/util/Set;
+
+    .line 76
+    move-result-object v4
+
+    .line 77
+    new-instance v5, Ljava/lang/StringBuilder;
+
+    .line 79
+    invoke-direct {v5}, Ljava/lang/StringBuilder;-><init>()V
+
+    .line 82
+    if-eqz v4, :cond_6c
+
+    .line 84
+    invoke-interface {v4}, Ljava/util/Set;->iterator()Ljava/util/Iterator;
+
+    .line 87
+    move-result-object v0
+
+    .line 88
+    :goto_57
+    invoke-interface {v0}, Ljava/util/Iterator;->hasNext()Z
+
+    .line 91
+    move-result v4
+
+    .line 92
+    if-eqz v4, :cond_6f
+
+    .line 94
+    invoke-interface {v0}, Ljava/util/Iterator;->next()Ljava/lang/Object;
+
+    .line 97
+    move-result-object v4
+
+    .line 98
+    check-cast v4, Ljava/lang/String;
+
+    .line 100
+    invoke-virtual {v5, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    .line 103
+    const-string v4, " "
+
+    .line 105
+    invoke-virtual {v5, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    .line 108
+    goto :goto_57
+
+    .line 109
+    :cond_6c
+    invoke-virtual {v5, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    .line 112
+    :cond_6f
+    const-string v0, " categories: "
+
+    .line 114
+    invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    .line 117
+    invoke-virtual {v1, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/CharSequence;)Ljava/lang/StringBuilder;
+
+    .line 120
+    invoke-virtual {v1, v3}, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
+
+    .line 123
+    const-string v0, " type: "
+
+    .line 125
+    invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    .line 128
+    invoke-virtual {p0}, Landroid/content/Intent;->getType()Ljava/lang/String;
+
+    .line 131
+    move-result-object v0
+
+    .line 132
+    invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    .line 135
+    invoke-virtual {v1, v3}, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
+
+    .line 138
+    invoke-virtual {p0}, Landroid/content/Intent;->getComponent()Landroid/content/ComponentName;
+
+    .line 141
+    move-result-object v0
+
+    .line 142
+    if-eqz v0, :cond_d1
+
+    .line 144
+    const-string v4, " component: "
+
+    .line 146
+    invoke-virtual {v1, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    .line 149
+    invoke-virtual {v0}, Ljava/lang/Object;->getClass()Ljava/lang/Class;
+
+    .line 152
+    move-result-object v4
+
+    .line 153
+    invoke-virtual {v4}, Ljava/lang/Class;->getName()Ljava/lang/String;
+
+    .line 156
+    move-result-object v4
+
+    .line 157
+    invoke-virtual {v1, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    .line 160
+    const-string v4, "@"
+
+    .line 162
+    invoke-virtual {v1, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    .line 165
+    invoke-static {v0}, Ljava/lang/System;->identityHashCode(Ljava/lang/Object;)I
+
+    .line 168
+    move-result v4
+
+    .line 169
+    invoke-static {v4}, Ljava/lang/Integer;->toHexString(I)Ljava/lang/String;
+
+    .line 172
+    move-result-object v4
+
+    .line 173
+    invoke-virtual {v1, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    .line 176
+    invoke-virtual {v1, v3}, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
+
+    .line 179
+    const-string v4, "  package: "
+
+    .line 181
+    invoke-virtual {v1, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    .line 184
+    invoke-virtual {v0}, Landroid/content/ComponentName;->getPackageName()Ljava/lang/String;
+
+    .line 187
+    move-result-object v4
+
+    .line 188
+    invoke-virtual {v1, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    .line 191
+    invoke-virtual {v1, v3}, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
+
+    .line 194
+    const-string v4, "  class: "
+
+    .line 196
+    invoke-virtual {v1, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    .line 199
+    invoke-virtual {v0}, Landroid/content/ComponentName;->getClassName()Ljava/lang/String;
+
+    .line 202
+    move-result-object v0
+
+    .line 203
+    invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    .line 206
+    invoke-virtual {v1, v3}, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
+
+    .line 209
+    goto :goto_d6
+
+    .line 210
+    :cond_d1
+    const-string v0, " component: null\n"
+
+    .line 212
+    invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    .line 215
+    :goto_d6
+    invoke-virtual {p0}, Landroid/content/Intent;->getExtras()Landroid/os/Bundle;
+
+    .line 218
+    move-result-object v0
+
+    .line 219
+    const-string v4, "  "
+
+    .line 221
+    if-eqz v0, :cond_149
+
+    .line 223
+    const-string v5, " extras: "
+
+    .line 225
+    invoke-virtual {v1, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    .line 228
+    invoke-virtual {v0}, Ljava/lang/Object;->getClass()Ljava/lang/Class;
+
+    .line 231
+    move-result-object v5
+
+    .line 232
+    invoke-virtual {v5}, Ljava/lang/Class;->getName()Ljava/lang/String;
+
+    .line 235
+    move-result-object v5
+
+    .line 236
+    invoke-virtual {v1, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    .line 239
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
+
+    .line 242
+    invoke-static {v0}, Ljava/lang/System;->identityHashCode(Ljava/lang/Object;)I
+
+    .line 245
+    move-result v2
+
+    .line 246
+    invoke-static {v2}, Ljava/lang/Integer;->toHexString(I)Ljava/lang/String;
+
+    .line 249
+    move-result-object v2
+
+    .line 250
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    .line 253
+    invoke-virtual {v1, v3}, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
+
+    .line 256
+    invoke-virtual {v0}, Landroid/os/BaseBundle;->keySet()Ljava/util/Set;
+
+    .line 259
+    move-result-object v2
+
+    .line 260
+    invoke-interface {v2}, Ljava/util/Set;->iterator()Ljava/util/Iterator;
+
+    .line 263
+    move-result-object v2
+
+    .line 264
+    :goto_107
+    invoke-interface {v2}, Ljava/util/Iterator;->hasNext()Z
+
+    .line 267
+    move-result v5
+
+    .line 268
+    if-eqz v5, :cond_149
+
+    .line 270
+    invoke-interface {v2}, Ljava/util/Iterator;->next()Ljava/lang/Object;
+
+    .line 273
+    move-result-object v5
+
+    .line 274
+    check-cast v5, Ljava/lang/String;
+
+    .line 276
+    invoke-virtual {v0, v5}, Landroid/os/BaseBundle;->get(Ljava/lang/String;)Ljava/lang/Object;
+
+    .line 279
+    move-result-object v6
+
+    .line 280
+    if-eqz v6, :cond_13d
+
+    .line 282
+    invoke-virtual {v1, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    .line 285
+    invoke-virtual {v1, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    .line 288
+    const-string v5, ": "
+
+    .line 290
+    invoke-virtual {v1, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    .line 293
+    invoke-virtual {v1, v6}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+
+    .line 296
+    const-string v5, " (Type: "
+
+    .line 298
+    invoke-virtual {v1, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    .line 301
+    invoke-virtual {v6}, Ljava/lang/Object;->getClass()Ljava/lang/Class;
+
+    .line 304
+    move-result-object v5
+
+    .line 305
+    invoke-virtual {v5}, Ljava/lang/Class;->getName()Ljava/lang/String;
+
+    .line 308
+    move-result-object v5
+
+    .line 309
+    invoke-virtual {v1, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    .line 312
+    const-string v5, ")\n"
+
+    .line 314
+    invoke-virtual {v1, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    .line 317
+    goto :goto_107
+
+    .line 318
+    :cond_13d
+    invoke-virtual {v1, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    .line 321
+    invoke-virtual {v1, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    .line 324
+    const-string v5, ": null\n"
+
+    .line 326
+    invoke-virtual {v1, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    .line 329
+    goto :goto_107
+
+    .line 330
+    :cond_149
+    invoke-virtual {p0}, Landroid/content/Intent;->getFlags()I
+
+    .line 333
+    move-result p0
+
+    .line 334
+    const-string v0, " flag: 0x"
+
+    .line 336
+    invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    .line 339
+    invoke-static {p0}, Ljava/lang/Integer;->toHexString(I)Ljava/lang/String;
+
+    .line 342
+    move-result-object v0
+
+    .line 343
+    invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    .line 346
+    invoke-virtual {v1, v3}, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
+
+    .line 349
+    if-eqz p0, :cond_19e
+
+    .line 351
+    const-class v0, Landroid/content/Intent;
+
+    .line 353
+    invoke-virtual {v0}, Ljava/lang/Class;->getDeclaredFields()[Ljava/lang/reflect/Field;
+
+    .line 356
+    move-result-object v0
+
+    .line 357
+    array-length v2, v0
+
+    .line 358
+    const/4 v5, 0x0
+
+    .line 359
+    :goto_166
+    if-ge v5, v2, :cond_19e
+
+    .line 361
+    aget-object v6, v0, v5
+
+    .line 363
+    :try_start_16a
+    invoke-virtual {v6}, Ljava/lang/reflect/Field;->getModifiers()I
+
+    .line 366
+    move-result v7
+
+    .line 367
+    invoke-static {v7}, Ljava/lang/reflect/Modifier;->isStatic(I)Z
+
+    .line 370
+    move-result v7
+
+    .line 371
+    if-eqz v7, :cond_19b
+
+    .line 373
+    invoke-virtual {v6}, Ljava/lang/reflect/Field;->getType()Ljava/lang/Class;
+
+    .line 376
+    move-result-object v7
+
+    .line 377
+    sget-object v8, Ljava/lang/Integer;->TYPE:Ljava/lang/Class;
+
+    .line 379
+    if-eq v7, v8, :cond_17d
+
+    .line 381
+    goto :goto_19b
+
+    .line 382
+    :cond_17d
+    invoke-virtual {v6}, Ljava/lang/reflect/Field;->getName()Ljava/lang/String;
+
+    .line 385
+    move-result-object v7
+
+    .line 386
+    const-string v8, "FLAG_"
+
+    .line 388
+    invoke-virtual {v7, v8}, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+
+    .line 391
+    move-result v8
+
+    .line 392
+    if-nez v8, :cond_18a
+
+    .line 394
+    goto :goto_19b
+
+    .line 395
+    :cond_18a
+    const/4 v8, 0x0
+
+    .line 396
+    invoke-virtual {v6, v8}, Ljava/lang/reflect/Field;->getInt(Ljava/lang/Object;)I
+
+    .line 399
+    move-result v6
+
+    .line 400
+    and-int/2addr v6, p0
+
+    .line 401
+    if-eqz v6, :cond_19b
+
+    .line 403
+    invoke-virtual {v1, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    .line 406
+    invoke-virtual {v1, v7}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    .line 409
+    invoke-virtual {v1, v3}, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
+    :try_end_19b
+    .catch Ljava/lang/IllegalAccessException; {:try_start_16a .. :try_end_19b} :catch_19b
+
+    .line 412
+    :catch_19b
+    :cond_19b
+    :goto_19b
+    add-int/lit8 v5, v5, 0x1
+
+    .line 414
+    goto :goto_166
+
+    .line 415
+    :cond_19e
+    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    .line 418
+    move-result-object p0
+
+    .line 419
+    return-object p0
+.end method
+
+.method public static getInternalStorageTypeCapitalizeString()Ljava/lang/String;
+    .registers 2
+
+    .line 1
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->i()V
+
+    .line 4
+    sget-object v0, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->e:Landroid/content/Context;
+
+    .line 6
+    if-nez v0, :cond_a
+
+    .line 8
+    const-string v0, ""
+
+    .line 10
+    return-object v0
+
+    .line 11
+    :cond_a
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->isExternalStorageRemovable()Z
+
+    .line 14
+    move-result v0
+
+    .line 15
+    if-eqz v0, :cond_1a
+
+    .line 17
+    sget-object v0, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->e:Landroid/content/Context;
+
+    .line 19
+    const v1, 0x7f1301a4
+
+    .line 22
+    invoke-virtual {v0, v1}, Landroid/content/Context;->getString(I)Ljava/lang/String;
+
+    .line 25
+    move-result-object v0
+
+    .line 26
+    return-object v0
+
+    .line 27
+    :cond_1a
+    sget-object v0, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->e:Landroid/content/Context;
+
+    .line 29
+    const v1, 0x7f1301a1
+
+    .line 32
+    invoke-virtual {v0, v1}, Landroid/content/Context;->getString(I)Ljava/lang/String;
+
+    .line 35
+    move-result-object v0
+
+    .line 36
+    return-object v0
+.end method
+
+.method public static getInternalStorageTypeString()Ljava/lang/String;
+    .registers 2
+
+    .line 1
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->i()V
+
+    .line 4
+    sget-object v0, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->e:Landroid/content/Context;
+
+    .line 6
+    if-nez v0, :cond_a
+
+    .line 8
+    const-string v0, ""
+
+    .line 10
+    return-object v0
+
+    .line 11
+    :cond_a
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->isExternalStorageRemovable()Z
+
+    .line 14
+    move-result v0
+
+    .line 15
+    if-eqz v0, :cond_1a
+
+    .line 17
+    sget-object v0, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->e:Landroid/content/Context;
+
+    .line 19
+    const v1, 0x7f13019f
+
+    .line 22
+    invoke-virtual {v0, v1}, Landroid/content/Context;->getString(I)Ljava/lang/String;
+
+    .line 25
+    move-result-object v0
+
+    .line 26
+    return-object v0
+
+    .line 27
+    :cond_1a
+    sget-object v0, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->e:Landroid/content/Context;
+
+    .line 29
+    const v1, 0x7f1301a0
+
+    .line 32
+    invoke-virtual {v0, v1}, Landroid/content/Context;->getString(I)Ljava/lang/String;
+
+    .line 35
+    move-result-object v0
+
+    .line 36
+    return-object v0
+.end method
+
+.method public static getLanguage()Ljava/lang/String;
+    .registers 3
+
+    .line 1
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->i()V
+
+    .line 4
+    sget-object v0, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->e:Landroid/content/Context;
+
+    .line 6
+    const-string v1, "en"
+
+    .line 8
+    if-nez v0, :cond_a
+
+    .line 10
+    return-object v1
+
+    .line 11
+    :cond_a
+    const v2, 0x7f1300ee
+
+    .line 14
+    invoke-virtual {v0, v2}, Landroid/content/Context;->getString(I)Ljava/lang/String;
+
+    .line 17
+    move-result-object v0
+
+    .line 18
+    if-eqz v0, :cond_1b
+
+    .line 20
+    invoke-virtual {v0}, Ljava/lang/String;->length()I
+
+    .line 23
+    move-result v2
+
+    .line 24
+    if-nez v2, :cond_1a
+
+    .line 26
+    goto :goto_1b
+
+    .line 27
+    :cond_1a
+    return-object v0
+
+    .line 28
+    :cond_1b
+    :goto_1b
+    return-object v1
+.end method
+
+.method public static getLaunchScheme()Ljava/lang/String;
+    .registers 1
+
+    .line 1
+    sget-object v0, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->c:Ljava/lang/String;
+
+    .line 3
+    return-object v0
+.end method
+
+.method public static getLocalPrivacyLaw()I
+    .registers 1
+
+    .line 1
+    :try_start_0
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->getLocalPrivacyLawNative()I
+
+    .line 4
+    move-result v0
+    :try_end_4
+    .catch Ljp/ne/ibis/ibispaintx/app/jni/NativeException; {:try_start_0 .. :try_end_4} :catch_5
+
+    .line 5
+    return v0
+
+    .line 6
+    :catch_5
+    const/4 v0, 0x0
+
+    .line 7
+    return v0
+.end method
+
+.method private static native getLocalPrivacyLawNative()I
+    .annotation system Ldalvik/annotation/Throws;
+        value = {
+            Ljp/ne/ibis/ibispaintx/app/jni/NativeException;
+        }
+    .end annotation
+.end method
+
+.method public static getMaximumRedirectCount()I
+    .registers 1
+
+    const/16 v0, 0xa
+
+    return v0
+.end method
+
+.method public static getNonExtensionName(Ljava/lang/String;)Ljava/lang/String;
+    .registers 3
+
+    .line 1
+    if-nez p0, :cond_4
+
+    .line 3
+    const/4 p0, 0x0
+
+    .line 4
+    return-object p0
+
+    .line 5
+    :cond_4
+    invoke-virtual {p0}, Ljava/lang/String;->length()I
+
+    .line 8
+    move-result v0
+
+    .line 9
+    if-gtz v0, :cond_d
+
+    .line 11
+    const-string p0, ""
+
+    .line 13
+    return-object p0
+
+    .line 14
+    :cond_d
+    const/16 v0, 0x2e
+
+    .line 16
+    invoke-virtual {p0, v0}, Ljava/lang/String;->lastIndexOf(I)I
+
+    .line 19
+    move-result v0
+
+    .line 20
+    const/4 v1, -0x1
+
+    .line 21
+    if-eq v0, v1, :cond_1b
+
+    .line 23
+    const/4 v1, 0x0
+
+    .line 24
+    invoke-virtual {p0, v1, v0}, Ljava/lang/String;->substring(II)Ljava/lang/String;
+
+    .line 27
+    move-result-object p0
+
+    .line 28
+    :cond_1b
+    return-object p0
+.end method
+
+.method public static getNonExtensionNameFromPath(Ljava/lang/String;)Ljava/lang/String;
+    .registers 3
+
+    .line 1
+    if-nez p0, :cond_4
+
+    .line 3
+    const/4 p0, 0x0
+
+    .line 4
+    return-object p0
+
+    .line 5
+    :cond_4
+    invoke-virtual {p0}, Ljava/lang/String;->length()I
+
+    .line 8
+    move-result v0
+
+    .line 9
+    if-gtz v0, :cond_d
+
+    .line 11
+    const-string p0, ""
+
+    .line 13
+    return-object p0
+
+    .line 14
+    :cond_d
+    sget-char v0, Ljava/io/File;->separatorChar:C
+
+    .line 16
+    invoke-virtual {p0, v0}, Ljava/lang/String;->lastIndexOf(I)I
+
+    .line 19
+    move-result v0
+
+    .line 20
+    const/4 v1, -0x1
+
+    .line 21
+    if-eq v0, v1, :cond_1c
+
+    .line 23
+    add-int/lit8 v0, v0, 0x1
+
+    .line 25
+    invoke-virtual {p0, v0}, Ljava/lang/String;->substring(I)Ljava/lang/String;
+
+    .line 28
+    move-result-object p0
+
+    .line 29
+    :cond_1c
+    invoke-static {p0}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->getNonExtensionName(Ljava/lang/String;)Ljava/lang/String;
+
+    .line 32
+    move-result-object p0
+
+    .line 33
+    return-object p0
+.end method
+
+.method public static getPlatformType()I
+    .registers 1
+
+    .line 1
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/util/a;->a()I
+
+    .line 4
+    move-result v0
+
+    .line 5
+    return v0
+.end method
+
+.method public static getPrivacyLawInCountry(Ljava/lang/String;)I
+    .registers 1
+
+    .line 1
+    :try_start_0
+    invoke-static {p0}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->getPrivacyLawInCountryNative(Ljava/lang/String;)I
+
+    .line 4
+    move-result p0
+    :try_end_4
+    .catch Ljp/ne/ibis/ibispaintx/app/jni/NativeException; {:try_start_0 .. :try_end_4} :catch_5
+
+    .line 5
+    return p0
+
+    .line 6
+    :catch_5
+    const/4 p0, 0x0
+
+    .line 7
+    return p0
+.end method
+
+.method private static native getPrivacyLawInCountryNative(Ljava/lang/String;)I
+    .annotation system Ldalvik/annotation/Throws;
+        value = {
+            Ljp/ne/ibis/ibispaintx/app/jni/NativeException;
+        }
+    .end annotation
+.end method
+
+.method public static getPrivateSystemNewsPageUrl()Ljava/lang/String;
+    .registers 2
+
+    .line 1
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->isTabletUserInterface()Z
+
+    .line 4
+    move-result v0
+
+    .line 5
+    if-eqz v0, :cond_b
+
+    .line 7
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->getServiceUrl()Ljava/lang/String;
+
+    .line 10
+    move-result-object v0
+
+    .line 11
+    return-object v0
+
+    .line 12
+    :cond_b
+    new-instance v0, Ljava/lang/StringBuffer;
+
+    .line 14
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->getServiceUrl()Ljava/lang/String;
+
+    .line 17
+    move-result-object v1
+
+    .line 18
+    invoke-direct {v0, v1}, Ljava/lang/StringBuffer;-><init>(Ljava/lang/String;)V
+
+    .line 21
+    const-string v1, "getNews.jsp"
+
+    .line 23
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuffer;->append(Ljava/lang/String;)Ljava/lang/StringBuffer;
+
+    .line 26
+    invoke-virtual {v0}, Ljava/lang/StringBuffer;->toString()Ljava/lang/String;
+
+    .line 29
+    move-result-object v0
+
+    .line 30
+    return-object v0
+.end method
+
+.method public static getPurchaseManager()Ljp/ne/ibis/ibispaintx/app/purchase/s0;
+    .registers 1
+
+    .line 1
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/IbisPaintApplication;->getApplication()Ljp/ne/ibis/ibispaintx/app/IbisPaintApplication;
+
+    .line 4
+    move-result-object v0
+
+    .line 5
+    invoke-virtual {v0}, Ljp/ne/ibis/ibispaintx/app/IbisPaintApplication;->e()Ljp/ne/ibis/ibispaintx/app/glwtk/IbisPaintGlapeApplication;
+
+    .line 8
+    move-result-object v0
+
+    .line 9
+    invoke-virtual {v0}, Ljp/ne/ibis/ibispaintx/app/glwtk/IbisPaintGlapeApplication;->getPurchaseManager()Ljp/ne/ibis/ibispaintx/app/purchase/s0;
+
+    .line 12
+    move-result-object v0
+
+    .line 13
+    return-object v0
+.end method
+
+.method public static getPurchaseManagerAdapter()Ljp/ne/ibis/ibispaintx/app/jni/PurchaseManagerAdapter;
+    .registers 1
+
+    .line 1
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/IbisPaintApplication;->getApplication()Ljp/ne/ibis/ibispaintx/app/IbisPaintApplication;
+
+    .line 4
+    move-result-object v0
+
+    .line 5
+    invoke-virtual {v0}, Ljp/ne/ibis/ibispaintx/app/IbisPaintApplication;->e()Ljp/ne/ibis/ibispaintx/app/glwtk/IbisPaintGlapeApplication;
+
+    .line 8
+    move-result-object v0
+
+    .line 9
+    invoke-virtual {v0}, Ljp/ne/ibis/ibispaintx/app/glwtk/IbisPaintGlapeApplication;->getPurchaseManagerAdapter()Ljp/ne/ibis/ibispaintx/app/jni/PurchaseManagerAdapter;
+
+    .line 12
+    move-result-object v0
+
+    .line 13
+    return-object v0
+.end method
+
+.method public static getReadTimeout()I
+    .registers 1
+
+    const/16 v0, 0x7530
+
+    return v0
+.end method
+
+.method public static getResourceHtml(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+    .registers 9
+
+    .line 1
+    new-instance v0, Ljava/lang/StringBuffer;
+
+    .line 3
+    invoke-direct {v0}, Ljava/lang/StringBuffer;-><init>()V
+
+    .line 6
+    const/4 v1, 0x0
+
+    .line 7
+    :try_start_6
+    new-instance v2, Ljava/io/BufferedReader;
+
+    .line 9
+    new-instance v3, Ljava/io/InputStreamReader;
+
+    .line 11
+    sget-object v4, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->e:Landroid/content/Context;
+
+    .line 13
+    invoke-virtual {v4}, Landroid/content/Context;->getAssets()Landroid/content/res/AssetManager;
+
+    .line 16
+    move-result-object v4
+
+    .line 17
+    new-instance v5, Ljava/lang/StringBuilder;
+
+    .line 19
+    invoke-direct {v5}, Ljava/lang/StringBuilder;-><init>()V
+
+    .line 22
+    const-string v6, "htmls/"
+
+    .line 24
+    invoke-virtual {v5, v6}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    .line 27
+    invoke-virtual {v5, p0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    .line 30
+    const-string p0, "/"
+
+    .line 32
+    invoke-virtual {v5, p0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    .line 35
+    invoke-virtual {v5, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    .line 38
+    invoke-virtual {v5}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    .line 41
+    move-result-object p0
+
+    .line 42
+    invoke-virtual {v4, p0}, Landroid/content/res/AssetManager;->open(Ljava/lang/String;)Ljava/io/InputStream;
+
+    .line 45
+    move-result-object p0
+
+    .line 46
+    invoke-direct {v3, p0}, Ljava/io/InputStreamReader;-><init>(Ljava/io/InputStream;)V
+
+    .line 49
+    invoke-direct {v2, v3}, Ljava/io/BufferedReader;-><init>(Ljava/io/Reader;)V
+    :try_end_33
+    .catch Ljava/io/IOException; {:try_start_6 .. :try_end_33} :catch_48
+
+    .line 52
+    :goto_33
+    :try_start_33
+    invoke-virtual {v2}, Ljava/io/BufferedReader;->readLine()Ljava/lang/String;
+
+    .line 55
+    move-result-object p0
+
+    .line 56
+    if-eqz p0, :cond_44
+
+    .line 58
+    invoke-virtual {v0, p0}, Ljava/lang/StringBuffer;->append(Ljava/lang/String;)Ljava/lang/StringBuffer;
+
+    .line 61
+    const-string p0, "\r\n"
+
+    .line 63
+    invoke-virtual {v0, p0}, Ljava/lang/StringBuffer;->append(Ljava/lang/String;)Ljava/lang/StringBuffer;
+
+    .line 66
+    goto :goto_33
+
+    .line 67
+    :catch_42
+    move-object v1, v2
+
+    .line 68
+    goto :goto_48
+
+    .line 69
+    :cond_44
+    invoke-virtual {v2}, Ljava/io/BufferedReader;->close()V
+    :try_end_47
+    .catch Ljava/io/IOException; {:try_start_33 .. :try_end_47} :catch_42
+
+    .line 72
+    goto :goto_4d
+
+    .line 73
+    :catch_48
+    :goto_48
+    if-eqz v1, :cond_4d
+
+    .line 75
+    :try_start_4a
+    invoke-virtual {v1}, Ljava/io/BufferedReader;->close()V
+    :try_end_4d
+    .catch Ljava/io/IOException; {:try_start_4a .. :try_end_4d} :catch_4d
+
+    .line 78
+    :catch_4d
+    :cond_4d
+    :goto_4d
+    invoke-virtual {v0}, Ljava/lang/StringBuffer;->toString()Ljava/lang/String;
+
+    .line 81
+    move-result-object p0
+
+    .line 82
+    return-object p0
+.end method
+
+.method public static getResourceHtmlTemporaryDirectory()Ljava/lang/String;
+    .registers 2
+
+    .line 1
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->isUseExternalStorage()Z
+
+    .line 4
+    move-result v0
+
+    .line 5
+    invoke-static {v0}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->getCacheDirectoryPath(Z)Ljava/lang/String;
+
+    .line 8
+    move-result-object v0
+
+    .line 9
+    if-nez v0, :cond_c
+
+    .line 11
+    const/4 v0, 0x0
+
+    .line 12
+    return-object v0
+
+    .line 13
+    :cond_c
+    new-instance v1, Ljava/lang/StringBuffer;
+
+    .line 15
+    invoke-direct {v1, v0}, Ljava/lang/StringBuffer;-><init>(Ljava/lang/String;)V
+
+    .line 18
+    sget-char v0, Ljava/io/File;->separatorChar:C
+
+    .line 20
+    invoke-virtual {v1, v0}, Ljava/lang/StringBuffer;->append(C)Ljava/lang/StringBuffer;
+
+    .line 23
+    const-string v0, "tempHtmlTips"
+
+    .line 25
+    invoke-virtual {v1, v0}, Ljava/lang/StringBuffer;->append(Ljava/lang/String;)Ljava/lang/StringBuffer;
+
+    .line 28
+    invoke-virtual {v1}, Ljava/lang/StringBuffer;->toString()Ljava/lang/String;
+
+    .line 31
+    move-result-object v0
+
+    .line 32
+    return-object v0
+.end method
+
+.method public static getScreenCanvasHeight(Z)I
+    .registers 1
+
+    .line 1
+    invoke-static {p0}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->b(Z)Landroid/graphics/Point;
+
+    .line 4
+    move-result-object p0
+
+    .line 5
+    if-eqz p0, :cond_9
+
+    .line 7
+    iget p0, p0, Landroid/graphics/Point;->y:I
+
+    .line 9
+    return p0
+
+    .line 10
+    :cond_9
+    const/4 p0, 0x0
+
+    .line 11
+    return p0
+.end method
+
+.method public static getScreenCanvasWidth(Z)I
+    .registers 1
+
+    .line 1
+    invoke-static {p0}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->b(Z)Landroid/graphics/Point;
+
+    .line 4
+    move-result-object p0
+
+    .line 5
+    if-eqz p0, :cond_9
+
+    .line 7
+    iget p0, p0, Landroid/graphics/Point;->x:I
+
+    .line 9
+    return p0
+
+    .line 10
+    :cond_9
+    const/4 p0, 0x0
+
+    .line 11
+    return p0
+.end method
+
+.method public static getServiceCharacterSet()Ljava/lang/String;
+    .registers 1
+
+    .line 1
+    const-string v0, "UTF-8"
+
+    .line 3
+    return-object v0
+.end method
+
+.method public static getServiceHostName()Ljava/lang/String;
+    .registers 1
+
+    .line 1
+    const-string v0, "ibispaint.com"
+
+    .line 3
+    return-object v0
+.end method
+
+.method public static getServicePath()Ljava/lang/String;
+    .registers 1
+
+    .line 1
+    const-string v0, "/"
+
+    .line 3
+    return-object v0
+.end method
+
+.method public static getServicePort()I
+    .registers 1
+
+    const/16 v0, 0x1bb
+
+    return v0
+.end method
+
+.method public static getServiceUrl()Ljava/lang/String;
+    .registers 2
+
+    .line 1
+    new-instance v0, Ljava/lang/StringBuffer;
+
+    .line 3
+    const-string v1, "https://"
+
+    .line 5
+    invoke-direct {v0, v1}, Ljava/lang/StringBuffer;-><init>(Ljava/lang/String;)V
+
+    .line 8
+    const-string v1, "ibispaint.com"
+
+    .line 10
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuffer;->append(Ljava/lang/String;)Ljava/lang/StringBuffer;
+
+    .line 13
+    const-string v1, "/"
+
+    .line 15
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuffer;->append(Ljava/lang/String;)Ljava/lang/StringBuffer;
+
+    .line 18
+    invoke-virtual {v0}, Ljava/lang/StringBuffer;->toString()Ljava/lang/String;
+
+    .line 21
+    move-result-object v0
+
+    .line 22
+    return-object v0
+.end method
+
+.method public static getStorageTypeCapitalizeString()Ljava/lang/String;
+    .registers 1
+
+    .line 1
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->isUseExternalStorage()Z
+
+    .line 4
+    move-result v0
+
+    .line 5
+    if-eqz v0, :cond_b
+
+    .line 7
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->getExternalStorageTypeCapitalizeString()Ljava/lang/String;
+
+    .line 10
+    move-result-object v0
+
+    .line 11
+    return-object v0
+
+    .line 12
+    :cond_b
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->getInternalStorageTypeCapitalizeString()Ljava/lang/String;
+
+    .line 15
+    move-result-object v0
+
+    .line 16
+    return-object v0
+.end method
+
+.method public static getStorageTypeString()Ljava/lang/String;
+    .registers 1
+
+    .line 1
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->isUseExternalStorage()Z
+
+    .line 4
+    move-result v0
+
+    .line 5
+    if-eqz v0, :cond_b
+
+    .line 7
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->getExternalStorageTypeString()Ljava/lang/String;
+
+    .line 10
+    move-result-object v0
+
+    .line 11
+    return-object v0
+
+    .line 12
+    :cond_b
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->getInternalStorageTypeString()Ljava/lang/String;
+
+    .line 15
+    move-result-object v0
+
+    .line 16
+    return-object v0
+.end method
+
+.method public static getStorageUnreadableMessage()Ljava/lang/String;
+    .registers 3
+
+    .line 1
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->i()V
+
+    .line 4
+    sget-object v0, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->e:Landroid/content/Context;
+
+    .line 6
+    if-nez v0, :cond_a
+
+    .line 8
+    const-string v0, ""
+
+    .line 10
+    return-object v0
+
+    .line 11
+    :cond_a
+    const v1, 0x7f13019c
+
+    .line 14
+    invoke-virtual {v0, v1}, Landroid/content/Context;->getString(I)Ljava/lang/String;
+
+    .line 17
+    move-result-object v0
+
+    .line 18
+    const-string v1, "###TYPE###"
+
+    .line 20
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->getStorageTypeString()Ljava/lang/String;
+
+    .line 23
+    move-result-object v2
+
+    .line 24
+    invoke-virtual {v0, v1, v2}, Ljava/lang/String;->replace(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)Ljava/lang/String;
+
+    .line 27
+    move-result-object v0
+
+    .line 28
+    return-object v0
+.end method
+
+.method public static getStorageUnwritableMessage()Ljava/lang/String;
+    .registers 3
+
+    .line 1
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->i()V
+
+    .line 4
+    sget-object v0, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->e:Landroid/content/Context;
+
+    .line 6
+    if-nez v0, :cond_a
+
+    .line 8
+    const-string v0, ""
+
+    .line 10
+    return-object v0
+
+    .line 11
+    :cond_a
+    const v1, 0x7f13019b
+
+    .line 14
+    invoke-virtual {v0, v1}, Landroid/content/Context;->getString(I)Ljava/lang/String;
+
+    .line 17
+    move-result-object v0
+
+    .line 18
+    const-string v1, "###TYPE###"
+
+    .line 20
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->getStorageTypeString()Ljava/lang/String;
+
+    .line 23
+    move-result-object v2
+
+    .line 24
+    invoke-virtual {v0, v1, v2}, Ljava/lang/String;->replace(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)Ljava/lang/String;
+
+    .line 27
+    move-result-object v0
+
+    .line 28
+    return-object v0
+.end method
+
+.method public static getSystemNewsArticlePageUrl(Ljava/lang/String;)Ljava/lang/String;
+    .registers 3
+
+    .line 1
+    new-instance v0, Ljava/lang/StringBuffer;
+
+    .line 3
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->getServiceUrl()Ljava/lang/String;
+
+    .line 6
+    move-result-object v1
+
+    .line 7
+    invoke-direct {v0, v1}, Ljava/lang/StringBuffer;-><init>(Ljava/lang/String;)V
+
+    .line 10
+    const-string v1, "information.jsp?newsID="
+
+    .line 12
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuffer;->append(Ljava/lang/String;)Ljava/lang/StringBuffer;
+
+    .line 15
+    invoke-virtual {v0, p0}, Ljava/lang/StringBuffer;->append(Ljava/lang/String;)Ljava/lang/StringBuffer;
+
+    .line 18
+    invoke-virtual {v0}, Ljava/lang/StringBuffer;->toString()Ljava/lang/String;
+
+    .line 21
+    move-result-object p0
+
+    .line 22
+    return-object p0
+.end method
+
+.method public static getTwitterAccountDisplayName(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+    .registers 3
+
+    .line 1
+    if-eqz p1, :cond_37
+
+    .line 3
+    invoke-virtual {p1}, Ljava/lang/String;->length()I
+
+    .line 6
+    move-result v0
+
+    .line 7
+    if-gtz v0, :cond_9
+
+    .line 9
+    goto :goto_37
+
+    .line 10
+    :cond_9
+    if-eqz p0, :cond_28
+
+    .line 12
+    invoke-virtual {p0}, Ljava/lang/String;->length()I
+
+    .line 15
+    move-result v0
+
+    .line 16
+    if-lez v0, :cond_28
+
+    .line 18
+    new-instance v0, Ljava/lang/StringBuffer;
+
+    .line 20
+    invoke-direct {v0, p0}, Ljava/lang/StringBuffer;-><init>(Ljava/lang/String;)V
+
+    .line 23
+    const-string p0, " (@"
+
+    .line 25
+    invoke-virtual {v0, p0}, Ljava/lang/StringBuffer;->append(Ljava/lang/String;)Ljava/lang/StringBuffer;
+
+    .line 28
+    invoke-virtual {v0, p1}, Ljava/lang/StringBuffer;->append(Ljava/lang/String;)Ljava/lang/StringBuffer;
+
+    .line 31
+    const-string p0, ")"
+
+    .line 33
+    invoke-virtual {v0, p0}, Ljava/lang/StringBuffer;->append(Ljava/lang/String;)Ljava/lang/StringBuffer;
+
+    .line 36
+    invoke-virtual {v0}, Ljava/lang/StringBuffer;->toString()Ljava/lang/String;
+
+    .line 39
+    move-result-object p0
+
+    .line 40
+    return-object p0
+
+    .line 41
+    :cond_28
+    new-instance p0, Ljava/lang/StringBuffer;
+
+    .line 43
+    const-string v0, "@"
+
+    .line 45
+    invoke-direct {p0, v0}, Ljava/lang/StringBuffer;-><init>(Ljava/lang/String;)V
+
+    .line 48
+    invoke-virtual {p0, p1}, Ljava/lang/StringBuffer;->append(Ljava/lang/String;)Ljava/lang/StringBuffer;
+
+    .line 51
+    invoke-virtual {p0}, Ljava/lang/StringBuffer;->toString()Ljava/lang/String;
+
+    .line 54
+    move-result-object p0
+
+    .line 55
+    return-object p0
+
+    .line 56
+    :cond_37
+    :goto_37
+    return-object p1
+.end method
+
+.method public static final getVectorFileFixLogFolderPath()Ljava/lang/String;
+    .registers 1
+
+    .line 4
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->isUseExternalStorage()Z
+
+    move-result v0
+
+    invoke-static {v0}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->getVectorFileFixLogFolderPath(Z)Ljava/lang/String;
+
+    move-result-object v0
+
+    return-object v0
+.end method
+
+.method public static final getVectorFileFixLogFolderPath(Z)Ljava/lang/String;
+    .registers 2
+
+    .line 1
+    invoke-static {p0}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->getCacheDirectoryPath(Z)Ljava/lang/String;
+
+    move-result-object p0
+
+    if-nez p0, :cond_8
+
+    const/4 p0, 0x0
+
+    return-object p0
+
+    .line 2
+    :cond_8
+    new-instance v0, Ljava/lang/StringBuffer;
+
+    invoke-direct {v0, p0}, Ljava/lang/StringBuffer;-><init>(Ljava/lang/String;)V
+
+    sget-object p0, Ljava/io/File;->separator:Ljava/lang/String;
+
+    invoke-virtual {v0, p0}, Ljava/lang/StringBuffer;->append(Ljava/lang/String;)Ljava/lang/StringBuffer;
+
+    const-string p0, "vffl"
+
+    .line 3
+    invoke-virtual {v0, p0}, Ljava/lang/StringBuffer;->append(Ljava/lang/String;)Ljava/lang/StringBuffer;
+
+    invoke-virtual {v0}, Ljava/lang/StringBuffer;->toString()Ljava/lang/String;
+
+    move-result-object p0
+
+    return-object p0
+.end method
+
+.method public static getVersionNumberString(I)Ljava/lang/String;
+    .registers 4
+
+    .line 1
+    div-int/lit16 v0, p0, 0x2710
+
+    .line 3
+    rem-int/lit8 v0, v0, 0x64
+
+    .line 5
+    div-int/lit8 v1, p0, 0x64
+
+    .line 7
+    rem-int/lit8 v1, v1, 0x64
+
+    .line 9
+    rem-int/lit8 p0, p0, 0x64
+
+    .line 11
+    new-instance v2, Ljava/lang/StringBuffer;
+
+    .line 13
+    invoke-direct {v2}, Ljava/lang/StringBuffer;-><init>()V
+
+    .line 16
+    invoke-virtual {v2, v0}, Ljava/lang/StringBuffer;->append(I)Ljava/lang/StringBuffer;
+
+    .line 19
+    const-string v0, "."
+
+    .line 21
+    invoke-virtual {v2, v0}, Ljava/lang/StringBuffer;->append(Ljava/lang/String;)Ljava/lang/StringBuffer;
+
+    .line 24
+    invoke-virtual {v2, v1}, Ljava/lang/StringBuffer;->append(I)Ljava/lang/StringBuffer;
+
+    .line 27
+    invoke-virtual {v2, v0}, Ljava/lang/StringBuffer;->append(Ljava/lang/String;)Ljava/lang/StringBuffer;
+
+    .line 30
+    invoke-virtual {v2, p0}, Ljava/lang/StringBuffer;->append(I)Ljava/lang/StringBuffer;
+
+    .line 33
+    invoke-virtual {v2}, Ljava/lang/StringBuffer;->toString()Ljava/lang/String;
+
+    .line 36
+    move-result-object p0
+
+    .line 37
+    return-object p0
+.end method
+
+.method public static final getWebViewErrorString(I)Ljava/lang/String;
+    .registers 4
+
+    .line 1
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->i()V
+
+    .line 4
+    sget-object v0, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->e:Landroid/content/Context;
+
+    .line 6
+    if-nez v0, :cond_c
+
+    .line 8
+    invoke-static {p0}, Ljava/lang/String;->valueOf(I)Ljava/lang/String;
+
+    .line 11
+    move-result-object p0
+
+    .line 12
+    return-object p0
+
+    .line 13
+    :cond_c
+    packed-switch p0, :pswitch_data_a0
+
+    .line 16
+    new-instance v1, Ljava/lang/StringBuffer;
+
+    .line 18
+    const v2, 0x7f13022c
+
+    .line 21
+    invoke-virtual {v0, v2}, Landroid/content/Context;->getString(I)Ljava/lang/String;
+
+    .line 24
+    move-result-object v0
+
+    .line 25
+    invoke-direct {v1, v0}, Ljava/lang/StringBuffer;-><init>(Ljava/lang/String;)V
+
+    .line 28
+    const-string v0, ":"
+
+    .line 30
+    invoke-virtual {v1, v0}, Ljava/lang/StringBuffer;->append(Ljava/lang/String;)Ljava/lang/StringBuffer;
+
+    .line 33
+    invoke-virtual {v1, p0}, Ljava/lang/StringBuffer;->append(I)Ljava/lang/StringBuffer;
+
+    .line 36
+    invoke-virtual {v1}, Ljava/lang/StringBuffer;->toString()Ljava/lang/String;
+
+    .line 39
+    move-result-object p0
+
+    .line 40
+    return-object p0
+
+    .line 41
+    :pswitch_28  #0xffffffff
+    const p0, 0x7f13023f
+
+    .line 44
+    invoke-virtual {v0, p0}, Landroid/content/Context;->getString(I)Ljava/lang/String;
+
+    .line 47
+    move-result-object p0
+
+    .line 48
+    return-object p0
+
+    .line 49
+    :pswitch_30  #0xfffffffe
+    const p0, 0x7f130239
+
+    .line 52
+    invoke-virtual {v0, p0}, Landroid/content/Context;->getString(I)Ljava/lang/String;
+
+    .line 55
+    move-result-object p0
+
+    .line 56
+    return-object p0
+
+    .line 57
+    :pswitch_38  #0xfffffffd
+    const p0, 0x7f130240
+
+    .line 60
+    invoke-virtual {v0, p0}, Landroid/content/Context;->getString(I)Ljava/lang/String;
+
+    .line 63
+    move-result-object p0
+
+    .line 64
+    return-object p0
+
+    .line 65
+    :pswitch_40  #0xfffffffc
+    const p0, 0x7f130233
+
+    .line 68
+    invoke-virtual {v0, p0}, Landroid/content/Context;->getString(I)Ljava/lang/String;
+
+    .line 71
+    move-result-object p0
+
+    .line 72
+    return-object p0
+
+    .line 73
+    :pswitch_48  #0xfffffffb
+    const p0, 0x7f13023b
+
+    .line 76
+    invoke-virtual {v0, p0}, Landroid/content/Context;->getString(I)Ljava/lang/String;
+
+    .line 79
+    move-result-object p0
+
+    .line 80
+    return-object p0
+
+    .line 81
+    :pswitch_50  #0xfffffffa
+    const p0, 0x7f130235
+
+    .line 84
+    invoke-virtual {v0, p0}, Landroid/content/Context;->getString(I)Ljava/lang/String;
+
+    .line 87
+    move-result-object p0
+
+    .line 88
+    return-object p0
+
+    .line 89
+    :pswitch_58  #0xfffffff9
+    const p0, 0x7f13023a
+
+    .line 92
+    invoke-virtual {v0, p0}, Landroid/content/Context;->getString(I)Ljava/lang/String;
+
+    .line 95
+    move-result-object p0
+
+    .line 96
+    return-object p0
+
+    .line 97
+    :pswitch_60  #0xfffffff8
+    const p0, 0x7f13023d
+
+    .line 100
+    invoke-virtual {v0, p0}, Landroid/content/Context;->getString(I)Ljava/lang/String;
+
+    .line 103
+    move-result-object p0
+
+    .line 104
+    return-object p0
+
+    .line 105
+    :pswitch_68  #0xfffffff7
+    const p0, 0x7f13023c
+
+    .line 108
+    invoke-virtual {v0, p0}, Landroid/content/Context;->getString(I)Ljava/lang/String;
+
+    .line 111
+    move-result-object p0
+
+    .line 112
+    return-object p0
+
+    .line 113
+    :pswitch_70  #0xfffffff6
+    const p0, 0x7f130241
+
+    .line 116
+    invoke-virtual {v0, p0}, Landroid/content/Context;->getString(I)Ljava/lang/String;
+
+    .line 119
+    move-result-object p0
+
+    .line 120
+    return-object p0
+
+    .line 121
+    :pswitch_78  #0xfffffff5
+    const p0, 0x7f130236
+
+    .line 124
+    invoke-virtual {v0, p0}, Landroid/content/Context;->getString(I)Ljava/lang/String;
+
+    .line 127
+    move-result-object p0
+
+    .line 128
+    return-object p0
+
+    .line 129
+    :pswitch_80  #0xfffffff4
+    const p0, 0x7f130234
+
+    .line 132
+    invoke-virtual {v0, p0}, Landroid/content/Context;->getString(I)Ljava/lang/String;
+
+    .line 135
+    move-result-object p0
+
+    .line 136
+    return-object p0
+
+    .line 137
+    :pswitch_88  #0xfffffff3
+    const p0, 0x7f130237
+
+    .line 140
+    invoke-virtual {v0, p0}, Landroid/content/Context;->getString(I)Ljava/lang/String;
+
+    .line 143
+    move-result-object p0
+
+    .line 144
+    return-object p0
+
+    .line 145
+    :pswitch_90  #0xfffffff2
+    const p0, 0x7f130238
+
+    .line 148
+    invoke-virtual {v0, p0}, Landroid/content/Context;->getString(I)Ljava/lang/String;
+
+    .line 151
+    move-result-object p0
+
+    .line 152
+    return-object p0
+
+    .line 153
+    :pswitch_98  #0xfffffff1
+    const p0, 0x7f13023e
+
+    .line 156
+    invoke-virtual {v0, p0}, Landroid/content/Context;->getString(I)Ljava/lang/String;
+
+    .line 159
+    move-result-object p0
+
+    .line 160
+    return-object p0
+
+    .line 161
+    :pswitch_data_a0
+    .packed-switch -0xf
+        :pswitch_98  #fffffff1
+        :pswitch_90  #fffffff2
+        :pswitch_88  #fffffff3
+        :pswitch_80  #fffffff4
+        :pswitch_78  #fffffff5
+        :pswitch_70  #fffffff6
+        :pswitch_68  #fffffff7
+        :pswitch_60  #fffffff8
+        :pswitch_58  #fffffff9
+        :pswitch_50  #fffffffa
+        :pswitch_48  #fffffffb
+        :pswitch_40  #fffffffc
+        :pswitch_38  #fffffffd
+        :pswitch_30  #fffffffe
+        :pswitch_28  #ffffffff
+    .end packed-switch
+.end method
+
+.method public static final getWebViewSslErrorString(Landroid/net/http/SslError;)Ljava/lang/String;
+    .registers 4
+
+    .line 1
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->i()V
+
+    .line 4
+    sget-object v0, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->e:Landroid/content/Context;
+
+    .line 6
+    if-nez v0, :cond_c
+
+    .line 8
+    invoke-virtual {p0}, Landroid/net/http/SslError;->toString()Ljava/lang/String;
+
+    .line 11
+    move-result-object p0
+
+    .line 12
+    return-object p0
+
+    .line 13
+    :cond_c
+    new-instance v0, Ljava/lang/StringBuffer;
+
+    .line 15
+    invoke-direct {v0}, Ljava/lang/StringBuffer;-><init>()V
+
+    .line 18
+    const/4 v1, 0x4
+
+    .line 19
+    invoke-virtual {p0, v1}, Landroid/net/http/SslError;->hasError(I)Z
+
+    .line 22
+    move-result v1
+
+    .line 23
+    if-eqz v1, :cond_24
+
+    .line 25
+    sget-object v1, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->e:Landroid/content/Context;
+
+    .line 27
+    const v2, 0x7f130242
+
+    .line 30
+    invoke-virtual {v1, v2}, Landroid/content/Context;->getString(I)Ljava/lang/String;
+
+    .line 33
+    move-result-object v1
+
+    .line 34
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuffer;->append(Ljava/lang/String;)Ljava/lang/StringBuffer;
+
+    .line 37
+    :cond_24
+    const/4 v1, 0x1
+
+    .line 38
+    invoke-virtual {p0, v1}, Landroid/net/http/SslError;->hasError(I)Z
+
+    .line 41
+    move-result v1
+
+    .line 42
+    if-eqz v1, :cond_37
+
+    .line 44
+    sget-object v1, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->e:Landroid/content/Context;
+
+    .line 46
+    const v2, 0x7f130243
+
+    .line 49
+    invoke-virtual {v1, v2}, Landroid/content/Context;->getString(I)Ljava/lang/String;
+
+    .line 52
+    move-result-object v1
+
+    .line 53
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuffer;->append(Ljava/lang/String;)Ljava/lang/StringBuffer;
+
+    .line 56
+    :cond_37
+    const/4 v1, 0x2
+
+    .line 57
+    invoke-virtual {p0, v1}, Landroid/net/http/SslError;->hasError(I)Z
+
+    .line 60
+    move-result v1
+
+    .line 61
+    if-eqz v1, :cond_4a
+
+    .line 63
+    sget-object v1, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->e:Landroid/content/Context;
+
+    .line 65
+    const v2, 0x7f130244
+
+    .line 68
+    invoke-virtual {v1, v2}, Landroid/content/Context;->getString(I)Ljava/lang/String;
+
+    .line 71
+    move-result-object v1
+
+    .line 72
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuffer;->append(Ljava/lang/String;)Ljava/lang/StringBuffer;
+
+    .line 75
+    :cond_4a
+    const/4 v1, 0x5
+
+    .line 76
+    invoke-virtual {p0, v1}, Landroid/net/http/SslError;->hasError(I)Z
+
+    .line 79
+    move-result v1
+
+    .line 80
+    if-eqz v1, :cond_5d
+
+    .line 82
+    sget-object v1, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->e:Landroid/content/Context;
+
+    .line 84
+    const v2, 0x7f130245
+
+    .line 87
+    invoke-virtual {v1, v2}, Landroid/content/Context;->getString(I)Ljava/lang/String;
+
+    .line 90
+    move-result-object v1
+
+    .line 91
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuffer;->append(Ljava/lang/String;)Ljava/lang/StringBuffer;
+
+    .line 94
+    :cond_5d
+    const/4 v1, 0x0
+
+    .line 95
+    invoke-virtual {p0, v1}, Landroid/net/http/SslError;->hasError(I)Z
+
+    .line 98
+    move-result v1
+
+    .line 99
+    if-eqz v1, :cond_70
+
+    .line 101
+    sget-object v1, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->e:Landroid/content/Context;
+
+    .line 103
+    const v2, 0x7f130246
+
+    .line 106
+    invoke-virtual {v1, v2}, Landroid/content/Context;->getString(I)Ljava/lang/String;
+
+    .line 109
+    move-result-object v1
+
+    .line 110
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuffer;->append(Ljava/lang/String;)Ljava/lang/StringBuffer;
+
+    .line 113
+    :cond_70
+    const/4 v1, 0x3
+
+    .line 114
+    invoke-virtual {p0, v1}, Landroid/net/http/SslError;->hasError(I)Z
+
+    .line 117
+    move-result p0
+
+    .line 118
+    if-eqz p0, :cond_83
+
+    .line 120
+    sget-object p0, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->e:Landroid/content/Context;
+
+    .line 122
+    const v1, 0x7f130247
+
+    .line 125
+    invoke-virtual {p0, v1}, Landroid/content/Context;->getString(I)Ljava/lang/String;
+
+    .line 128
+    move-result-object p0
+
+    .line 129
+    invoke-virtual {v0, p0}, Ljava/lang/StringBuffer;->append(Ljava/lang/String;)Ljava/lang/StringBuffer;
+
+    .line 132
+    :cond_83
+    invoke-virtual {v0}, Ljava/lang/StringBuffer;->toString()Ljava/lang/String;
+
+    .line 135
+    move-result-object p0
+
+    .line 136
+    return-object p0
+.end method
+
+.method public static getYouTubeCategory()Ljava/lang/String;
+    .registers 1
+
+    .line 1
+    const-string v0, "Entertainment"
+
+    .line 3
+    return-object v0
+.end method
+
+.method public static getYouTubeDeveloperCategory()Ljava/lang/String;
+    .registers 1
+
+    .line 1
+    const-string v0, "ibisPaint"
+
+    .line 3
+    return-object v0
+.end method
+
+.method public static getYoutubeDeveloperKey()Ljava/lang/String;
+    .registers 1
+
+    .line 1
+    const-string v0, "AI39si4BA49t6e-xfgsX2UZzKedn1OKpK52tjcYvl6oBk0AxFFrxdpeCwDHmpdPBFjb0cwA8zcUnreYmzOkHGTADKO0I86Z9Ww"
+
+    .line 3
+    return-object v0
+.end method
+
+.method public static getYoutubeServiceName()Ljava/lang/String;
+    .registers 1
+
+    .line 1
+    const-string v0, "ibisPaint"
+
+    .line 3
+    return-object v0
+.end method
+
+.method public static getYoutubeVideoIdFromMovieUrl(Ljava/lang/String;)Ljava/lang/String;
+    .registers 6
+
+    .line 1
+    sget-object v0, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->d:[Ljava/util/regex/Pattern;
+
+    .line 3
+    array-length v1, v0
+
+    .line 4
+    const/4 v2, 0x0
+
+    .line 5
+    :goto_4
+    if-ge v2, v1, :cond_1b
+
+    .line 7
+    aget-object v3, v0, v2
+
+    .line 9
+    invoke-virtual {v3, p0}, Ljava/util/regex/Pattern;->matcher(Ljava/lang/CharSequence;)Ljava/util/regex/Matcher;
+
+    .line 12
+    move-result-object v3
+
+    .line 13
+    invoke-virtual {v3}, Ljava/util/regex/Matcher;->matches()Z
+
+    .line 16
+    move-result v4
+
+    .line 17
+    if-nez v4, :cond_15
+
+    .line 19
+    add-int/lit8 v2, v2, 0x1
+
+    .line 21
+    goto :goto_4
+
+    .line 22
+    :cond_15
+    const/4 p0, 0x3
+
+    .line 23
+    invoke-virtual {v3, p0}, Ljava/util/regex/Matcher;->group(I)Ljava/lang/String;
+
+    .line 26
+    move-result-object p0
+
+    .line 27
+    return-object p0
+
+    .line 28
+    :cond_1b
+    const-string p0, ""
+
+    .line 30
+    return-object p0
+.end method
+
+.method private static h(Ljava/lang/String;)Landroid/os/Bundle;
+    .registers 10
+
+    .line 1
+    const/4 v0, 0x1
+
+    .line 2
+    const/4 v1, 0x0
+
+    .line 3
+    new-instance v2, Lorg/json/JSONObject;
+
+    .line 5
+    invoke-direct {v2, p0}, Lorg/json/JSONObject;-><init>(Ljava/lang/String;)V
+
+    .line 8
+    invoke-virtual {v2}, Lorg/json/JSONObject;->keys()Ljava/util/Iterator;
+
+    .line 11
+    move-result-object p0
+
+    .line 12
+    new-instance v3, Landroid/os/Bundle;
+
+    .line 14
+    invoke-direct {v3}, Landroid/os/Bundle;-><init>()V
+
+    .line 17
+    :goto_10
+    invoke-interface {p0}, Ljava/util/Iterator;->hasNext()Z
+
+    .line 20
+    move-result v4
+
+    .line 21
+    if-eqz v4, :cond_a6
+
+    .line 23
+    invoke-interface {p0}, Ljava/util/Iterator;->next()Ljava/lang/Object;
+
+    .line 26
+    move-result-object v4
+
+    .line 27
+    check-cast v4, Ljava/lang/String;
+
+    .line 29
+    invoke-virtual {v2, v4}, Lorg/json/JSONObject;->getJSONArray(Ljava/lang/String;)Lorg/json/JSONArray;
+
+    .line 32
+    move-result-object v5
+
+    .line 33
+    invoke-virtual {v5, v1}, Lorg/json/JSONArray;->getString(I)Ljava/lang/String;
+
+    .line 36
+    move-result-object v6
+
+    .line 37
+    invoke-virtual {v6}, Ljava/lang/Object;->getClass()Ljava/lang/Class;
+
+    .line 40
+    const/4 v7, -0x1
+
+    .line 41
+    invoke-virtual {v6}, Ljava/lang/String;->hashCode()I
+
+    .line 44
+    move-result v8
+
+    .line 45
+    sparse-switch v8, :sswitch_data_a8
+
+    .line 48
+    goto :goto_71
+
+    .line 49
+    :sswitch_30
+    const-string v8, "float"
+
+    .line 51
+    invoke-virtual {v6, v8}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    .line 54
+    move-result v6
+
+    .line 55
+    if-nez v6, :cond_39
+
+    .line 57
+    goto :goto_71
+
+    .line 58
+    :cond_39
+    const/4 v7, 0x5
+
+    .line 59
+    goto :goto_71
+
+    .line 60
+    :sswitch_3b
+    const-string v8, "null"
+
+    .line 62
+    invoke-virtual {v6, v8}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    .line 65
+    move-result v6
+
+    .line 66
+    if-nez v6, :cond_44
+
+    .line 68
+    goto :goto_71
+
+    .line 69
+    :cond_44
+    const/4 v7, 0x4
+
+    .line 70
+    goto :goto_71
+
+    .line 71
+    :sswitch_46
+    const-string v8, "long"
+
+    .line 73
+    invoke-virtual {v6, v8}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    .line 76
+    move-result v6
+
+    .line 77
+    if-nez v6, :cond_4f
+
+    .line 79
+    goto :goto_71
+
+    .line 80
+    :cond_4f
+    const/4 v7, 0x3
+
+    .line 81
+    goto :goto_71
+
+    .line 82
+    :sswitch_51
+    const-string v8, "bool"
+
+    .line 84
+    invoke-virtual {v6, v8}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    .line 87
+    move-result v6
+
+    .line 88
+    if-nez v6, :cond_5a
+
+    .line 90
+    goto :goto_71
+
+    .line 91
+    :cond_5a
+    const/4 v7, 0x2
+
+    .line 92
+    goto :goto_71
+
+    .line 93
+    :sswitch_5c
+    const-string v8, "int"
+
+    .line 95
+    invoke-virtual {v6, v8}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    .line 98
+    move-result v6
+
+    .line 99
+    if-nez v6, :cond_65
+
+    .line 101
+    goto :goto_71
+
+    .line 102
+    :cond_65
+    move v7, v0
+
+    .line 103
+    goto :goto_71
+
+    .line 104
+    :sswitch_67
+    const-string v8, "string"
+
+    .line 106
+    invoke-virtual {v6, v8}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    .line 109
+    move-result v6
+
+    .line 110
+    if-nez v6, :cond_70
+
+    .line 112
+    goto :goto_71
+
+    .line 113
+    :cond_70
+    move v7, v1
+
+    .line 114
+    :goto_71
+    packed-switch v7, :pswitch_data_c2
+
+    .line 117
+    goto :goto_10
+
+    .line 118
+    :pswitch_75  #0x5
+    invoke-virtual {v5, v0}, Lorg/json/JSONArray;->getDouble(I)D
+
+    .line 121
+    move-result-wide v5
+
+    .line 122
+    double-to-float v5, v5
+
+    .line 123
+    invoke-virtual {v3, v4, v5}, Landroid/os/Bundle;->putFloat(Ljava/lang/String;F)V
+
+    .line 126
+    goto :goto_10
+
+    .line 127
+    :pswitch_7e  #0x4
+    const/4 v5, 0x0
+
+    .line 128
+    invoke-virtual {v3, v4, v5}, Landroid/os/BaseBundle;->putString(Ljava/lang/String;Ljava/lang/String;)V
+
+    .line 131
+    goto :goto_10
+
+    .line 132
+    :pswitch_83  #0x3
+    invoke-virtual {v5, v0}, Lorg/json/JSONArray;->getLong(I)J
+
+    .line 135
+    move-result-wide v5
+
+    .line 136
+    invoke-virtual {v3, v4, v5, v6}, Landroid/os/BaseBundle;->putLong(Ljava/lang/String;J)V
+
+    .line 139
+    goto :goto_10
+
+    .line 140
+    :pswitch_8b  #0x2
+    invoke-virtual {v5, v0}, Lorg/json/JSONArray;->getBoolean(I)Z
+
+    .line 143
+    move-result v5
+
+    .line 144
+    invoke-virtual {v3, v4, v5}, Landroid/os/BaseBundle;->putBoolean(Ljava/lang/String;Z)V
+
+    .line 147
+    goto/16 :goto_10
+
+    .line 149
+    :pswitch_94  #0x1
+    invoke-virtual {v5, v0}, Lorg/json/JSONArray;->getInt(I)I
+
+    .line 152
+    move-result v5
+
+    .line 153
+    invoke-virtual {v3, v4, v5}, Landroid/os/BaseBundle;->putInt(Ljava/lang/String;I)V
+
+    .line 156
+    goto/16 :goto_10
+
+    .line 158
+    :pswitch_9d  #0x0
+    invoke-virtual {v5, v0}, Lorg/json/JSONArray;->getString(I)Ljava/lang/String;
+
+    .line 161
+    move-result-object v5
+
+    .line 162
+    invoke-virtual {v3, v4, v5}, Landroid/os/BaseBundle;->putString(Ljava/lang/String;Ljava/lang/String;)V
+
+    .line 165
+    goto/16 :goto_10
+
+    .line 167
+    :cond_a6
+    return-object v3
+
+    .line 168
+    nop
+
+    .line 169
+    :sswitch_data_a8
+    .sparse-switch
+        -0x352a9fef -> :sswitch_67
+        0x197ef -> :sswitch_5c
+        0x2e3aea -> :sswitch_51
+        0x32c67c -> :sswitch_46
+        0x33c587 -> :sswitch_3b
+        0x5d0225c -> :sswitch_30
+    .end sparse-switch
+
+    .line 195
+    :pswitch_data_c2
+    .packed-switch 0x0
+        :pswitch_9d  #00000000
+        :pswitch_94  #00000001
+        :pswitch_8b  #00000002
+        :pswitch_83  #00000003
+        :pswitch_7e  #00000004
+        :pswitch_75  #00000005
+    .end packed-switch
+.end method
+
+.method static i()V
+    .registers 1
+
+    .line 1
+    sget-object v0, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->e:Landroid/content/Context;
+
+    .line 3
+    if-eqz v0, :cond_5
+
+    .line 5
+    goto :goto_15
+
+    .line 6
+    :cond_5
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/IbisPaintApplication;->getApplication()Ljp/ne/ibis/ibispaintx/app/IbisPaintApplication;
+
+    .line 9
+    move-result-object v0
+
+    .line 10
+    if-nez v0, :cond_c
+
+    .line 12
+    goto :goto_15
+
+    .line 13
+    :cond_c
+    invoke-virtual {v0}, Landroid/content/Context;->getApplicationContext()Landroid/content/Context;
+
+    .line 16
+    move-result-object v0
+
+    .line 17
+    if-eqz v0, :cond_15
+
+    .line 19
+    invoke-static {v0}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->g(Landroid/content/Context;)V
+
+    .line 22
+    :cond_15
+    :goto_15
+    return-void
+.end method
+
+.method public static isAdMobConsentFormAvailable()Z
+    .registers 1
+
+    .line 1
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/IbisPaintApplication;->getApplication()Ljp/ne/ibis/ibispaintx/app/IbisPaintApplication;
+
+    .line 4
+    move-result-object v0
+
+    .line 5
+    invoke-virtual {v0}, Ljp/ne/ibis/ibispaintx/app/IbisPaintApplication;->f()Ljp/ne/ibis/ibispaintx/app/glwtk/IbisPaintActivity;
+
+    .line 8
+    move-result-object v0
+
+    .line 9
+    if-eqz v0, :cond_f
+
+    .line 11
+    invoke-static {v0}, Ljp/ne/ibis/ibispaintx/app/advertisement/AdUtil;->isConsentFormAvailable(Landroid/app/Activity;)Z
+
+    .line 14
+    move-result v0
+
+    .line 15
+    return v0
+
+    .line 16
+    :cond_f
+    const/4 v0, 0x0
+
+    .line 17
+    return v0
+.end method
+
+.method public static isAppMultiplier()Z
+    .registers 3
+
+    .line 1
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->i()V
+
+    .line 4
+    sget-object v0, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->e:Landroid/content/Context;
+
+    .line 6
+    const/4 v1, 0x0
+
+    .line 7
+    if-nez v0, :cond_9
+
+    .line 9
+    return v1
+
+    .line 10
+    :cond_9
+    invoke-virtual {v0}, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
+
+    .line 13
+    move-result-object v0
+
+    .line 14
+    invoke-virtual {v0}, Landroid/content/res/Resources;->getConfiguration()Landroid/content/res/Configuration;
+
+    .line 17
+    move-result-object v0
+
+    .line 18
+    invoke-virtual {v0}, Landroid/content/res/Configuration;->toString()Ljava/lang/String;
+
+    .line 21
+    move-result-object v0
+
+    .line 22
+    const-string v2, "hwMultiwindow-magic"
+
+    .line 24
+    invoke-virtual {v0, v2}, Ljava/lang/String;->contains(Ljava/lang/CharSequence;)Z
+
+    .line 27
+    move-result v2
+
+    .line 28
+    if-nez v2, :cond_27
+
+    .line 30
+    const-string v2, "hw-magic-windows"
+
+    .line 32
+    invoke-virtual {v0, v2}, Ljava/lang/String;->contains(Ljava/lang/CharSequence;)Z
+
+    .line 35
+    move-result v0
+
+    .line 36
+    if-eqz v0, :cond_26
+
+    .line 38
+    goto :goto_27
+
+    .line 39
+    :cond_26
+    return v1
+
+    .line 40
+    :cond_27
+    :goto_27
+    const/4 v0, 0x1
+
+    .line 41
+    return v0
+.end method
+
+.method public static isAvailableGooglePlayServices()Z
+    .registers 1
+
+    const/4 v0, 0x0
+
+    .line 1
+    invoke-static {v0}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->isAvailableGooglePlayServices(Landroid/app/Activity;)Z
+
+    move-result v0
+
+    return v0
+.end method
+
+.method public static isAvailableGooglePlayServices(Landroid/app/Activity;)Z
+    .registers 1
+
+    .line 2
+    invoke-static {p0}, Ljp/ne/ibis/ibispaintx/app/util/a;->b(Landroid/app/Activity;)Z
+
+    move-result p0
+
+    return p0
+.end method
+
+.method public static isDebug()Z
+    .registers 1
+
+    const/4 v0, 0x0
+
+    return v0
+.end method
+
+.method public static isEducationVersion()Z
+    .registers 1
+
+    .line 1
+    sget-boolean v0, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->b:Z
+
+    .line 3
+    return v0
+.end method
+
+.method public static isExternalStorageReadable()Z
+    .registers 3
+
+    .line 1
+    invoke-static {}, Landroid/os/Environment;->getExternalStorageState()Ljava/lang/String;
+
+    .line 4
+    move-result-object v0
+
+    .line 5
+    const-string v1, "mounted"
+
+    .line 7
+    invoke-virtual {v1, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    .line 10
+    move-result v1
+
+    .line 11
+    const/4 v2, 0x0
+
+    .line 12
+    if-nez v1, :cond_16
+
+    .line 14
+    const-string v1, "mounted_ro"
+
+    .line 16
+    invoke-virtual {v1, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    .line 19
+    move-result v0
+
+    .line 20
+    if-nez v0, :cond_16
+
+    .line 22
+    return v2
+
+    .line 23
+    :cond_16
+    sget-object v0, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->e:Landroid/content/Context;
+
+    .line 25
+    if-nez v0, :cond_1b
+
+    .line 27
+    return v2
+
+    .line 28
+    :cond_1b
+    const/4 v1, 0x0
+
+    .line 29
+    invoke-virtual {v0, v1}, Landroid/content/Context;->getExternalFilesDir(Ljava/lang/String;)Ljava/io/File;
+
+    .line 32
+    move-result-object v0
+
+    .line 33
+    if-nez v0, :cond_23
+
+    .line 35
+    return v2
+
+    .line 36
+    :cond_23
+    const/4 v0, 0x1
+
+    .line 37
+    return v0
+.end method
+
+.method public static isExternalStorageRemovable()Z
+    .registers 1
+
+    .line 1
+    invoke-static {}, Landroid/os/Environment;->isExternalStorageRemovable()Z
+
+    .line 4
+    move-result v0
+
+    .line 5
+    return v0
+.end method
+
+.method public static isExternalStorageWritable()Z
+    .registers 3
+
+    .line 1
+    invoke-static {}, Landroid/os/Environment;->getExternalStorageState()Ljava/lang/String;
+
+    .line 4
+    move-result-object v0
+
+    .line 5
+    const-string v1, "mounted"
+
+    .line 7
+    invoke-virtual {v1, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    .line 10
+    move-result v0
+
+    .line 11
+    const/4 v1, 0x0
+
+    .line 12
+    if-nez v0, :cond_e
+
+    .line 14
+    return v1
+
+    .line 15
+    :cond_e
+    sget-object v0, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->e:Landroid/content/Context;
+
+    .line 17
+    if-nez v0, :cond_13
+
+    .line 19
+    return v1
+
+    .line 20
+    :cond_13
+    const/4 v2, 0x0
+
+    .line 21
+    invoke-virtual {v0, v2}, Landroid/content/Context;->getExternalFilesDir(Ljava/lang/String;)Ljava/io/File;
+
+    .line 24
+    move-result-object v0
+
+    .line 25
+    if-nez v0, :cond_1b
+
+    .line 27
+    return v1
+
+    .line 28
+    :cond_1b
+    const/4 v0, 0x1
+
+    .line 29
+    return v0
+.end method
+
+.method public static isFreeVersion()Z
+    .registers 1
+
+    .line 1
+    sget-boolean v0, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->a:Z
+
+    .line 3
+    return v0
+.end method
+
+.method public static isInvalidCharacterAsArtName(I)Z
+    .registers 2
+
+    .line 1
+    const/16 v0, 0x3c
+
+    .line 3
+    if-eq p0, v0, :cond_31
+
+    .line 5
+    const/16 v0, 0x3e
+
+    .line 7
+    if-eq p0, v0, :cond_31
+
+    .line 9
+    const/16 v0, 0x3a
+
+    .line 11
+    if-eq p0, v0, :cond_31
+
+    .line 13
+    const/16 v0, 0x22
+
+    .line 15
+    if-eq p0, v0, :cond_31
+
+    .line 17
+    const/16 v0, 0x2f
+
+    .line 19
+    if-eq p0, v0, :cond_31
+
+    .line 21
+    const/16 v0, 0x5c
+
+    .line 23
+    if-eq p0, v0, :cond_31
+
+    .line 25
+    const/16 v0, 0x7c
+
+    .line 27
+    if-eq p0, v0, :cond_31
+
+    .line 29
+    const/16 v0, 0x3f
+
+    .line 31
+    if-eq p0, v0, :cond_31
+
+    .line 33
+    const/16 v0, 0x2a
+
+    .line 35
+    if-eq p0, v0, :cond_31
+
+    .line 37
+    const/16 v0, 0xa5
+
+    .line 39
+    if-eq p0, v0, :cond_31
+
+    .line 41
+    invoke-static {p0}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->isInvalidCharacterInYouTube(I)Z
+
+    .line 44
+    move-result p0
+
+    .line 45
+    if-eqz p0, :cond_2f
+
+    .line 47
+    goto :goto_31
+
+    .line 48
+    :cond_2f
+    const/4 p0, 0x0
+
+    .line 49
+    return p0
+
+    .line 50
+    :cond_31
+    :goto_31
+    const/4 p0, 0x1
+
+    .line 51
+    return p0
+.end method
+
+.method public static isInvalidCharacterInYouTube(I)Z
+    .registers 2
+
+    const/16 v0, 0x3c
+
+    if-eq p0, v0, :cond_10
+
+    const/16 v0, 0x3e
+
+    if-eq p0, v0, :cond_10
+
+    const v0, 0x1fffff
+
+    if-le p0, v0, :cond_e
+
+    goto :goto_10
+
+    :cond_e
+    const/4 p0, 0x0
+
+    return p0
+
+    :cond_10
+    :goto_10
+    const/4 p0, 0x1
+
+    return p0
+.end method
+
+.method public static isInvalidStringAsArtName(Ljava/lang/String;)Z
+    .registers 7
+
+    .line 1
+    const/4 v0, 0x0
+
+    .line 2
+    if-eqz p0, :cond_2b
+
+    .line 4
+    invoke-virtual {p0}, Ljava/lang/String;->length()I
+
+    .line 7
+    move-result v1
+
+    .line 8
+    if-gtz v1, :cond_a
+
+    .line 10
+    goto :goto_2b
+
+    .line 11
+    :cond_a
+    invoke-virtual {p0}, Ljava/lang/String;->toCharArray()[C
+
+    .line 14
+    move-result-object p0
+
+    .line 15
+    array-length v1, p0
+
+    .line 16
+    move v2, v0
+
+    .line 17
+    :goto_10
+    if-ge v2, v1, :cond_2b
+
+    .line 19
+    invoke-static {p0, v2}, Ljava/lang/Character;->codePointAt([CI)I
+
+    .line 22
+    move-result v3
+
+    .line 23
+    const/4 v4, 0x1
+
+    .line 24
+    if-nez v2, :cond_1e
+
+    .line 26
+    const/16 v5, 0x2e
+
+    .line 28
+    if-ne v3, v5, :cond_1e
+
+    .line 30
+    return v4
+
+    .line 31
+    :cond_1e
+    invoke-static {v3}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->isInvalidCharacterAsArtName(I)Z
+
+    .line 34
+    move-result v5
+
+    .line 35
+    if-eqz v5, :cond_25
+
+    .line 37
+    return v4
+
+    .line 38
+    :cond_25
+    invoke-static {v3}, Ljava/lang/Character;->charCount(I)I
+
+    .line 41
+    move-result v3
+
+    .line 42
+    add-int/2addr v2, v3
+
+    .line 43
+    goto :goto_10
+
+    .line 44
+    :cond_2b
+    :goto_2b
+    return v0
+.end method
+
+.method public static isNetworkConnected()Z
+    .registers 3
+
+    .line 1
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->i()V
+
+    .line 4
+    sget-object v0, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->e:Landroid/content/Context;
+
+    .line 6
+    const/4 v1, 0x0
+
+    .line 7
+    if-nez v0, :cond_9
+
+    .line 9
+    return v1
+
+    .line 10
+    :cond_9
+    const-string v2, "connectivity"
+
+    .line 12
+    invoke-virtual {v0, v2}, Landroid/content/Context;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;
+
+    .line 15
+    move-result-object v0
+
+    .line 16
+    check-cast v0, Landroid/net/ConnectivityManager;
+
+    .line 18
+    if-nez v0, :cond_14
+
+    .line 20
+    return v1
+
+    .line 21
+    :cond_14
+    invoke-virtual {v0}, Landroid/net/ConnectivityManager;->getActiveNetwork()Landroid/net/Network;
+
+    .line 24
+    move-result-object v2
+
+    .line 25
+    if-eqz v2, :cond_32
+
+    .line 27
+    invoke-virtual {v0, v2}, Landroid/net/ConnectivityManager;->getNetworkCapabilities(Landroid/net/Network;)Landroid/net/NetworkCapabilities;
+
+    .line 30
+    move-result-object v0
+
+    .line 31
+    if-eqz v0, :cond_32
+
+    .line 33
+    const/16 v2, 0xc
+
+    .line 35
+    invoke-virtual {v0, v2}, Landroid/net/NetworkCapabilities;->hasCapability(I)Z
+
+    .line 38
+    move-result v2
+
+    .line 39
+    if-eqz v2, :cond_32
+
+    .line 41
+    const/16 v2, 0x10
+
+    .line 43
+    invoke-virtual {v0, v2}, Landroid/net/NetworkCapabilities;->hasCapability(I)Z
+
+    .line 46
+    move-result v0
+
+    .line 47
+    if-eqz v0, :cond_32
+
+    .line 49
+    const/4 v0, 0x1
+
+    .line 50
+    return v0
+
+    .line 51
+    :cond_32
+    return v1
+.end method
+
+.method public static isSetMaxTextureSize()Z
+    .registers 1
+
+    .line 1
+    sget v0, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->g:I
+
+    .line 3
+    if-eqz v0, :cond_6
+
+    .line 5
+    const/4 v0, 0x1
+
+    .line 6
+    return v0
+
+    .line 7
+    :cond_6
+    const/4 v0, 0x0
+
+    .line 8
+    return v0
+.end method
+
+.method public static isStorageReadable()Z
+    .registers 1
+
+    .line 1
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->isUseExternalStorage()Z
+
+    .line 4
+    move-result v0
+
+    .line 5
+    if-eqz v0, :cond_f
+
+    .line 7
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->isExternalStorageReadable()Z
+
+    .line 10
+    move-result v0
+
+    .line 11
+    if-eqz v0, :cond_d
+
+    .line 13
+    goto :goto_f
+
+    .line 14
+    :cond_d
+    const/4 v0, 0x0
+
+    .line 15
+    return v0
+
+    .line 16
+    :cond_f
+    :goto_f
+    const/4 v0, 0x1
+
+    .line 17
+    return v0
+.end method
+
+.method public static isStorageWritable()Z
+    .registers 1
+
+    .line 1
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->isUseExternalStorage()Z
+
+    .line 4
+    move-result v0
+
+    .line 5
+    if-eqz v0, :cond_f
+
+    .line 7
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->isExternalStorageWritable()Z
+
+    .line 10
+    move-result v0
+
+    .line 11
+    if-eqz v0, :cond_d
+
+    .line 13
+    goto :goto_f
+
+    .line 14
+    :cond_d
+    const/4 v0, 0x0
+
+    .line 15
+    return v0
+
+    .line 16
+    :cond_f
+    :goto_f
+    const/4 v0, 0x1
+
+    .line 17
+    return v0
+.end method
+
+.method public static isSupportedPrimeYearly()Z
+    .registers 2
+
+    .line 1
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->getPlatformType()I
+
+    .line 4
+    move-result v0
+
+    .line 5
+    const/4 v1, 0x3
+
+    .line 6
+    if-eq v0, v1, :cond_9
+
+    .line 8
+    const/4 v0, 0x1
+
+    .line 9
+    return v0
+
+    .line 10
+    :cond_9
+    const/4 v0, 0x0
+
+    .line 11
+    return v0
+.end method
+
+.method public static isTabletUserInterface()Z
+    .registers 1
+
+    .line 1
+    sget-boolean v0, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->f:Z
+
+    .line 3
+    return v0
+.end method
+
+.method public static isUIThread()Z
+    .registers 2
+
+    .line 1
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->i()V
+
+    .line 4
+    sget-object v0, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->e:Landroid/content/Context;
+
+    .line 6
+    if-nez v0, :cond_9
+
+    .line 8
+    const/4 v0, 0x0
+
+    .line 9
+    return v0
+
+    .line 10
+    :cond_9
+    invoke-static {}, Ljava/lang/Thread;->currentThread()Ljava/lang/Thread;
+
+    .line 13
+    move-result-object v0
+
+    .line 14
+    sget-object v1, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->e:Landroid/content/Context;
+
+    .line 16
+    invoke-virtual {v1}, Landroid/content/Context;->getMainLooper()Landroid/os/Looper;
+
+    .line 19
+    move-result-object v1
+
+    .line 20
+    invoke-virtual {v1}, Landroid/os/Looper;->getThread()Ljava/lang/Thread;
+
+    .line 23
+    move-result-object v1
+
+    .line 24
+    invoke-virtual {v0, v1}, Ljava/lang/Object;->equals(Ljava/lang/Object;)Z
+
+    .line 27
+    move-result v0
+
+    .line 28
+    return v0
+.end method
+
+.method public static isUseExternalStorage()Z
+    .registers 1
+
+    .line 1
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/configuration/ConfigurationChunk;->e()Ljp/ne/ibis/ibispaintx/app/configuration/ConfigurationChunk;
+
+    .line 4
+    move-result-object v0
+
+    .line 5
+    invoke-virtual {v0}, Ljp/ne/ibis/ibispaintx/app/configuration/ConfigurationChunk;->o()Z
+
+    .line 8
+    move-result v0
+
+    .line 9
+    return v0
+.end method
+
+.method public static isUserInJapan()Z
+    .registers 2
+
+    .line 1
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->e()Ljava/lang/String;
+
+    .line 4
+    move-result-object v0
+
+    .line 5
+    const-string v1, "JP"
+
+    .line 7
+    invoke-virtual {v0, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    .line 10
+    move-result v0
+
+    .line 11
+    if-eqz v0, :cond_e
+
+    .line 13
+    const/4 v0, 0x1
+
+    .line 14
+    return v0
+
+    .line 15
+    :cond_e
+    const/4 v0, 0x0
+
+    .line 16
+    return v0
+.end method
+
+.method public static isUserSubjectToGdpr()Z
+    .registers 1
+
+    .line 1
+    :try_start_0
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->isUserSubjectToGdprNative()Z
+
+    .line 4
+    move-result v0
+    :try_end_4
+    .catch Ljp/ne/ibis/ibispaintx/app/jni/NativeException; {:try_start_0 .. :try_end_4} :catch_5
+
+    .line 5
+    return v0
+
+    .line 6
+    :catch_5
+    const/4 v0, 0x0
+
+    .line 7
+    return v0
+.end method
+
+.method private static native isUserSubjectToGdprNative()Z
+    .annotation system Ldalvik/annotation/Throws;
+        value = {
+            Ljp/ne/ibis/ibispaintx/app/jni/NativeException;
+        }
+    .end annotation
+.end method
+
+.method public static isUserSubjectToUsPrivacy()Z
+    .registers 2
+
+    .line 1
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->e()Ljava/lang/String;
+
+    .line 4
+    move-result-object v0
+
+    .line 5
+    const-string v1, "US"
+
+    .line 7
+    invoke-virtual {v0, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    .line 10
+    move-result v0
+
+    .line 11
+    if-eqz v0, :cond_e
+
+    .line 13
+    const/4 v0, 0x1
+
+    .line 14
+    return v0
+
+    .line 15
+    :cond_e
+    const/4 v0, 0x0
+
+    .line 16
+    return v0
+.end method
+
+.method public static isVerifyPurchased()Z
+    .registers 1
+
+    const/4 v0, 0x1
+
+    return v0
+.end method
+
+.method public static isYoutubeMovieUrl(Ljava/lang/String;)Z
+    .registers 6
+
+    .line 1
+    sget-object v0, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->d:[Ljava/util/regex/Pattern;
+
+    .line 3
+    array-length v1, v0
+
+    .line 4
+    const/4 v2, 0x0
+
+    .line 5
+    move v3, v2
+
+    .line 6
+    :goto_5
+    if-ge v3, v1, :cond_18
+
+    .line 8
+    aget-object v4, v0, v3
+
+    .line 10
+    invoke-virtual {v4, p0}, Ljava/util/regex/Pattern;->matcher(Ljava/lang/CharSequence;)Ljava/util/regex/Matcher;
+
+    .line 13
+    move-result-object v4
+
+    .line 14
+    invoke-virtual {v4}, Ljava/util/regex/Matcher;->matches()Z
+
+    .line 17
+    move-result v4
+
+    .line 18
+    if-eqz v4, :cond_15
+
+    .line 20
+    const/4 p0, 0x1
+
+    .line 21
+    return p0
+
+    .line 22
+    :cond_15
+    add-int/lit8 v3, v3, 0x1
+
+    .line 24
+    goto :goto_5
+
+    .line 25
+    :cond_18
+    return v2
+.end method
+
+.method public static notifyFirebaseEvent(Ljava/lang/String;Ljava/lang/String;)V
+    .registers 3
+
+    .line 1
+    :try_start_0
+    invoke-static {p1}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->h(Ljava/lang/String;)Landroid/os/Bundle;
+
+    .line 4
+    move-result-object p1
+
+    .line 5
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/IbisPaintApplication;->getApplication()Ljp/ne/ibis/ibispaintx/app/IbisPaintApplication;
+
+    .line 8
+    move-result-object v0
+
+    .line 9
+    invoke-virtual {v0, p0, p1}, Ljp/ne/ibis/ibispaintx/app/IbisPaintApplication;->z(Ljava/lang/String;Landroid/os/Bundle;)V
+    :try_end_b
+    .catch Lorg/json/JSONException; {:try_start_0 .. :try_end_b} :catch_b
+
+    .line 12
+    :catch_b
+    return-void
+.end method
+
+.method public static onActivityCreate(Landroid/app/Activity;Landroid/os/Bundle;)V
+    .registers 3
+
+    .line 1
+    if-nez p0, :cond_3
+
+    .line 3
+    goto :goto_20
+
+    .line 4
+    :cond_3
+    sget-object v0, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->e:Landroid/content/Context;
+
+    .line 6
+    if-nez v0, :cond_e
+
+    .line 8
+    invoke-virtual {p0}, Landroid/content/Context;->getApplicationContext()Landroid/content/Context;
+
+    .line 11
+    move-result-object v0
+
+    .line 12
+    invoke-static {v0}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->g(Landroid/content/Context;)V
+
+    .line 15
+    :cond_e
+    if-eqz p1, :cond_13
+
+    .line 17
+    invoke-static {p0, p1}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->onActivityRestoreInstanceState(Landroid/app/Activity;Landroid/os/Bundle;)V
+
+    .line 20
+    :cond_13
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->getPlatformType()I
+
+    .line 23
+    move-result p0
+
+    .line 24
+    const/4 p1, 0x3
+
+    .line 25
+    if-ne p0, p1, :cond_20
+
+    .line 27
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/util/DeviceUtil;->isTablet()Z
+
+    .line 30
+    move-result p0
+
+    .line 31
+    sput-boolean p0, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->f:Z
+
+    .line 33
+    :cond_20
+    :goto_20
+    return-void
+.end method
+
+.method public static onActivityRestoreInstanceState(Landroid/app/Activity;Landroid/os/Bundle;)V
+    .registers 3
+
+    .line 1
+    if-eqz p0, :cond_20
+
+    .line 3
+    if-nez p1, :cond_5
+
+    .line 5
+    goto :goto_20
+
+    .line 6
+    :cond_5
+    sget-object v0, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->e:Landroid/content/Context;
+
+    .line 8
+    if-nez v0, :cond_10
+
+    .line 10
+    invoke-virtual {p0}, Landroid/content/Context;->getApplicationContext()Landroid/content/Context;
+
+    .line 13
+    move-result-object p0
+
+    .line 14
+    invoke-static {p0}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->g(Landroid/content/Context;)V
+
+    .line 17
+    :cond_10
+    const-string p0, "APPLICATION_UTIL_MAX_TEXTURE_SIZE"
+
+    .line 19
+    invoke-virtual {p1, p0}, Landroid/os/BaseBundle;->containsKey(Ljava/lang/String;)Z
+
+    .line 22
+    move-result v0
+
+    .line 23
+    if-eqz v0, :cond_20
+
+    .line 25
+    sget v0, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->g:I
+
+    .line 27
+    invoke-virtual {p1, p0, v0}, Landroid/os/BaseBundle;->getInt(Ljava/lang/String;I)I
+
+    .line 30
+    move-result p0
+
+    .line 31
+    sput p0, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->g:I
+
+    .line 33
+    :cond_20
+    :goto_20
+    return-void
+.end method
+
+.method public static onActivitySaveInstanceState(Landroid/app/Activity;Landroid/os/Bundle;)V
+    .registers 3
+
+    .line 1
+    if-eqz p0, :cond_11
+
+    .line 3
+    if-nez p1, :cond_5
+
+    .line 5
+    goto :goto_11
+
+    .line 6
+    :cond_5
+    sget-object p0, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->e:Landroid/content/Context;
+
+    .line 8
+    if-nez p0, :cond_a
+
+    .line 10
+    goto :goto_11
+
+    .line 11
+    :cond_a
+    const-string p0, "APPLICATION_UTIL_MAX_TEXTURE_SIZE"
+
+    .line 13
+    sget v0, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->g:I
+
+    .line 15
+    invoke-virtual {p1, p0, v0}, Landroid/os/BaseBundle;->putInt(Ljava/lang/String;I)V
+
+    .line 18
+    :cond_11
+    :goto_11
+    return-void
+.end method
+
+.method public static prepareCertificateAuthorityFile()Ljava/lang/String;
+    .registers 8
+
+    .line 1
+    const-string v0, ""
+
+    .line 3
+    const-string v1, "cacerts/cacert.pem"
+
+    .line 5
+    const/4 v2, 0x0
+
+    .line 6
+    invoke-static {v2}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->getFileDirectoryPath(Z)Ljava/lang/String;
+
+    .line 9
+    move-result-object v3
+
+    .line 10
+    new-instance v4, Ljava/lang/StringBuffer;
+
+    .line 12
+    invoke-direct {v4, v3}, Ljava/lang/StringBuffer;-><init>(Ljava/lang/String;)V
+
+    .line 15
+    sget-char v3, Ljava/io/File;->separatorChar:C
+
+    .line 17
+    invoke-virtual {v4, v3}, Ljava/lang/StringBuffer;->append(C)Ljava/lang/StringBuffer;
+
+    .line 20
+    const-string v5, ".cert"
+
+    .line 22
+    invoke-virtual {v4, v5}, Ljava/lang/StringBuffer;->append(Ljava/lang/String;)Ljava/lang/StringBuffer;
+
+    .line 25
+    invoke-virtual {v4}, Ljava/lang/StringBuffer;->toString()Ljava/lang/String;
+
+    .line 28
+    move-result-object v4
+
+    .line 29
+    new-instance v5, Ljava/lang/StringBuffer;
+
+    .line 31
+    invoke-direct {v5, v4}, Ljava/lang/StringBuffer;-><init>(Ljava/lang/String;)V
+
+    .line 34
+    invoke-virtual {v5, v3}, Ljava/lang/StringBuffer;->append(C)Ljava/lang/StringBuffer;
+
+    .line 37
+    const-string v3, "cacert.pem"
+
+    .line 39
+    invoke-virtual {v5, v3}, Ljava/lang/StringBuffer;->append(Ljava/lang/String;)Ljava/lang/StringBuffer;
+
+    .line 42
+    invoke-virtual {v5}, Ljava/lang/StringBuffer;->toString()Ljava/lang/String;
+
+    .line 45
+    move-result-object v3
+
+    .line 46
+    new-instance v5, Ljava/io/File;
+
+    .line 48
+    invoke-direct {v5, v4}, Ljava/io/File;-><init>(Ljava/lang/String;)V
+
+    .line 51
+    invoke-virtual {v5}, Ljava/io/File;->mkdirs()Z
+
+    .line 54
+    const/16 v4, 0x1000
+
+    .line 56
+    new-array v4, v4, [B
+
+    .line 58
+    const/4 v5, 0x0
+
+    .line 59
+    :try_start_3a
+    sget-object v6, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->e:Landroid/content/Context;
+
+    .line 61
+    invoke-virtual {v6}, Landroid/content/Context;->getAssets()Landroid/content/res/AssetManager;
+
+    .line 64
+    move-result-object v6
+
+    .line 65
+    invoke-virtual {v6, v1}, Landroid/content/res/AssetManager;->open(Ljava/lang/String;)Ljava/io/InputStream;
+
+    .line 68
+    move-result-object v1
+    :try_end_44
+    .catch Ljava/io/IOException; {:try_start_3a .. :try_end_44} :catch_69
+    .catchall {:try_start_3a .. :try_end_44} :catchall_66
+
+    .line 69
+    :try_start_44
+    new-instance v6, Ljava/io/FileOutputStream;
+
+    .line 71
+    invoke-direct {v6, v3}, Ljava/io/FileOutputStream;-><init>(Ljava/lang/String;)V
+    :try_end_49
+    .catch Ljava/io/IOException; {:try_start_44 .. :try_end_49} :catch_64
+    .catchall {:try_start_44 .. :try_end_49} :catchall_61
+
+    .line 74
+    :goto_49
+    :try_start_49
+    invoke-virtual {v1, v4}, Ljava/io/InputStream;->read([B)I
+
+    .line 77
+    move-result v5
+
+    .line 78
+    const/4 v7, -0x1
+
+    .line 79
+    if-eq v5, v7, :cond_59
+
+    .line 81
+    invoke-virtual {v6, v4, v2, v5}, Ljava/io/FileOutputStream;->write([BII)V
+    :try_end_53
+    .catch Ljava/io/IOException; {:try_start_49 .. :try_end_53} :catch_57
+    .catchall {:try_start_49 .. :try_end_53} :catchall_54
+
+    .line 84
+    goto :goto_49
+
+    .line 85
+    :catchall_54
+    move-exception v2
+
+    .line 86
+    :goto_55
+    move-object v5, v1
+
+    .line 87
+    goto :goto_6b
+
+    .line 88
+    :catch_57
+    :goto_57
+    move-object v5, v1
+
+    .line 89
+    goto :goto_7a
+
+    .line 90
+    :cond_59
+    :try_start_59
+    invoke-virtual {v1}, Ljava/io/InputStream;->close()V
+    :try_end_5c
+    .catch Ljava/io/IOException; {:try_start_59 .. :try_end_5c} :catch_60
+
+    .line 93
+    :try_start_5c
+    invoke-virtual {v6}, Ljava/io/FileOutputStream;->close()V
+    :try_end_5f
+    .catch Ljava/io/IOException; {:try_start_5c .. :try_end_5f} :catch_60
+
+    .line 96
+    return-object v3
+
+    .line 97
+    :catch_60
+    return-object v0
+
+    .line 98
+    :catchall_61
+    move-exception v2
+
+    .line 99
+    move-object v6, v5
+
+    .line 100
+    goto :goto_55
+
+    .line 101
+    :catch_64
+    move-object v6, v5
+
+    .line 102
+    goto :goto_57
+
+    .line 103
+    :catchall_66
+    move-exception v2
+
+    .line 104
+    move-object v6, v5
+
+    .line 105
+    goto :goto_6b
+
+    .line 106
+    :catch_69
+    move-object v6, v5
+
+    .line 107
+    goto :goto_7a
+
+    .line 108
+    :goto_6b
+    if-eqz v5, :cond_72
+
+    .line 110
+    :try_start_6d
+    invoke-virtual {v5}, Ljava/io/InputStream;->close()V
+    :try_end_70
+    .catch Ljava/io/IOException; {:try_start_6d .. :try_end_70} :catch_71
+
+    .line 113
+    goto :goto_72
+
+    .line 114
+    :catch_71
+    return-object v0
+
+    .line 115
+    :cond_72
+    :goto_72
+    if-eqz v6, :cond_79
+
+    .line 117
+    :try_start_74
+    invoke-virtual {v6}, Ljava/io/FileOutputStream;->close()V
+    :try_end_77
+    .catch Ljava/io/IOException; {:try_start_74 .. :try_end_77} :catch_78
+
+    .line 120
+    goto :goto_79
+
+    .line 121
+    :catch_78
+    return-object v0
+
+    .line 122
+    :cond_79
+    :goto_79
+    throw v2
+
+    .line 123
+    :goto_7a
+    if-eqz v5, :cond_81
+
+    .line 125
+    :try_start_7c
+    invoke-virtual {v5}, Ljava/io/InputStream;->close()V
+    :try_end_7f
+    .catch Ljava/io/IOException; {:try_start_7c .. :try_end_7f} :catch_80
+
+    .line 128
+    goto :goto_81
+
+    .line 129
+    :catch_80
+    return-object v0
+
+    .line 130
+    :cond_81
+    :goto_81
+    if-eqz v6, :cond_87
+
+    .line 132
+    :try_start_83
+    invoke-virtual {v6}, Ljava/io/FileOutputStream;->close()V
+    :try_end_86
+    .catch Ljava/io/IOException; {:try_start_83 .. :try_end_86} :catch_87
+
+    .line 135
+    nop
+
+    .line 136
+    :catch_87
+    :cond_87
+    return-object v0
+.end method
+
+.method public static registerMediaFileToGallery(Ljava/lang/String;Ljava/lang/String;)V
+    .registers 5
+
+    .line 1
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->i()V
+
+    .line 4
+    sget-object v0, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->e:Landroid/content/Context;
+
+    .line 6
+    if-nez v0, :cond_8
+
+    .line 8
+    return-void
+
+    .line 9
+    :cond_8
+    filled-new-array {p0}, [Ljava/lang/String;
+
+    .line 12
+    move-result-object p0
+
+    .line 13
+    const/4 v1, 0x1
+
+    .line 14
+    new-array v1, v1, [Ljava/lang/String;
+
+    .line 16
+    const/4 v2, 0x0
+
+    .line 17
+    aput-object p1, v1, v2
+
+    .line 19
+    if-nez p1, :cond_15
+
+    .line 21
+    const/4 v1, 0x0
+
+    .line 22
+    :cond_15
+    new-instance p1, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil$a;
+
+    .line 24
+    invoke-direct {p1}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil$a;-><init>()V
+
+    .line 27
+    invoke-static {v0, p0, v1, p1}, Landroid/media/MediaScannerConnection;->scanFile(Landroid/content/Context;[Ljava/lang/String;[Ljava/lang/String;Landroid/media/MediaScannerConnection$OnScanCompletedListener;)V
+
+    .line 30
+    return-void
+.end method
+
+.method public static runOnMainThread(Ljava/lang/Runnable;)V
+    .registers 2
+
+    .line 1
+    sget-object v0, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->h:Landroid/os/Handler;
+
+    .line 3
+    invoke-virtual {v0, p0}, Landroid/os/Handler;->post(Ljava/lang/Runnable;)Z
+
+    .line 6
+    return-void
+.end method
+
+.method public static runOnMainThreadDelayed(Ljava/lang/Runnable;J)V
+    .registers 4
+
+    .line 1
+    sget-object v0, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->h:Landroid/os/Handler;
+
+    .line 3
+    invoke-virtual {v0, p0, p1, p2}, Landroid/os/Handler;->postDelayed(Ljava/lang/Runnable;J)Z
+
+    .line 6
+    return-void
+.end method
+
+.method public static setFirebaseEventDefaultParameter(Ljava/lang/String;)V
+    .registers 2
+
+    .line 1
+    :try_start_0
+    invoke-static {p0}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->h(Ljava/lang/String;)Landroid/os/Bundle;
+
+    .line 4
+    move-result-object p0
+
+    .line 5
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/IbisPaintApplication;->getApplication()Ljp/ne/ibis/ibispaintx/app/IbisPaintApplication;
+
+    .line 8
+    move-result-object v0
+
+    .line 9
+    invoke-virtual {v0, p0}, Ljp/ne/ibis/ibispaintx/app/IbisPaintApplication;->F(Landroid/os/Bundle;)V
+    :try_end_b
+    .catch Lorg/json/JSONException; {:try_start_0 .. :try_end_b} :catch_b
+
+    .line 12
+    :catch_b
+    return-void
+.end method
+
+.method public static setFirebaseUserProperty(Ljava/lang/String;Ljava/lang/String;)V
+    .registers 3
+
+    .line 1
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/IbisPaintApplication;->getApplication()Ljp/ne/ibis/ibispaintx/app/IbisPaintApplication;
+
+    .line 4
+    move-result-object v0
+
+    .line 5
+    invoke-virtual {v0, p0, p1}, Ljp/ne/ibis/ibispaintx/app/IbisPaintApplication;->G(Ljava/lang/String;Ljava/lang/String;)V
+
+    .line 8
+    return-void
+.end method
+
+.method public static setMaxTextureSize(I)V
+    .registers 3
+
+    .line 1
+    const-string v0, "MT8125"
+
+    .line 3
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/util/DeviceUtil;->getCpuHardwareName()Ljava/lang/String;
+
+    .line 6
+    move-result-object v1
+
+    .line 7
+    invoke-virtual {v0, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    .line 10
+    move-result v0
+
+    .line 11
+    if-eqz v0, :cond_15
+
+    .line 13
+    const/16 v0, 0x800
+
+    .line 15
+    invoke-static {p0, v0}, Ljava/lang/Math;->min(II)I
+
+    .line 18
+    move-result p0
+
+    .line 19
+    sput p0, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->g:I
+
+    .line 21
+    return-void
+
+    .line 22
+    :cond_15
+    sput p0, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->g:I
+
+    .line 24
+    return-void
+.end method
+
+.method public static setupAdMobPrivacySettings()V
+    .registers 1
+
+    .line 1
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/IbisPaintApplication;->getApplication()Ljp/ne/ibis/ibispaintx/app/IbisPaintApplication;
+
+    .line 4
+    move-result-object v0
+
+    .line 5
+    invoke-virtual {v0}, Ljp/ne/ibis/ibispaintx/app/IbisPaintApplication;->f()Ljp/ne/ibis/ibispaintx/app/glwtk/IbisPaintActivity;
+
+    .line 8
+    move-result-object v0
+
+    .line 9
+    if-eqz v0, :cond_d
+
+    .line 11
+    invoke-static {v0}, Ljp/ne/ibis/ibispaintx/app/advertisement/AdUtil;->setupPrivacySettings(Landroid/app/Activity;)V
+
+    .line 14
+    :cond_d
+    return-void
+.end method
+
+.method public static setupFirebaseAnalytics()V
+    .registers 1
+
+    .line 1
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/IbisPaintApplication;->getApplication()Ljp/ne/ibis/ibispaintx/app/IbisPaintApplication;
+
+    .line 4
+    move-result-object v0
+
+    .line 5
+    invoke-virtual {v0}, Ljp/ne/ibis/ibispaintx/app/IbisPaintApplication;->I()V
+
+    .line 8
+    return-void
+.end method
+
+.method public static shouldUseExternalStorage()Z
+    .registers 9
+
+    .line 1
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->isExternalStorageWritable()Z
+
+    .line 4
+    move-result v0
+
+    .line 5
+    const/4 v1, 0x0
+
+    .line 6
+    if-nez v0, :cond_8
+
+    .line 8
+    return v1
+
+    .line 9
+    :cond_8
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/IbisPaintApplication;->getApplication()Ljp/ne/ibis/ibispaintx/app/IbisPaintApplication;
+
+    .line 12
+    move-result-object v0
+
+    .line 13
+    invoke-virtual {v0}, Ljp/ne/ibis/ibispaintx/app/IbisPaintApplication;->e()Ljp/ne/ibis/ibispaintx/app/glwtk/IbisPaintGlapeApplication;
+
+    .line 16
+    move-result-object v0
+
+    .line 17
+    if-nez v0, :cond_13
+
+    .line 19
+    return v1
+
+    .line 20
+    :cond_13
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/IbisPaintApplication;->getApplication()Ljp/ne/ibis/ibispaintx/app/IbisPaintApplication;
+
+    .line 23
+    move-result-object v0
+
+    .line 24
+    invoke-virtual {v0}, Ljp/ne/ibis/ibispaintx/app/IbisPaintApplication;->e()Ljp/ne/ibis/ibispaintx/app/glwtk/IbisPaintGlapeApplication;
+
+    .line 27
+    move-result-object v0
+
+    .line 28
+    invoke-virtual {v0}, Ljp/ne/ibis/ibispaintx/app/glwtk/IbisPaintGlapeApplication;->getArtTool()Ljp/ne/ibis/ibispaintx/app/art/ArtTool;
+
+    .line 31
+    move-result-object v0
+
+    .line 32
+    if-nez v0, :cond_22
+
+    .line 34
+    return v1
+
+    .line 35
+    :cond_22
+    :try_start_22
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/art/ArtTool;->p()Ljava/lang/String;
+
+    .line 38
+    move-result-object v2
+
+    .line 39
+    invoke-virtual {v0, v2, v1}, Ljp/ne/ibis/ibispaintx/app/art/ArtTool;->e(Ljava/lang/String;I)Ljava/lang/String;
+
+    .line 42
+    move-result-object v3
+
+    .line 43
+    const/4 v4, 0x1
+
+    .line 44
+    invoke-virtual {v0, v2, v4}, Ljp/ne/ibis/ibispaintx/app/art/ArtTool;->e(Ljava/lang/String;I)Ljava/lang/String;
+
+    .line 47
+    move-result-object v2
+    :try_end_2f
+    .catch Ljp/ne/ibis/ibispaintx/app/jni/NativeException; {:try_start_22 .. :try_end_2f} :catch_b4
+
+    .line 48
+    if-eqz v3, :cond_b4
+
+    .line 50
+    invoke-virtual {v3}, Ljava/lang/String;->length()I
+
+    .line 53
+    move-result v5
+
+    .line 54
+    if-gtz v5, :cond_39
+
+    .line 56
+    goto/16 :goto_b4
+
+    .line 58
+    :cond_39
+    if-eqz v2, :cond_b4
+
+    .line 60
+    invoke-virtual {v2}, Ljava/lang/String;->length()I
+
+    .line 63
+    move-result v5
+
+    .line 64
+    if-gtz v5, :cond_43
+
+    .line 66
+    goto/16 :goto_b4
+
+    .line 68
+    :cond_43
+    :try_start_43
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/art/ArtTool;->d()Ljava/lang/String;
+
+    .line 71
+    move-result-object v5
+
+    .line 72
+    invoke-virtual {v0, v5, v1}, Ljp/ne/ibis/ibispaintx/app/art/ArtTool;->e(Ljava/lang/String;I)Ljava/lang/String;
+
+    .line 75
+    move-result-object v6
+
+    .line 76
+    invoke-virtual {v0, v5, v4}, Ljp/ne/ibis/ibispaintx/app/art/ArtTool;->e(Ljava/lang/String;I)Ljava/lang/String;
+
+    .line 79
+    move-result-object v0
+    :try_end_4f
+    .catch Ljp/ne/ibis/ibispaintx/app/jni/NativeException; {:try_start_43 .. :try_end_4f} :catch_b4
+
+    .line 80
+    invoke-static {v3}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->c(Ljava/lang/String;)I
+
+    .line 83
+    move-result v5
+
+    .line 84
+    invoke-static {v6}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->c(Ljava/lang/String;)I
+
+    .line 87
+    move-result v7
+
+    .line 88
+    add-int/2addr v5, v7
+
+    .line 89
+    invoke-static {v2}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->c(Ljava/lang/String;)I
+
+    .line 92
+    move-result v7
+
+    .line 93
+    invoke-static {v0}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->c(Ljava/lang/String;)I
+
+    .line 96
+    move-result v8
+
+    .line 97
+    add-int/2addr v7, v8
+
+    .line 98
+    if-lez v5, :cond_66
+
+    .line 100
+    if-nez v7, :cond_66
+
+    .line 102
+    return v1
+
+    .line 103
+    :cond_66
+    if-nez v5, :cond_6b
+
+    .line 105
+    if-lez v7, :cond_6b
+
+    .line 107
+    return v4
+
+    .line 108
+    :cond_6b
+    if-lez v5, :cond_93
+
+    .line 110
+    if-lez v7, :cond_93
+
+    .line 112
+    if-eq v5, v7, :cond_75
+
+    .line 114
+    if-gt v5, v7, :cond_74
+
+    .line 116
+    move v1, v4
+
+    .line 117
+    :cond_74
+    return v1
+
+    .line 118
+    :cond_75
+    invoke-static {v3}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->d(Ljava/lang/String;)J
+
+    .line 121
+    move-result-wide v7
+
+    .line 122
+    invoke-static {v6}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->d(Ljava/lang/String;)J
+
+    .line 125
+    move-result-wide v5
+
+    .line 126
+    invoke-static {v7, v8, v5, v6}, Ljava/lang/Math;->max(JJ)J
+
+    .line 129
+    move-result-wide v5
+
+    .line 130
+    invoke-static {v2}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->d(Ljava/lang/String;)J
+
+    .line 133
+    move-result-wide v2
+
+    .line 134
+    invoke-static {v0}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->d(Ljava/lang/String;)J
+
+    .line 137
+    move-result-wide v7
+
+    .line 138
+    invoke-static {v2, v3, v7, v8}, Ljava/lang/Math;->max(JJ)J
+
+    .line 141
+    move-result-wide v2
+
+    .line 142
+    cmp-long v0, v5, v2
+
+    .line 144
+    if-gtz v0, :cond_92
+
+    .line 146
+    move v1, v4
+
+    .line 147
+    :cond_92
+    return v1
+
+    .line 148
+    :cond_93
+    invoke-static {}, Landroid/os/Environment;->isExternalStorageEmulated()Z
+
+    .line 151
+    move-result v0
+
+    .line 152
+    if-eqz v0, :cond_9a
+
+    .line 154
+    return v1
+
+    .line 155
+    :cond_9a
+    invoke-static {}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->isExternalStorageRemovable()Z
+
+    .line 158
+    move-result v0
+
+    .line 159
+    if-eqz v0, :cond_b4
+
+    .line 161
+    new-instance v0, Landroid/os/StatFs;
+
+    .line 163
+    invoke-direct {v0, v3}, Landroid/os/StatFs;-><init>(Ljava/lang/String;)V
+
+    .line 166
+    invoke-virtual {v0, v3}, Landroid/os/StatFs;->restat(Ljava/lang/String;)V
+
+    .line 169
+    invoke-static {v0}, Ljp/ne/ibis/ibispaintx/app/util/ApplicationUtil;->f(Landroid/os/StatFs;)J
+
+    .line 172
+    move-result-wide v2
+
+    .line 173
+    const-wide/32 v5, 0x40000000
+
+    .line 176
+    cmp-long v0, v2, v5
+
+    .line 178
+    if-gez v0, :cond_b4
+
+    .line 180
+    return v4
+
+    .line 181
+    :catch_b4
+    :cond_b4
+    :goto_b4
+    return v1
+.end method
